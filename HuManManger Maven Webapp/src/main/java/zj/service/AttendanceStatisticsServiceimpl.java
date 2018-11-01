@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import zj.dao.AttendanceStatistics;
-import zj.entity.hr_go_out;
-import zj.entity.travel;
-import zj.entity.vocation;
-import zj.entity.work_register;
+import zj.entity.Hr_go_out;
+import zj.entity.Travel;
+import zj.entity.Vocation;
+import zj.entity.Work_register;
 @Service
 public class AttendanceStatisticsServiceimpl implements AttendanceStatisticsService{
 	@Autowired
@@ -24,25 +24,25 @@ public class AttendanceStatisticsServiceimpl implements AttendanceStatisticsServ
 	}
 
 	@Override
-	public List<hr_go_out> selectout(int staffid) {
+	public List<Hr_go_out> selectout(int staffid) {
 		// TODO Auto-generated method stub
 		return as.selectout(staffid);
 	}
 
 	@Override
-	public List<travel> selecttra(int staffid) {
+	public List<Travel> selecttra(int staffid) {
 		// TODO Auto-generated method stub
 		return as.selecttra(staffid);
 	}
 
 	@Override
-	public List<vocation> selectvoc(int staffid) {
+	public List<Vocation> selectvoc(int staffid) {
 		// TODO Auto-generated method stub
 		return as.selectvoc(staffid);
 	}
 
 	@Override
-	public List<work_register> selectreg(int staffid) {
+	public List<Work_register> selectreg(int staffid) {
 		// TODO Auto-generated method stub
 		return as.selectreg(staffid);
 	}

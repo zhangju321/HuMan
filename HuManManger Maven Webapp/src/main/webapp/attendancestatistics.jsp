@@ -73,6 +73,50 @@
 					<h4 class="modal-title" id="modalTitle1">考勤详情</h4>
 				</div>
 				<div class="modal-body">
+				
+				
+				<table class="table table-striped">
+	<caption>条纹表格布局</caption>
+	<thead>
+		<tr>
+			<th>名称</th>
+			<th>城市</th>
+			<th>邮编</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Tanmay</td>
+			<td>Bangalore</td>
+			<td>560001</td>
+		</tr>
+		<tr>
+			<td>Sachin</td>
+			<td>Mumbai</td>
+			<td>400003</td>
+		</tr>
+		<tr>
+			<td>Uma</td>
+			<td>Pune</td>
+			<td>411027</td>
+		</tr>
+	</tbody>
+</table>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 					
 
 				</div>
@@ -110,6 +154,7 @@
 				for (var i = 0; i < data.length; i++) {
 					var obj = data[i];
 					var tr = "<tr>";
+					tr += "<td id='staid' style='display:none'>" + obj.staff_id + "</td>"; //员工id
 					tr += "<td>" + obj.STAFF_NAME + "</td>"; //员工姓名
 					tr += "<td>" + obj.co + "</td>"; //外出次数 
 					tr += "<td>" + obj.ct + "</td>"; //出差次数
@@ -129,13 +174,13 @@
 	
 	/*详细信息  */
 	$(document).on("click", ".Details", function() {
-		var id = this.title;
-		alert(id);
+	    var staid=$(this).parent().parent().find("#staid").html();
+	    //查询外出
 		$.ajax({
-			url : "as/Details",
+			url : "as/selectout",
 			type : "post",
 			data : {
-				"staffid" : id
+				"staffid" : staid
 			},
 			dataType : "json",
 			success : function(data) {
@@ -143,6 +188,47 @@
 
 			}
 		});
+		//查询出差
+		$.ajax({
+			url : "as/selectvoc",
+			type : "post",
+			data : {
+				"staffid" : staid
+			},
+			dataType : "json",
+			success : function(data) {
+			alert("成功");
+
+			}
+		});
+		//查询请假
+		$.ajax({
+			url : "as/selecttra",
+			type : "post",
+			data : {
+				"staffid" : staid
+			},
+			dataType : "json",
+			success : function(data) {
+			alert("成功");
+
+			}
+		});
+		//查询上下班登记
+		$.ajax({
+			url : "as/selectreg",
+			type : "post",
+			data : {
+				"staffid" : staid
+			},
+			dataType : "json",
+			success : function(data) {
+			alert("成功");
+
+			}
+		});
+		
+		
 	});
 
 

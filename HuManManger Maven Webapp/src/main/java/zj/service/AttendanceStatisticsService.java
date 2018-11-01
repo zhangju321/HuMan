@@ -5,10 +5,10 @@ import java.util.Map;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import zj.entity.hr_go_out;
-import zj.entity.travel;
-import zj.entity.vocation;
-import zj.entity.work_register;
+import zj.entity.Hr_go_out;
+import zj.entity.Travel;
+import zj.entity.Vocation;
+import zj.entity.Work_register;
 
 public interface AttendanceStatisticsService {
 	@Transactional
@@ -17,12 +17,12 @@ public interface AttendanceStatisticsService {
 	public List<Map<String,Object>> selectas();
 
 	//根据id查询外出表
-	public List<hr_go_out> selectout(int staffid);
+	public List<Hr_go_out> selectout(int staffid);
 	//根据id查询出差表
-	public List<travel> selecttra(int staffid);
+	public List<Travel> selecttra(int staffid);
 	//根据id查询请假表
-	public List<vocation> selectvoc(int staffid);
+	public List<Vocation> selectvoc(int staffid);
 	//根据id查询上班登记表
-	public List<work_register> selectreg(int staffid);
+	public List<Work_register> selectreg(int staffid);
 
 }
