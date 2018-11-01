@@ -1,5 +1,81 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- <mapper namespace="zj.dao.staff_infoMapper">
- 
-</mapper> 
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="zj.dao.staff_infoMapper" >
+	<!-- 查询全部 -->
+	<select id="selectAll" resultType="Map">
+		select info.*,depa.departmentName,p.positionName,r.roleName 
+		from staff_info info
+	    LEFT JOIN department depa on info.departmentId=depa.departmentId 
+		LEFT JOIN position p on info.positionId=p.positionId 
+		LEFT JOIN role r on info.roleId=r.roleId
+	</select>
+	
+	<select id="selectDep" parameterType="zj.entity.department"> 
+		select * from department
+	</select>
+	<!--角色  -->
+<select id="selectRole" parameterType="zj.entity.role">
+		select * from role
+	</select>
+<!-- 职务 -->
+		<select id="selectPost" parameterType="zj.entity.position">
+		select * from position
+	</select>
+	<!-- 添加 -->
+	<insert id="save" parameterType="staff_info">
+		insert into staff_info (departmentId,positionId,STAFF_NO,PHOTO_NAME,STAFF_NAME,STAFF_CARD_NO,STAFF_SEX,STAFF_BIRTH,STAFF_AGE,STAFF_NATIVE_PLACE,STAFF_NATIONALITY,STAFF_POLITICAL_STATUS,
+		STAFF_PHONE,STAFF_EMAIL,HOME_ADDRESS,JOB_BEGINNING,WORK_AGE,STAFF_HEALTH,STAFF_HIGHEST_SCHOOL,STAFF_HIGHEST_DEGREE,GRADUATION_DATE,GRADUATION_SCHOOL,STAFF_MAJOR,STAFF_SKILLS,STAFF_OCCUPATION,
+		DATES_EMPLOYED,JOB_AGE,BEGIN_SALSRY_TIME,WORK_STATUS,STAFF_CS,STAFF_CTR,STAFF_COMPANY,RESUME,ADD_TIME,REMARK,ATTACHMENT_ID,ATTACHMENT_NAME)
+		values(#{departmentId},#{positionId},#{STAFF_NO},#{PHOTO_NAME},#{STAFF_NAME},#{STAFF_CARD_NO},#{STAFF_SEX},#{STAFF_BIRTH},#{STAFF_AGE},#{STAFF_NATIVE_PLACE},#{STAFF_NATIONALITY},#{STAFF_POLITICAL_STATUS},
+		#{STAFF_PHONE},#{STAFF_EMAIL},#{HOME_ADDRESS},#{JOB_BEGINNING},#{WORK_AGE},#{STAFF_HEALTH},#{STAFF_HIGHEST_SCHOOL},#{STAFF_HIGHEST_DEGREE},#{GRADUATION_DATE},#{GRADUATION_SCHOOL},#{STAFF_MAJOR},#{STAFF_SKILLS},#{STAFF_OCCUPATION},
+		#{DATES_EMPLOYED},#{JOB_AGE},#{BEGIN_SALSRY_TIME},#{WORK_STATUS},#{STAFF_CS},#{STAFF_CTR},#{STAFF_COMPANY},#{RESUME},#{ADD_TIME},#{REMARK},#{ATTACHMENT_ID},#{ATTACHMENT_NAME})
+	</insert>
+	<!-- 删除 -->
+	<delete id="delete" parameterType="staff_info">
+		delete from staff_info where staff_id=#{staff_id}
+	</delete>
+	<!--修改前查询  -->
+	<select id="selectId" parameterType="int" resultType="Map">
+		select * from staff_info where staff_id=#{staff_id}
+	</select>
+	<update id="update" parameterType="staff_info" >
+		update staff_info  
+		<set>
+			<if test="departmentId != null">departmentId=#{departmentId},</if>
+			<if test="positionId != null">positionId=#{positionId},</if>
+			<if test="STAFF_NO !=null">STAFF_NO=#{STAFF_NO},</if>
+			<if test="PHOTO_NAME !=null">PHOTO_NAME=#{PHOTO_NAME},</if>
+			<if test="STAFF_NAME !=null">STAFF_NAME=#{STAFF_NAME},</if>
+			<if test="STAFF_CARD_NO !=null">STAFF_CARD_NO=#{STAFF_CARD_NO},</if>
+			<if test="STAFF_SEX !=null">STAFF_SEX=#{STAFF_SEX},</if>
+			<if test="STAFF_BIRTH !=null">STAFF_BIRTH=#{STAFF_BIRTH},</if>
+			<if test="STAFF_AGE !=null">STAFF_AGE=#{STAFF_AGE},</if>
+			<if test="STAFF_NATIVE_PLACE !=null">STAFF_NATIVE_PLACE=#{STAFF_NATIVE_PLACE},</if>
+			<if test="STAFF_NATIONALITY !=null"> STAFF_NATIONALITY=#{ STAFF_NATIONALITY},</if>
+			<if test="STAFF_POLITICAL_STATUS !=null">STAFF_POLITICAL_STATUS=#{STAFF_POLITICAL_STATUS},</if>
+			<if test="STAFF_PHONE !=null">STAFF_PHONE=#{STAFF_PHONE},</if>
+			<if test="STAFF_EMAIL !=null"> STAFF_EMAIL=#{ STAFF_EMAIL},</if>
+			<if test="HOME_ADDRESS !=null">HOME_ADDRESS=#{HOME_ADDRESS},</if>
+			<if test="JOB_BEGINNING !=null">JOB_BEGINNING=#{JOB_BEGINNING},</if>
+			<if test="WORK_AGE !=null">WORK_AGE=#{WORK_AGE},</if>
+			<if test="STAFF_HEALTH !=null"> STAFF_HEALTH=#{ STAFF_HEALTH},</if>
+			<if test="STAFF_HIGHEST_SCHOOL !=null">STAFF_HIGHEST_SCHOOL=#{STAFF_HIGHEST_SCHOOL},</if>
+			<if test="STAFF_HIGHEST_DEGREE !=null">STAFF_HIGHEST_DEGREE=#{STAFF_HIGHEST_DEGREE},</if>
+			<if test="GRADUATION_DATE!=null">GRADUATION_DATE=#{GRADUATION_DATE},</if>
+			<if test="GRADUATION_SCHOOL !=null">GRADUATION_SCHOOL=#{GRADUATION_SCHOOL},</if>
+			<if test="STAFF_MAJOR !=null">STAFF_MAJOR=#{STAFF_MAJOR},</if>
+			<if test="STAFF_SKILLS !=null">STAFF_SKILLS=#{STAFF_SKILLS},</if>
+			<if test="STAFF_OCCUPATION !=null">STAFF_OCCUPATION=#{STAFF_OCCUPATION},</if>
+			<if test="DATES_EMPLOYED !=null">DATES_EMPLOYED=#{DATES_EMPLOYED},</if>
+			<if test="JOB_AGE !=null">JOB_AGE=#{JOB_AGE},</if>
+			<if test="BEGIN_SALSRY_TIME !=null">BEGIN_SALSRY_TIME=#{BEGIN_SALSRY_TIME}</if>
+			<if test="WORK_STATUS !=null"> WORK_STATUS=#{ WORK_STATUS},</if>
+			<if test="RESUME !=null">RESUME=#{RESUME},</if>
+			<if test="ADD_TIME !=null">ADD_TIME=#{ADD_TIME},</if>
+			<if test="REMARK !=null">REMARK=#{REMARK},</if>
+			<if test="ATTACHMENT_ID !=null">ATTACHMENT_ID=#{ATTACHMENT_ID},</if>
+			<if test="ATTACHMENT_NAME !=null">ATTACHMENT_NAME=#{ATTACHMENT_NAME},</if>
+		</set>
+		where staff_id=#{staff_id}
+	</update>
+</mapper>
