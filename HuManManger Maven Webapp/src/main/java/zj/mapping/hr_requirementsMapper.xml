@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="zj.dao.hr_requirementsMapper" >
+  <select id="select" resultType="Map">
+    select * from hr_recruit_requirements
+  </select>
+  <!-- 根据id查询 -->
+   <select id="QueryId" resultType="Map" parameterType="int">
+     select requ.*,plan.PLAN_NAME from hr_recruit_requirements requ left join  hr_recruit_plan plan on requ.PLAN_NO=plan.PLAN_NO
+      where REQUIREMENTS_ID=#{requirementsId} 
+   </select>
+   <!-- 修改 -->
+   <update id="Update"  parameterType="hr_recruit_requirements" >
+      update hr_recruit_requirements set
+     REQU_DEPT=#{requDept},REQU_JOB=#{requJob},
+     REQU_NUM=#{requNum},REQU_REQUIRES=#{requRequires},REQU_TIME=#{requTime},
+     PETITIONER=#{petitioner},REMARK=#{remark}
+     where REQUIREMENTS_ID=#{requirementsId}
+   </update>
+   <!-- 删除 -->
+   <delete id="Delete" parameterType="int">
+     delete from hr_recruit_requirements where REQUIREMENTS_ID=#{requirementsId}
+   </delete>
+   <!-- 添加 -->
+  <insert id="Save" parameterType="hr_recruit_requirements">
+	   insert into hr_recruit_requirements
+       (
+          REQU_DEPT,REQU_JOB,REQU_NUM,REQU_REQUIRES,REQU_TIME,PETITIONER,REMARK,PLAN_NO
+       ) 
+       values
+       (#{requDept}, #{requJob},
+         #{requNum}, #{requRequires}, #{requTime},#{petitioner},
+         #{remark}, #{planNo}
+       )
+       </insert>
+  <resultMap id="BaseResultMap" type="zj.entity.hr_recruit_requirements" >
+    <id column="REQUIREMENTS_ID" property="requirementsId" jdbcType="INTEGER" />
+    <result column="REQU_DEPT" property="requDept" jdbcType="VARCHAR" />
+    <result column="REQU_JOB" property="requJob" jdbcType="VARCHAR" />
+    <result column="REQU_NUM" property="requNum" jdbcType="INTEGER" />
+    <result column="REQU_REQUIRES" property="requRequires" jdbcType="VARCHAR" />
+    <result column="REQU_TIME" property="requTime" jdbcType="TIMESTAMP" />
+    <result column="PETITIONER" property="petitioner" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+   
+</mapper>
