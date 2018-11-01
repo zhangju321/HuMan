@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="zj.dao.attend_scheduleMapper" >
+<!--   <resultMap type="map" id="getthree" autoMapping="true">
+  <id property="id" column="id" />
+  <association property="ro" column="roleId" javaType="role" autoMapping="true">
+  <id property="roleId" column="roleId"></id>
+  </association>
+  
+  <association property="staff" column="staff_id" javaType="staff_info" autoMapping="true">
+	 	<id property="staff_id" column="staff_id"/>
+	 	</association>
+	 	
+	 	<association property="de" column="departmentId" javaType="department" autoMapping="true">
+	 	<id property="departmentId" column="departmentId"/>
+	 	</association>
+	 	
+	 </resultMap> -->
+	<!-- 表连接查询 -->
+	<!-- <select id="scheFind" resultMap="getthree">
+		select ache.*,r.roleId,d.departmentId,s.staff_id
+from attend_schedule ache join role r on ache.roleId=r.roleId JOIN
+ department d ON d.departmentId=ache.departmentId join staff_info s on s.staff_id=ache.staff_id
+  order by id asc
+	</select>  --> 
+	<select id="scheFind" resultType="map">
+		select ache.*,r.roleId,r.roleName,d.departmentId,d.departmentName,s.staff_id,s.STAFF_NAME
+from attend_schedule ache join role r on ache.roleId=r.roleId JOIN
+ department d ON d.departmentId=ache.departmentId join staff_info s on s.staff_id=ache.staff_id
+  order by id asc
+	</select> 
+	<select id="roleFind" resultType="map">
+	select * from role
+	</select>
+	<select id="departFind" resultType="map">
+	select * from department
+	</select>
+	<select id="staffFind" resultType="map">
+	select * from staff_info
+	</select>
+  <insert id="scheSave" parameterType="attend_schedule">
+  insert into attend_schedule(departmentId,roleId,staff_id,name,status,date_start,date_end) values(
+  #{departmentId},#{roleId},#{staff_id},#{name},#{status},#{date_start},#{date_end})
+  </insert>
+  <delete id="scheDelete" parameterType="attend_schedule">
+  delete from attend_schedule where id=#{id}
+  </delete>
+  <update id="scheUpdate" parameterType="attend_schedule">
+  update attend_schedule set departmentId=#{departmentId},roleId=#{roleId},staff_id=#{staff_id},name=#{name},
+  status=#{status},date_start=#{date_start},date_end=#{date_end} where id=#{id}
+  </update>
+  <update id="updateState" parameterType="attend_schedule">
+  update attend_schedule set status=#{status} where id=#{id}
+  </update>
+ <select id="scheFindById" parameterType="int" resultType="attend_schedule">
+ select * from attend_schedule where id=#{id}
+ </select>
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="zj.dao.attend_configMapper" >
+  <select id="conFind" resultType="map">
+  select * from attend_config
+  </select>
+  <insert id="conSave" parameterType="attend_config">
+  insert into attend_config(duty_name,duty_time1,duty_time2,duty_time3,duty_time4,duty_after1,duty_after2,duty_after3,duty_after4)
+   values(#{duty_name},#{duty_time1},#{duty_time2},#{duty_time3},#{duty_time4},#{duty_after1},#{duty_after2},#{duty_after3},#{duty_after4})
+  </insert>
+  <delete id="conDelete" parameterType="attend_config">
+  delete from attend_config where duty_id=#{duty_id}
+  </delete>
+  <update id="conUpdate" parameterType="attend_config">
+  update attend_config set duty_name=#{duty_name},duty_time1=#{duty_time1},duty_time2=#{duty_time2},duty_time3=#{duty_time3},
+  duty_time4=#{duty_time4},duty_after1=#{duty_after1},duty_after2=#{duty_after2},duty_after3=#{duty_after3},duty_after4=#{duty_after4} where duty_id=#{duty_id}
+  </update>
+ <select id="conFindById" parameterType="int" resultType="attend_config">
+ select * from attend_config where duty_id=#{duty_id}
+ </select>
+</mapper>
