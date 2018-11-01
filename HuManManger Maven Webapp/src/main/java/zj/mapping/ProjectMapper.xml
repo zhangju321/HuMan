@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zj.dao.ProjectDao">
+<!--project表添加 -->
+<insert id="psave" parameterType="Project">
+  insert into project(project_id,project_name,project_type) values(#{project_id},#{project_name},#{project_type})
+</insert>
+
+<!--project表查询 所有-->
+<select id="findAll" resultType="Project">
+  select * from project
+</select>
+
+<!-- 修改 -->
+<update id="pupdate" parameterType="Project">
+  update project set project_name=#{project_name},project_type=#{project_type} where project_id=#{project_id} 
+</update>
+
+<!-- 删除 -->
+<delete id="pdelete" parameterType="Project">
+delete from project where project_id=#{project_id}
+</delete>
+
+<!-- 查询单条数据 -->
+<select id="selectid" resultType="Project" parameterType="int">
+ select * from project where project_id=#{id}
+</select>
+</mapper>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zj.dao.WelfareDao">
+<!-- 查询全部福利表 -->
+<select id="queryWelfare" resultType="Map">
+select w.welfareid, d.departmentId,d.departmentName,s.staff_id,s.STAFF_NAME,w.welfare_type,w.issue_date,w.welfare_monery,w.tax,w.goods,w.remark 
+from welfare w
+left join department d on w.departmentId=d.departmentId
+left join staff_info s on w.staff_id=s.staff_id 
+</select>
+<!-- 添加福利 -->
+<insert id="welfSave" parameterType="Welfare">
+ insert into welfare(staff_id,departmentId,welfare_type,issue_date,welfare_monery,tax,goods,remark)values(#{staff_id},#{departmentId},#{welfare_type},#{issue_date},#{welfare_monery},#{tax},#{goods},#{remark})
+</insert>
+
+<!-- 查询部门 -->
+<select id="queryDepar" resultType="Map">
+select  d.departmentId,d.departmentName,s.staff_id,s.STAFF_NAME
+from  staff_info s
+left join department d on s.departmentId=d.departmentId 
+</select>
+<!--删除  -->
+<delete id="welfDlete" parameterType="Welfare">
+delete from welfare where welfareid=#{welfareid}
+</delete>
+<!-- 单条查询 -->
+<select id="queryWelfare2" resultType="Map" parameterType="int">
+select d.departmentId,d.departmentName,s.staff_id,s.STAFF_NAME,w.welfare_type,w.issue_date,w.welfare_monery,w.tax,w.goods,w.remark 
+from welfare w
+left join department d on w.departmentId=d.departmentId
+left join staff_info s on w.staff_id=s.staff_id   where w.welfareid=#{id}
+</select>
+
+<!-- 修改 -->
+<update id="welfUpdate" parameterType="Welfare">
+update welfare set departmentId=#{departmentId},staff_id=#{staff_id},welfare_type=#{welfare_type},issue_date=#{issue_date},welfare_monery=#{welfare_monery},tax=#{tax},goods=#{goods},remark=#{remark} where welfareid=#{welfareid}
+</update>
+
+</mapper>
