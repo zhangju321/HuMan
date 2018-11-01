@@ -10,6 +10,28 @@
 
 	<context:component-scan base-package="zj.controller"></context:component-scan>
 	
+	
+	<!--mvc注解配置 -->
+<mvc:annotation-driven>
+<mvc:message-converters>
+<!--解决日期乱码 -->
+<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+<property name="objectMapper">
+<bean class="com.fasterxml.jackson.databind.ObjectMapper">
+<property name="dateFormat">
+<bean class="java.text.SimpleDateFormat">
+<constructor-arg value="yyyy-MM-dd HH:mm:ss" type="java.lang.String"/>
+</bean>
+</property>
+</bean>
+</property>
+</bean>
+</mvc:message-converters>
+</mvc:annotation-driven>
+
+<!--引入mvc -->
+	
+	
 	<mvc:annotation-driven></mvc:annotation-driven>
 	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

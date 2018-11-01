@@ -2,18 +2,20 @@ package zj.entity;
 
 import java.util.Date;
 
-public class vocation {
-    private Integer vocationId;
+import org.springframework.format.annotation.DateTimeFormat;
 
-    private Integer staStaffId;
+public class vocation {//请假
+    private int vocationId;
 
-    private Integer staffId;
+    private int staffId;
 
     private String vocationReason;
 
-    private Date vocationQiTime;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date vocationQiTime;//请假起始时间
 
-    private Date vocationJieTime;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date vocationJieTime;//请假截止时间
 
     private String vocationType;
 
@@ -25,91 +27,86 @@ public class vocation {
 
     private String operate;
 
-    public Integer getVocationId() {
-        return vocationId;
-    }
+	public int getVocationId() {
+		return vocationId;
+	}
 
-    public void setVocationId(Integer vocationId) {
-        this.vocationId = vocationId;
-    }
+	public void setVocationId(int vocationId) {
+		this.vocationId = vocationId;
+	}
 
-    public Integer getStaStaffId() {
-        return staStaffId;
-    }
+	public int getStaffId() {
+		return staffId;
+	}
 
-    public void setStaStaffId(Integer staStaffId) {
-        this.staStaffId = staStaffId;
-    }
+	public void setStaffId(int staffId) {
+		this.staffId = staffId;
+	}
 
-    public Integer getStaffId() {
-        return staffId;
-    }
+	public String getVocationReason() {
+		return vocationReason;
+	}
 
-    public void setStaffId(Integer staffId) {
-        this.staffId = staffId;
-    }
+	public void setVocationReason(String vocationReason) {
+		this.vocationReason = vocationReason;
+	}
 
-    public String getVocationReason() {
-        return vocationReason;
-    }
+	public Date getVocationQiTime() {
+		return vocationQiTime;
+	}
 
-    public void setVocationReason(String vocationReason) {
-        this.vocationReason = vocationReason == null ? null : vocationReason.trim();
-    }
+	public void setVocationQiTime(Date vocationQiTime) {
+		this.vocationQiTime = vocationQiTime;
+	}
 
-    public Date getVocationQiTime() {
-        return vocationQiTime;
-    }
+	public Date getVocationJieTime() {
+		return vocationJieTime;
+	}
 
-    public void setVocationQiTime(Date vocationQiTime) {
-        this.vocationQiTime = vocationQiTime;
-    }
+	public void setVocationJieTime(Date vocationJieTime) {
+		this.vocationJieTime = vocationJieTime;
+	}
 
-    public Date getVocationJieTime() {
-        return vocationJieTime;
-    }
+	public String getVocationType() {
+		return vocationType;
+	}
 
-    public void setVocationJieTime(Date vocationJieTime) {
-        this.vocationJieTime = vocationJieTime;
-    }
+	public void setVocationType(String vocationType) {
+		this.vocationType = vocationType;
+	}
 
-    public String getVocationType() {
-        return vocationType;
-    }
+	public String getStatusName() {
+		return statusName;
+	}
 
-    public void setVocationType(String vocationType) {
-        this.vocationType = vocationType == null ? null : vocationType.trim();
-    }
+	public void setStatusName(String statusName) {
+		this.statusName = statusName;
+	}
 
-    public String getStatusName() {
-        return statusName;
-    }
+	public String getExaminePerson() {
+		return examinePerson;
+	}
 
-    public void setStatusName(String statusName) {
-        this.statusName = statusName == null ? null : statusName.trim();
-    }
+	public void setExaminePerson(String examinePerson) {
+		this.examinePerson = examinePerson;
+	}
 
-    public String getExaminePerson() {
-        return examinePerson;
-    }
+	public String getCirculate() {
+		return circulate;
+	}
 
-    public void setExaminePerson(String examinePerson) {
-        this.examinePerson = examinePerson == null ? null : examinePerson.trim();
-    }
+	public void setCirculate(String circulate) {
+		this.circulate = circulate;
+	}
 
-    public String getCirculate() {
-        return circulate;
-    }
+	public String getOperate() {
+		return operate;
+	}
 
-    public void setCirculate(String circulate) {
-        this.circulate = circulate == null ? null : circulate.trim();
-    }
+	public void setOperate(String operate) {
+		this.operate = operate;
+	}
 
-    public String getOperate() {
-        return operate;
-    }
 
-    public void setOperate(String operate) {
-        this.operate = operate == null ? null : operate.trim();
-    }
+ 
 }

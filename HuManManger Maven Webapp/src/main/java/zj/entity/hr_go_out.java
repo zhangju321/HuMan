@@ -1,21 +1,18 @@
 package zj.entity;
 
-import java.util.Date;
 
-public class hr_go_out {
-    private Integer outId;
+public class hr_go_out {//外出
+    private int outId;
 
-    private Integer staStaffId;
-
-    private Integer staffId;
+    private int staffId;
 
     private String reason;
 
-    private Date outTime;
+    private String outTime;//外出日期
 
-    private Date startTime;
+    private String startTime;//开始时间
 
-    private Date endTime;
+    private String endTime;//结束时间
 
     private String place;
 
@@ -27,99 +24,93 @@ public class hr_go_out {
 
     private String operate;
 
-    public Integer getOutId() {
-        return outId;
-    }
+	public int getOutId() {
+		return outId;
+	}
 
-    public void setOutId(Integer outId) {
-        this.outId = outId;
-    }
+	public void setOutId(int outId) {
+		this.outId = outId;
+	}
 
-    public Integer getStaStaffId() {
-        return staStaffId;
-    }
+	public int getStaffId() {
+		return staffId;
+	}
 
-    public void setStaStaffId(Integer staStaffId) {
-        this.staStaffId = staStaffId;
-    }
+	public void setStaffId(int staffId) {
+		this.staffId = staffId;
+	}
 
-    public Integer getStaffId() {
-        return staffId;
-    }
+	public String getReason() {
+		return reason;
+	}
 
-    public void setStaffId(Integer staffId) {
-        this.staffId = staffId;
-    }
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
 
-    public String getReason() {
-        return reason;
-    }
+	public String getOutTime() {
+		return outTime;
+	}
 
-    public void setReason(String reason) {
-        this.reason = reason == null ? null : reason.trim();
-    }
+	public void setOutTime(String outTime) {
+		this.outTime = outTime;
+	}
 
-    public Date getOutTime() {
-        return outTime;
-    }
+	public String getStartTime() {
+		return startTime;
+	}
 
-    public void setOutTime(Date outTime) {
-        this.outTime = outTime;
-    }
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
 
-    public Date getStartTime() {
-        return startTime;
-    }
+	public String getEndTime() {
+		return endTime;
+	}
 
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
-    }
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
 
-    public Date getEndTime() {
-        return endTime;
-    }
+	public String getPlace() {
+		return place;
+	}
 
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
-    }
+	public void setPlace(String place) {
+		this.place = place;
+	}
 
-    public String getPlace() {
-        return place;
-    }
+	public String getExaminePerson() {
+		return examinePerson;
+	}
 
-    public void setPlace(String place) {
-        this.place = place == null ? null : place.trim();
-    }
+	public void setExaminePerson(String examinePerson) {
+		this.examinePerson = examinePerson;
+	}
 
-    public String getExaminePerson() {
-        return examinePerson;
-    }
+	public String getCirculate() {
+		return circulate;
+	}
 
-    public void setExaminePerson(String examinePerson) {
-        this.examinePerson = examinePerson == null ? null : examinePerson.trim();
-    }
+	public void setCirculate(String circulate) {
+		this.circulate = circulate;
+	}
 
-    public String getCirculate() {
-        return circulate;
-    }
+	public String getStatusName() {
+		return statusName;
+	}
 
-    public void setCirculate(String circulate) {
-        this.circulate = circulate == null ? null : circulate.trim();
-    }
+	public void setStatusName(String statusName) {
+		this.statusName = statusName;
+	}
 
-    public String getStatusName() {
-        return statusName;
-    }
+	public String getOperate() {
+		return operate;
+	}
 
-    public void setStatusName(String statusName) {
-        this.statusName = statusName == null ? null : statusName.trim();
-    }
+	public void setOperate(String operate) {
+		this.operate = operate;
+	}
+    
 
-    public String getOperate() {
-        return operate;
-    }
-
-    public void setOperate(String operate) {
-        this.operate = operate == null ? null : operate.trim();
-    }
 }

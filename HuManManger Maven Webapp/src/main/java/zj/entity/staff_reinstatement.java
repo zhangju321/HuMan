@@ -2,184 +2,197 @@ package zj.entity;
 
 import java.util.Date;
 
-public class staff_reinstatement {
-    private Integer reinstatementId;
+import org.springframework.format.annotation.DateTimeFormat;
 
-    private Integer staffId;
+public class staff_reinstatement {//复职
+	
+    private int reinstatementId;//复职id
 
-    private Integer positionid;
+    private int positionid;//职务外键
+    
+    private int staffId;//员工外键
 
-    private Integer departmentid;
+    private int departmentid;//部门外键
 
-    private Date reappointmentTimeFact;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date reappointmentTimePlan;//拟复职日期 
 
-    private Integer reappointmentType;
+    private int reappointmentType;//复职类型  调回 复员
+    
+    private String reappointmentState;//复职说明
 
-    private String reappointmentState;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date firstSalaryTime;//工资恢复日期
 
-    private String remark;
+    private String remark;//备注
+    
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date reappointmentTimeFact;//实际复职日期
 
-    private Date addTime;
+    private String despacho;//批示
 
-    private Date lastUpdateTime;
+    private String despachoPerson;//批示人
+    
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date addTime;//登记日期
 
-    private Date reappointmentTimePlan;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date lastUpdateTime;//最后修改时间
 
-    private String despachoPerson;
+    private int materialsCondition;//复职手续办理 
 
-    private String despacho;
+    private int attachmentId;//附件编号
 
-    private Date applicationDate;
+    private String attachmentName;//附件名称
 
-    private Date firstSalaryTime;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date applicationDate;//申请日期
 
-    private Integer materialsCondition;
+	public int getReinstatementId() {
+		return reinstatementId;
+	}
 
-    private Integer attachmentId;
+	public void setReinstatementId(int reinstatementId) {
+		this.reinstatementId = reinstatementId;
+	}
 
-    private String attachmentName;
+	public int getStaffId() {
+		return staffId;
+	}
 
-    public Integer getReinstatementId() {
-        return reinstatementId;
-    }
+	public void setStaffId(int staffId) {
+		this.staffId = staffId;
+	}
 
-    public void setReinstatementId(Integer reinstatementId) {
-        this.reinstatementId = reinstatementId;
-    }
+	public int getPositionid() {
+		return positionid;
+	}
 
-    public Integer getStaffId() {
-        return staffId;
-    }
+	public void setPositionid(int positionid) {
+		this.positionid = positionid;
+	}
 
-    public void setStaffId(Integer staffId) {
-        this.staffId = staffId;
-    }
+	public int getDepartmentid() {
+		return departmentid;
+	}
 
-    public Integer getPositionid() {
-        return positionid;
-    }
+	public void setDepartmentid(int departmentid) {
+		this.departmentid = departmentid;
+	}
 
-    public void setPositionid(Integer positionid) {
-        this.positionid = positionid;
-    }
+	public Date getReappointmentTimePlan() {
+		return reappointmentTimePlan;
+	}
 
-    public Integer getDepartmentid() {
-        return departmentid;
-    }
+	public void setReappointmentTimePlan(Date reappointmentTimePlan) {
+		this.reappointmentTimePlan = reappointmentTimePlan;
+	}
 
-    public void setDepartmentid(Integer departmentid) {
-        this.departmentid = departmentid;
-    }
+	public Date getReappointmentTimeFact() {
+		return reappointmentTimeFact;
+	}
 
-    public Date getReappointmentTimeFact() {
-        return reappointmentTimeFact;
-    }
+	public void setReappointmentTimeFact(Date reappointmentTimeFact) {
+		this.reappointmentTimeFact = reappointmentTimeFact;
+	}
 
-    public void setReappointmentTimeFact(Date reappointmentTimeFact) {
-        this.reappointmentTimeFact = reappointmentTimeFact;
-    }
+	public int getReappointmentType() {
+		return reappointmentType;
+	}
 
-    public Integer getReappointmentType() {
-        return reappointmentType;
-    }
+	public void setReappointmentType(int reappointmentType) {
+		this.reappointmentType = reappointmentType;
+	}
 
-    public void setReappointmentType(Integer reappointmentType) {
-        this.reappointmentType = reappointmentType;
-    }
+	public String getReappointmentState() {
+		return reappointmentState;
+	}
 
-    public String getReappointmentState() {
-        return reappointmentState;
-    }
+	public void setReappointmentState(String reappointmentState) {
+		this.reappointmentState = reappointmentState;
+	}
 
-    public void setReappointmentState(String reappointmentState) {
-        this.reappointmentState = reappointmentState == null ? null : reappointmentState.trim();
-    }
+	public String getRemark() {
+		return remark;
+	}
 
-    public String getRemark() {
-        return remark;
-    }
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 
-    public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
-    }
+	public Date getAddTime() {
+		return addTime;
+	}
 
-    public Date getAddTime() {
-        return addTime;
-    }
+	public void setAddTime(Date addTime) {
+		this.addTime = addTime;
+	}
 
-    public void setAddTime(Date addTime) {
-        this.addTime = addTime;
-    }
+	public Date getLastUpdateTime() {
+		return lastUpdateTime;
+	}
 
-    public Date getLastUpdateTime() {
-        return lastUpdateTime;
-    }
+	public void setLastUpdateTime(Date lastUpdateTime) {
+		this.lastUpdateTime = lastUpdateTime;
+	}
 
-    public void setLastUpdateTime(Date lastUpdateTime) {
-        this.lastUpdateTime = lastUpdateTime;
-    }
+	public String getDespachoPerson() {
+		return despachoPerson;
+	}
 
-    public Date getReappointmentTimePlan() {
-        return reappointmentTimePlan;
-    }
+	public void setDespachoPerson(String despachoPerson) {
+		this.despachoPerson = despachoPerson;
+	}
 
-    public void setReappointmentTimePlan(Date reappointmentTimePlan) {
-        this.reappointmentTimePlan = reappointmentTimePlan;
-    }
+	public String getDespacho() {
+		return despacho;
+	}
 
-    public String getDespachoPerson() {
-        return despachoPerson;
-    }
+	public void setDespacho(String despacho) {
+		this.despacho = despacho;
+	}
 
-    public void setDespachoPerson(String despachoPerson) {
-        this.despachoPerson = despachoPerson == null ? null : despachoPerson.trim();
-    }
+	public Date getApplicationDate() {
+		return applicationDate;
+	}
 
-    public String getDespacho() {
-        return despacho;
-    }
+	public void setApplicationDate(Date applicationDate) {
+		this.applicationDate = applicationDate;
+	}
 
-    public void setDespacho(String despacho) {
-        this.despacho = despacho == null ? null : despacho.trim();
-    }
+	public Date getFirstSalaryTime() {
+		return firstSalaryTime;
+	}
 
-    public Date getApplicationDate() {
-        return applicationDate;
-    }
+	public void setFirstSalaryTime(Date firstSalaryTime) {
+		this.firstSalaryTime = firstSalaryTime;
+	}
 
-    public void setApplicationDate(Date applicationDate) {
-        this.applicationDate = applicationDate;
-    }
+	public int getMaterialsCondition() {
+		return materialsCondition;
+	}
 
-    public Date getFirstSalaryTime() {
-        return firstSalaryTime;
-    }
+	public void setMaterialsCondition(int materialsCondition) {
+		this.materialsCondition = materialsCondition;
+	}
 
-    public void setFirstSalaryTime(Date firstSalaryTime) {
-        this.firstSalaryTime = firstSalaryTime;
-    }
+	public int getAttachmentId() {
+		return attachmentId;
+	}
 
-    public Integer getMaterialsCondition() {
-        return materialsCondition;
-    }
+	public void setAttachmentId(int attachmentId) {
+		this.attachmentId = attachmentId;
+	}
 
-    public void setMaterialsCondition(Integer materialsCondition) {
-        this.materialsCondition = materialsCondition;
-    }
+	public String getAttachmentName() {
+		return attachmentName;
+	}
 
-    public Integer getAttachmentId() {
-        return attachmentId;
-    }
+	public void setAttachmentName(String attachmentName) {
+		this.attachmentName = attachmentName;
+	}
+    
+    
+    
 
-    public void setAttachmentId(Integer attachmentId) {
-        this.attachmentId = attachmentId;
-    }
-
-    public String getAttachmentName() {
-        return attachmentName;
-    }
-
-    public void setAttachmentName(String attachmentName) {
-        this.attachmentName = attachmentName == null ? null : attachmentName.trim();
-    }
 }

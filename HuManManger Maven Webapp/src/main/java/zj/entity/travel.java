@@ -1,21 +1,18 @@
 package zj.entity;
 
-import java.util.Date;
 
-public class travel {
-    private Integer travelId;
+public class travel {//出差
+    private int travelId;
 
-    private Integer staStaffId;
-
-    private Integer staffId;
+    private int staffId;
 
     private String travelPlace;
 
-    private Date startTime;
+    private String startTime;//开始时间
 
-    private Date endTime;
+    private String endTime;//结束时间
 
-    private Integer travelDate;
+    private int travelDate;
 
     private String travelReason;
 
@@ -27,99 +24,94 @@ public class travel {
 
     private String operate;
 
-    public Integer getTravelId() {
-        return travelId;
-    }
+	public int getTravelId() {
+		return travelId;
+	}
 
-    public void setTravelId(Integer travelId) {
-        this.travelId = travelId;
-    }
+	public void setTravelId(int travelId) {
+		this.travelId = travelId;
+	}
 
-    public Integer getStaStaffId() {
-        return staStaffId;
-    }
+	public int getStaffId() {
+		return staffId;
+	}
 
-    public void setStaStaffId(Integer staStaffId) {
-        this.staStaffId = staStaffId;
-    }
+	public void setStaffId(int staffId) {
+		this.staffId = staffId;
+	}
 
-    public Integer getStaffId() {
-        return staffId;
-    }
+	public String getTravelPlace() {
+		return travelPlace;
+	}
 
-    public void setStaffId(Integer staffId) {
-        this.staffId = staffId;
-    }
+	public void setTravelPlace(String travelPlace) {
+		this.travelPlace = travelPlace;
+	}
 
-    public String getTravelPlace() {
-        return travelPlace;
-    }
+	public String getStartTime() {
+		return startTime;
+	}
 
-    public void setTravelPlace(String travelPlace) {
-        this.travelPlace = travelPlace == null ? null : travelPlace.trim();
-    }
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
 
-    public Date getStartTime() {
-        return startTime;
-    }
+	public String getEndTime() {
+		return endTime;
+	}
 
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
-    }
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
 
-    public Date getEndTime() {
-        return endTime;
-    }
+	public int getTravelDate() {
+		return travelDate;
+	}
 
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
-    }
+	public void setTravelDate(int travelDate) {
+		this.travelDate = travelDate;
+	}
 
-    public Integer getTravelDate() {
-        return travelDate;
-    }
+	public String getTravelReason() {
+		return travelReason;
+	}
 
-    public void setTravelDate(Integer travelDate) {
-        this.travelDate = travelDate;
-    }
+	public void setTravelReason(String travelReason) {
+		this.travelReason = travelReason;
+	}
 
-    public String getTravelReason() {
-        return travelReason;
-    }
+	public String getExaminePerson() {
+		return examinePerson;
+	}
 
-    public void setTravelReason(String travelReason) {
-        this.travelReason = travelReason == null ? null : travelReason.trim();
-    }
+	public void setExaminePerson(String examinePerson) {
+		this.examinePerson = examinePerson;
+	}
 
-    public String getExaminePerson() {
-        return examinePerson;
-    }
+	public String getCirculate() {
+		return circulate;
+	}
 
-    public void setExaminePerson(String examinePerson) {
-        this.examinePerson = examinePerson == null ? null : examinePerson.trim();
-    }
+	public void setCirculate(String circulate) {
+		this.circulate = circulate;
+	}
 
-    public String getCirculate() {
-        return circulate;
-    }
+	public String getStatusName() {
+		return statusName;
+	}
 
-    public void setCirculate(String circulate) {
-        this.circulate = circulate == null ? null : circulate.trim();
-    }
+	public void setStatusName(String statusName) {
+		this.statusName = statusName;
+	}
 
-    public String getStatusName() {
-        return statusName;
-    }
+	public String getOperate() {
+		return operate;
+	}
 
-    public void setStatusName(String statusName) {
-        this.statusName = statusName == null ? null : statusName.trim();
-    }
+	public void setOperate(String operate) {
+		this.operate = operate;
+	}
+    
 
-    public String getOperate() {
-        return operate;
-    }
-
-    public void setOperate(String operate) {
-        this.operate = operate == null ? null : operate.trim();
-    }
+ 
 }
