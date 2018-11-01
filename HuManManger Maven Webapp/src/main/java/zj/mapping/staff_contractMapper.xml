@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="zj.dao.staff_contractMapper" >
+    <!-- 合同 -->
+   <resultMap id="contract" type="zj.entity.staff_contract" >
+    <id column="CONTRACT_ID" property="contractId" jdbcType="INTEGER" /> 
+    <result column="STAFF_ID" property="staffId" jdbcType="INTEGER" />
+    <result column="CONTRACT_TYPE" property="contractType" jdbcType="VARCHAR" />
+    <result column="CONTRACT_SPECIALIZATION" property="contractSpecialization" jdbcType="VARCHAR" />
+    <result column="MAKE_CONTRACT" property="makeContract" jdbcType="TIMESTAMP" />
+    <result column="TRAIL_EFFECTIVE_TIME" property="trailEffectiveTime" jdbcType="TIMESTAMP" />
+    <result column="PROBATIONARY_PERIOD" property="probationaryPeriod" jdbcType="VARCHAR" />
+    <result column="TRAIL_OVER_TIME" property="trailOverTime" jdbcType="TIMESTAMP" />
+    <result column="PASS_OR_NOT" property="passOrNot" jdbcType="INTEGER" />
+    <result column="PROBATION_END_DATE" property="probationEndDate" jdbcType="TIMESTAMP" />
+    <result column="PROBATION_EFFECTIVE_DATE" property="probationEffectiveDate" jdbcType="TIMESTAMP" />
+    <result column="ACTIVE_PERIOD" property="activePeriod" jdbcType="VARCHAR" />
+    <result column="CONTRACT_END_TIME" property="contractEndTime" jdbcType="TIMESTAMP" />
+    <result column="REMOVE_OR_NOT" property="removeOrNot" jdbcType="INTEGER" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="SIGN_TIMES" property="signTimes" jdbcType="VARCHAR" />
+    <result column="ATTACHMENT_ID" property="attachmentId" jdbcType="VARCHAR" />
+    <result column="ATTACHMENT_NAME" property="attachmentName" jdbcType="VARCHAR" />
+    <result column="ADD_TIME" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="LAST_UPDATE_TIME" property="lastUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="REMIND_TIME" property="remindTime" jdbcType="TIMESTAMP" />
+    <result column="STAFF_USER_NAME" property="staffUserName" jdbcType="VARCHAR" />
+    <result column="REMIND_TYPE" property="remindType" jdbcType="INTEGER" />
+    <result column="HAS_REMINDED" property="hasReminded" jdbcType="INTEGER" />
+    <result column="RENEW_TIME" property="renewTime" jdbcType="VARCHAR" />
+    <result column="CONTRACT_ENTERPRIES" property="contractEnterpries" jdbcType="VARCHAR" />
+    <result column="IS_TRIAL" property="isTrial" jdbcType="INTEGER" />
+    <result column="IS_RENEW" property="isRenew" jdbcType="INTEGER" />
+    <result column="CONTRACT_REMOVE_TIME" property="contractRemoveTime" jdbcType="TIMESTAMP" />
+    <result column="REMARK" property="remark" jdbcType="LONGVARCHAR" />
+    <result column="REMIND_USER" property="remindUser" jdbcType="LONGVARCHAR" />
+  </resultMap>
+
+	<!-- 员工 -->
+	<resultMap id="staff_info" type="zj.entity.staff_info">
+		<id column="staff_id" property="staffId" jdbcType="INTEGER" />
+		<result column="STAFF_NAME" property="staffName" jdbcType="VARCHAR" />
+	</resultMap>
+
+
+	<!-- 查询合同 -->
+	<select id="selectcontract" resultType="map">
+		 select i.STAFF_NAME,c.*,DATEDIFF(contract_end_time,now()) htdaoqi,DATEDIFF(trail_over_time,now()) sydaoqi
+         from staff_contract c left JOIN staff_info i on c.STAFF_ID=i.staff_id
+         order by c.CONTRACT_ID  asc
+	</select>
+	<!-- 查询员工 -->
+	<select id="selectstaffinfo" resultMap="staff_info"
+		parameterType="zj.entity.staff_info">
+		select * from staff_info
+	</select>
+	<!-- 添加合同 -->
+   <insert id="insert" parameterType="zj.entity.staff_contract" >
+    insert into staff_contract (CONTRACT_ID, STAFF_ID, CONTRACT_TYPE, 
+      CONTRACT_SPECIALIZATION, MAKE_CONTRACT, 
+      TRAIL_EFFECTIVE_TIME, PROBATIONARY_PERIOD, 
+      TRAIL_OVER_TIME, PASS_OR_NOT, PROBATION_END_DATE, 
+      PROBATION_EFFECTIVE_DATE, ACTIVE_PERIOD, 
+      CONTRACT_END_TIME, REMOVE_OR_NOT, STATUS, 
+      SIGN_TIMES, ATTACHMENT_ID, ATTACHMENT_NAME, 
+      ADD_TIME, LAST_UPDATE_TIME, REMIND_TIME, 
+      STAFF_USER_NAME, REMIND_TYPE, HAS_REMINDED, 
+      RENEW_TIME, CONTRACT_ENTERPRIES, IS_TRIAL, 
+      IS_RENEW, CONTRACT_REMOVE_TIME, REMARK, 
+      REMIND_USER)
+    values (#{contractId,jdbcType=INTEGER}, #{staffId,jdbcType=INTEGER}, #{contractType,jdbcType=VARCHAR}, 
+      #{contractSpecialization,jdbcType=VARCHAR}, #{makeContract,jdbcType=TIMESTAMP}, 
+      #{trailEffectiveTime,jdbcType=TIMESTAMP}, #{probationaryPeriod,jdbcType=VARCHAR}, 
+      #{trailOverTime,jdbcType=TIMESTAMP}, #{passOrNot,jdbcType=INTEGER}, #{probationEndDate,jdbcType=TIMESTAMP}, 
+      #{probationEffectiveDate,jdbcType=TIMESTAMP}, #{activePeriod,jdbcType=VARCHAR}, 
+      #{contractEndTime,jdbcType=TIMESTAMP}, #{removeOrNot,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, 
+      #{signTimes,jdbcType=VARCHAR}, #{attachmentId,jdbcType=VARCHAR}, #{attachmentName,jdbcType=VARCHAR}, 
+      #{addTime,jdbcType=TIMESTAMP}, #{lastUpdateTime,jdbcType=TIMESTAMP}, #{remindTime,jdbcType=TIMESTAMP}, 
+      #{staffUserName,jdbcType=VARCHAR}, #{remindType,jdbcType=INTEGER}, #{hasReminded,jdbcType=INTEGER}, 
+      #{renewTime,jdbcType=VARCHAR}, #{contractEnterpries,jdbcType=VARCHAR}, #{isTrial,jdbcType=INTEGER}, 
+      #{isRenew,jdbcType=INTEGER}, #{contractRemoveTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=LONGVARCHAR}, 
+      #{remindUser,jdbcType=LONGVARCHAR})
+  </insert>
+  
+  	<!-- 修改前查询合同 -->
+	<select id="selectByID" resultMap="contract" parameterType="zj.entity.staff_contract">
+		 select * from staff_contract 
+         where CONTRACT_ID=#{contractId}
+	</select>
+		<!-- 删除 -->
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from staff_contract
+		where CONTRACT_ID=#{contractId}
+	</delete>
+
+  <!-- 修改 -->
+   <update id="update" parameterType="zj.entity.staff_contract" >
+    update staff_contract
+    set STAFF_ID = #{staffId,jdbcType=INTEGER},
+      CONTRACT_TYPE = #{contractType,jdbcType=VARCHAR},
+      CONTRACT_SPECIALIZATION = #{contractSpecialization,jdbcType=VARCHAR},
+      MAKE_CONTRACT = #{makeContract,jdbcType=TIMESTAMP},
+      TRAIL_EFFECTIVE_TIME = #{trailEffectiveTime,jdbcType=TIMESTAMP},
+      PROBATIONARY_PERIOD = #{probationaryPeriod,jdbcType=VARCHAR},
+      TRAIL_OVER_TIME = #{trailOverTime,jdbcType=TIMESTAMP},
+      PASS_OR_NOT = #{passOrNot,jdbcType=INTEGER},
+      PROBATION_END_DATE = #{probationEndDate,jdbcType=TIMESTAMP},
+      PROBATION_EFFECTIVE_DATE = #{probationEffectiveDate,jdbcType=TIMESTAMP},
+      ACTIVE_PERIOD = #{activePeriod,jdbcType=VARCHAR},
+      CONTRACT_END_TIME = #{contractEndTime,jdbcType=TIMESTAMP},
+      REMOVE_OR_NOT = #{removeOrNot,jdbcType=INTEGER},
+      STATUS = #{status,jdbcType=VARCHAR},
+      SIGN_TIMES = #{signTimes,jdbcType=VARCHAR},
+      ATTACHMENT_ID = #{attachmentId,jdbcType=VARCHAR},
+      ATTACHMENT_NAME = #{attachmentName,jdbcType=VARCHAR},
+      ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      LAST_UPDATE_TIME = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      REMIND_TIME = #{remindTime,jdbcType=TIMESTAMP},
+      STAFF_USER_NAME = #{staffUserName,jdbcType=VARCHAR},
+      REMIND_TYPE = #{remindType,jdbcType=INTEGER},
+      HAS_REMINDED = #{hasReminded,jdbcType=INTEGER},
+      RENEW_TIME = #{renewTime,jdbcType=VARCHAR},
+      CONTRACT_ENTERPRIES = #{contractEnterpries,jdbcType=VARCHAR},
+      IS_TRIAL = #{isTrial,jdbcType=INTEGER},
+      IS_RENEW = #{isRenew,jdbcType=INTEGER},
+      CONTRACT_REMOVE_TIME = #{contractRemoveTime,jdbcType=TIMESTAMP},
+      REMARK = #{remark,jdbcType=LONGVARCHAR},
+      REMIND_USER = #{remindUser,jdbcType=LONGVARCHAR}
+    where CONTRACT_ID = #{contractId,jdbcType=INTEGER}
+  </update>
+   
+	
+	
+</mapper>

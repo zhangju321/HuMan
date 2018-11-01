@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="zj.dao.staff_reinstatementMapper" >
+   <!-- 复职 -->
+  <resultMap id="Reinstatement" type="zj.entity.staff_reinstatement" >
+    <id column="REINSTATEMENT_ID" property="reinstatementId" jdbcType="INTEGER" />
+    <result column="STAFF_ID" property="staffId" jdbcType="INTEGER" />
+    <result column="REAPPOINTMENT_TIME_FACT" property="reappointmentTimeFact" jdbcType="TIMESTAMP" />
+    <result column="REAPPOINTMENT_TYPE" property="reappointmentType" jdbcType="INTEGER" />
+    <result column="ADD_TIME" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="LAST_UPDATE_TIME" property="lastUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="REAPPOINTMENT_TIME_PLAN" property="reappointmentTimePlan" jdbcType="TIMESTAMP" />
+    <result column="DESPACHO_PERSON" property="despachoPerson" jdbcType="VARCHAR" />
+    <result column="DESPACHO" property="despacho" jdbcType="VARCHAR" />
+    <result column="APPLICATION_DATE" property="applicationDate" jdbcType="TIMESTAMP" />
+    <result column="FIRST_SALARY_TIME" property="firstSalaryTime" jdbcType="TIMESTAMP" />
+    <result column="MATERIALS_CONDITION" property="materialsCondition" jdbcType="INTEGER" />
+    <result column="ATTACHMENT_ID" property="attachmentId" jdbcType="INTEGER" />
+    <result column="ATTACHMENT_NAME" property="attachmentName" jdbcType="VARCHAR" />
+    <result column="REAPPOINTMENT_STATE" property="reappointmentState" jdbcType="LONGVARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  	<!-- 职务 -->
+	<resultMap id="position" type="zj.entity.position">
+		<id column="positionId" property="positionid" jdbcType="INTEGER" />
+		<result column="positionName" property="positionname" jdbcType="VARCHAR" />
+	</resultMap>
+	<!-- 部门 -->
+	<resultMap id="department" type="zj.entity.department">
+		<id column="departmentId" property="departmentid" jdbcType="INTEGER" />
+		<result column="departmentName" property="departmentname"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<!-- 员工 -->
+	<resultMap id="staff_info" type="zj.entity.staff_info">
+		<id column="staff_id" property="staffId" jdbcType="INTEGER" />
+		<result column="departmentId" property="departmentid" jdbcType="INTEGER" />
+		<result column="positionId" property="positionid" jdbcType="INTEGER" />
+		<result column="STAFF_NAME" property="staffName" jdbcType="VARCHAR" />
+		<result column="WORK_STATUS" property="workStatus" jdbcType="INTEGER" />
+	</resultMap>
+	
+	
+		<!-- 查询复职表 -->
+	<select id="selectRein" resultType="map">
+		select
+		r.*,p.positionName,p.positionId,d.departmentName,d.departmentId,s.staff_id,s.STAFF_NAME,s.WORK_STATUS
+		from staff_reinstatement r
+		left join position p on r.positionId=p.positionId
+		left join department d on r.departmentId=d.departmentId
+		left join staff_info s on r.staff_id=s.staff_id
+		where s.WORK_STATUS=1 order by r.REINSTATEMENT_ID asc
+	</select>
+	
+		
+	<!-- 查询离职员工 -->
+	<select id="selectinfostu" resultMap="staff_info" parameterType="zj.entity.staff_info">
+		select * from staff_info where WORK_STATUS=2
+	</select>
+	
+		<!-- 查询员工 -->
+	<select id="selectstaffinfo" resultMap="staff_info"
+		parameterType="zj.entity.staff_info">
+		select * from staff_info
+	</select>
+
+	<!-- 查询部门 -->
+	<select id="selectdepartment" resultMap="department"
+		parameterType="zj.entity.department">
+		select * from department
+	</select>
+
+	<!-- 查询职务 -->
+	<select id="selectposition" resultMap="position" parameterType="zj.entity.position">
+		select * from position
+	</select>
+	
+		<!-- 删除 -->
+	<delete id="deleteRein" parameterType="java.lang.Integer">
+		delete from staff_reinstatement
+		where REINSTATEMENT_ID = #{reinstatementId}
+	</delete>
+
+	<!-- 修改前查询 -->
+	<select id="selectReinid" resultMap="Reinstatement" parameterType="zj.entity.staff_reinstatement">
+		select * from staff_reinstatement
+		where REINSTATEMENT_ID = #{reinstatementId}
+	</select>
+	
+	<!-- 修改 -->
+  <update id="updateRein" parameterType="zj.entity.staff_reinstatement" >
+    update staff_reinstatement
+    set staff_id = #{staffId,jdbcType=INTEGER},
+      positionId = #{positionid,jdbcType=INTEGER},
+      departmentId = #{departmentid,jdbcType=INTEGER},
+      REAPPOINTMENT_TIME_FACT = #{reappointmentTimeFact,jdbcType=TIMESTAMP},
+      REAPPOINTMENT_TYPE = #{reappointmentType,jdbcType=INTEGER},
+      ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      LAST_UPDATE_TIME = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      REAPPOINTMENT_TIME_PLAN = #{reappointmentTimePlan,jdbcType=TIMESTAMP},
+      DESPACHO_PERSON = #{despachoPerson,jdbcType=VARCHAR},
+      DESPACHO = #{despacho,jdbcType=VARCHAR},
+      APPLICATION_DATE = #{applicationDate,jdbcType=TIMESTAMP},
+      FIRST_SALARY_TIME = #{firstSalaryTime,jdbcType=TIMESTAMP},
+      MATERIALS_CONDITION = #{materialsCondition,jdbcType=INTEGER},
+      ATTACHMENT_ID = #{attachmentId,jdbcType=INTEGER},
+      ATTACHMENT_NAME = #{attachmentName,jdbcType=VARCHAR},
+      REAPPOINTMENT_STATE = #{reappointmentState,jdbcType=LONGVARCHAR},
+      REMARK = #{remark,jdbcType=LONGVARCHAR}
+    where REINSTATEMENT_ID = #{reinstatementId,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 添加 -->
+  <insert id="insert" parameterType="zj.entity.staff_reinstatement" >
+    insert into staff_reinstatement (REINSTATEMENT_ID, staff_id, positionId, 
+      departmentId, REAPPOINTMENT_TIME_FACT, 
+      REAPPOINTMENT_TYPE, ADD_TIME, LAST_UPDATE_TIME, 
+      REAPPOINTMENT_TIME_PLAN, DESPACHO_PERSON, 
+      DESPACHO, APPLICATION_DATE, FIRST_SALARY_TIME, 
+      MATERIALS_CONDITION, ATTACHMENT_ID, ATTACHMENT_NAME, 
+      REAPPOINTMENT_STATE, REMARK)
+    values (#{reinstatementId,jdbcType=INTEGER}, #{staffId,jdbcType=INTEGER}, #{positionid,jdbcType=INTEGER}, 
+      #{departmentid,jdbcType=INTEGER}, #{reappointmentTimeFact,jdbcType=TIMESTAMP}, 
+      #{reappointmentType,jdbcType=INTEGER}, #{addTime,jdbcType=TIMESTAMP}, #{lastUpdateTime,jdbcType=TIMESTAMP}, 
+      #{reappointmentTimePlan,jdbcType=TIMESTAMP}, #{despachoPerson,jdbcType=VARCHAR}, 
+      #{despacho,jdbcType=VARCHAR}, #{applicationDate,jdbcType=TIMESTAMP}, #{firstSalaryTime,jdbcType=TIMESTAMP}, 
+      #{materialsCondition,jdbcType=INTEGER}, #{attachmentId,jdbcType=INTEGER}, #{attachmentName,jdbcType=VARCHAR}, 
+      #{reappointmentState,jdbcType=LONGVARCHAR}, #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+
+	<!-- //修改状态 -->
+  <update id="updateStatus" parameterType="zj.entity.staff_info" >
+      UPDATE staff_info SET work_status=1 where staff_id=#{staffId}
+  </update>
+		<!-- //添加复职的时候把离职表相同员工的数据删除    delectId -->
+	<delete id="delectId" parameterType="java.lang.Integer">
+		DELETE from staff_leave where sta_staff_id=#{staStaffId}
+	</delete>
+	
+	
+</mapper>
