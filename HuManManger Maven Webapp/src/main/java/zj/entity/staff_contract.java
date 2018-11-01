@@ -2,314 +2,332 @@ package zj.entity;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class staff_contract {
-    private Integer contractId;
+    private int contractId;//合同编号
 
-    private Integer staffId;
+    private int staffId;//员工外键
 
-    private String contractType;
+    private int contractType;//合同类型
 
-    private String contractSpecialization;
+    private int contractSpecialization;//合同属性
 
-    private Date makeContract;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date makeContract;//合同签订日期
 
-    private Date trailEffectiveTime;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date trailEffectiveTime;//试用生效日期
 
-    private String probationaryPeriod;
+    private String probationaryPeriod;//试用期限
 
-    private Date trailOverTime;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date trailOverTime;//试用到期日期
 
-    private Integer passOrNot;
+    private int passOrNot;//是否转正
 
-    private Date probationEndDate;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date probationEndDate;//合同转正日期
 
-    private Date probationEffectiveDate;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date probationEffectiveDate;//合同生效日期
 
-    private String activePeriod;
+    private String activePeriod;//合同期限
 
-    private Date contractEndTime;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date contractEndTime;//合同到期日期
+    
+    private String remark;//备注
 
-    private String remark;
+    private int removeOrNot;//合同是否解除
 
-    private Integer removeOrNot;
+    private int status;//合同状态
 
-    private String status;
+    private String signTimes;//签约次数
 
-    private String signTimes;
+    private String attachmentId;//附件编号
 
-    private String attachmentId;
+    private String attachmentName;//附件名称
 
-    private String attachmentName;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date addTime;//登记时间
 
-    private Date addTime;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date lastUpdateTime;//最后修改时间
 
-    private Date lastUpdateTime;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date remindTime;//合同到期提醒
 
-    private Date remindTime;
+    private String staffUserName;//甲方
+    
+    private String remindUser;//提醒人员
 
-    private String staffUserName;
+    private int remindType;//提醒方式
 
-    private String remindUser;
+    private int hasReminded;//是否已经提醒
 
-    private Integer remindType;
+    private String renewTime;//合同续签时间
 
-    private Integer hasReminded;
+    private String contractEnterpries;//合同续签公司
 
-    private String renewTime;
+    private int isTrial;//合同是否试用
 
-    private String contractEnterpries;
+    private int isRenew;//合同是否续签
 
-    private Integer isTrial;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date contractRemoveTime;//合同解除日期
 
-    private Integer isRenew;
+	public int getContractId() {
+		return contractId;
+	}
 
-    private Date contractRemoveTime;
+	public void setContractId(int contractId) {
+		this.contractId = contractId;
+	}
 
-    public Integer getContractId() {
-        return contractId;
-    }
+	public int getStaffId() {
+		return staffId;
+	}
 
-    public void setContractId(Integer contractId) {
-        this.contractId = contractId;
-    }
+	public void setStaffId(int staffId) {
+		this.staffId = staffId;
+	}
 
-    public Integer getStaffId() {
-        return staffId;
-    }
+	public int getContractType() {
+		return contractType;
+	}
 
-    public void setStaffId(Integer staffId) {
-        this.staffId = staffId;
-    }
+	public void setContractType(int contractType) {
+		this.contractType = contractType;
+	}
 
-    public String getContractType() {
-        return contractType;
-    }
+	public int getContractSpecialization() {
+		return contractSpecialization;
+	}
 
-    public void setContractType(String contractType) {
-        this.contractType = contractType == null ? null : contractType.trim();
-    }
+	public void setContractSpecialization(int contractSpecialization) {
+		this.contractSpecialization = contractSpecialization;
+	}
+
+	public Date getMakeContract() {
+		return makeContract;
+	}
+
+	public void setMakeContract(Date makeContract) {
+		this.makeContract = makeContract;
+	}
+
+	public Date getTrailEffectiveTime() {
+		return trailEffectiveTime;
+	}
+
+	public void setTrailEffectiveTime(Date trailEffectiveTime) {
+		this.trailEffectiveTime = trailEffectiveTime;
+	}
+
+	public String getProbationaryPeriod() {
+		return probationaryPeriod;
+	}
+
+	public void setProbationaryPeriod(String probationaryPeriod) {
+		this.probationaryPeriod = probationaryPeriod;
+	}
+
+	public Date getTrailOverTime() {
+		return trailOverTime;
+	}
+
+	public void setTrailOverTime(Date trailOverTime) {
+		this.trailOverTime = trailOverTime;
+	}
+
+	public int getPassOrNot() {
+		return passOrNot;
+	}
+
+	public void setPassOrNot(int passOrNot) {
+		this.passOrNot = passOrNot;
+	}
+
+	public Date getProbationEndDate() {
+		return probationEndDate;
+	}
+
+	public void setProbationEndDate(Date probationEndDate) {
+		this.probationEndDate = probationEndDate;
+	}
+
+	public Date getProbationEffectiveDate() {
+		return probationEffectiveDate;
+	}
+
+	public void setProbationEffectiveDate(Date probationEffectiveDate) {
+		this.probationEffectiveDate = probationEffectiveDate;
+	}
+
+	public String getActivePeriod() {
+		return activePeriod;
+	}
+
+	public void setActivePeriod(String activePeriod) {
+		this.activePeriod = activePeriod;
+	}
+
+	public Date getContractEndTime() {
+		return contractEndTime;
+	}
+
+	public void setContractEndTime(Date contractEndTime) {
+		this.contractEndTime = contractEndTime;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public int getRemoveOrNot() {
+		return removeOrNot;
+	}
+
+	public void setRemoveOrNot(int removeOrNot) {
+		this.removeOrNot = removeOrNot;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public String getSignTimes() {
+		return signTimes;
+	}
+
+	public void setSignTimes(String signTimes) {
+		this.signTimes = signTimes;
+	}
+
+	public String getAttachmentId() {
+		return attachmentId;
+	}
+
+	public void setAttachmentId(String attachmentId) {
+		this.attachmentId = attachmentId;
+	}
+
+	public String getAttachmentName() {
+		return attachmentName;
+	}
+
+	public void setAttachmentName(String attachmentName) {
+		this.attachmentName = attachmentName;
+	}
 
-    public String getContractSpecialization() {
-        return contractSpecialization;
-    }
+	public Date getAddTime() {
+		return addTime;
+	}
 
-    public void setContractSpecialization(String contractSpecialization) {
-        this.contractSpecialization = contractSpecialization == null ? null : contractSpecialization.trim();
-    }
+	public void setAddTime(Date addTime) {
+		this.addTime = addTime;
+	}
 
-    public Date getMakeContract() {
-        return makeContract;
-    }
+	public Date getLastUpdateTime() {
+		return lastUpdateTime;
+	}
 
-    public void setMakeContract(Date makeContract) {
-        this.makeContract = makeContract;
-    }
-
-    public Date getTrailEffectiveTime() {
-        return trailEffectiveTime;
-    }
-
-    public void setTrailEffectiveTime(Date trailEffectiveTime) {
-        this.trailEffectiveTime = trailEffectiveTime;
-    }
-
-    public String getProbationaryPeriod() {
-        return probationaryPeriod;
-    }
-
-    public void setProbationaryPeriod(String probationaryPeriod) {
-        this.probationaryPeriod = probationaryPeriod == null ? null : probationaryPeriod.trim();
-    }
-
-    public Date getTrailOverTime() {
-        return trailOverTime;
-    }
-
-    public void setTrailOverTime(Date trailOverTime) {
-        this.trailOverTime = trailOverTime;
-    }
-
-    public Integer getPassOrNot() {
-        return passOrNot;
-    }
-
-    public void setPassOrNot(Integer passOrNot) {
-        this.passOrNot = passOrNot;
-    }
-
-    public Date getProbationEndDate() {
-        return probationEndDate;
-    }
-
-    public void setProbationEndDate(Date probationEndDate) {
-        this.probationEndDate = probationEndDate;
-    }
-
-    public Date getProbationEffectiveDate() {
-        return probationEffectiveDate;
-    }
-
-    public void setProbationEffectiveDate(Date probationEffectiveDate) {
-        this.probationEffectiveDate = probationEffectiveDate;
-    }
-
-    public String getActivePeriod() {
-        return activePeriod;
-    }
-
-    public void setActivePeriod(String activePeriod) {
-        this.activePeriod = activePeriod == null ? null : activePeriod.trim();
-    }
-
-    public Date getContractEndTime() {
-        return contractEndTime;
-    }
-
-    public void setContractEndTime(Date contractEndTime) {
-        this.contractEndTime = contractEndTime;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
-    }
-
-    public Integer getRemoveOrNot() {
-        return removeOrNot;
-    }
-
-    public void setRemoveOrNot(Integer removeOrNot) {
-        this.removeOrNot = removeOrNot;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
-    }
-
-    public String getSignTimes() {
-        return signTimes;
-    }
-
-    public void setSignTimes(String signTimes) {
-        this.signTimes = signTimes == null ? null : signTimes.trim();
-    }
-
-    public String getAttachmentId() {
-        return attachmentId;
-    }
-
-    public void setAttachmentId(String attachmentId) {
-        this.attachmentId = attachmentId == null ? null : attachmentId.trim();
-    }
-
-    public String getAttachmentName() {
-        return attachmentName;
-    }
-
-    public void setAttachmentName(String attachmentName) {
-        this.attachmentName = attachmentName == null ? null : attachmentName.trim();
-    }
-
-    public Date getAddTime() {
-        return addTime;
-    }
-
-    public void setAddTime(Date addTime) {
-        this.addTime = addTime;
-    }
-
-    public Date getLastUpdateTime() {
-        return lastUpdateTime;
-    }
-
-    public void setLastUpdateTime(Date lastUpdateTime) {
-        this.lastUpdateTime = lastUpdateTime;
-    }
-
-    public Date getRemindTime() {
-        return remindTime;
-    }
-
-    public void setRemindTime(Date remindTime) {
-        this.remindTime = remindTime;
-    }
-
-    public String getStaffUserName() {
-        return staffUserName;
-    }
-
-    public void setStaffUserName(String staffUserName) {
-        this.staffUserName = staffUserName == null ? null : staffUserName.trim();
-    }
-
-    public String getRemindUser() {
-        return remindUser;
-    }
-
-    public void setRemindUser(String remindUser) {
-        this.remindUser = remindUser == null ? null : remindUser.trim();
-    }
-
-    public Integer getRemindType() {
-        return remindType;
-    }
-
-    public void setRemindType(Integer remindType) {
-        this.remindType = remindType;
-    }
-
-    public Integer getHasReminded() {
-        return hasReminded;
-    }
-
-    public void setHasReminded(Integer hasReminded) {
-        this.hasReminded = hasReminded;
-    }
-
-    public String getRenewTime() {
-        return renewTime;
-    }
-
-    public void setRenewTime(String renewTime) {
-        this.renewTime = renewTime == null ? null : renewTime.trim();
-    }
-
-    public String getContractEnterpries() {
-        return contractEnterpries;
-    }
-
-    public void setContractEnterpries(String contractEnterpries) {
-        this.contractEnterpries = contractEnterpries == null ? null : contractEnterpries.trim();
-    }
-
-    public Integer getIsTrial() {
-        return isTrial;
-    }
-
-    public void setIsTrial(Integer isTrial) {
-        this.isTrial = isTrial;
-    }
-
-    public Integer getIsRenew() {
-        return isRenew;
-    }
-
-    public void setIsRenew(Integer isRenew) {
-        this.isRenew = isRenew;
-    }
-
-    public Date getContractRemoveTime() {
-        return contractRemoveTime;
-    }
-
-    public void setContractRemoveTime(Date contractRemoveTime) {
-        this.contractRemoveTime = contractRemoveTime;
-    }
+	public void setLastUpdateTime(Date lastUpdateTime) {
+		this.lastUpdateTime = lastUpdateTime;
+	}
+
+	public Date getRemindTime() {
+		return remindTime;
+	}
+
+	public void setRemindTime(Date remindTime) {
+		this.remindTime = remindTime;
+	}
+
+	public String getStaffUserName() {
+		return staffUserName;
+	}
+
+	public void setStaffUserName(String staffUserName) {
+		this.staffUserName = staffUserName;
+	}
+
+	public String getRemindUser() {
+		return remindUser;
+	}
+
+	public void setRemindUser(String remindUser) {
+		this.remindUser = remindUser;
+	}
+
+	public int getRemindType() {
+		return remindType;
+	}
+
+	public void setRemindType(int remindType) {
+		this.remindType = remindType;
+	}
+
+	public int getHasReminded() {
+		return hasReminded;
+	}
+
+	public void setHasReminded(int hasReminded) {
+		this.hasReminded = hasReminded;
+	}
+
+	public String getRenewTime() {
+		return renewTime;
+	}
+
+	public void setRenewTime(String renewTime) {
+		this.renewTime = renewTime;
+	}
+
+	public String getContractEnterpries() {
+		return contractEnterpries;
+	}
+
+	public void setContractEnterpries(String contractEnterpries) {
+		this.contractEnterpries = contractEnterpries;
+	}
+
+	public int getIsTrial() {
+		return isTrial;
+	}
+
+	public void setIsTrial(int isTrial) {
+		this.isTrial = isTrial;
+	}
+
+	public int getIsRenew() {
+		return isRenew;
+	}
+
+	public void setIsRenew(int isRenew) {
+		this.isRenew = isRenew;
+	}
+
+	public Date getContractRemoveTime() {
+		return contractRemoveTime;
+	}
+
+	public void setContractRemoveTime(Date contractRemoveTime) {
+		this.contractRemoveTime = contractRemoveTime;
+	}
+
+
+    
+
+
+   
 }

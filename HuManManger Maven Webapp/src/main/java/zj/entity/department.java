@@ -1,25 +1,23 @@
 package zj.entity;
 
 public class department {
-    private Integer departmentId;
+    private Integer departmentid;
 
-    private String departmentName;
+    private String departmentname;
 
-	public Integer getDepartmentId() {
-		return departmentId;
-	}
+    public Integer getDepartmentid() {
+        return departmentid;
+    }
 
-	public void setDepartmentId(Integer departmentId) {
-		this.departmentId = departmentId;
-	}
+    public void setDepartmentid(Integer departmentid) {
+        this.departmentid = departmentid;
+    }
 
-	public String getDepartmentName() {
-		return departmentName;
-	}
+    public String getDepartmentname() {
+        return departmentname;
+    }
 
-	public void setDepartmentName(String departmentName) {
-		this.departmentName = departmentName;
-	}
-
-   
+    public void setDepartmentname(String departmentname) {
+        this.departmentname = departmentname == null ? null : departmentname.trim();
+    }
 }
