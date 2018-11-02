@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import zj.dao.WelfareDao;
-import zj.entity.department;
+import zj.entity.Department;
 import zj.entity.Welfare;
 
 @Service

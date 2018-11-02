@@ -14,8 +14,8 @@ public class Welfare {
  private String uploda;
  
 
-private staff_info staff;
- private department depar;
+private Staff_info staff;
+ private Department depar;
 public int getWelfareid() {
 	return welfareid;
 }
@@ -82,47 +82,20 @@ public String getUploda() {
 public void setUploda(String uploda) {
 	this.uploda = uploda;
 }
-public staff_info getStaff() {
-	return staff;
-}
-public void setStaff(staff_info staff) {
-	this.staff = staff;
-}
-public department getDepar() {
+
+public Department getDepar() {
 	return depar;
 }
-public void setDepar(department depar) {
+public void setDepar(Department depar) {
 	this.depar = depar;
 }
-@Override
-public String toString() {
-	return "Welfare [welfareid=" + welfareid + ", project_id=" + project_id + ", staff_id=" + staff_id
-			+ ", departmentId=" + departmentId + ", welfare_type=" + welfare_type + ", issue_date=" + issue_date
-			+ ", welfare_monery=" + welfare_monery + ", tax=" + tax + ", goods=" + goods + ", remark=" + remark
-			+ ", uploda=" + uploda + ", staff=" + staff + ", depar=" + depar + "]";
+public Staff_info getStaff() {
+	return staff;
 }
-public Welfare(int welfareid, int project_id, int staff_id, int departmentId, String welfare_type, String issue_date,
-		double welfare_monery, String tax, String goods, String remark, String uploda, staff_info staff,
-		department depar) {
-	super();
-	this.welfareid = welfareid;
-	this.project_id = project_id;
-	this.staff_id = staff_id;
-	this.departmentId = departmentId;
-	this.welfare_type = welfare_type;
-	this.issue_date = issue_date;
-	this.welfare_monery = welfare_monery;
-	this.tax = tax;
-	this.goods = goods;
-	this.remark = remark;
-	this.uploda = uploda;
+public void setStaff(Staff_info staff) {
 	this.staff = staff;
-	this.depar = depar;
 }
-public Welfare() {
-	super();
-	// TODO Auto-generated constructor stub
-}
+
 
  
 }

@@ -203,16 +203,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</a>
 							<dl class="layui-nav-child">
 								<dd>
-									<a lay-href="template/personalpage.html">排班管理</a>
+									<a lay-href="config.jsp">排班管理</a>
 								</dd>
 								<dd>
-									<a lay-href="template/addresslist.html">班次管理</a>
+									<a lay-href="schedule.jsp">班次管理</a>
 								</dd>
 								<dd>
-									<a lay-href="template/caller.html">考勤统计规则</a>
+									<a lay-href="rule.jsp">考勤统计规则</a>
 								</dd>
 								<dd>
-									<a lay-href="template/caller.html">免签节假日</a>
+									<a lay-href="sf.jsp">免签节假日</a>
 								</dd>
 							</dl></li>
 						<li data-name="user" class="layui-nav-item"><a
@@ -301,7 +301,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<!-- 主体内容 -->
 			<div class="layui-body" id="LAY_app_body">
 				<div class="layadmin-tabsbody-item layui-show">
-					<iframe src="rule.jsp" frameborder="0"
+					<iframe src="login.jsp" frameborder="0"
 						class="layadmin-iframe"></iframe>
 
 				</div>

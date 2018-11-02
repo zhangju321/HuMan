@@ -3,7 +3,7 @@ package zj.service;
 import java.util.List;
 import java.util.Map;
 
-import zj.entity.department;
+import zj.entity.Department;
 import zj.entity.Welfare;
 
 public interface WelfareService {
