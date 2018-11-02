@@ -5,10 +5,6 @@ import java.util.Date;
 public class Staff_info {
 	//员工id
     private int staffId;
-    //部门外键
-    private int departmentid;
-    //职务外键
-    private int positionid;
     //员工姓名
     private String staffName;
     //在职状态 在职1 离职2
@@ -21,26 +17,10 @@ public class Staff_info {
 	public void setStaffId(int staffId) {
 		this.staffId = staffId;
 	}
-
-	public int getDepartmentid() {
-		return departmentid;
-	}
-
-	public void setDepartmentid(int departmentid) {
-		this.departmentid = departmentid;
-	}
-
-	public int getPositionid() {
-		return positionid;
-	}
-
-	public void setPositionid(int positionid) {
-		this.positionid = positionid;
-	}
-
 	public String getStaffName() {
 		return staffName;
 	}
+	
 
 	public void setStaffName(String staffName) {
 		this.staffName = staffName;
