@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import zj.entity.hr_recruit_filter;
-import zj.service.hr_filterService;
+import zj.entity.Hr_recruit_filter;
+import zj.service.Hr_filterService;
 
 @Controller
 @RequestMapping("/filter")
-public class hr_filterController {
+public class Hr_filterController {
 @Autowired
-private hr_filterService service;
+private Hr_filterService service;
 @ResponseBody
 @RequestMapping("/filtersave")
-public int Save(hr_recruit_filter filter){
+public int Save(Hr_recruit_filter filter){
 	return service.saveFilter(filter);
 }
 /*查询全部招聘计划*/
@@ -40,19 +40,19 @@ public List<Map<String,Object>> selectId(@RequestBody int filterId){
 /*修改*/
 @RequestMapping("/filterUpdate")
 @ResponseBody
-public int updateFilter(hr_recruit_filter filter){
+public int updateFilter(Hr_recruit_filter filter){
 	return service.updateFilter(filter);
 }
 /*第一次筛选*/
 @ResponseBody
 @RequestMapping("/filterOneUpdate")
-public void oneSave(hr_recruit_filter filter){
+public void oneSave(Hr_recruit_filter filter){
 	service.oneUpdate(filter);
 }
 /*第二次筛选*/
 @ResponseBody
 @RequestMapping("/filterTwoUpdate")
-public void twoSave(hr_recruit_filter filter){
+public void twoSave(Hr_recruit_filter filter){
 	System.out.println(123);
 	System.out.println(filter);
 	service.twoUpdate(filter);

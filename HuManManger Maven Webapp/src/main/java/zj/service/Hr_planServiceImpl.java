@@ -6,19 +6,19 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import zj.dao.hr_planMapper;
-import zj.entity.hr_recruit_plan;
-import zj.service.hr_planService;
+import zj.dao.Hr_planMapper;
+import zj.entity.Hr_recruit_plan;
+import zj.service.Hr_planService;
 @Service
-public class hr_planServiceImpl implements hr_planService {
+public class Hr_planServiceImpl implements Hr_planService {
 @Autowired
-private hr_planMapper dao;
+private Hr_planMapper dao;
 	@Override
 	public List<Map<String,Object>> Select() {
 		return dao.QueryAll();
 	}
 	@Override
-	public int Save(hr_recruit_plan plan) {
+	public int Save(Hr_recruit_plan plan) {
 		return dao.Save(plan);
 	}
 	@Override
@@ -26,7 +26,7 @@ private hr_planMapper dao;
 		return dao.QueryId(planNo);
 	}
 	@Override
-	public int Update(hr_recruit_plan plan) {
+	public int Update(Hr_recruit_plan plan) {
 		return dao.Update(plan);
 	}
 	/*²éÑ¯×´Ì¬*/
@@ -44,6 +44,11 @@ private hr_planMapper dao;
 	@Override
 	public int Delete(int planNo) {
 		return dao.Delete(planNo);
+	}
+	@Override
+	public List<Map<String, Object>> departName() {
+		// TODO Auto-generated method stub
+		return dao.departName();
 	}
 
 

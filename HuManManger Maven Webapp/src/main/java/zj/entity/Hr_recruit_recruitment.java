@@ -4,7 +4,7 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class hr_recruit_recruitment {
+public class Hr_recruit_recruitment {
     private int recruitmentId;
     private int planNo;
     private String applyerName;
@@ -19,7 +19,7 @@ public class hr_recruit_recruitment {
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date startingSalaryTime;
     private String remark;
-    private hr_recruit_plan plan;
+    private Hr_recruit_plan plan;
 	public int getRecruitmentId() {
 		return recruitmentId;
 	}
@@ -86,10 +86,10 @@ public class hr_recruit_recruitment {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	public hr_recruit_plan getPlan() {
+	public Hr_recruit_plan getPlan() {
 		return plan;
 	}
-	public void setPlan(hr_recruit_plan plan) {
+	public void setPlan(Hr_recruit_plan plan) {
 		this.plan = plan;
 	}
 	

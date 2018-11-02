@@ -16,7 +16,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" href="layuiadmin/layui/css/layui.css"
 	media="all">
 <link rel="stylesheet" href="layuiadmin/style/admin.css" media="all">
-
 <script>
 /*  /^http(s*):\/\//.test(location.href) || alert('请先部署到 localhost 下再访问'); */
 </script>
@@ -122,10 +121,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<a href="javascript:;">招聘计划<span class="layui-nav-more"></span></a>
 									<dl class="layui-nav-child">
 										<dd data-name="list">
-											<a lay-href="component/grid/list.html">创建招聘计划</a>
+											<a lay-href="/HuManManger/wmw/plan_save.jsp">创建招聘计划</a>
 										</dd>
 										<dd data-name="list">
-											<a lay-href="component/grid/list.html">招聘计划管理</a>
+											<a lay-href="/HuManManger/wmw/plan_select.jsp">招聘计划管理</a>
 										</dd>
 										<dd data-name="list">
 											<a lay-href="component/grid/list.html">招聘计划审批</a>

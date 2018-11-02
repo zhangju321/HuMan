@@ -4,7 +4,7 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class hr_recruit_filter {
+public class Hr_recruit_filter {
 	private int filterId;
     private int planNo;
     private String employeeName;
@@ -18,7 +18,7 @@ public class hr_recruit_filter {
     private Date nextDateTime;
     private String nextTransaStep;
     /*外键计划表*/
-    private hr_recruit_plan plan;
+    private Hr_recruit_plan plan;
     /*初选*/
     private String filterMethod1;
     @DateTimeFormat(pattern="yyyy-MM-dd")
@@ -107,10 +107,10 @@ public class hr_recruit_filter {
 	public void setNextTransaStep(String nextTransaStep) {
 		this.nextTransaStep = nextTransaStep;
 	}
-	public hr_recruit_plan getPlan() {
+	public Hr_recruit_plan getPlan() {
 		return plan;
 	}
-	public void setPlan(hr_recruit_plan plan) {
+	public void setPlan(Hr_recruit_plan plan) {
 		this.plan = plan;
 	}
 	public String getFilterMethod1() {

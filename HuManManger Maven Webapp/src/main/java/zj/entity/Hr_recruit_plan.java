@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class hr_recruit_plan {
+public class Hr_recruit_plan {
     private int planNo;
     private String planName;
     private String recruitDept;
@@ -30,9 +30,9 @@ public class hr_recruit_plan {
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date approveDate;
     private String approveComment;
-    private List<hr_recruit_filter> filter;
-    private List<hr_recruit_requirements> requ;
-    private List<hr_recruit_recruitment> recru;
+    private List<Hr_recruit_filter> filter;
+    private List<Hr_recruit_requirements> requ;
+    private List<Hr_recruit_recruitment> recru;
 	public int getPlanNo() {
 		return planNo;
 	}
@@ -153,22 +153,22 @@ public class hr_recruit_plan {
 	public void setApproveComment(String approveComment) {
 		this.approveComment = approveComment;
 	}
-	public List<hr_recruit_filter> getFilter() {
+	public List<Hr_recruit_filter> getFilter() {
 		return filter;
 	}
-	public void setFilter(List<hr_recruit_filter> filter) {
+	public void setFilter(List<Hr_recruit_filter> filter) {
 		this.filter = filter;
 	}
-	public List<hr_recruit_requirements> getRequ() {
+	public List<Hr_recruit_requirements> getRequ() {
 		return requ;
 	}
-	public void setRequ(List<hr_recruit_requirements> requ) {
+	public void setRequ(List<Hr_recruit_requirements> requ) {
 		this.requ = requ;
 	}
-	public List<hr_recruit_recruitment> getRecru() {
+	public List<Hr_recruit_recruitment> getRecru() {
 		return recru;
 	}
-	public void setRecru(List<hr_recruit_recruitment> recru) {
+	public void setRecru(List<Hr_recruit_recruitment> recru) {
 		this.recru = recru;
 	}
 	

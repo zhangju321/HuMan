@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="zj.dao.hr_recruitmentMapper" >
+<mapper namespace="zj.dao.Hr_recruitmentMapper" >
   <select id="QueryAll" resultType="Map">
      select recru.*,plan.PLAN_NO,plan.PLAN_NAME from  hr_recruit_recruitment recru left join hr_recruit_plan plan on recru.PLAN_NO=plan.PLAN_NO
   </select>
@@ -10,7 +10,7 @@
    where RECRUITMENT_ID=#{recruitmentId}
    </select>
    <!-- 修改 -->
-   <update id="Update"  parameterType="hr_recruit_recruitment" >
+   <update id="Update"  parameterType="Hr_recruit_recruitment" >
       update hr_recruit_recruitment set
      PLAN_NO=#{planNo},ASSESSING_OFFICER=#{assessingOfficer},ASS_PASS_TIME=#{assPassTime},
      DEPARTMENT=#{department},TYPE=#{type},APPLYER_NAME=#{applyerName},
@@ -22,7 +22,7 @@
      delete from hr_recruit_recruitment where RECRUITMENT_ID=#{recruitmentId}
    </delete>
    <!-- ,plan.PLAN_NO,plan.PLAN_NAME -->
-   <select id="Queryfilter" resultType="Map" parameterType="hr_recruit_filter">
+   <select id="Queryfilter" resultType="Map" parameterType="Hr_recruit_filter">
       select filter.FILTER_ID,filter.EMPLOYEE_NAME
        from 
       hr_recruit_filter filter LEFT JOIN hr_recruit_plan plan on filter.PLAN_NO=plan.PLAN_NO

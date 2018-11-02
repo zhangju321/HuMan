@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="zj.dao.hr_filterMapper" >
+<mapper namespace="zj.dao.Hr_filterMapper" >
   <!-- 添加 -->
-  <insert id="saveFilter" parameterType="zj.entity.hr_recruit_filter" >
+  <insert id="saveFilter" parameterType="zj.entity.Hr_recruit_filter" >
 	   insert into hr_recruit_filter
        (
          PLAN_NO,EMPLOYEE_NAME,POSITION,EMPLOYEE_MAJOR,EMPLOYEE_PHONE,
@@ -29,7 +29,7 @@
      where FILTER_ID=#{filterId}
    </select>
    <!-- 修改 -->
-   <update id="updateFilter"  parameterType="zj.entity.hr_recruit_filter" >
+   <update id="updateFilter"  parameterType="zj.entity.Hr_recruit_filter" >
       update hr_recruit_filter 
       <set>
         <if test="planNo != null" >
@@ -64,7 +64,7 @@
      delete from hr_recruit_filter where FILTER_ID=#{filterId}
    </delete>
    <!-- 初选 -->
-   <update id="oneUpdate"  parameterType="zj.entity.hr_recruit_filter" >
+   <update id="oneUpdate"  parameterType="zj.entity.Hr_recruit_filter" >
         update hr_recruit_filter 
         <set>
         <if test="stepFlag != null" >
@@ -102,7 +102,7 @@
    </update>
    
    <!-- 复选 -->
-   <update id="twoUpdate"  parameterType="zj.entity.hr_recruit_filter" >
+   <update id="twoUpdate"  parameterType="zj.entity.Hr_recruit_filter" >
         update hr_recruit_filter 
         <set>
         <if test="stepFlag != null" >

@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import zj.entity.hr_recruit_requirements;
-import zj.service.hr_requirementsService;
+import zj.entity.Hr_recruit_requirements;
+import zj.service.Hr_requirementsService;
 
 @Controller
 @RequestMapping("/require")
-public class hr_requirementsController {
+public class Hr_requirementsController {
 @Autowired
-private hr_requirementsService service;
+private Hr_requirementsService service;
 @RequestMapping("/select")
 @ResponseBody
 public List<Map<String,Object>> select(){
@@ -31,7 +31,7 @@ public List<Map<String,Object>> queryId(@RequestBody int requId){
 /*修改*/
 @ResponseBody
 @RequestMapping("/requUpdate")
-public int planUpdate(hr_recruit_requirements requ){
+public int planUpdate(Hr_recruit_requirements requ){
 	return service.Update(requ);
 }
 /*删除*/
@@ -43,7 +43,7 @@ public int planDelete(@RequestBody int requId){
 /*添加招聘需求*/
 @ResponseBody
 @RequestMapping("/requSave")
-public int plansave(hr_recruit_requirements requ){
+public int plansave(Hr_recruit_requirements requ){
 	return service.Save(requ);
 }
 }

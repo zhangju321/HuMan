@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import zj.entity.hr_recruit_plan;
-import zj.service.hr_planService;
+import zj.entity.Hr_recruit_plan;
+import zj.service.Hr_planService;
 
 @Controller
 @RequestMapping("/plan")
-public class hr_planController {
+public class Hr_planController {
 @Autowired
-private hr_planService service;
+private Hr_planService service;
 /*查询全部招聘计划*/
 @RequestMapping("/select")
 @ResponseBody
@@ -28,7 +28,7 @@ public List<Map<String,Object>> select(){
 /*添加招聘计划*/
 @ResponseBody
 @RequestMapping("/planSave")
-public int plansave(hr_recruit_plan plan){
+public int plansave(Hr_recruit_plan plan){
 	return service.Save(plan);
 }
 /*根据id查询*/
@@ -41,7 +41,7 @@ public List<Map<String,Object>> queryId(@RequestBody int planNo){
 /*修改*/
 @ResponseBody
 @RequestMapping("/planUpdate")
-public int planUpdate(hr_recruit_plan plan){
+public int planUpdate(Hr_recruit_plan plan){
     int a=0;
 	a=service.Update(plan);
 	return a;
@@ -70,5 +70,10 @@ public int oneupdate(@RequestBody int planNo){
 @ResponseBody
 public int twoupdate(@RequestBody int planNo){
 	return service.twoupdae(planNo);
+}
+@RequestMapping("/departName")
+@ResponseBody
+public List<Map<String,Object>> departName(){
+	return service.departName();
 }
 }

@@ -9,15 +9,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import zj.entity.hr_recruit_filter;
-import zj.entity.hr_recruit_recruitment;
-import zj.service.hr_recruitmentService;
+import zj.entity.Hr_recruit_filter;
+import zj.entity.Hr_recruit_recruitment;
+import zj.service.Hr_recruitmentService;
 
 @Controller
 @RequestMapping("/recru")
-public class hr_recruitmentController {
+public class Hr_recruitmentController {
 	@Autowired
-	private hr_recruitmentService service;
+	private Hr_recruitmentService service;
 	/*查询全部招聘需求*/
 	@RequestMapping("/select")
 	@ResponseBody
@@ -33,7 +33,7 @@ public class hr_recruitmentController {
 	/*修改*/
 	@RequestMapping("/Update")
 	@ResponseBody
-	public int updateFilter(hr_recruit_recruitment recru){
+	public int updateFilter(Hr_recruit_recruitment recru){
 		return service.Update(recru);
 	}
 	/*删除*/
@@ -45,7 +45,7 @@ public class hr_recruitmentController {
 	/*查询筛选通过人员*/
 	@ResponseBody
 	@RequestMapping("/QueryFilter")
-	public List<Map<String,Object>> Queryfilter(hr_recruit_filter filter){
+	public List<Map<String,Object>> Queryfilter(Hr_recruit_filter filter){
 		return service.Queryfilter(filter);
 	}
 }

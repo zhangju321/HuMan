@@ -6,13 +6,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import zj.dao.hr_requirementsMapper;
-import zj.entity.hr_recruit_requirements;
-import zj.service.hr_requirementsService;
+import zj.dao.Hr_requirementsMapper;
+import zj.entity.Hr_recruit_requirements;
+import zj.service.Hr_requirementsService;
 @Service
-public class hr_requirementsServiceImpl implements hr_requirementsService {
+public class Hr_requirementsServiceImpl implements Hr_requirementsService {
 @Autowired
-private hr_requirementsMapper dao;
+private Hr_requirementsMapper dao;
 	@Override
 	public List<Map<String,Object>> queryAll() {
 		return dao.select();
@@ -22,7 +22,7 @@ private hr_requirementsMapper dao;
 		return dao.QueryId(requId);
 	}
 	@Override
-	public int Update(hr_recruit_requirements requ) {
+	public int Update(Hr_recruit_requirements requ) {
 		return dao.Update(requ);
 	}
 	@Override
@@ -30,7 +30,7 @@ private hr_requirementsMapper dao;
 		return dao.Delete(requId);
 	}
 	@Override
-	public int Save(hr_recruit_requirements requ) {
+	public int Save(Hr_recruit_requirements requ) {
 		return dao.Save(requ);
 	}
 }
