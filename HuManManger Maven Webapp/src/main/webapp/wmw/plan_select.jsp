@@ -19,30 +19,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <link rel="stylesheet" type="text/css"href="${pageContext.request.contextPath}/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css"href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css">
-<script	src="${pageContext.request.contextPath}/resources/bootstrap/jquery-1.11.3.min.js"></script>
+<script	src="${pageContext.request.contextPath}/resource/jquery-1.11.3.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/demo.css">
 </head>
-<body>
-	 <p>招聘计划</p>
-     <ul class="nav nav-tabs">
-	  <li class="active"><a href="/HuManManger/wmw/plan_select.jsp">招聘计划管理</a></li>
-	  <li><a href="/HuManManger/wmw/plan_save.jsp">创建招聘计划</a></li>
-	  <li><a href="/HuManManger/wmw/plan_select.jsp">招聘计划查询</a></li>
-    </ul>
+<body>     
 
-<div id="none_select">
+<div id="none_select"  style="width:98%;margin:0 auto;">
 	<!-- 招聘计划查询 -->
-	<table class="table table-condensed">
-		<tr>
-			<td>计划名称</td>
-			<td>招聘人数</td>
-			<td>开始日期</td>
-			<td>结束日期</td>
-			<td>用工日期</td>
-			<td>计划状态</td>
-			<td>操作</td>
+	<table class="table table-bordered">
+	
+	<caption ><a href="/HuManManger/wmw/plan_select.jsp">招聘计划管理</a></caption>
+	<thead>
+	   <tr>
+	        <td style="width:2%;"></td>
+			<td style="width:5%;">计划名称</td>
+			<td style="width:5%;">招聘人数</td>
+			<td style="width:5%;">开始日期</td>
+			<td style="width:5%;">结束日期</td>
+			<td style="width:5%;">用工日期</td>
+			<td style="width:5%;">计划状态</td>
+			<td style="width:10%;">操作</td>
 		</tr>
+	</thead>
 		<tbody id="plan_tbody"></tbody>
 	</table>
 	</div>
@@ -56,12 +55,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="modal-body">
 				<!-- 修改 -->
 				<form method="post" id="from_plan">
-					<table class="Table" width="60%" align="center">
+					<table class="table table-bordered" width="60%" align="center">
 							   <input type="hidden" name="planNo" id="PLAN_NO"class="form-control">
+			  <thead>
 						<tr>
 						    <td nowrap class="col-md-1 control-label" style="width: 10%">计划名称:</td>
 							<td class="TableData" style="width: 20%">
-							   <input type="text" name="planName" id="PLAN_NAME"class="form-control">
+							   <input type="text" name="planName" id="PLAN_NAME"class="form-control" >
 							</td>
 							<td nowrap class="col-md-4 control-label" style="width: 20%">招聘部门:</td>
 							<td class="TableData" style="width: 20%">
@@ -81,7 +81,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<tr>
 							<td nowrap class="col-md-2 control-label">招聘渠道:</td>
 							<td class="TableData">
-							   <select name="planDitch" style="background: white;" class="form-control" > 
+							   <select name="planDitch" style="background: white;" id="PLAN_DITCH" class="form-control" > 
 					              <option value="">请选择</option>
 		                		  <option value="1">网络招聘</option>
                                   <option value="2">招聘会招聘</option>
@@ -95,8 +95,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</tr>
 							<tr>
 								<td nowrap class="col-md-2 control-label">开始日期:</td>
-								<td class="TableData"><input type="date" name="startDate"
-									class="form-control" id="START_DATE"></td>
+								<td class="TableData">
+								<input type="date" name="startDate"class="form-control" id="START_DATE"></td>
 								<td nowrap class="col-md-2 control-label">结束日期:</td>
 								<td class="TableData"><input type="date" name="endDate"
 									class="form-control" id="END_DATE"></td>
@@ -120,23 +120,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</td>
 							</tr>
 							<tr>
-								<td nowrap class="col-md-2 control-label">招聘说明:</td>
-								<td class="TableData"><input type="text"
-									name="recruitDirection" class="form-control"
-									id="RECRUIT_DIRECTION"></td>
-								<td nowrap class="col-md-2 control-label">招聘备注:</td>
-								<td class="TableData"><input type="text"
-									name="recruitRemark" class="form-control" id="RECRUIT_REMARK">
+								<td nowrap class="TableData">招聘说明:</td>
+								<td class="TableData" colspan=3>
+								<textarea class="form-control" name="recruitDirection" id="RECRUIT_DIRECTION"></textarea>
+							</tr>
+							<tr>
+							    <td nowrap class="TableData">招聘备注:</td>
+								<td class="TableData" colspan=3>
+								<textarea class="form-control"  name="recruitRemark" id="RECRUIT_REMARK"></textarea>
 								</td>
 							</tr>
 							<tr>
 								<td nowrap class="col-md-2 control-label">附件:</td>
-								<td class="TableData"><input type="text"
-									name="attachmentName" class="form-control" id="ATTACHMENT_NAME">
+								<td class="TableData" >
+								<textarea class="form-control" name="attachmentName" id="ATTACHMENT_NAME"></textarea>
 								</td>
 							</tr>
-						</table>
-                   </form>
+				</thead>
+				</table>
+               </form>
 			</div>
 		<div class="modal-footer">
 			<button type="button" class="btn btn-primary"data-dismiss="modal"onclick="plan_update()">修改</button>
@@ -164,16 +166,22 @@ function queryAll(){
         		$("#plan_tbody").html("");
         		 for(var i=0; i<data.length;i++){
         		    var tr="<tr>";
+        		    tr+="<td></td>";
         		    tr+="<td>"+data[i].PLAN_NAME+"</td>";
         		    tr+="<td>"+data[i].PLAN_RECR_NO+"</td>";
         		    tr+="<td>"+data[i].START_DATE+"</td>";
         		    tr+="<td>"+data[i].END_DATE+"</td>";
         		    tr+="<td>"+data[i].WORK_DATE+"</td>"; 
         		    tr+="<td>"+status(data[i].PLAN_STATUS)+"</td>";
-        		    tr+="<td><input type='button' id='"+data[i].PLAN_NO+"' value='修改' href='#plan_modal' data-toggle='modal' class='update  btn btn-primary' >"+
-        		    "<input type='button' id='"+data[i].PLAN_NO+"' value='删除'  class='delete btn btn-primary'>"+
-        		    "<input type='button' id='"+data[i].PLAN_NO+"' value='详细信息'  class='details btn btn-primary'></td>"; 
-        		    tr+="</tr>";
+        		    if(data[i].PLAN_STATUS==1){
+        		    tr+="<td><input type='button' id='"+data[i].PLAN_NO+"' value='详细信息'  class='details btn btn-primary'>"+
+        		    "<input type='button' id='"+data[i].PLAN_NO+"' value='删除'  class='delete btn btn-primary'></td>"; 
+        		    }else{
+        		   tr+="<td><input type='button' id='"+data[i].PLAN_NO+"' value='详细信息'  class='details btn btn-primary'>"+
+        		    "<input type='button' id='"+data[i].PLAN_NO+"' value='修改' href='#plan_modal' data-toggle='modal' class='update  btn btn-primary' >"+
+        		    "<input type='button' id='"+data[i].PLAN_NO+"' value='删除'  class='delete btn btn-primary'></td>"; 
+        		    }
+        		   tr+="</tr>";
         		     $("#plan_tbody").append(tr); 
         	}}
  		}); 
@@ -183,7 +191,7 @@ function queryAll(){
   	   if(PLAN_STATUS==0){
   	       return '待批准';
   	   }else if(PLAN_STATUS==1){
-  	       return '批准';
+  	       return '已批准';
   	   }else if(PLAN_STATUS==2){
   	       return '未批准';
   	   }
@@ -205,8 +213,7 @@ function queryAll(){
 							$("#RECRUIT_DEPT").val(data[0].RECRUIT_DEPT);
 							$("#RECRUIT_POSITION").val(data[0].RECRUIT_POSITION);
 							$("#PLAN_RECR_NO").val(data[0].PLAN_RECR_NO);
-/* 							$("#PLAN_DITCH").val(data[0].PLAN_DITCH);
- */							document.getElementById("#PLAN_DITCH")[data[0].PLAN_DITCH].selected=true;
+							$("#PLAN_DITCH option[value='"+data[0].PLAN_DITCH+"']").attr("selected", true);
 							$("#PLAN_BCWS").val(data[0].PLAN_BCWS);
 							$("#START_DATE").val(data[0].START_DATE);
 							$("#END_DATE").val(data[0].END_DATE);
@@ -268,16 +275,5 @@ function queryAll(){
 					});
 				})
 			})
-			/* 设置下拉框 */
-			function selectValue(sId,value){  
-    var s = document.getElementById(sId);  
-    var ops = s.options;  
-    for(var i=0;i<ops.length; i++){  
-        var tempValue = ops[i].value;  
-        if(tempValue == value)  
-        {  
-            ops[i].selected = true;  
-        }  
-    }  
-}
+		
 </script>

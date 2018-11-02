@@ -26,29 +26,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    <p>招聘计划</p>
-     <ul class="nav nav-tabs">
-	  <li><a href="/HuManManger/wmw/plan_select.jsp">招聘计划管理</a></li>
-	  <li class="active"><a href="/HuManManger/wmw/plan_save.jsp">创建招聘计划</a></li>
-	  <li><a href="/HuManManger/wmw/plan_select.jsp">招聘计划查询</a></li>
-    </ul>
 <!-- 添加招聘计划 -->
-<div>
+<div style="width:90%; margin:0 auto;">
 <form method="post"  id="plansave">
-<table class="Table" width="60%" align="center">
+<table class="table table-bordered" width="60%" align="center">
 <tr align="center" class="TableControl">
       <td colspan=4 nowrap>
         <p>创建招聘计划</p>
       </td>
     </tr>
    <tr>
-      <td nowrap class="col-md-1 control-label" style="width: 10%">计划名称:</td>
+      <td nowrap class="col-md-1 control-label" style="width: 10%;">计划名称:</td>
       <td class="TableData" style="width: 20%">
          <input type="text" name="planName"  class="form-control" >
       </td>
-      <td nowrap class="col-md-4 control-label" style="width: 20%">招聘部门:</td>
+      <td nowrap class="col-md-4 control-label" style="width: 10%">招聘部门:</td>
       <td class="TableData" style="width: 20%">
-        <INPUT type="text" name="recruitDept" class="form-control"  >
+          <input type="text" id="recruitDept"  class="form-control">
       </td>
    </tr>
    <tr>
@@ -108,14 +102,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    </tr>
    <tr>
       <td nowrap class="col-md-2 control-label">招聘说明:</td>
-      <td class="TableData">
-         <textarea class="form-control" rows="3" name="recruitDirection" ></textarea>
+      <td class="TableData" colspan=3>
+         <textarea class="form-control"  name="recruitDirection" ></textarea>
       </td>
     </tr>
     <tr>
       <td nowrap class="col-md-2 control-label">招聘备注:</td>
-      <td class="TableData">
-        <textarea class="form-control" rows="3" name="recruitRemark" ></textarea>
+      <td class="TableData" colspan=3>
+        <textarea class="form-control" name="recruitRemark" ></textarea>
       </td>
    </tr>
    <tr>
@@ -132,6 +126,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </table>
 </form>
 </div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="selectDepartName" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					选择招聘部门
+				</h4>
+			</div>
+			<div class="modal-body">
+				<table>
+				  <tbody id="departName" ></tbody>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
   </body>
 </html>
 <script>
@@ -147,5 +165,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	}
  		}); 
 	 }
+	 
+	 <script>
+    $('#selectDepartName').on('show.bs.modal', function () {
+        $.ajax({
+        	url : "plan/departName",
+        	type : "post",
+        	async : true,
+        	contentType: "application/json; charset=utf-8",
+       	 	dataType : 'json', 
+        	success : function(data) {
+           		$("#departName").html("");
+        		 for(var i=0; i<data.length;i++){
+        		    var tr="<tr>";
+        		    tr+="<td><button type='button' id='"+data[i].departmentName+"' class='insert btn btn-default' data-dismiss='modal'>'"+data[i].departmentName+"'</button></td>";
+        		    tr+="</tr>";
+        		     $("#departName").append(tr); 
+        	}}
+ 		}); 
+     })
+	$(function(){
+				$("#departName").on("click",".insert",function(){
+					var name=this.id;
+					$("#name").val(name);
+				})
+			})
   </script>
   

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zj.dao.Hr_planMapper">
+  <!-- 查询全部 -->
+  <select id="QueryAll" resultType="Map">
+     select PLAN_NO,PLAN_NAME,PLAN_RECR_NO,START_DATE,END_DATE,WORK_DATE,PLAN_STATUS from  hr_recruit_plan
+  </select>
+  <!-- 添加 -->
+  <insert id="Save" parameterType="Hr_recruit_plan">
+	   insert into hr_recruit_plan
+       (
+          PLAN_NAME,RECRUIT_DEPT,RECRUIT_POSITION,PLAN_RECR_NO,PLAN_DITCH,PLAN_BCWS,START_DATE,
+          END_DATE,WORK_DATE,SALARY_AREA,POSITION_REQUIRE,RECRUIT_DIRECTION,
+          RECRUIT_REMARK,REGISTER_TIME,ATTACHMENT_NAME,PLAN_STATUS,APPROVE_PERSON,APPROVE_DATE
+       ) 
+       values
+       (#{planName}, #{recruitDept},
+         #{recruitPosition}, #{planRecrNo}, #{planDitch},#{planBcws},
+         #{startDate}, #{endDate},#{workDate}, #{salaryArea}, #{positionRequire},#{recruitDirection},
+         #{recruitRemark},#{registerTime}, #{attachmentName}, #{planStatus},#{approvePerson},#{approveDate}
+       )
+  </insert>
+  <!-- 根据id查询 -->
+   <select id="QueryId" resultType="Map" parameterType="int">
+     select * from hr_recruit_plan where PLAN_No=#{planNo}
+   </select>
+   <!-- 修改 -->
+   <update id="Update"  parameterType="Hr_recruit_plan" >
+      update hr_recruit_plan set
+     PLAN_NAME=#{planName},RECRUIT_DEPT=#{recruitDept},RECRUIT_POSITION=#{recruitPosition},
+     PLAN_RECR_NO=#{planRecrNo},PLAN_DITCH=#{planDitch},PLAN_BCWS=#{planBcws},
+     START_DATE=#{startDate},END_DATE=#{endDate},WORK_DATE=#{workDate},SALARY_AREA=#{salaryArea},
+     POSITION_REQUIRE=#{positionRequire},RECRUIT_DIRECTION=#{recruitDirection},
+     RECRUIT_REMARK=#{recruitRemark},REGISTER_TIME=#{registerTime},ATTACHMENT_NAME=#{attachmentName},
+     PLAN_STATUS=#{planStatus},APPROVE_PERSON=#{approvePerson}
+     where PLAN_No=#{planNo}
+   </update>
+   <delete id="Delete" parameterType="int">
+     delete from hr_recruit_plan where PLAN_NO=#{planNo}
+   </delete>
+   <!-- 查询审批状态 -->
+   <select id="Querystatus" resultType="Map" parameterType="int">
+     select * from hr_recruit_plan where PLAN_STATUS=#{planStatus}
+   </select>
+   <update id="oneupdate"  parameterType="int" >
+      update hr_recruit_plan set PLAN_STATUS=1 where PLAN_No=#{planNo}
+   </update>
+   <update id="twoupdate"  parameterType="int" >
+      update hr_recruit_plan set PLAN_STATUS=2 where PLAN_No=#{planNo}
+   </update>
+   <!-- 查询部门 -->
+   <select id="departName" resultType="Map">
+     select * from  department
+  </select>
+</mapper>

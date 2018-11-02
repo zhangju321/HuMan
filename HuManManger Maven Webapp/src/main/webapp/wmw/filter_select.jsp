@@ -283,7 +283,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              <table>
 		     <tr>
 		        <td>
-		        <button type="button" class="btn btn-primary" style="display:none" id="filterTwo_next" data-dismiss="modal"onclick="filterClose_One(1,2)">下一步骤</button>
+		        <!-- <button type="button" class="btn btn-primary" style="display:none" id="filterTwo_next" data-dismiss="modal"onclick="filterClose_One(1,2)">下一步骤</button> -->
 			    <button type="button" class="btn btn-default" data-dismiss="modal"onclick="filterClose_One(2,2)">结束筛选</button>
 		        </td>
 		     </tr>
