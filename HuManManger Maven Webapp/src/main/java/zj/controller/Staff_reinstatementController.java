@@ -29,7 +29,7 @@ public class Staff_reinstatementController {
     @ResponseBody
 	public List<Map<String,Object>> selectRein(){
 		List<Map<String,Object>> list=ser.selectRein();
-		System.out.println(list.get(0));
+System.out.println(list.get(0));
 		return list;
 	}
     

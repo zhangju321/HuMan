@@ -1,33 +1,35 @@
 package zj.entity;
 
 public class Position {
-    private Integer positionid;
+    private Integer positionId;
 
-    private Integer departmentid;
+    private Integer departmentId;
 
-    private String positionname;
+    private String positionName;
 
-    public Integer getPositionid() {
-        return positionid;
-    }
+	public Integer getPositionId() {
+		return positionId;
+	}
 
-    public void setPositionid(Integer positionid) {
-        this.positionid = positionid;
-    }
+	public void setPositionId(Integer positionId) {
+		this.positionId = positionId;
+	}
 
-    public Integer getDepartmentid() {
-        return departmentid;
-    }
+	public Integer getDepartmentId() {
+		return departmentId;
+	}
 
-    public void setDepartmentid(Integer departmentid) {
-        this.departmentid = departmentid;
-    }
+	public void setDepartmentId(Integer departmentId) {
+		this.departmentId = departmentId;
+	}
 
-    public String getPositionname() {
-        return positionname;
-    }
+	public String getPositionName() {
+		return positionName;
+	}
 
-    public void setPositionname(String positionname) {
-        this.positionname = positionname == null ? null : positionname.trim();
-    }
+	public void setPositionName(String positionName) {
+		this.positionName = positionName;
+	}
+
+    
 }

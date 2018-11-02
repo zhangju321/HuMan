@@ -9,9 +9,9 @@ public class Staff_leave {
     
     private int staffId;//员工编号
 
-    private int departmentid;//部门外键
+    private int departmentId;//部门外键
     
-    private int positionid;//职务外键
+    private int positionId;//职务外键
 
     private int staStaffId;//员工外键
 
@@ -73,20 +73,20 @@ public class Staff_leave {
 		this.staffId = staffId;
 	}
 
-	public int getDepartmentid() {
-		return departmentid;
+	public int getDepartmentId() {
+		return departmentId;
 	}
 
-	public void setDepartmentid(int departmentid) {
-		this.departmentid = departmentid;
+	public void setDepartmentId(int departmentId) {
+		this.departmentId = departmentId;
 	}
 
-	public int getPositionid() {
-		return positionid;
+	public int getPositionId() {
+		return positionId;
 	}
 
-	public void setPositionid(int positionid) {
-		this.positionid = positionid;
+	public void setPositionId(int positionId) {
+		this.positionId = positionId;
 	}
 
 	public int getStaStaffId() {
@@ -241,6 +241,7 @@ public class Staff_leave {
 		this.isBlacklist = isBlacklist;
 	}
 
+	
 	
 
 

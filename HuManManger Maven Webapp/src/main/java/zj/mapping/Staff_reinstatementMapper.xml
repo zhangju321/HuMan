@@ -22,20 +22,20 @@
   </resultMap>
   	<!-- 职务 -->
 	<resultMap id="position" type="zj.entity.Position">
-		<id column="positionId" property="positionid" jdbcType="INTEGER" />
-		<result column="positionName" property="positionname" jdbcType="VARCHAR" />
+		<id column="positionId" property="positionId" jdbcType="INTEGER" />
+		<result column="positionName" property="positionName" jdbcType="VARCHAR" />
 	</resultMap>
 	<!-- 部门 -->
 	<resultMap id="department" type="zj.entity.Department">
-		<id column="departmentId" property="departmentid" jdbcType="INTEGER" />
-		<result column="departmentName" property="departmentname"
+		<id column="departmentId" property="departmentId" jdbcType="INTEGER" />
+		<result column="departmentName" property="departmentName"
 			jdbcType="VARCHAR" />
 	</resultMap>
 	<!-- 员工 -->
 	<resultMap id="staff_info" type="zj.entity.Staff_info">
 		<id column="staff_id" property="staffId" jdbcType="INTEGER" />
-		<result column="departmentId" property="departmentid" jdbcType="INTEGER" />
-		<result column="positionId" property="positionid" jdbcType="INTEGER" />
+		<result column="departmentId" property="departmentId" jdbcType="INTEGER" />
+		<result column="positionId" property="positionId" jdbcType="INTEGER" />
 		<result column="STAFF_NAME" property="staffName" jdbcType="VARCHAR" />
 		<result column="WORK_STATUS" property="workStatus" jdbcType="INTEGER" />
 	</resultMap>
@@ -91,8 +91,8 @@
   <update id="updateRein" parameterType="zj.entity.Staff_reinstatement" >
     update staff_reinstatement
     set staff_id = #{staffId,jdbcType=INTEGER},
-      positionId = #{positionid,jdbcType=INTEGER},
-      departmentId = #{departmentid,jdbcType=INTEGER},
+      positionId = #{positionId,jdbcType=INTEGER},
+      departmentId = #{departmentId,jdbcType=INTEGER},
       REAPPOINTMENT_TIME_FACT = #{reappointmentTimeFact,jdbcType=TIMESTAMP},
       REAPPOINTMENT_TYPE = #{reappointmentType,jdbcType=INTEGER},
       ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
@@ -119,8 +119,8 @@
       DESPACHO, APPLICATION_DATE, FIRST_SALARY_TIME, 
       MATERIALS_CONDITION, ATTACHMENT_ID, ATTACHMENT_NAME, 
       REAPPOINTMENT_STATE, REMARK)
-    values (#{reinstatementId,jdbcType=INTEGER}, #{staffId,jdbcType=INTEGER}, #{positionid,jdbcType=INTEGER}, 
-      #{departmentid,jdbcType=INTEGER}, #{reappointmentTimeFact,jdbcType=TIMESTAMP}, 
+    values (#{reinstatementId,jdbcType=INTEGER}, #{staffId,jdbcType=INTEGER}, #{positionId,jdbcType=INTEGER}, 
+      #{departmentId,jdbcType=INTEGER}, #{reappointmentTimeFact,jdbcType=TIMESTAMP}, 
       #{reappointmentType,jdbcType=INTEGER}, #{addTime,jdbcType=TIMESTAMP}, #{lastUpdateTime,jdbcType=TIMESTAMP}, 
       #{reappointmentTimePlan,jdbcType=TIMESTAMP}, #{despachoPerson,jdbcType=VARCHAR}, 
       #{despacho,jdbcType=VARCHAR}, #{applicationDate,jdbcType=TIMESTAMP}, #{firstSalaryTime,jdbcType=TIMESTAMP}, 

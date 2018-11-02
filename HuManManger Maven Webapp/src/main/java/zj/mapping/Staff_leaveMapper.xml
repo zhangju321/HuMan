@@ -39,20 +39,20 @@
 
 	<!-- 职务 -->
 	<resultMap id="position" type="zj.entity.Position">
-		<id column="positionId" property="positionid" jdbcType="INTEGER" />
-		<result column="positionName" property="positionname" jdbcType="VARCHAR" />
+		<id column="positionId" property="positionId" jdbcType="INTEGER" />
+		<result column="positionName" property="positionName" jdbcType="VARCHAR" />
 	</resultMap>
 	<!-- 部门 -->
 	<resultMap id="department" type="zj.entity.Department">
-		<id column="departmentId" property="departmentid" jdbcType="INTEGER" />
-		<result column="departmentName" property="departmentname"
+		<id column="departmentId" property="departmentId" jdbcType="INTEGER" />
+		<result column="departmentName" property="departmentName"
 			jdbcType="VARCHAR" />
 	</resultMap>
 	<!-- 员工 -->
 	<resultMap id="staff_info" type="zj.entity.Staff_info">
 		<id column="staff_id" property="staffId" jdbcType="INTEGER" />
-		<result column="departmentId" property="departmentid" jdbcType="INTEGER" />
-		<result column="positionId" property="positionid" jdbcType="INTEGER" />
+		<result column="departmentId" property="departmentId" jdbcType="INTEGER" />
+		<result column="positionId" property="positionId" jdbcType="INTEGER" />
 		<result column="STAFF_NAME" property="staffName" jdbcType="VARCHAR" />
 		<result column="WORK_STATUS" property="workStatus" jdbcType="INTEGER" />
 	</resultMap>
@@ -105,9 +105,9 @@
 	
 	<update id="updateleave" parameterType="zj.entity.Staff_leave" >
     update staff_leave
-    set positionId = #{positionid,jdbcType=INTEGER},
+    set positionId = #{positionId,jdbcType=INTEGER},
       STAFF_ID = #{staffId,jdbcType=INTEGER},
-      departmentId = #{departmentid,jdbcType=INTEGER},
+      departmentId = #{departmentId,jdbcType=INTEGER},
       sta_staff_id = #{staStaffId,jdbcType=INTEGER},
       QUIT_TIME_PLAN = #{quitTimePlan,jdbcType=TIMESTAMP},
       QUIT_TYPE = #{quitType,jdbcType=INTEGER},
@@ -140,8 +140,8 @@
       APPLICATION_DATE, SALARY, TEMENT, 
       IS_BLACKLIST, QUIT_REASON, TRACE, 
       REMARK, DESPACHO)
-    values (#{leaveId,jdbcType=INTEGER}, #{positionid,jdbcType=INTEGER}, #{staffId,jdbcType=INTEGER}, 
-      #{departmentid,jdbcType=INTEGER}, #{staStaffId,jdbcType=INTEGER}, #{quitTimePlan,jdbcType=TIMESTAMP}, 
+    values (#{leaveId,jdbcType=INTEGER}, #{positionId,jdbcType=INTEGER}, #{staffId,jdbcType=INTEGER}, 
+      #{departmentId,jdbcType=INTEGER}, #{staStaffId,jdbcType=INTEGER}, #{quitTimePlan,jdbcType=TIMESTAMP}, 
       #{quitType,jdbcType=INTEGER}, #{lastSalaryTime,jdbcType=TIMESTAMP}, #{quitTimeFact,jdbcType=TIMESTAMP}, 
       #{materialsCondition,jdbcType=INTEGER}, #{despachoPerson,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, 
       #{lastUpdateTime,jdbcType=TIMESTAMP}, #{attachmentId,jdbcType=INTEGER}, #{attachmentName,jdbcType=VARCHAR}, 

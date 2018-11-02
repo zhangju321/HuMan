@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zj.dao.AdminDao">
+	<select id="queryAllRoles" resultType="map" parameterType="Integer">
+		select * from roles
+	</select>
+	<select id="findByIdRoles" resultType="map" parameterType="Integer">
+		select * from roles r where r.rolesId=#{rolesId}
+	</select>
+	<delete id="deleteRoles" parameterType="Integer">
+		delete from Roles where
+		rolesId=#{rolesId}
+	</delete>
+	<update id="updateRoles" parameterType="zj.entity.Roles">
+		update roles set rolesName=#{rolesName},rolesdescribe=#{rolesdescribe} where
+		rolesId=#{rolesId}
+	</update>
+	<insert id="saveRoles" parameterType="zj.entity.Roles">
+		insert into Roles(rolesName,rolesdescribe)
+		values(#{rolesName},#{rolesdescribe})
+	</insert>
+
+</mapper>

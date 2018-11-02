@@ -98,17 +98,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								class="layui-icon layui-icon-home"></i> <cite>人事管理</cite>
 						</a>
 							<dl class="layui-nav-child">
-								<dd data-name="console" class="layui-this">
-									<a lay-href="home/console.html">人事档案</a>
+								<dd data-name="console">
+									<a lay-href="csj/staffion.jsp">人事档案</a>
 								</dd>
 								<dd data-name="console">
-									<a lay-href="home/homepage1.html">离职管理</a>
+									<a lay-href="csj/rencai.jsp">人才库</a>
+								</dd>
+								
+								<dd data-name="console">
+									<a lay-href="Staff_leaveSelect.jsp">离职管理</a>
 								</dd>
 								<dd data-name="console">
-									<a lay-href="home/homepage2.html">复职管理</a>
+									<a lay-href="Staff_reinstatement.jsp">复职管理</a>
 								</dd>
 								<dd data-name="console">
-									<a lay-href="home/homepage2.html">合同管理</a>
+									<a lay-href="Staff_contract.jsp">合同管理</a>
 								</dd>
 							</dl>
 						</li>
@@ -127,7 +131,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<a lay-href="/HuManManger/wmw/plan_select.jsp">招聘计划管理</a>
 										</dd>
 										<dd data-name="list">
-											<a lay-href="component/grid/list.html">招聘计划审批</a>
+											<a lay-href="/HuManManger/wmw/plan_blurry.jsp">招聘计划审批</a>
 										</dd>
 									</dl>
 								</dd>
@@ -140,10 +144,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<a href="javascript:;">人才筛选<span class="layui-nav-more"></span></a>
 									<dl class="layui-nav-child">
 										 <dd data-name="list" class="">
-											<a lay-href="component/layer/list.html" lay-text="layer 创建筛选">创建筛选</a>
+											<a lay-href="/HuManManger/wmw/filter_save.jsp" lay-text="layer 创建筛选">创建筛选</a>
 										</dd>
 										<dd data-name="special-demo" class="">
-											<a lay-href="component/layer/special-demo.html"
+											<a lay-href="/HuManManger/wmw/filter_select.jsp"
 												lay-text="layer 办理筛选">办理筛选</a>
 										</dd>
 										
@@ -162,19 +166,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</a>
 							<dl class="layui-nav-child">
 								<dd>
-									<a lay-href="template/personalpage.html">外出</a>
+									<a lay-href="attend.jsp">考勤登记/审批</a>
 								</dd>
-								<dd>
-									<a lay-href="template/addresslist.html">请假</a>
-								</dd>
-								<dd>
-									<a lay-href="template/caller.html">出差</a>
-								</dd>
+								
 								<dd>
 									<a lay-href="template/caller.html">上下班打卡</a>
 								</dd>
 								<dd>
-									<a lay-href="template/caller.html">考勤统计</a>
+									<a lay-href="attendancestatistics.jsp">考勤统计</a>
 								</dd>
 								
 							</dl></li>
@@ -300,7 +299,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<!-- 主体内容 -->
 			<div class="layui-body" id="LAY_app_body">
 				<div class="layadmin-tabsbody-item layui-show">
-					<iframe src="login.jsp" frameborder="0"
+					<iframe src="attend.jsp" frameborder="0"
 						class="layadmin-iframe"></iframe>
 
 				</div>

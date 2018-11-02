@@ -42,8 +42,7 @@
 	<table class="table table-hover">
 		<thead>
 			<tr class="success">
-			<tr class="success">
-				<th>离职编号</th>
+				<!-- <th>离职编号</th> -->
 				<th>员工姓名</th>
 				<th>在职状态</th>
 				<th>部门</th>
@@ -66,6 +65,7 @@
 				<th>当月薪酬</th>
 				<th>是否复职</th>
 				<th>黑名单</th>
+				<th>  </th>
 				<th>操作</th>
 				<th><input type="button" data-toggle="modal"
 					data-target="#myModal" class="emptys btn btn-default" value="新建离职"></th>
@@ -105,14 +105,14 @@
 								<label for="description" class="col-sm-2 control-label">部门</label>
 								<div class="col-sm-4"><!-- 
 								<input type="hidden" name="staffId.workStatus" class="form-control" value="2"> -->
-										<select class="department form-control" id="departmentId" name="departmentid">
+										<select class="department form-control" id="departmentId" name="departmentId">
         	                            </select>
 								</div>
 							</div>
 							 <div class="form-group">
 								<label for="description" class="col-sm-2 control-label">职务</label>
 								<div class="col-sm-4">
-										<select class="position form-control" id="positionId" name="positionid">
+										<select class="position form-control" id="positionId" name="positionId">
         	                            </select>
 								</div>
 							</div>
@@ -345,7 +345,7 @@
                          blacklist="否"
                       };
 					var tr = "<tr>";
-					tr += "<td>" + obj.LEAVE_ID + "</td>"; //离职编号;
+					tr += "<td style='display:none'>" + obj.LEAVE_ID + "</td>"; //离职编号;
 					tr += "<td id='name'>" + obj.STAFF_NAME + "</td>"; //员工姓名
 					tr += "<td>" + status + "</td>"; //在职状态
 					tr += "<td>" + obj.departmentName + "</td>"; //部门
@@ -368,6 +368,7 @@
 					tr += "<td>" + obj.SALARY + "</td>"; //当月薪酬
 					tr += "<td>" + tement + "</td>"; //是否复职
 					tr += "<td>" + blacklist + "</td>"; //黑名单
+					tr += "<td><input type='button' data-toggle='modal' data-target='#Details' class='Details btn btn-default' value='详细信息'></td>";				
 					tr += "<td><input type='button' data-toggle='modal' data-target='#myModal' title=" + obj.LEAVE_ID + "  class='selectleaveByID btn btn-default' value='修改'></td>";
 					tr += "<td><input type='button' id=" + obj.LEAVE_ID + "  class='delete btn btn-default' value='删除'></td>";
 					tr += "</tr>";
@@ -385,7 +386,7 @@
        success:function(data){
          for(var i=0;i<data.length;i++){
             var obj=data[i];
-            $(".position").append("<option value='"+obj.positionid+"'>"+obj.positionname+"</option>");
+            $(".position").append("<option value='"+obj.positionId+"'>"+obj.positionName+"</option>");
          }
        }
      });
@@ -399,7 +400,7 @@
        success:function(data){
          for(var i=0;i<data.length;i++){
             var obj=data[i];
-            $(".department").append("<option value='"+obj.departmentid+"'>"+obj.departmentname+"</option>");
+            $(".department").append("<option value='"+obj.departmentId+"'>"+obj.departmentName+"</option>");
          }
        }
      });
@@ -475,9 +476,9 @@
 			dataType : "json",
 			success : function(data) {
 				$("#leaveId").val(data.leaveId); //离职编号
-		        $("#departmentId").val(data.departmentid);//部门表外键  部门名称
+		        $("#departmentId").val(data.departmentId);//部门表外键  部门名称
 		        $("#staStaffId").val(data.staStaffId);//员工表外键  员工姓名 
-	         	$("#positionId").val(data.positionid);//职务表外键 职务名称 
+	         	$("#positionId").val(data.positionId);//职务表外键 职务名称 
 				$("#t1").val(data.quitTimePlan);//拟离职日期     
 				$("#quitType").val(data.quitType); //离职类型
 				$("#quitReason").val(data.quitReason); //离职原因

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zj.dao.AdminDao">
+	<select id="findAllMenusByRoleId" parameterType="int"
+		resultType="map">
+		select m.modulesId,m.parentid,m.modulesText , CASE when rolesId is not null
+		then TRUE else FALSE END as checked from modules as m left join
+		(select * from rolesmodule where rolesId=#{rolesId}) as sm on
+		m.modulesId=sm.modulesId
+	</select>
+	<delete id="deleteRolesModule">
+		delete from Rolesmodule where rolesId=#{rolesId}
+		<!-- delete from rolesmodule where modulesId in (#{menuIds}) and rolesId=#{rolesId} -->
+	</delete>
+	<insert id="saveRolesModule" parameterType="zj.entity.Rolesmodule">
+		insert into rolesmodule (modulesId,rolesId) values(#{modules.modulesId},#{roles.rolesId})
+	</insert>
+</mapper>

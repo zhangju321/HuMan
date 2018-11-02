@@ -42,7 +42,7 @@
 	<table class="table table-hover">
 		<thead>
 			<tr class="success">
-				<th>复职编号</th>
+				<!-- <th>复职编号</th> -->
 				<th>员工姓名</th>
 				<th>在职状态</th>
 				<th>部门</th>
@@ -100,14 +100,14 @@
 								<label for="description" class="col-sm-2 control-label">部门</label>
 								<div class="col-sm-4"><!-- 
 								<input type="hidden" name="staffId.workStatus" class="form-control" value="2"> -->
-										<select class="department form-control" id="departmentid" name="departmentid">
+										<select class="department form-control" id="departmentId" name="departmentId">
         	                            </select>
 								</div>
 							</div>
 							 <div class="form-group">
 								<label for="description" class="col-sm-2 control-label">职务</label>
 								<div class="col-sm-4">
-										<select class="position form-control" id="positionid" name="positionid">
+										<select class="position form-control" id="positionId" name="positionId">
         	                            </select>
 								</div>
 							</div>
@@ -286,7 +286,7 @@
                          mation="未办理"
                       };
 					var tr = "<tr>";
-					tr += "<td>" + obj.REINSTATEMENT_ID + "</td>"; //复职编号;
+					tr += "<td STYLE='display:none'>" + obj.REINSTATEMENT_ID + "</td>"; //复职编号;
 					tr += "<td id='name'>" + obj.STAFF_NAME + "</td>"; //员工姓名
 					tr += "<td>" + status + "</td>"; //在职状态
 					tr += "<td>" + obj.departmentName + "</td>"; //部门
@@ -322,7 +322,7 @@
        success:function(data){
          for(var i=0;i<data.length;i++){
             var obj=data[i];
-            $(".position").append("<option value='"+obj.positionid+"'>"+obj.positionname+"</option>");
+            $(".position").append("<option value='"+obj.positionId+"'>"+obj.positionName+"</option>");
          }
        }
      });
@@ -336,7 +336,7 @@
        success:function(data){
          for(var i=0;i<data.length;i++){
             var obj=data[i];
-            $(".department").append("<option value='"+obj.departmentid+"'>"+obj.departmentname+"</option>");
+            $(".department").append("<option value='"+obj.departmentId+"'>"+obj.departmentName+"</option>");
          }
        }
      });
@@ -345,8 +345,8 @@
 	/* 添加之前清空form表单 */
 	$(document).on("click", ".emptys", function() {
 		$("#reinstatementId").val(""); //复职编号
-		$("#positionid").val("");//职务表外键 职务名称 
-		$("#departmentid").val("");//部门表外键  部门名称
+		$("#positionId").val("");//职务表外键 职务名称 
+		$("#departmentId").val("");//部门表外键  部门名称
 		$("#staffId").html("");//员工表外键  员工姓名 
 		$("#t1").val(""); //拟复职日期
 		$("#reappointmentType").val(""); //复职类型
@@ -408,9 +408,9 @@
 			dataType : "json",
 			success : function(data) {
 				$("#reinstatementId").val(data.reinstatementId); //复职编号
-		        $("#departmentid").val(data.departmentid);//部门表外键  部门名称
+		        $("#departmentId").val(data.departmentId);//部门表外键  部门名称
 		        $("#staffId").val(data.staffId);//员工表外键  员工姓名 
-	         	$("#positionid").val(data.positionid);//职务表外键 职务名称 
+	         	$("#positionId").val(data.positionId);//职务表外键 职务名称 
 				$("#t1").val(data.reappointmentTimePlan);//拟复职日期     
 				$("#reappointmentType").val(data.reappointmentType); //复职类型
 				$("#reappointmentState").val(data.reappointmentState); //复职说明

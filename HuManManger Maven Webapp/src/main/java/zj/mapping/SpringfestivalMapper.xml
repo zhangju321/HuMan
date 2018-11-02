@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zj.dao.SpringfestivalMapper">
+
+<resultMap type="map" id="getDepart" autoMapping="true">
+<id property="sfId" column="sfId"/>
+<association property="de" column="departmentId" javaType="department" autoMapping="true">
+<id property="departmentId" column="departmentId"/>
+</association>
+</resultMap>
+ <select id="sfFind" resultMap="getDepart">
+ select s.*,d.departmentName from springfestival s left join department d 
+   on s.departmentId=d.departmentId order by s.sfId
+ </select>
+ <insert id="sfSave" parameterType="Springfestival">
+ insert into springfestival(sfName,sfTime,sfTimeEnd,departmentId) values(#{sfName},#{sfTime},#{sfTimeEnd},#{departmentId})
+ </insert>
+ <delete id="sfDelete" parameterType="Springfestival">
+ delete from springfestival where sfId=#{sfId}
+ </delete>
+ <update id="sfUpdate" parameterType="Springfestival">
+ update springfestival set sfName=#{sfName},sfTime=#{sfTime},sfTimeEnd=#{sfTimeEnd},departmentId=#{departmentId} where sfId=#{sfId}
+ </update>
+ <select id="sfFindById" parameterType="int" resultType="Springfestival">
+ select * from springfestival where sfId=#{sfId}
+ </select>
+  <select id="departFind" resultType="map">
+ select * from department
+ </select> 
+</mapper>

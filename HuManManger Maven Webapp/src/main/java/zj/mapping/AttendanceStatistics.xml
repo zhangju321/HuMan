@@ -2,88 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="zj.dao.AttendanceStatistics" >
 
-      <!-- //外出 -->
-      <resultMap id="out" type="zj.entity.Hr_go_out" >
-        <id column="out_id" property="outId" jdbcType="INTEGER" />
-        <result column="STAFF_ID" property="staffId" jdbcType="INTEGER" />
-        <result column="reason" property="reason" jdbcType="VARCHAR" />
-        <result column="out_time" property="outTime" jdbcType="TIMESTAMP" />
-        <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
-        <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
-        <result column="place" property="place" jdbcType="VARCHAR" />
-        <result column="examine_Person" property="examinePerson" jdbcType="VARCHAR" />
-        <result column="circulate" property="circulate" jdbcType="VARCHAR" />
-        <result column="status_name" property="statusName" jdbcType="VARCHAR" />
-        <result column="operate" property="operate" jdbcType="VARCHAR" />
-  </resultMap>
-  <!-- 出差 -->
-  <resultMap id="voc" type="zj.entity.Vocation" >
-    <id column="vocation_id" property="vocationId" jdbcType="INTEGER" />
-    <result column="STAFF_ID" property="staffId" jdbcType="INTEGER" />
-    <result column="vocation_reason" property="vocationReason" jdbcType="VARCHAR" />
-    <result column="vocation_qi_time" property="vocationQiTime" jdbcType="DATE" />
-    <result column="vocation_jie_time" property="vocationJieTime" jdbcType="DATE" />
-    <result column="vocation_type" property="vocationType" jdbcType="VARCHAR" />
-    <result column="status_name" property="statusName" jdbcType="VARCHAR" />
-    <result column="examine_Person" property="examinePerson" jdbcType="VARCHAR" />
-    <result column="circulate" property="circulate" jdbcType="VARCHAR" />
-    <result column="operate" property="operate" jdbcType="VARCHAR" />
-  </resultMap>
-  <!-- 请假 -->
-  <resultMap id="tra" type="zj.entity.Travel" >
-    <id column="travel_id" property="travelId" jdbcType="INTEGER" />
-    <result column="STAFF_ID" property="staffId" jdbcType="INTEGER" />
-    <result column="travel_place" property="travelPlace" jdbcType="VARCHAR" />
-    <result column="start_time" property="startTime" jdbcType="DATE" />
-    <result column="end_time" property="endTime" jdbcType="DATE" />
-    <result column="travel_date" property="travelDate" jdbcType="INTEGER" />
-    <result column="travel_reason" property="travelReason" jdbcType="VARCHAR" />
-    <result column="examine_Person" property="examinePerson" jdbcType="VARCHAR" />
-    <result column="circulate" property="circulate" jdbcType="VARCHAR" />
-    <result column="status_name" property="statusName" jdbcType="VARCHAR" />
-    <result column="operate" property="operate" jdbcType="VARCHAR" />
-  </resultMap>
-  
-  
-  <!-- 上下班登记 -->
-  <resultMap id="reg" type="zj.entity.Work_register" >
-    <id column="work_id" property="workId" jdbcType="INTEGER" />
-    <result column="departmentId" property="departmentid" jdbcType="INTEGER" />
-    <result column="staff_id" property="staffId" jdbcType="INTEGER" />
-    <result column="register_order" property="registerOrder" jdbcType="INTEGER" />
-    <result column="register_type" property="registerType" jdbcType="VARCHAR" />
-    <result column="set_time" property="setTime" jdbcType="TIMESTAMP" />
-    <result column="register_ip" property="registerIp" jdbcType="INTEGER" />
-    <result column="attendance_should" property="attendanceShould" jdbcType="INTEGER" />
-    <result column="attendance_actual" property="attendanceActual" jdbcType="INTEGER" />
-    <result column="rest" property="rest" jdbcType="INTEGER" />
-    <result column="absenteeism" property="absenteeism" jdbcType="INTEGER" />
-    <result column="late" property="late" jdbcType="INTEGER" />
-    <result column="work_unregistered" property="workUnregistered" jdbcType="INTEGER" />
-    <result column="early_retreat" property="earlyRetreat" jdbcType="INTEGER" />
-    <result column="work_off" property="workOff" jdbcType="INTEGER" />
-    <result column="work_time" property="workTime" jdbcType="TIMESTAMP" />
-    <result column="work_offtime" property="workOfftime" jdbcType="TIMESTAMP" />
-  </resultMap>
-  
-  
-  
-  
-  
     <!-- 外出 -->
-    <select id="selectout" resultMap="out" parameterType="zj.entity.Hr_go_out">
-        select * from hr_go_out where staff_id=#{staffId}
+    <select id="selectout" resultType="map">
+        select * from hr_go_out where sta_staff_id=#{staffId}
     </select>
     <!--  出差 -->
-    <select id="selecttra" resultMap="tra" parameterType="zj.entity.Travel">
-        select * from travel where staff_id=#{staffId}
+    <select id="selecttra" resultType="map">
+        select * from travel where sta_staff_id=#{staffId}
     </select>
     <!-- 请假 -->
-    <select id="selectvoc" resultMap="voc" parameterType="zj.entity.Vocation">
-        select * from vocation where staff_id=#{staffId}
+    <select id="selectvoc" resultType="map">
+        select * from vocation where sta_staff_id=#{staffId}
     </select>
     <!-- 上下班登记 -->
-    <select id="selectreg" resultMap="reg" parameterType="zj.entity.Work_register">
+    <select id="selectreg" resultType="map">
         select * from work_register where staff_id=#{staffId}
     </select>
     
@@ -92,7 +24,7 @@
   	<!-- 考勤统计 -->
 	<select id="selectas" resultType="map">
 		 select i.staff_id,i.STAFF_NAME,COUNT(t.travel_id) ct,count(v.vocation_id) cv,count(r.work_id) cr,count(o.out_id) co,
-		 t.*,v.*,r.*,o.*,sum(late) sl,SUM(rest) sr,SUM(absenteeism) sa
+		 t.*,v.*,r.*,o.*,sum(late) sl,SUM(rest) sr,SUM(absenteeism) sa,sum(work_unregistered) su,SUM(work_off) so
          from staff_info i 
          left JOIN travel t on i.staff_id=t.STAFF_ID
          left join vocation v on i.staff_id=v.STAFF_ID

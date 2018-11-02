@@ -33,6 +33,21 @@ public class Hr_recruit_plan {
     private List<Hr_recruit_filter> filter;
     private List<Hr_recruit_requirements> requ;
     private List<Hr_recruit_recruitment> recru;
+    private Department depart;
+    private List<Hr_recruit_pool> hr_recruit_pool;
+	
+	public List<Hr_recruit_pool> getHr_recruit_pool() {
+		return hr_recruit_pool;
+	}
+	public void setHr_recruit_pool(List<Hr_recruit_pool> hr_recruit_pool) {
+		this.hr_recruit_pool = hr_recruit_pool;
+	}
+	public Department getDepart() {
+		return depart;
+	}
+	public void setDepart(Department depart) {
+		this.depart = depart;
+	}
 	public int getPlanNo() {
 		return planNo;
 	}

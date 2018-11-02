@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="zj.dao.Hr_recruit_poolMapper" >
+ 	<select id="queryAll" resultType="Map">
+ 		 	select hl.EXPERT_ID,h.PLAN_NAME,hl.EMPLOYEE_NAME,hl.EMPLOYEE_BIRTH,hl.EMPLOYEE_PHONE,hl.EMPLOYEE_HIGHEST_SCHOOL,hl.EMPLOYEE_MAJOR,hl.POSITION from hr_recruit_plan h join hr_recruit_pool hl on h.PLAN_No=hl.PLAN_No
+ 	</select>
+ 	<!-- 招聘计划 -->
+ 	<select id="queryplan" resultType="Map">
+ 	select * from hr_recruit_plan 
+ 	</select>
+ 	<insert id="savehrpool" parameterType="Hr_recruit_pool">
+ 		 insert into hr_recruit_pool
+ 		  (EXPERT_ID, PLAN_NO, POSITION,EMPLOYEE_NAME, EMPLOYEE_SEX, EMPLOYEE_BIRTH,EMPLOYEE_NATIVE_PLACE,
+ 		   EMPLOYEE_DOMICILE_PLACE,EMPLOYEE_NATIONALITY, EMPLOYEE_MARITAL_STATUS,EMPLOYEE_POLITICAL_STATUS,
+ 		    EMPLOYEE_PHONE,EMPLOYEE_EMAIL, JOB_BEGINNING, EMPLOYEE_HEALTH,EMPLOYEE_HIGHEST_SCHOOL,
+ 		     EMPLOYEE_HIGHEST_DEGREE,GRADUATION_DATE, GRADUATION_SCHOOL, EMPLOYEE_MAJOR,COMPUTER_LEVEL,
+ 		      FOREIGN_LANGUAGE1, FOREIGN_LEVEL1,FOREIGN_LANGUAGE2, FOREIGN_LEVEL2, FOREIGN_LANGUAGE3,
+ 		      FOREIGN_LEVEL3, EMPLOYEE_SKILLS, RESUME,JOB_INTENSION, CAREER_SKILLS, WORK_EXPERIENCE,
+ 		      PROJECT_EXPERIENCE, ATTACHMENT_NAME, RESIDENCE_PLACE,JOB_CATEGORY, JOB_INDUSTRY, WORK_CITY,
+ 		      EXPECTED_SALARY, START_WORKING, PHOTO_NAME,EMPLOYEE_AGE, WHETHER_BY_SCREENING, 
+ 		      RECRU_CHANNEL,RUKUTIME)values 
+ 		      (#{EXPERT_ID,jdbcType=INTEGER}, #{PLAN_NO,jdbcType=INTEGER},
+ 		       #{POSITION,jdbcType=VARCHAR},#{EMPLOYEE_NAME,jdbcType=VARCHAR}, 
+ 		       #{EMPLOYEE_SEX,jdbcType=VARCHAR}, #{EMPLOYEE_BIRTH,jdbcType=DATE},
+ 		       #{EMPLOYEE_NATIVE_PLACE,jdbcType=VARCHAR}, #{EMPLOYEE_DOMICILE_PLACE,jdbcType=VARCHAR},
+ 		       #{EMPLOYEE_NATIONALITY,jdbcType=VARCHAR}, #{EMPLOYEE_MARITAL_STATUS,jdbcType=VARCHAR},
+ 		       #{EMPLOYEE_POLITICAL_STATUS,jdbcType=VARCHAR}, #{EMPLOYEE_PHONE,jdbcType=VARCHAR},
+ 		       #{EMPLOYEE_EMAIL,jdbcType=VARCHAR}, #{JOB_BEGINNING,jdbcType=DATE}, 
+ 		       #{EMPLOYEE_HEALTH,jdbcType=VARCHAR},#{EMPLOYEE_HIGHEST_SCHOOL,jdbcType=VARCHAR}, 
+ 		       #{EMPLOYEE_HIGHEST_DEGREE,jdbcType=VARCHAR},#{GRADUATION_DATE,jdbcType=DATE},
+ 		        #{GRADUATION_SCHOOL,jdbcType=VARCHAR}, #{EMPLOYEE_MAJOR,jdbcType=VARCHAR},
+ 		        #{COMPUTER_LEVEL,jdbcType=VARCHAR}, #{FOREIGN_LANGUAGE1,jdbcType=VARCHAR},
+ 		         #{FOREIGN_LEVEL1,jdbcType=VARCHAR},#{FOREIGN_LANGUAGE2,jdbcType=VARCHAR}, 
+ 		         #{FOREIGN_LEVEL2,jdbcType=VARCHAR}, #{FOREIGN_LANGUAGE3,jdbcType=VARCHAR},
+ 		         #{FOREIGN_LEVEL3,jdbcType=VARCHAR}, #{EMPLOYEE_SKILLS,jdbcType=VARCHAR}, 
+ 		         #{RESUME,jdbcType=VARCHAR},#{JOB_INTENSION,jdbcType=VARCHAR}, 
+ 		         #{CAREER_SKILLS,jdbcType=VARCHAR}, #{WORK_EXPERIENCE,jdbcType=VARCHAR},
+ 		         #{PROJECT_EXPERIENCE,jdbcType=VARCHAR}, #{ATTACHMENT_NAME,jdbcType=VARCHAR},
+ 		         
+ 		          #{RESIDENCE_PLACE,jdbcType=VARCHAR},#{JOB_CATEGORY,jdbcType=VARCHAR}, 
+ 		          #{JOB_INDUSTRY,jdbcType=VARCHAR}, #{WORK_CITY,jdbcType=VARCHAR},
+ 		          #{EXPECTED_SALARY,jdbcType=VARCHAR}, #{START_WORKING,jdbcType=VARCHAR},
+ 		           #{PHOTO_NAME,jdbcType=VARCHAR},#{PHOTO_NAME,jdbcType=VARCHAR}, 
+ 		           #{WHETHER_BY_SCREENING,jdbcType=INTEGER}, #{RECRU_CHANNEL,jdbcType=VARCHAR},
+ 		           #{RUKUTIME,jdbcType=DATE}) 	</insert>
+ 	<delete id="deletePool" parameterType="Hr_recruit_pool">
+ 		delete from hr_recruit_pool where EXPERT_ID=#{EXPERT_ID}
+ 	</delete>
+ 	<select id="queryByid" parameterType="int" resultType="Hr_recruit_pool">
+ 		select * from hr_recruit_pool where EXPERT_ID=#{EXPERT_ID}
+ 	</select>
+ 	<update id="updatePool" parameterType="Hr_recruit_pool">
+ 		update hr_recruit_pool
+ 		<set>
+ 			<if test="PLAN_NO !=null">PLAN_NO=#{PLAN_NO},</if>
+ 			<if test="POSITION !=null">POSITION=#{POSITION},</if>
+ 			<if test="EMPLOYEE_NAME !=null">EMPLOYEE_NAME=#{EMPLOYEE_NAME},</if>
+ 			<if test="EMPLOYEE_SEX !=null">EMPLOYEE_SEX=#{EMPLOYEE_SEX},</if>
+ 			<if test="EMPLOYEE_BIRTH !=null">EMPLOYEE_BIRTH=#{EMPLOYEE_BIRTH},</if>
+ 			<if test="EMPLOYEE_NATIVE_PLACE !=null">EMPLOYEE_NATIVE_PLACE=#{EMPLOYEE_NATIVE_PLACE},</if>
+ 			<if test="EMPLOYEE_DOMICILE_PLACE !=null">EMPLOYEE_DOMICILE_PLACE=#{EMPLOYEE_DOMICILE_PLACE},</if>
+ 			<if test="EMPLOYEE_NATIONALITY !=null">EMPLOYEE_NATIONALITY=#{EMPLOYEE_NATIONALITY},</if>
+ 			<if test="EMPLOYEE_MARITAL_STATUS !=null">EMPLOYEE_MARITAL_STATUS=#{EMPLOYEE_MARITAL_STATUS},</if>
+ 			<if test="EMPLOYEE_POLITICAL_STATUS !=null">EMPLOYEE_POLITICAL_STATUS=#{EMPLOYEE_POLITICAL_STATUS},</if>
+ 			<if test="EMPLOYEE_PHONE= !=null">EMPLOYEE_PHONE=#{EMPLOYEE_PHONE},</if>
+ 			<if test="EMPLOYEE_EMAIL !=null">EMPLOYEE_EMAIL=#{EMPLOYEE_EMAIL},</if>
+ 			<if test="JOB_BEGINNING !=null">JOB_BEGINNING=#{JOB_BEGINNING},</if>
+ 			<if test="EMPLOYEE_HEALTH !=null">EMPLOYEE_HEALTH=#{EMPLOYEE_HEALTH},</if>
+ 			<if test="EMPLOYEE_HIGHEST_SCHOOL !=null">EMPLOYEE_HIGHEST_SCHOOL=#{EMPLOYEE_HIGHEST_SCHOOL},</if>
+ 			<if test="EMPLOYEE_HIGHEST_DEGREE !=null">EMPLOYEE_HIGHEST_DEGREE=#{EMPLOYEE_HIGHEST_DEGREE},</if>
+ 			<if test="GRADUATION_DATE !=null">GRADUATION_DATE=#{GRADUATION_DATE},</if>
+ 			<if test="GRADUATION_SCHOOL !=null">GRADUATION_SCHOOL=#{GRADUATION_SCHOOL},</if>
+ 			<if test="EMPLOYEE_MAJOR !=null">EMPLOYEE_MAJOR=#{EMPLOYEE_MAJOR},</if>
+ 			<if test="COMPUTER_LEVEL !=null">COMPUTER_LEVEL=#{COMPUTER_LEVEL},</if>
+ 			<if test="FOREIGN_LANGUAGE1 !=null">FOREIGN_LANGUAGE1=#{FOREIGN_LANGUAGE1},</if>
+ 			<if test="FOREIGN_LEVEL1 !=null">FOREIGN_LEVEL1=#{FOREIGN_LEVEL1},</if>
+ 			<if test="FOREIGN_LANGUAGE2 !=null">FOREIGN_LANGUAGE2=#{FOREIGN_LANGUAGE2},</if>
+ 			<if test="FOREIGN_LEVEL2 !=null">FOREIGN_LEVEL2=#{FOREIGN_LEVEL2},</if>
+ 			<if test="FOREIGN_LANGUAGE3 !=null">FOREIGN_LANGUAGE3=#{FOREIGN_LANGUAGE3},</if>
+ 			<if test="FOREIGN_LEVEL3 !=null">FOREIGN_LEVEL3=#{FOREIGN_LEVEL3},</if>
+ 			<if test="EMPLOYEE_SKILLS !=null">EMPLOYEE_SKILLS=#{EMPLOYEE_SKILLS},</if>
+ 			<if test="RESUME !=null">RESUME=#{RESUME},</if>
+ 			<if test="JOB_INTENSION !=null">JOB_INTENSION=#{JOB_INTENSION},</if>
+ 			<if test="CAREER_SKILLS !=null">CAREER_SKILLS=#{CAREER_SKILLS},</if>
+ 			<if test="WORK_EXPERIENCE !=null">WORK_EXPERIENCE=#{WORK_EXPERIENCE},</if>
+ 			<if test="PROJECT_EXPERIENCE !=null">PROJECT_EXPERIENCE=#{PROJECT_EXPERIENCE},</if>
+ 			<if test="ATTACHMENT_NAME !=null">ATTACHMENT_NAME=#{ATTACHMENT_NAME},</if>
+ 			<if test="RESIDENCE_PLACE !=null">RESIDENCE_PLACE=#{RESIDENCE_PLACE},</if>
+ 			<if test="JOB_CATEGORY !=null">JOB_CATEGORY=#{JOB_CATEGORY},</if>
+ 			<if test="JOB_INDUSTRY !=null">JOB_INDUSTRY=#{JOB_INDUSTRY},</if>
+ 			<if test="WORK_CITY !=null">WORK_CITY=#{WORK_CITY},</if>
+ 			<if test="EXPECTED_SALARY !=null">EXPECTED_SALARY=#{EXPECTED_SALARY},</if>
+ 			<if test="START_WORKING !=null">START_WORKING=#{START_WORKING},</if>
+ 			<if test="PHOTO_NAME !=null">PHOTO_NAME=#{PHOTO_NAME},</if>
+ 			<if test="EMPLOYEE_AGE !=null">EMPLOYEE_AGE=#{EMPLOYEE_AGE},</if>
+ 			<if test="WHETHER_BY_SCREENING !=null">WHETHER_BY_SCREENING=#{WHETHER_BY_SCREENING},</if>
+ 			<if test="RECRU_CHANNEL !=null">RECRU_CHANNEL=#{RECRU_CHANNEL},</if>
+ 			<if test="RUKUTIME !=null">RUKUTIME=#{RUKUTIME},</if>
+ 		</set>
+ 		where EXPERT_ID=#{EXPERT_ID}
+ 	</update>
+</mapper>

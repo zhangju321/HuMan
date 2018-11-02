@@ -8,11 +8,11 @@ public class Staff_reinstatement {//复职
 	
     private int reinstatementId;//复职id
 
-    private int positionid;//职务外键
+    private int positionId;//职务外键
     
     private int staffId;//员工外键
 
-    private int departmentid;//部门外键
+    private int departmentId;//部门外键
 
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date reappointmentTimePlan;//拟复职日期 
@@ -56,6 +56,14 @@ public class Staff_reinstatement {//复职
 		this.reinstatementId = reinstatementId;
 	}
 
+	public int getPositionId() {
+		return positionId;
+	}
+
+	public void setPositionId(int positionId) {
+		this.positionId = positionId;
+	}
+
 	public int getStaffId() {
 		return staffId;
 	}
@@ -64,20 +72,12 @@ public class Staff_reinstatement {//复职
 		this.staffId = staffId;
 	}
 
-	public int getPositionid() {
-		return positionid;
+	public int getDepartmentId() {
+		return departmentId;
 	}
 
-	public void setPositionid(int positionid) {
-		this.positionid = positionid;
-	}
-
-	public int getDepartmentid() {
-		return departmentid;
-	}
-
-	public void setDepartmentid(int departmentid) {
-		this.departmentid = departmentid;
+	public void setDepartmentId(int departmentId) {
+		this.departmentId = departmentId;
 	}
 
 	public Date getReappointmentTimePlan() {
@@ -86,14 +86,6 @@ public class Staff_reinstatement {//复职
 
 	public void setReappointmentTimePlan(Date reappointmentTimePlan) {
 		this.reappointmentTimePlan = reappointmentTimePlan;
-	}
-
-	public Date getReappointmentTimeFact() {
-		return reappointmentTimeFact;
-	}
-
-	public void setReappointmentTimeFact(Date reappointmentTimeFact) {
-		this.reappointmentTimeFact = reappointmentTimeFact;
 	}
 
 	public int getReappointmentType() {
@@ -112,12 +104,44 @@ public class Staff_reinstatement {//复职
 		this.reappointmentState = reappointmentState;
 	}
 
+	public Date getFirstSalaryTime() {
+		return firstSalaryTime;
+	}
+
+	public void setFirstSalaryTime(Date firstSalaryTime) {
+		this.firstSalaryTime = firstSalaryTime;
+	}
+
 	public String getRemark() {
 		return remark;
 	}
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public Date getReappointmentTimeFact() {
+		return reappointmentTimeFact;
+	}
+
+	public void setReappointmentTimeFact(Date reappointmentTimeFact) {
+		this.reappointmentTimeFact = reappointmentTimeFact;
+	}
+
+	public String getDespacho() {
+		return despacho;
+	}
+
+	public void setDespacho(String despacho) {
+		this.despacho = despacho;
+	}
+
+	public String getDespachoPerson() {
+		return despachoPerson;
+	}
+
+	public void setDespachoPerson(String despachoPerson) {
+		this.despachoPerson = despachoPerson;
 	}
 
 	public Date getAddTime() {
@@ -134,38 +158,6 @@ public class Staff_reinstatement {//复职
 
 	public void setLastUpdateTime(Date lastUpdateTime) {
 		this.lastUpdateTime = lastUpdateTime;
-	}
-
-	public String getDespachoPerson() {
-		return despachoPerson;
-	}
-
-	public void setDespachoPerson(String despachoPerson) {
-		this.despachoPerson = despachoPerson;
-	}
-
-	public String getDespacho() {
-		return despacho;
-	}
-
-	public void setDespacho(String despacho) {
-		this.despacho = despacho;
-	}
-
-	public Date getApplicationDate() {
-		return applicationDate;
-	}
-
-	public void setApplicationDate(Date applicationDate) {
-		this.applicationDate = applicationDate;
-	}
-
-	public Date getFirstSalaryTime() {
-		return firstSalaryTime;
-	}
-
-	public void setFirstSalaryTime(Date firstSalaryTime) {
-		this.firstSalaryTime = firstSalaryTime;
 	}
 
 	public int getMaterialsCondition() {
@@ -191,7 +183,15 @@ public class Staff_reinstatement {//复职
 	public void setAttachmentName(String attachmentName) {
 		this.attachmentName = attachmentName;
 	}
-    
+
+	public Date getApplicationDate() {
+		return applicationDate;
+	}
+
+	public void setApplicationDate(Date applicationDate) {
+		this.applicationDate = applicationDate;
+	}
+
     
     
 
