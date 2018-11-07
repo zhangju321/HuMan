@@ -14,7 +14,7 @@ public interface StaffInfoService {
 	//员工部门
     public List<Department> findAll();
     //部门id查询
-    public List<Map> queryDepartId(int departmentid);
+    public List<Map> queryDepartId(int departmentId);
   //员工id查询
     //public StaffInfo queryById2(int staff_Id);
     public Map queryById(Staff_info s);

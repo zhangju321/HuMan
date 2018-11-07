@@ -31,8 +31,8 @@ public class Hr_recruitmentServiceImpl implements Hr_recruitmentService {
 		return dao.Delete(recruitmentId);
 	}
 	@Override
-	public int Save(Hr_recruit_recruitment recru) {
-         return dao.Save(recru);		
+	public int Save(Hr_recruit_recruitment recruit) {
+         return dao.Save(recruit);		
 	}
 	@Override
 	public List<Map<String, Object>> Queryfilter(Hr_recruit_filter filter) {

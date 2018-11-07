@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
-import zj.entity.Department;
+import zj.entity.Pay;
 import zj.entity.Project;
 import zj.entity.Welfare;
 import zj.service.WelfareService;
@@ -49,11 +49,10 @@ public PageInfo<Map<String, Object>> queryDepar(@RequestParam(required =false, d
 
 //添加福利
 @RequestMapping("/welfSave")
-public void welfSave(Welfare welf,HttpServletResponse response) throws IOException{
-	response.setContentType("text/html;charset=utf-8");
-	PrintWriter out=response.getWriter();
-   ser.welfSave(welf);
-   out.print("添加成功");
+@ResponseBody
+public int welfSave(Welfare welf){
+    int num=ser.welfSave(welf);
+    return num;
 }
 //删除
 @RequestMapping("/welfdelete")

@@ -48,4 +48,10 @@ public class Hr_recruitmentController {
 	public List<Map<String,Object>> Queryfilter(Hr_recruit_filter filter){
 		return service.Queryfilter(filter);
 	}
+	@ResponseBody
+	@RequestMapping("/save")
+	public int save(Hr_recruit_recruitment recruit){
+		System.out.println(recruit);
+		return service.Save(recruit);
+	}
 }

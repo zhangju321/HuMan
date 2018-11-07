@@ -31,7 +31,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript" src="resource/jquery.form.js"></script>
     <script src="js/layui/layui.js" charset="utf-8"></script>
     <script src="bootstrap-select/dist/js/bootstrap-select.min.js"></script>
-    <script src="bootstrap-select/dist/js/i18n/defaults-ar_AR.min.js"></script>
+    <script src="bootstrap-select/dist/js/i18n/defaults-zh_CN.min.js"></script>
+   <!--  <script src="bootstrap-select/dist/js/i18n/defaults-ar_AR.min.js"></script>
     <script src="bootstrap-select/dist/js/i18n/defaults-bg_BG.min.js"></script>
     <script src="bootstrap-select/dist/js/i18n/defaults-cs_CZ.min.js"></script>
     <script src="bootstrap-select/dist/js/i18n/defaults-da_DK.min.js"></script>
@@ -64,9 +65,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="bootstrap-select/dist/js/i18n/defaults-tr_TR.min.js"></script>
     <script src="bootstrap-select/dist/js/i18n/defaults-ua_UA.min.js"></script>
     <script src="bootstrap-select/dist/js/i18n/defaults-vi_VN.min.js"></script>
-    <script src="bootstrap-select/dist/js/i18n/defaults-zh_CN.min.js"></script>
-    <script src="bootstrap-select/dist/js/i18n/defaults-zh_TW.min.js"></script>
-
+    <script src="bootstrap-select/dist/js/i18n/defaults-zh_TW.min.js"></script> -->
+<style>
+ .dropdown_item{width: 100%}
+    .dropdown_item>li:HOVER{background-color: #eee;cursor: pointer;}
+    .dropdown_item>li {display: block;padding: 3px 10px;clear: both;font-weight: normal;line-height: 1.428571429;color: #333;white-space: nowrap;}
+    .dropdown_item>li>.check_box{width: 18px;height: 18px;vertical-align: middle;margin: 0px;}
+    .dropdown_item>li>span{vertical-align: middle;}
+    .select_multiple .caret{border-top: 4px solid!important;border-bottom: 0;}
+</style>
   </head>
   
   <body>
@@ -138,21 +145,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   						
 	   						<div class="form-group">
 								<label for="description" class="col-sm-2 control-label">部门范围:</label>
-								 <div class="col-sm-4">
-								 <select id="departFind" name="departmentId" class="form-control">
-								</select>  
-								<!--  <select id="departFind" name="departmentId" class="selectpicker show-tick form-control" multiple="multiple">
-                                <option value="1">财务部</option> 
-                                <option value="2">行政后勤部</option> 
-                                <option value="3">人事部</option> 
-                                <option value="4">企划部</option> 
-                                <option value="5">销售部</option>
-                           </select>  -->
-								</div> 
+								  <div class="col-sm-4">
+				    <select id="departFind" name="departmentName" title="请选择部门" class="form-control selectpicker" multiple>
+                    <option data-content="<span class='label label-success'>广东省</span>">广东省</option>    
+                    <option data-content="<span class='label label-info'>广西省</span>">广西省</option>  
+                     <option data-content="<span class='label label-warning'>福建省</span>">福建省</option>  
+                       <option data-content="<span class='label label-danger'>山东省</span>">山东省</option>                        
+
+								</select>   
+ 
+	  
 								
-                               
+		<!-- 	<div class="dropup" style="position: relative;">
+	<button class="btn btn-default dropdown-toggle form-control select_multiple" 
+	style="width: 100%;margin-left: 0px;" type="button" id="departmentId" data-toggle="dropdown">
+    	<span class="select_text" data-is-select="false">请选择</span>
+    	<span class="caret"></span>
+  	</button>
+  	<ul class="dropdown-menu dropdown_item" style="bottom: auto;">
+    	<li><input type="checkbox" class="check_box" value="1" name="departmentId"/> <span>总经理办公室</span></li>
+    	<li><input type="checkbox" class="check_box" value="2" name="departmentId"/> <span>人力资源部</span></li>
+    	<li><input type="checkbox" class="check_box" value="3" name="departmentId"/> <span>财务部</span></li>
+    	<li><input type="checkbox" class="check_box" value="4" name="departmentId"/> <span>计划营销部</span></li>
+    	<li><input type="checkbox" class="check_box" value="5" name="departmentId"/> <span>生产技术部</span></li>
+    	<li><input type="checkbox" class="check_box" value="6" name="departmentId"/> <span>安全监察部</span></li>
+  	</ul>					
+                               </div> -->
 	   						</div>
-						
+						</div>
 							<input type="button"  id="saveOrUpdate" data-toggle='modal' data-target='#myModal' class="btn btn-primary" value="保存">
 						</form>
 
@@ -187,6 +207,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           var ary = data.list;
           for(var i=0;i<ary.length;i++){
            var obj = ary[i];
+           
             var tr="<tr>";
                  tr+="<td>"+obj.sfName+"</td>";
                  tr+="<td>"+obj.sfTime+"</td>";
@@ -258,6 +279,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   });
    $(document).on("click","#saveOrUpdate",function(){
      var obj=$("#file1").serializeObject();//将表单数据转换json对象
+     alert(JSON.stringify(obj));
      $.ajax({
        url:"sf/saveOrUpdate",
        type:"post",
@@ -348,19 +370,52 @@ layui.use(['laypage', 'layer'], function(){
  });
 </script>
 
-<!-- <script>
-$(window).on('load', function () {
-var str='3,4,5,6';
-    var arr=str.split(',');
-    $('#departFind').selectpicker('val', arr);
 
-    $('#departFind').selectpicker({
-        'selectedText': 'cat'
-    });
-    
-});
-$('.selectpicker').selectpicker('val', 'Mustard');
-</script>
+ <!-- <script>
+ //多选下拉框实现
+    $(document).on("click",".check_box",function(event){
+		event.stopPropagation();//阻止事件冒泡，防止触发li的点击事件
+		//勾选的项
+		var $selectTextDom=$(this).parent().parent("ul").siblings("button").children(".select_text");
+		//勾选项的值
+		var $selectValDom=$(this).parent().parent("ul").siblings(".select_val");
+		//是否有选择项了
+		var isSelected=$selectTextDom[0].getAttribute("data-is-select");
+		var selectText="";//文本值，用于显示
+		var selectVal=$selectValDom.val();//实际值，会提交到后台的
+		var selected_text=$(this).siblings("span").text();//当次勾选的文本值
+		var selected_val=$(this).val();//当次勾选的实际值
+		//判断是否选择过
+		if(isSelected=="true"){
+			selectText=$selectTextDom.text();
+		}
+		if(selectText!=""){
+			if(selectText.indexOf(selected_text)>=0){//判断是否已经勾选过
+				selectText=selectText.replace(selected_text,"").replace(",,",",");//替换掉
+				selectVal=selectVal.replace(selected_val,"").replace(",,",",");//替换掉
+				//判断最后一个字符是否是逗号
+				if(selectText.charAt(selectText.length - 1)==","){
+					//去除末尾逗号
+					selectText=selectText.substring(0,selectText.length - 1);
+					selectVal=selectVal.substring(0,selectVal.length - 1);
+				}
+			}else{
+				selectText+=","+selected_text;
+				selectVal+=","+selected_val;
+			}
+		}else{
+			selectText=selected_text;
+			selectVal=selected_val;
+		}
+		$selectTextDom.text(selectText);
+		$selectValDom.val(selectVal);
+		if(selectText==""){
+			$selectTextDom.text("请选择");
+			$selectTextDom[0].setAttribute("data-is-select","false");
+		}else{
+			$selectTextDom[0].setAttribute("data-is-select","true");
+		}
+	})
+ </script>
  -->
-
 

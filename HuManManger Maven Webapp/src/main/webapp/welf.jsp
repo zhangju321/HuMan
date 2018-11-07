@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css">
-<script	src="${pageContext.request.contextPath}/resources/bootstrap/jquery-1.11.3.min.js"></script>
+<script	src="${pageContext.request.contextPath}/resource/jquery-1.11.3.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 
 	
@@ -29,7 +29,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <table class="table table-hover">
 
 				<thead>
-					<tr>
+				 <h3>福利操作</h3> 
+					<tr class="warning">
 						<th>部门名称</th>
 						<th>人员名称</th>
 						<th>福利项目名</th>
@@ -65,7 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="col-sm-3">
 					
 						<input type="text" class="form-control" 
-							placeholder="部门名" id="bname">
+							placeholder="部门名" id="bname" >
 							<input type="hidden"  name="departmentId"  id="bid">
 							
 					</div>
@@ -127,7 +128,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </select>
 				</div>
 				
-
+</div>
 
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-7">
@@ -154,7 +155,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 			<div class="modal fade" id="modal-container-880261" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
-					<div class="modal-content">
+					<div class="modal-content" style="width:500px">
 						<div class="modal-header">
 							 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 							<h4 class="modal-title" id="myModalLabel">
@@ -165,7 +166,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							
 							<table class="table table-hover">
 				<thead>
-					<tr>
+					<tr class="warning">
 						<th>部门编号</th>
 						<th>部门名称</th>
 						<th>人员编号</th>
@@ -229,7 +230,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="col-sm-3">
 					<input type="hidden"  name="welfareid"  id="welfareid">
 						<input type="text" class="form-control" 
-							placeholder="部门名" id="deparname" disabled="disabled">
+							placeholder="部门名" id="deparname" readonly="readonly">
 							<input type="hidden"  name="departmentId"  id="deparid">
 							
 					</div>
@@ -238,7 +239,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<label for="lastname" class="col-sm-1 control-label">员工名:</label>
 					<div class="col-sm-3">
 						<input type="text" class="form-control" id="staffname"
-							placeholder="福利请项目名称" disabled="disabled">
+							placeholder="福利请项目名称" readonly="readonly">
 							<input type="hidden"  name="staff_id"  id="staffid">
 							
 					</div>
@@ -439,7 +440,7 @@ $(function(){
 	  $("#bz").val(remark);
 	   //获取是否纳税  并将值加到修改的input内
 	    var tax=$(this).parent().parent().find("#welftax").html();
-	  $("#tax").val(tax);
+	  $("#sele").val(tax);
 	  });
 	})
 	
@@ -457,8 +458,14 @@ $(function(){
 			data : $("#form1").serialize(), //数据类型不需要转化成json
 			dataType : 'text', //返回类型type
 			success : function(data) {
-				alert(data);
 				findAll();
+					if(data>0){
+					alert("添加成功");
+					location.reload();
+				}else{
+					alert("人员福利添加重复");
+					location.reload();
+				}
 			}
 		});
 	}
@@ -488,6 +495,7 @@ $(function(){
                     tr +="<td><input type='button' id='" + obj.departmentId+ "' value='设置福利' class='fl btn btn-default''></td>"
 					tr += "</tr>";
 					$("#tbody2").append(tr);
+					
           }
           //当前页的值
 				$("#currPage").val(data.pageNum);
@@ -559,6 +567,7 @@ $(function(){
 	  
 	   var ygid=$(this).parent().parent().find("#rsid").html();
 	  $("#sid").val(ygid); 
+	  location.reload();
 	  });
 	})
 		/*删除  */

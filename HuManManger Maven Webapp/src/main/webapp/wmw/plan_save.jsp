@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" type="text/css"href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css">
 <script	src="${pageContext.request.contextPath}/resource/jquery-1.11.3.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/demo.css">
+
 
   </head>
   
@@ -42,13 +42,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </td>
       <td nowrap class="col-md-4 control-label" style="width: 10%">招聘部门:</td>
       <td class="TableData" style="width: 20%">
-          <input type="text" id="recruitDept"  class="form-control">
+          <input type="text" name="departmentId"  class="form-control">
       </td>
    </tr>
    <tr>
       <td nowrap class="col-md-2 control-label" style="width: 20%">招聘岗位:</td>
       <td class="TableData">
-         <INPUT type="text" name="recruitPosition" class="form-control"   >
+         <INPUT type="text" name="positionId"  class="form-control"   >
       </td>
       <td nowrap class="col-md-2 control-label">招聘人数:</td>
       <td class="TableData">
@@ -155,6 +155,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script>
     function plan_save(){
 			var obj=$("#plansave").serialize();
+			alert(obj);
 		    $.ajax({
 		       url : "plan/planSave",
         	   type : "post",
@@ -165,8 +166,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	}
  		}); 
 	 }
-	 
-	 <script>
     $('#selectDepartName').on('show.bs.modal', function () {
         $.ajax({
         	url : "plan/departName",

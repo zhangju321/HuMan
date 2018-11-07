@@ -47,6 +47,8 @@
 				<th>合同类型</th>
 				<th>合同签订日期</th>
 				<th>合同到期日期</th>
+				<th><input type="button" data-toggle="modal"
+					data-target="#select" class="emptys btn btn-default" value="查询合同信息"></th>
 				<th>操作</th>
 				<th><input type="button" data-toggle="modal"
 					data-target="#myModal" class="emptys btn btn-default" value="新建合同"></th>
@@ -56,6 +58,13 @@
 
 		</tbody>
 	</table>
+	<ul class="pager">
+		<li><button type="button" class="btn btn-default" id="shouye">首页</button></li>
+		<li><button type="button" class="btn btn-default" id="syy">上一页</button></li>
+		<li><button type="button" class="btn btn-default" id="xyy">下一页</button></li>
+		<li><button type="button" class="btn btn-default" id="weiye">尾页</button></li>
+		<li style="font-weight: lighter;">当前第<input type="text" id="currPage" style="height:35px;width:50px;border-radius:10px;text-align: center;"/>页</li>
+	</ul>
 	
 	
 	<!-- 模态框弹出录入内容 -->
@@ -163,16 +172,20 @@
 		selectcontract();
 	});
 
-	function selectcontract() {
+	function selectcontract(startPage) {
 		
 		$.ajax({
 			url : "contract/selectcontract",
 			type : "post",
+			data : {
+				"startPage" : startPage
+			},
 			dataType : "json",
 			success : function(data) {
 				$("#tbody").empty();
-				for (var i = 0; i < data.length; i++) {
-					var obj = data[i];
+				var list=data.list;
+				for (var i = 0; i < list.length; i++) {
+					var obj = list[i];
 					
 					var contype=null;
 					if(obj.CONTRACT_TYPE=1){
@@ -193,15 +206,63 @@
 					tr += "<td>" + obj.CONTRACT_END_TIME + "</td>"; //合同到期日期
 					tr += "<td id='htdq' style='display:none'>" + obj.htdaoqi + "</td>"; //合同剩余时间
 					tr += "<td id='sydq' style='display:none'>" + obj.sydaoqi + "</td>"; //试用剩余时间
+					tr += "<td></td>";
 					tr += "<td><input type='button' data-toggle='modal' data-target='#myModal' title=" + obj.CONTRACT_ID + "  class='selectByID btn btn-default' value='修改'></td>";
 					tr += "<td><input type='button' id=" + obj.CONTRACT_ID + "  class='delete btn btn-default' value='删除'></td>";
+					tr += "<td></td>";
 					tr += "</tr>";
 					$("#tbody").append(tr);
 
 				}
-			}
-		});
-	}
+				//当前页的值
+				$("#currPage").val(data.pageNum);
+				$("#weiye").click(function() {
+					var last = Math.ceil(data.total / data.pageSize);
+					selectcontract(last);
+				})
+				$("#currPage").blur(function() {
+					var last = Math.ceil(data.total / data.pageSize);
+					var curr = $("#currPage").val();
+					if(last<curr){
+					   $("#currPage").val(last);
+					   selectcontract(last);
+					}
+					if(curr<=0){
+					  $("#currPage").val(1);
+					   selectcontract(1);
+					}
+					 selectcontract(curr);
+				});
+				
+				if (data.isFirstPage) {
+					$("#syy").attr("disabled", "disabled");
+					$("#shouye").attr("disabled", "disabled");
+				} else {
+					$("#syy").removeAttr("disabled", "disabled");
+					$("#shouye").removeAttr("disabled", "disabled");
+				}
+				if (data.isLastPage) {
+					$("#xyy").attr("disabled", "disabled");
+					$("#weiye").attr("disabled", "disabled");
+				} else {
+					$("#xyy").removeAttr("disabled", "disabled");
+					$("#weiye").removeAttr("disabled", "disabled");
+				}
+       }
+    });
+  }
+  /* 按钮的赋值 */
+	$("#syy").click(function() {
+		var currPage = parseInt($("#currPage").val());
+		selectcontract(currPage - 1);
+	})
+	$("#xyy").click(function() {
+		var currPage = parseInt($("#currPage").val());
+		selectcontract(currPage + 1);
+	})
+	$("#shouye").click(function() {
+		selectcontract(1);
+	})
       
 
 
@@ -297,11 +358,16 @@
 	 	var htdq=$(this).parent().parent().find("#htdq").html();
 	 	//试用到期时间
 	 	var sydq=$(this).parent().parent().find("#sydq").html();
-	 	if(sydq<0){
+	 	if(sydq<=0){
 	 	  alert(staffName+"试用已过期");
+	 	  
 	 	}
-	 	if(htdq<0){
+	 	if(htdq<=0){
 	 	  alert(staffName+"合同已过期");
+	 	  
+	 	  
+	 	  
+	 	  
 	 	}
 
 	
@@ -402,6 +468,7 @@
 			type : 'datetime'
 		});
 	});
+	   
 	       
 
  

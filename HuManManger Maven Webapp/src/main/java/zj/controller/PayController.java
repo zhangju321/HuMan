@@ -34,11 +34,10 @@ public class PayController {
 	
 	//薪资基数表添加
 	@RequestMapping("/psave")
-	public void save(Pay pay,HttpServletResponse response) throws IOException{
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out=response.getWriter();
-	    ser.paySave(pay);
-	    out.print("添加成功");
+	@ResponseBody
+	public int save(Pay pay){
+	    int num=ser.paySave(pay);
+	    return num;
 	}
 	//pay查询
 	@RequestMapping("/queryAll")
@@ -67,7 +66,6 @@ public class PayController {
 	@RequestMapping("/queryPeo")
 	@ResponseBody
 	public List<Map<String, Object>> queryPeo(){
-		System.out.println("ddd");
 		List<Map<String, Object>> list=ser.queryPeo();
 		return list;
 		
@@ -77,20 +75,34 @@ public class PayController {
 			@RequestMapping("/queryid")
 			@ResponseBody
 			public List<Map<String,Object>> query(@RequestBody int id){
-				List<Map<String,Object>> list2=ser.queryId(id);
-				return list2;
+				List<Map<String,Object>> listdepar=ser.queryId(id);
+				return listdepar;
 			}
 			
 			
 			
+			
+			/*public List<Map<String, Object>> queryAll3(){
+				
+				List<Map<String, Object>> listpay=ser.queryAll3();
+				return listpay;
+				
+			}*/
+			
+		
 			@RequestMapping("/queryAll3")
 			@ResponseBody
-			public List<Map<String, Object>> queryAll3(){
-				
-				List<Map<String, Object>> list3=ser.queryAll3();
-				return list3;
-				
+			public Map<String,Object> queryAll3(){
+				System.out.println("ddd");
+				List<Map<String,Object>> list=ser.queryAll3();
+				Map<String, Object> map = new HashMap<String, Object>();
+		        map.put("code", 200);
+		        map.put("msg", "");
+		        map.put("count",1000);
+		        map.put("data",list);
+				return map;
 			}
+
 			//查询考勤扣款标准表
 			@RequestMapping("/querycheck")
 			@ResponseBody
@@ -110,7 +122,13 @@ public class PayController {
 				 PageInfo<Map<String, Object>> pi2 = new PageInfo<>(list);
 				 return pi2;	
 			}
-			
+			//查询单条部门职务人员名称
+			@RequestMapping("/selectid")
+			@ResponseBody
+			public List<Map<String,Object>> selectid(@RequestBody int id){
+				List<Map<String,Object>> listpayid=ser.selectid(id);
+				return listpayid;
+			}
 			//修改薪资
 			@RequestMapping("/payupdate")
 			public void payupdate(Pay pay,HttpServletResponse response) throws IOException{

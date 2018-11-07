@@ -141,7 +141,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										<option value="4">无党派人士</option>
 										</slect></td>
 								<td nowrap class="col-md-2 control-label">健康状况:</td>
-								<td class="TableData"><input type="date"
+								<td class="TableData"><input type="text"
 									name="EMPLOYEE_HEALTH" class="form-control"
 									id="EMPLOYEE_HEALTH"></td>
 							</tr>

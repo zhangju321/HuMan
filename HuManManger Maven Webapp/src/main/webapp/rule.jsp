@@ -33,7 +33,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <div style="text-align: center">
-  <input type="button"  data-toggle="modal" data-target="#myModal"  class="em btn btn-default" value="增加排班"></th>
+  <input type="button"  data-toggle="modal" data-target="#myModal"  class="em btn btn-default" value="新建考勤统计规则">
  </div>
    <table border="1" class="table">   
      <thead>   

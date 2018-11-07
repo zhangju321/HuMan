@@ -11,7 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 import zj.entity.Staff_contract;
 import zj.entity.Staff_info;
@@ -25,9 +29,12 @@ public class Staff_contractController {
 	  //查询合同信息
     @RequestMapping("/selectcontract")
     @ResponseBody
-	public List<Map<String,Object>> selectcontract(){
+	public PageInfo<Map<String,Object>> selectcontract(@RequestParam(required = false, defaultValue = "1") Integer startPage,
+            @RequestParam(required = false, defaultValue = "2") Integer PageSize){
+    	PageHelper.startPage(startPage,PageSize);
 		List<Map<String,Object>> list=ser.selectcontract();
-		return list;
+    	PageInfo<Map<String,Object>> pi=new PageInfo<Map<String,Object>>(list);
+		return pi;
 	}
          //查询员工
          @RequestMapping("/selectstaffinfo")

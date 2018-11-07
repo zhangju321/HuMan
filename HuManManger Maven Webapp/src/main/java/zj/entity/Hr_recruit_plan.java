@@ -7,9 +7,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class Hr_recruit_plan {
     private int planNo;
+    private int departmentId;
+    private int positionId;
+    private Department department;
+    private Position position;
     private String planName;
-    private String recruitDept;
-    private String recruitPosition;
     private int planRecrNo;
     private String planDitch;
     private Double planBcws;
@@ -33,44 +35,41 @@ public class Hr_recruit_plan {
     private List<Hr_recruit_filter> filter;
     private List<Hr_recruit_requirements> requ;
     private List<Hr_recruit_recruitment> recru;
-    private Department depart;
-    private List<Hr_recruit_pool> hr_recruit_pool;
-	
-	public List<Hr_recruit_pool> getHr_recruit_pool() {
-		return hr_recruit_pool;
-	}
-	public void setHr_recruit_pool(List<Hr_recruit_pool> hr_recruit_pool) {
-		this.hr_recruit_pool = hr_recruit_pool;
-	}
-	public Department getDepart() {
-		return depart;
-	}
-	public void setDepart(Department depart) {
-		this.depart = depart;
-	}
 	public int getPlanNo() {
 		return planNo;
 	}
 	public void setPlanNo(int planNo) {
 		this.planNo = planNo;
 	}
+	public int getDepartmentId() {
+		return departmentId;
+	}
+	public void setDepartmentId(int departmentId) {
+		this.departmentId = departmentId;
+	}
+	public int getPositionId() {
+		return positionId;
+	}
+	public void setPositionId(int positionId) {
+		this.positionId = positionId;
+	}
+	public Department getDepartment() {
+		return department;
+	}
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+	public Position getPosition() {
+		return position;
+	}
+	public void setPosition(Position position) {
+		this.position = position;
+	}
 	public String getPlanName() {
 		return planName;
 	}
 	public void setPlanName(String planName) {
 		this.planName = planName;
-	}
-	public String getRecruitDept() {
-		return recruitDept;
-	}
-	public void setRecruitDept(String recruitDept) {
-		this.recruitDept = recruitDept;
-	}
-	public String getRecruitPosition() {
-		return recruitPosition;
-	}
-	public void setRecruitPosition(String recruitPosition) {
-		this.recruitPosition = recruitPosition;
 	}
 	public int getPlanRecrNo() {
 		return planRecrNo;

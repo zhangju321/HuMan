@@ -36,7 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<table class="table table-hover">
 
 				<thead>
-					<tr>
+					<tr class="warning">
 					<th>部门名称</th>	
 					<th>职务名称</th>
 					<th>人员名称</th>
@@ -66,7 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<table class="table table-striped">
 
 				<thead>
-					<tr>
+					<tr class="success">
 						 <th>迟到扣款标准(元)</th>
 						<th>早退扣款标准(元)</th>
 						<th>旷工扣款标准(元)</th>
@@ -101,8 +101,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<label for="firstname" class="col-sm-2 control-label">部门名称</label>
 				<div class="col-sm-3">
 						<input type="text" class="form-control" id="bname"
-							placeholder="部门名称">
-						<input type="hidden"  name="departmentId"  id="bid">
+							placeholder="部门名称" readonly="readonly">
+						<input type="hidden"   name="departmentId"  id="bid">
 					</div>
 				</div>
 				
@@ -110,7 +110,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<label for="firstname" class="col-sm-2 control-label">职务名称</label>
 					<div class="col-sm-3">
 						<input type="text" class="form-control" id="zname"
-							placeholder="职务编号">
+							placeholder="职务编号" readonly="readonly">
 							<input type="hidden" name="positionId" id="zid">
 					</div>
 				</div>
@@ -121,7 +121,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<label for="firstname" class="col-sm-2 control-label">人员名称</label>
 					<div class="col-sm-3">
 						<input type="text" class="form-control" id="rname"
-							placeholder="人员编号">
+							placeholder="人员编号" >
 							<input type="hidden" name="staff_id" id="rid">
 					</div>
 				</div>
@@ -142,7 +142,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<label for="lastname" class="col-sm-2 control-label">应交保险总额</label>
 					<div class="col-sm-3">
 						<input type="text" class="form-control" id="lastname"
-							placeholder="应交保险总额" name="insurance">
+							placeholder="应交保险总额" name="insurance" readonly="readonly">
 						
 					</div>
 					
@@ -152,16 +152,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<label for="lastname" class="col-sm-2 control-label">个人养老保险</label>
 					<div class="col-sm-3">
 						<input type="text" class="form-control" id="lastname1"
-							placeholder="个人养老保险" name="endowment_insurance">
+							placeholder="个人养老保险" name="endowment_insurance" readonly="readonly">
 					</div>
 					</div>
 					
 					
 					<div class="form-group">
-					<label for="lastname" class="col-sm-2 control-label">个人医疗保险</label>
+					<label for="lastname" class="col-sm-2 control-label">个人医疗保险</label >
 					<div class="col-sm-3">
 						<input type="text" class="form-control" id="lastname2"
-							placeholder="个人医疗保险" name="medical_insurance">
+							placeholder="个人医疗保险" name="medical_insurance" readonly="readonly">
 					</div>
 					</div>
 					
@@ -170,7 +170,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<label for="lastname" class="col-sm-2 control-label">个人生育保险</label>
 					<div class="col-sm-3">
 						<input type="text" class="form-control" id="lastname3"
-							placeholder="个人生育保险" name="birth_insurance">
+							placeholder="个人生育保险" name="birth_insurance" readonly="readonly">
 					</div>
 					</div>
 					
@@ -178,7 +178,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<label for="lastname" class="col-sm-2 control-label">个人失业保险</label>
 					<div class="col-sm-3">
 						<input type="text" class="form-control" id="lastname4"
-							placeholder="个人失业保险" name="unemployment_insurance">
+							placeholder="个人失业保险" name="unemployment_insurance" readonly="readonly">
 					</div>
 					</div>
 					
@@ -186,7 +186,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<label for="lastname" class="col-sm-2 control-label">个人工伤保险</label>
 					<div class="col-sm-3">
 						<input type="text" class="form-control" id="lastname5"
-							placeholder="个人工伤保险" name="injury_insurance">
+							placeholder="个人工伤保险" name="injury_insurance" readonly="readonly">
 					</div>
 					</div>
 					
@@ -194,7 +194,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<label for="lastname" class="col-sm-2 control-label">个人住房公积金</label>
 					<div class="col-sm-3">
 						<input type="text" class="form-control" id="lastname6"
-							placeholder="个人住房公积金" name="housing_fund">
+							placeholder="个人住房公积金" name="housing_fund" readonly="readonly">
 					</div>
 					</div>
 					
@@ -203,7 +203,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<label for="lastname" class="col-sm-2 control-label">个人保险扣款总额</label>
 					<div class="col-sm-3">
 						<input type="text" class="form-control" id="lastname_one"
-							placeholder="个人保险扣款总额" name="B_withhold">
+							placeholder="个人保险扣款总额" name="B_withhold"  readonly="readonly">
 					</div>
 					</div>
 					
@@ -212,7 +212,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<label for="lastname" class="col-sm-2 control-label">单位保险扣款总额</label>
 					<div class="col-sm-3">
 						<input type="text" class="form-control" id="lastname_men"
-							placeholder="单位保险扣款总额" name="D_withhold">
+							placeholder="单位保险扣款总额" name="D_withhold" readonly="readonly">
 					</div>
 					</div>
 					
@@ -221,7 +221,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<label for="lastname" class="col-sm-2 control-label">单位养老保险</label>
 					<div class="col-sm-3">
 						<input type="text" class="form-control" id="lastname_d1"
-							placeholder="单位养老保险" name="endowment_insurance_d">
+							placeholder="单位养老保险" name="endowment_insurance_d" readonly="readonly">
 					</div>
 					</div>
 					
@@ -229,7 +229,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<label for="lastname" class="col-sm-2 control-label">单位医疗保险</label>
 					<div class="col-sm-3">
 						<input type="text" class="form-control" id="lastname_d2"
-							placeholder="单位医疗保险" name="medical_insurance_d">
+							placeholder="单位医疗保险" name="medical_insurance_d" readonly="readonly">
 					</div>
 					</div>
 					
@@ -239,14 +239,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<label for="lastname" class="col-sm-2 control-label">单位生育保险</label>
 					<div class="col-sm-3">
 						<input type="text" class="form-control" id="lastname_d3"
-							placeholder="单位生育保险" name="birth_insurance_d">
+							placeholder="单位生育保险" name="birth_insurance_d" readonly="readonly">
 					</div>
 					</div>
 					<div class="form-group">
 					<label for="lastname" class="col-sm-2 control-label">单位失业保险</label>
 					<div class="col-sm-3">
 						<input type="text" class="form-control" id="lastname_d4"
-							placeholder="单位失业保险" name="unemployment_insurance_d">
+							placeholder="单位失业保险" name="unemployment_insurance_d" readonly="readonly">
 					</div>
 					</div>
 					
@@ -255,7 +255,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<label for="lastname" class="col-sm-2 control-label">单位工伤保险</label>
 					<div class="col-sm-3">
 						<input type="text" class="form-control" id="lastname_d5"
-							placeholder="单位工伤保险" name="injury_insurance_d">
+							placeholder="单位工伤保险" name="injury_insurance_d" readonly="readonly">
 					</div>
 					</div>
 					
@@ -264,7 +264,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<label for="lastname" class="col-sm-2 control-label">单位住房公积金</label>
 					<div class="col-sm-3">
 						<input type="text" class="form-control" id="lastname_d6"
-							placeholder="单位住房公积金" name="housing_fund_d">
+							placeholder="单位住房公积金" name="housing_fund_d" readonly="readonly">
 					</div>
 					</div>
 					
@@ -284,7 +284,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<label for="lastname" class="col-sm-2 control-label">奖金</label>
 					<div class="col-sm-3">
 						<input type="text" class="form-control" id="bonus"
-							placeholder="奖金" name="Bonus">
+							placeholder="奖金" name="Bonus" readonly="readonly">
 					</div>
 					</div>
 					
@@ -292,7 +292,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<label for="lastname" class="col-sm-2 control-label">考勤扣款总额</label>
 					<div class="col-sm-3">
 						<input type="text" class="form-control" id="kkze"
-							placeholder="考勤扣款总额" name="K_withhold">
+							placeholder="考勤扣款总额" name="K_withhold" readonly="readonly">
 					</div>
 					
 					</div>
@@ -302,10 +302,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<label for="lastname" class="col-sm-2 control-label">应发工资</label>
 					<div class="col-sm-3">
 						<input type="text" class="form-control" id="tax"
-							placeholder="应发工资" name="after_tax_salary">
+							placeholder="应发工资" name="after_tax_salary" readonly="readonly">
 					</div>
 						<input type="button" class="btn btn-default" value="计算应发工资"
-							onclick="bx2()">
+							onclick="bx2()"  >
 					</div>
 
 				<div class="form-group">
@@ -445,13 +445,18 @@ $(function () { $('#collapseFour').collapse({
 	var withhold=$(this).parent().parent().find("#withhold").html();//早退次数
 	var absent=$(this).parent().parent().find("#absent").html();//旷工次数
 //计算
- 	var kkze=early*10+withhold*10+absent*3;
+ 	var kkze=(early*20)+(withhold*15)+(absent*50);
  	alert("计算考勤总额为:"+kkze);
  	//将计算结果赋值到扣款总额的input框内
  	$("#kkze").val(kkze);
 	 			
 	 			
-	 			if(kkze>0){
+	 			if(early>3){
+	 			$("#bonus").val(0);
+	 			}else if(withhold>3){
+	 			$("#bonus").val(0);
+	 			
+	 			}else if(absent>0){
 	 			$("#bonus").val(0);
 	 			}else{
 	 			$("#bonus").val(200);
@@ -485,8 +490,13 @@ $(function () { $('#collapseFour').collapse({
 			data : $("#form1").serialize(), //数据类型不需要转化成json
 			dataType : 'text', //返回类型type
 			success : function(data) {
-				alert(data);
-				
+				if(data>0){
+					alert("添加成功");
+					location.reload();
+				}else{
+					alert("人员重复");
+					location.reload();
+				}
 			}
 		});
 	}

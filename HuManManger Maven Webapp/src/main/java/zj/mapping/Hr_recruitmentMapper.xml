@@ -37,18 +37,29 @@
           and filter.PASS_OR_NOT2=1
         </if>
    </select>
-
-  <!-- <insert id="" parameterType="" >
-    insert into hr_recruit_recruitment (RECRUITMENT_ID, PLAN_NO, ASSESSING_OFFICER, 
-      ASS_PASS_TIME, DEPARTMENT, TYPE, 
-      JOB_POSITION, PRESENT_POSITION, ON_BOARDING_TIME, 
-      STARTING_SALARY_TIME, REMARK, JOB_STATUS, 
-      APPLYER_NAME, EXPERT_ID)
-    values (#{recruitmentId,jdbcType=INTEGER}, #{planNo,jdbcType=INTEGER}, #{assessingOfficer,jdbcType=VARCHAR}, 
-      #{assPassTime,jdbcType=DATE}, #{department,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
-      #{jobPosition,jdbcType=VARCHAR}, #{presentPosition,jdbcType=VARCHAR}, #{onBoardingTime,jdbcType=DATE}, 
-      #{startingSalaryTime,jdbcType=DATE}, #{remark,jdbcType=VARCHAR}, #{jobStatus,jdbcType=VARCHAR}, 
-      #{applyerName,jdbcType=VARCHAR}, #{expertId,jdbcType=INTEGER})
-  </insert> -->
+    <!-- 添加 -->
+  <insert id="saveFilter" parameterType="zj.entity.Hr_recruit_filter" >
+	   insert into hr_recruit_filter
+       (
+         PLAN_NO,EMPLOYEE_NAME,POSITION,EMPLOYEE_MAJOR,EMPLOYEE_PHONE,
+         TRANSACTOR_STEP,STEP_FLAG,END_FLAG,NEXT_DATE_TIME,NEXT_TRANSA_STEP
+       ) 
+       values
+       (#{planNo},#{employeeName},#{position},#{employeeMajor},#{employeePhone},#{transactorStep},
+       #{stepFlag},#{endFlag},#{nextDateTime},#{nextTransaStep}
+       )
+  </insert>
+  <insert id="Save" parameterType="zj.entity.Hr_recruit_recruitment" >
+    insert into hr_recruit_recruitment (PLAN_NO, APPLYER_NAME,DEPARTMENT,
+     JOB_STATUS, ASS_PASS_TIME, TYPE, ASSESSING_OFFICER,
+     ON_BOARDING_TIME, STARTING_SALARY_TIME,REMARK
+     )
+    values (#{planNo,jdbcType=INTEGER}, #{applyerName,jdbcType=VARCHAR},
+       #{department,jdbcType=VARCHAR},#{jobStatus,jdbcType=VARCHAR}, 
+       #{assPassTime,jdbcType=DATE}, #{type,jdbcType=VARCHAR}, 
+       #{assessingOfficer,jdbcType=VARCHAR},#{onBoardingTime,jdbcType=DATE},
+       #{startingSalaryTime,jdbcType=DATE}, #{remark,jdbcType=VARCHAR}
+     )
+  </insert> 
   
 </mapper>

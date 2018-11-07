@@ -9,13 +9,13 @@
   <insert id="Save" parameterType="Hr_recruit_plan">
 	   insert into hr_recruit_plan
        (
-          PLAN_NAME,RECRUIT_DEPT,RECRUIT_POSITION,PLAN_RECR_NO,PLAN_DITCH,PLAN_BCWS,START_DATE,
+          PLAN_NAME,departmentId,positionId,PLAN_RECR_NO,PLAN_DITCH,PLAN_BCWS,START_DATE,
           END_DATE,WORK_DATE,SALARY_AREA,POSITION_REQUIRE,RECRUIT_DIRECTION,
           RECRUIT_REMARK,REGISTER_TIME,ATTACHMENT_NAME,PLAN_STATUS,APPROVE_PERSON,APPROVE_DATE
        ) 
        values
-       (#{planName}, #{recruitDept},
-         #{recruitPosition}, #{planRecrNo}, #{planDitch},#{planBcws},
+       (#{planName}, #{departmentId},
+         #{positionId}, #{planRecrNo}, #{planDitch},#{planBcws},
          #{startDate}, #{endDate},#{workDate}, #{salaryArea}, #{positionRequire},#{recruitDirection},
          #{recruitRemark},#{registerTime}, #{attachmentName}, #{planStatus},#{approvePerson},#{approveDate}
        )
@@ -27,7 +27,7 @@
    <!-- 修改 -->
    <update id="Update"  parameterType="Hr_recruit_plan" >
       update hr_recruit_plan set
-     PLAN_NAME=#{planName},RECRUIT_DEPT=#{recruitDept},RECRUIT_POSITION=#{recruitPosition},
+     PLAN_NAME=#{planName},departmentId=#{departmentId},positionId=#{positionId},
      PLAN_RECR_NO=#{planRecrNo},PLAN_DITCH=#{planDitch},PLAN_BCWS=#{planBcws},
      START_DATE=#{startDate},END_DATE=#{endDate},WORK_DATE=#{workDate},SALARY_AREA=#{salaryArea},
      POSITION_REQUIRE=#{positionRequire},RECRUIT_DIRECTION=#{recruitDirection},

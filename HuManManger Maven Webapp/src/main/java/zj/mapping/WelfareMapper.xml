@@ -37,4 +37,8 @@ left join staff_info s on w.staff_id=s.staff_id   where w.welfareid=#{id}
 update welfare set departmentId=#{departmentId},staff_id=#{staff_id},welfare_type=#{welfare_type},issue_date=#{issue_date},welfare_monery=#{welfare_monery},tax=#{tax},goods=#{goods},remark=#{remark} where welfareid=#{welfareid}
 </update>
 
+<!-- 查询人员id，判断是否重复 -->
+<select id="querystaffid" resultType="int" parameterType="int">
+select count(staff_id) from welfare where staff_id=#{id}
+</select>
 </mapper>

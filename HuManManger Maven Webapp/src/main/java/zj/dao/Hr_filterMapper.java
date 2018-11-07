@@ -14,4 +14,5 @@ public interface Hr_filterMapper {
 	public int oneUpdate(Hr_recruit_filter filter);
 	public int twoUpdate(Hr_recruit_filter filter);
 	public int Delete(int filterId);
+	public List<Map<String,Object>> FilterName();
 }

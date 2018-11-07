@@ -58,7 +58,6 @@
 				$("#tbody").empty();
 				for (var i = 0; i < data.length; i++) {
 					var obj = data[i];
-					alert(obj.EXPERT_ID);
 					var tr = "<tr>";
 					tr += "<td><input type='checkbox' ></td>";
 					tr += "<td style='display:none'>" + obj.EXPERT_ID + "</td>";
@@ -188,7 +187,7 @@
 				<th>联系电话</th>
 				<th>学历</th>
 				<th>专业</th>
-				<th>岗位</th>
+				<!-- <th>岗位</th> -->
 				<th>入库时间</th>
 			</tr>
 		</thead>

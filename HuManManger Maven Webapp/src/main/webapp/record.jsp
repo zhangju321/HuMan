@@ -19,11 +19,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-<link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap-theme.min.css">
-	<script src="resources/bootstrap/jquery-1.11.3.min.js"></script>
-	<script src="resources/bootstrap/js/bootstrap.min.js"></script>
-	<script src="resources/jquery.serialize.js"></script>
+<link rel="stylesheet" type="text/css" href="resource/js/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="resource/js/bootstrap/css/bootstrap-theme.min.css">
+	<script src="resource/jquery-1.11.3.min.js"></script>
+	<script src="resource/js/bootstrap/js/bootstrap.min.js"></script>
+	<script src="resource/jquery.serialize.js"></script>
 	
   </head>
   
@@ -31,9 +31,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        
     <form id="form1" method="post" class="form-horizontal">
       <div class="form-group">
-        <label for="departmentid" class="col-md-4 control-label">部门:</label>
+        <label for="departmentId" class="col-md-4 control-label">部门:</label>
          <div class="col-md-6">
-           <select id="depart" name="departmentid" >
+           <select id="depart" name="departmentId" >
                 <option selected>显示所有部门员工</option>
            </select>
          </div>
@@ -54,6 +54,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		<tbody id="tbody">   		
     		</tbody>
     	</table>
+    	<ul class="pager">
+		<li><button type="button" class="btn btn-default" id="shouye">首页</button></li>
+		<li><button type="button" class="btn btn-default" id="syy">上一页</button></li>
+		<li><button type="button" class="btn btn-default" id="xyy">下一页</button></li>
+		<li><button type="button" class="btn btn-default" id="weiye">尾页</button></li>
+		<li style="font-weight: lighter;">当前第<input type="text" id="currPage" style="height:35px;width:50px;border-radius:10px;text-align: center;"/>页</li>
+	</ul>
     </div>
     
     
@@ -118,6 +125,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		<tbody id="tbody4">   		
     		</tbody>
     	</table>
+    	
     </div>
     
 	</div>
@@ -128,18 +136,96 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </body>
 </html>
 <script>
+$(function(){
+    conFind(1);
+  });
+  function conFind(startPage){
+    $.ajax({
+       url:"staffInfo/queryStaff",
+       type:"post",
+       data : {
+				"startPage" : startPage
+			}, 
+       dataType:"json",
+       success:function(data){
+          $("#tbody").empty();
+          var ary = data.list;
+          for(var i=0;i<ary.length;i++){
+           var obj = ary[i];
+            var tr="<tr>";
+                 tr+="<td>"+obj.departmentName+"</td>";
+        			tr+="<td>"+obj.staff_Id+"</td>";
+        			tr+="<td>"+obj.staff_Name+"</td>";        			
+        			tr+="<td><button class='queryId btn btn-primary' id='"+obj.staff_Id+"' data-toggle='modal' data-target='#myModall'>详情</button></td>";          			      					        	  		     
+        			tr+="</tr>";
+        			$("#tbody").append(tr);
+          }
+          //当前页的值
+				$("#currPage").val(data.pageNum);
+				$("#weiye").click(function() {
+					var last = Math.ceil(data.total / data.pageSize);
+					conFind(last);
+				})
+				$("#currPage").blur(function() {
+					var last = Math.ceil(data.total / data.pageSize);
+					var curr = $("#currPage").val();
+					if(last<curr){
+					   $("#currPage").val(last);
+					   conFind(last);
+					}
+					if(curr<=0){
+					  $("#currPage").val(1);
+					   conFind(1);
+					}
+					 conFind(curr);
+				});
+				if (data.isFirstPage) {
+					$("#syy").attr("disabled", "disabled");
+					$("#shouye").attr("disabled", "disabled");
+				} else {
+					$("#syy").removeAttr("disabled", "disabled");
+					$("#shouye").removeAttr("disabled", "disabled");
+				}
+				if (data.isLastPage) {
+					$("#xyy").attr("disabled", "disabled");
+					$("#weiye").attr("disabled", "disabled");
+				} else {
+					$("#xyy").removeAttr("disabled", "disabled");
+					$("#weiye").removeAttr("disabled", "disabled");
+				}
+       }
+    });
+  };
+  	/* 按钮的赋值 */
+	$("#syy").click(function() {
+		var currPage = parseInt($("#currPage").val());
+		conFind(currPage - 1);
+	})
+	$("#xyy").click(function() {
+		var currPage = parseInt($("#currPage").val());
+		conFind(currPage + 1);
+	})
+	$("#shouye").click(function() {
+		conFind(1);
+	})
+
+
+
+
+
+
 
 	/* 根据下拉框选中的类型进行查询 */
 	$("#depart").bind("change",function(){
-            var departmentid = $(this).val();
-            godeptId(departmentid);
+            var departmentId = $(this).val();
+            godeptId(departmentId);
         });
-function godeptId(departmentid){
+function godeptId(departmentId){
      $.ajax({
 			url:"staffInfo/queryDepartId",
 			type : "post",			
         	data:{
-        		"departmentid" : departmentid,
+        		"departmentId" : departmentId,
         	},
        	 	dataType : "json",//返回的数据类型
         	success : function(data) {  						
@@ -147,7 +233,7 @@ function godeptId(departmentid){
         		for(var i=0;i<data.length;i++){
         			var obj=data[i];
         			var tr="<tr>"; 
-        			tr+="<td>"+data[i].departmentname+"</td>";
+        			tr+="<td>"+data[i].departmentName+"</td>";
         			tr+="<td>"+data[i].staff_Id+"</td>";
         			tr+="<td>"+data[i].staff_Name+"</td>";        			
         			tr+="<td><button class='queryId btn btn-primary' id='"+data[i].staff_Id+"' data-toggle='modal' data-target='#myModall'>记录</button></td>";          			      					        	  		     
@@ -158,7 +244,7 @@ function godeptId(departmentid){
       })
 
 }
- function goStaff(){
+/*  function goStaff(){
 		 	$.ajax({
         	url : "staffInfo/queryStaff",
         	type : "post",
@@ -170,7 +256,7 @@ function godeptId(departmentid){
         		for(var i=0;i<data.length;i++){
         			var obj=data[i];
         			var tr="<tr>"; 
-        			tr+="<td>"+data[i].departmentname+"</td>";
+        			tr+="<td>"+data[i].departmentName+"</td>";
         			tr+="<td>"+data[i].staff_Id+"</td>";
         			tr+="<td>"+data[i].staff_Name+"</td>";        			
         			tr+="<td><button class='queryId btn btn-primary' id='"+data[i].staff_Id+"' data-toggle='modal' data-target='#myModall'>详情</button></td>";          			      					        	  		     
@@ -179,10 +265,10 @@ function godeptId(departmentid){
         		}     
         	}
  		});
-		} 
+		}  */
  $(function(){
 		findDepart();
-		goStaff();
+		conFind();
 		})
 		
 	 function findDepart(){	
@@ -194,7 +280,7 @@ function godeptId(departmentid){
 		 async:true,
 		 success:function(data){
 		 for(var i=0;i<data.length;i++){
-		  $("#depart").append("<option value='"+data[i].departmentid+"'>"+data[i].departmentname+"</option>");
+		  $("#depart").append("<option value='"+data[i].departmentId+"'>"+data[i].departmentName+"</option>");
 		 	}
 		 	
 		 		
@@ -262,13 +348,13 @@ function godeptId(departmentid){
 	}) 
 	
 	$("#tbody").on("click",".queryId",function(){
-		 var staff_Id=this.id;
+		 var sta_Staff_Id=this.id;
 		
 		$.ajax({
 			url:"travel/queryStaff2",
 			type : "post",			
         	 data:{
-        		"staff_Id" : staff_Id,
+        		"sta_Staff_Id" : sta_Staff_Id,
         	}, 
        	 	dataType : "json",//返回的数据类型
         	success : function(data) {  
@@ -290,8 +376,8 @@ function godeptId(departmentid){
 		        	if(data[i].status_Name==2){
 		        		tr+="<td>驳回</td>";
 		        		}        			
-        			tr+="<td><button class='delete btn btn-primary' id='"+data[i].travel_Id+"' data-toggle='modal' data-target='#myModall'>详情</button></td>";          			      					        	  		     
-        			tr+="</tr>";
+/*         			tr+="<td><button class='delete btn btn-primary' id='"+data[i].travel_Id+"' data-toggle='modal' data-target='#myModall'>详情</button></td>";          			      					        	  		     
+ */        			tr+="</tr>";
         			$("#tbody3").append(tr);
         		}     
 				
@@ -299,13 +385,13 @@ function godeptId(departmentid){
 		})
 	})
 	$("#tbody").on("click",".queryId",function(){
-		 var staff_Id=this.id;
+		 var sta_Staff_Id=this.id;
 		
 		$.ajax({
 			url:"goOut/queryStaff3",
 			type : "post",			
         	 data:{
-        		"staff_Id" : staff_Id,
+        		"sta_Staff_Id" : sta_Staff_Id,
         	}, 
        	 	dataType : "json",//返回的数据类型
         	success : function(data) {  
@@ -327,8 +413,8 @@ function godeptId(departmentid){
 		        	if(data[i].status_Name==2){
 		        		tr+="<td>驳回</td>";
 		        		}        			
-        			tr+="<td><button class='delete btn btn-primary' id='"+data[i].staff_Id+"' data-toggle='modal' data-target='#myModall'>详情</button></td>";          			      					        	  		     
-        			tr+="</tr>";
+/*         			tr+="<td><button class='delete btn btn-primary' id='"+data[i].staff_Id+"' data-toggle='modal' data-target='#myModall'>详情</button></td>";          			      					        	  		     
+ */        			tr+="</tr>";
         			$("#tbody4").append(tr);
         		}     
 				

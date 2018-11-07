@@ -29,6 +29,7 @@ public List<Map<String,Object>> select(){
 @ResponseBody
 @RequestMapping("/planSave")
 public int plansave(Hr_recruit_plan plan){
+	System.out.println(plan);
 	return service.Save(plan);
 }
 /*¸ù¾İid²éÑ¯*/

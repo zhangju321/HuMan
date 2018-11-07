@@ -22,7 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css">
 <script
-	src="${pageContext.request.contextPath}/resources/bootstrap/jquery-1.11.3.min.js"></script>
+	src="${pageContext.request.contextPath}/resource/jquery-1.11.3.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 <%-- <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/demo.css">
@@ -34,7 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<table class="table table-hover">
 
 				<thead>
-					<tr>
+					<tr  class="warning">
 					<th>部门名称</th>	
 					<th>职务名称</th>
 					<th>人员名称</th>
@@ -134,7 +134,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<label for="firstname" class="col-sm-2 control-label">部门名称</label>
 					<div class="col-sm-3">
 						<input type="text" class="form-control" 
-							placeholder="请项目编号"  id="deparname" disabled="disabled">
+							placeholder="请项目编号"  id="deparname" readonly="readonly">
 							<input type="hidden"  name="departmentId"  id="deparid">
 					</div>
 				</div>
@@ -144,7 +144,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<label for="firstname" class="col-sm-2 control-label">人员名称</label>
 					<div class="col-sm-3">
 						<input type="text" class="form-control" 
-							placeholder="请项目编号" id="staffname" disabled="disabled">
+							placeholder="请项目编号" id="staffname" readonly="readonly">
 							<input type="hidden"  name="staff_id"  id="staffid">
 					</div>
 				</div>
@@ -154,7 +154,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<label for="firstname" class="col-sm-2 control-label">职务工资</label>
 					<div class="col-sm-3">
 						<input type="text" class="form-control" 
-							placeholder="请项目编号" name="tax_salary" id="tax">
+							placeholder="请项目编号" name="tax_salary" id="tax" >
 					</div>
 				</div>
 				
@@ -163,7 +163,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<label for="firstname" class="col-sm-2 control-label">保险总额</label>
 					<div class="col-sm-3">
 						<input type="text" class="form-control" 
-							placeholder="请项目编号" name="insurance" id="insur">
+							placeholder="请项目编号" name="insurance" id="insur" readonly="readonly">
 					</div>
 						<input type="button" class="btn btn-default" value="计算保险总额"
 							onclick="bx()">
@@ -184,7 +184,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<label for="firstname" class="col-sm-2 control-label">奖金</label>
 					<div class="col-sm-3">
 						<input type="text" class="form-control" 
-							placeholder="请项目编号" name="Bonus" id="bonus" disabled="disabled">
+							placeholder="请项目编号" name="Bonus" id="bonus" readonly="readonly">
 					</div>
 				</div>
 				
@@ -192,7 +192,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<label for="firstname" class="col-sm-2 control-label">考勤扣款总额</label>
 					<div class="col-sm-3">
 						<input type="text" class="form-control" 
-							placeholder="请项目编号" name="K_withhold" id="with" disabled="disabled">
+							placeholder="请项目编号" name="K_withhold" id="with" readonly="readonly">
 					</div>
 				</div>
 				
@@ -201,7 +201,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<label for="firstname" class="col-sm-2 control-label">应发工资</label>
 					<div class="col-sm-3">
 						<input type="text" class="form-control" 
-							placeholder="请项目编号" name="after_tax_salary" id="after_tax" disabled="disabled">
+							placeholder="应发工资" name="after_tax_salary" id="after_tax" readonly="readonly">
 					</div>
 					<input type="button" class="btn btn-default" value="计算应发工资"
 							onclick="bx2()">
@@ -238,12 +238,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	
 	
 	
-	function bx(){
-	  //获取职务工资  并将值加到修改的input内
-	    var tax=$("#tax").val();
-	    var insur=tax*0.08
-	    $("#insur").val(insur);
-	}
 		
 	//获取查询的列值,方便修改
 $(function(){
@@ -286,29 +280,61 @@ $(function(){
 	   //获取考勤扣款  并将值加到修改的input内
 	    var withhold=$(this).parent().parent().find("#withhold").html();
 	  $("#with").val(withhold);
-	   //获取应发工资  并将值加到修改的input内
-	    var tax=$(this).parent().parent().find("#tax_sala").html();
-	  $("#after_tax").val(tax);
+	   
 	  });
 	})
-	
+	//计算保险总额
+	function bx(){
+	  //获取职务工资  并将值加到修改的input内
+	    var tax=$("#tax").val();
+	    var insur=tax*0.08
+	    $("#insur").val(insur);
+	}
 	//计算应发工资
  function bx2() {
   		var yf1 = $("#tax").val(); //职务工资
-  		var num1 = parseInt(yf1);
+  		 var num1 = parseInt(yf1); 
   		var yf2 = $("#insur").val(); //个人保险扣款
-  		var num2 = parseInt(yf2);
+  		 var num2 = parseInt(yf2); 
   		var yf3 = $("#sub").val(); //津贴
-  		var num3 = parseInt(yf3);
+  		  var num3 = parseInt(yf3); 
   		var yf4 = $("#bonus").val(); //奖金
-  		var num4 = parseInt(yf4);
+  		  var num4 = parseInt(yf4);  
   		var yf5 = $("#with").val(); //考勤扣款
-  		var num5 = parseInt(yf5);
-  
+  	  var num5 = parseInt(yf5);  
+      
   		var yf = num1 - num2 + num3 + num4 - num5; //应发工资=职务工资-个人保险扣款+津贴+奖金-考勤扣款
   		$("#after_tax").val(yf);
+  		  if(yf5>30){
+	 			$("#bonus").val(0);
+	 			}else{
+	 			$("#bonus").val(200);
+	 			}
   	}
   	
+  	
+  	//单挑查询薪资各个总额详情
+  	
+  	/* $(function(){
+				$("#tbody").on("click",".update",function(){
+					var id=this.id;
+					
+					$.ajax({
+						url:"pay/selectid",
+						type:"post",
+						async:true,
+						contentType:"application/json;charset=utf-8",
+						data:JSON.stringify(id),
+						dataType: 'Json',
+						success:function(data){
+							
+							$("#project_id").val(data[0].project_id);
+							$("#project_name").val(data[0].project_name);
+							$("#project_type").val(data[0].project_type);
+						}
+					});
+				})
+			}) */
   		//修改
 			function update1(){
 				var obj=$("#form").serialize();
@@ -320,8 +346,8 @@ $(function(){
 					 data:obj,//数据类型不需要转化成json
 					dataType : 'text', //返回类型type
 					success : function(data) {
-						location.reload();
 						findAll();
+						location.reload();
 					}
 				});
 			}		
@@ -518,5 +544,18 @@ $(function(){
   $(function() {
 		findAll(1);
 	})
+		/* 按钮的赋值 */
+	$("#syy").click(function() {
+		var currPage = parseInt($("#currPage").val());
+		findAll(currPage - 1);
+	})
+	$("#xyy").click(function() {
+		var currPage = parseInt($("#currPage").val());
+		findAll(currPage + 1);
+	})
+	$("#shouye").click(function() {
+		findAll(1);
+	})
+	
   </script>
 </html>

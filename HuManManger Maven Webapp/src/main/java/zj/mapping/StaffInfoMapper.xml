@@ -3,7 +3,7 @@
 <mapper namespace="zj.dao.StaffInfoMapper" >
    <select id="queryStaff" resultType="java.util.Map">
     <!-- select * from StaffInfo -->
-    select d.departmentname,s.staff_Id,s.staff_Name from staff_info s left join department d on
+    select d.departmentName,s.staff_Id,s.staff_Name from staff_info s left join department d on
        s.departmentId=d.departmentId    
   </select>  
   
@@ -19,8 +19,8 @@
      select s.staff_Id,s.staff_Name from staff_Info s where staff_Id=#{staff_Id}
   </select> 
   <select id="queryDepartId" resultType="java.util.Map" parameterType="int">
-     select d.departmentname,s.staff_Id,s.staff_Name from staff_info s inner join department d on
-       s.departmentId=d.departmentId and s.departmentId=#{departmentid}    
+     select d.departmentName,s.staff_Id,s.staff_Name from staff_info s inner join department d on
+       s.departmentId=d.departmentId and s.departmentId=#{departmentId}    
   </select>
       
 </mapper>

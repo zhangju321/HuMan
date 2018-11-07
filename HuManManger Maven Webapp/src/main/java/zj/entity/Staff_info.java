@@ -41,7 +41,7 @@ public class Staff_info {
     private String REMARK;//备注
     private Integer ATTACHMENT_ID;//附件编号
     private String ATTACHMENT_NAME;//附件名称
-    private int roleid;
+    private int rolesId;
 
 	public Integer getDepartmentId() {
 		return departmentId;
@@ -255,11 +255,12 @@ public class Staff_info {
 	public void setATTACHMENT_NAME(String aTTACHMENT_NAME) {
 		ATTACHMENT_NAME = aTTACHMENT_NAME;
 	}
-	public int getRoleid() {
-		return roleid;
+	
+	public int getRolesId() {
+		return rolesId;
 	}
-	public void setRoleid(int roleid) {
-		this.roleid = roleid;
+	public void setRolesId(int rolesId) {
+		this.rolesId = rolesId;
 	}
 	public Integer getStaffId() {
 		return staffId;

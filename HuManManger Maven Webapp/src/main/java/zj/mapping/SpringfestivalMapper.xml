@@ -9,7 +9,7 @@
 </association>
 </resultMap>
  <select id="sfFind" resultMap="getDepart">
- select s.*,d.departmentName from springfestival s left join department d 
+ select s.*,d.departmentId,d.departmentName from springfestival s left join department d 
    on s.departmentId=d.departmentId order by s.sfId
  </select>
  <insert id="sfSave" parameterType="Springfestival">

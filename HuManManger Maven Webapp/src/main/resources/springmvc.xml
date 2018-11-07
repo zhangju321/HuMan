@@ -54,4 +54,5 @@
 	<mvc:resources location="/views/" mapping="/views/**"></mvc:resources>
 	<mvc:resources location="/layuiadmin/" mapping="/layuiadmin/**"></mvc:resources>
 	<mvc:resources location="/bootstrap-select/" mapping="/bootstrap-select/**"></mvc:resources>
+	<mvc:resources location="/zTree_v3/" mapping="/zTree_v3/**"></mvc:resources>
 </beans>

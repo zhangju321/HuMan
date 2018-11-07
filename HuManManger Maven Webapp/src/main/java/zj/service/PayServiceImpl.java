@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import zj.dao.PayDao;
 import zj.entity.hr_check;
 import zj.entity.Pay;
-import zj.entity.Staff_info;
+
 
 
 @Service
@@ -22,7 +22,13 @@ private PayDao dao;
 @Transactional
 public int paySave(Pay pay) {
 	// TODO Auto-generated method stub
-	return dao.paySave(pay);
+	int id=dao.querystaffid(pay.getStaff_id());
+	if(id>0){
+		return 0; 
+	}else{
+		int num=dao.paySave(pay);
+		return num;
+	}
 }
 	
 	@Override
@@ -82,7 +88,7 @@ public int paySave(Pay pay) {
 		return dao.payUpdate(pay);
 	}
 
-	@Override
+	@Transactional
 	public void payDelete(Pay pay) {
 		// TODO Auto-generated method stub
 		dao.payDelete(pay);
@@ -93,6 +99,16 @@ public int paySave(Pay pay) {
 		// TODO Auto-generated method stub
 		return dao.queryPayId(id);
 	}
+
+	@Override
+	public List<Map<String, Object>> selectid(int id) {
+		// TODO Auto-generated method stub
+		return dao.selectid(id);
+	}
+
+	
+
+	
 	
 
 	

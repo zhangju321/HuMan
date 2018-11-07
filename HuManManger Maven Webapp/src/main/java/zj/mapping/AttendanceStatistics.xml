@@ -23,13 +23,15 @@
 
   	<!-- 考勤统计 -->
 	<select id="selectas" resultType="map">
-		 select i.staff_id,i.STAFF_NAME,COUNT(t.travel_id) ct,count(v.vocation_id) cv,count(r.work_id) cr,count(o.out_id) co,
-		 t.*,v.*,r.*,o.*,sum(late) sl,SUM(rest) sr,SUM(absenteeism) sa,sum(work_unregistered) su,SUM(work_off) so
+		 select i.staff_id,i.STAFF_NAME,
+                count(t.travel_id) ct,COUNT(o.out_id) co,
+                sum(r.late) sl,SUM(r.rest) sr,
+                SUM(r.absenteeism) sa,sum(r.work_unregistered) su,SUM(r.work_off) so,
+                SUM(r.attendance_should) sas,SUM(r.attendance_actual) saa
          from staff_info i 
-         left JOIN travel t on i.staff_id=t.STAFF_ID
-         left join vocation v on i.staff_id=v.STAFF_ID
+         left JOIN travel t on i.staff_id=t.sta_staff_id
          left join work_register r on i.staff_id=r.staff_id
-         left join hr_go_out o on i.staff_id=o.STAFF_ID
+         left join hr_go_out o on i.staff_id=o.sta_staff_id
          group by i.staff_id,i.staff_name 
          order by i.staff_id asc
 	</select>

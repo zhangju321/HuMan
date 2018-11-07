@@ -31,9 +31,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      
   </head>
   
-  <body style="background-image: url(images/img.jpg)">
+  <body>
   <div style="text-align: center">
-  <input type="button"  data-toggle="modal" data-target="#myModal"  class="saveORUpdate btn btn-default" value="增加排班"></th>
+  <input type="button"  data-toggle="modal" data-target="#myModal"  class="saveORUpdate btn btn-default" value="新建班次"></th>
  </div>
    <table border="1" class="table">   
      <thead>   

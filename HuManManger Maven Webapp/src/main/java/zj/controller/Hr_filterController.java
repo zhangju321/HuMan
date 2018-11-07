@@ -63,4 +63,11 @@ public void twoSave(Hr_recruit_filter filter){
 public int planDelete(@RequestBody int filterId){
 	return service.Delete(filterId);
 }
+/*查询满足条件的人员*/
+@ResponseBody
+@RequestMapping("/filterName")
+public List<Map<String,Object>> FilterName(){
+	
+	return service.FilterName();
+}
 }

@@ -44,5 +44,10 @@ public class Hr_filterServiceImpl implements Hr_filterService {
 	public int twoUpdate(Hr_recruit_filter filter) {
 		return dao.twoUpdate(filter);
 	}
+	@Override
+	public List<Map<String, Object>> FilterName() {
+		// TODO Auto-generated method stub
+		return dao.FilterName();
+	}
 
 }

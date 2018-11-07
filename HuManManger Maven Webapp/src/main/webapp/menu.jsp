@@ -29,9 +29,9 @@
 <link rel="stylesheet" type="text/css"
 	href="resource/js/bootstrap/css/bootstrap-theme.min.css">
 <link rel="stylesheet" type="text/css"
-	href="resource/zTree_v3/css/zTreeStyle/zTreeStyle.css">
+	href="zTree_v3/css/zTreeStyle/zTreeStyle.css">
 <script
-	src="resource/zTree_v3/js/jquery.ztree.all.min.js"></script>
+	src="zTree_v3/js/jquery.ztree.all.min.js"></script>
 
 
 
@@ -100,7 +100,7 @@
 
 	function queryAllRoles(startPage) {
 		$.ajax({
-			url : "${pageContext.request.contextPath}/login/queryAllRoles",
+			url : "${pageContext.request.contextPath}/login/queryAllRoles",//login
 			type : "post",
 			data : {
 				"startPage" : startPage
@@ -227,10 +227,10 @@
 		zTree.expandAll(true);
 	// 展开全部节点
 	/* var treeObj = $.fn.zTree.getZTreeObj("tree");
-	treeObj.expandAll(true); */
+	treeObj.expandAll(true);  */
 	}
 	/* 异步加载无法展开tree 默认展开一级菜单 */
-	var firstAsyncSuccessFlag = 0;
+	 var firstAsyncSuccessFlag = 0;
 	function zTreeOnAsyncSuccess(event, treeId, msg) {
 		if (firstAsyncSuccessFlag == 0) {
 			try {
@@ -248,7 +248,7 @@
 				console.log(err.message);
 			}
 		}
-	}
+	} 
 
 	//保存修改后的权限数据
 	$("#saveRight").click(function() {

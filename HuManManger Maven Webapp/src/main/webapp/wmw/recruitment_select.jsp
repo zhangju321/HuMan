@@ -21,7 +21,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" type="text/css"href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css">
 <script	src="${pageContext.request.contextPath}/resource/jquery-1.11.3.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/demo.css">
 </head>
 <body>
 	 <p>招聘录用</p>

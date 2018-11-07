@@ -3,8 +3,8 @@
 <mapper namespace="zj.dao.Attend_scheduleMapper" >
 <!--   <resultMap type="map" id="getthree" autoMapping="true">
   <id property="id" column="id" />
-  <association property="ro" column="roleId" javaType="role" autoMapping="true">
-  <id property="roleId" column="roleId"></id>
+  <association property="ro" column="rolesId" javaType="role" autoMapping="true">
+  <id property="rolesId" column="rolesId"></id>
   </association>
   
   <association property="staff" column="staff_id" javaType="staff_info" autoMapping="true">
@@ -18,8 +18,8 @@
 	 </resultMap> -->
 	<!-- 表连接查询 -->
 	<!-- <select id="scheFind" resultMap="getthree">
-		select ache.*,r.roleId,d.departmentId,s.staff_id
-from Attend_schedule ache join role r on ache.roleId=r.roleId JOIN
+		select ache.*,r.rolesId,d.departmentId,s.staff_id
+from Attend_schedule ache join role r on ache.rolesId=r.rolesId JOIN
  department d ON d.departmentId=ache.departmentId join staff_info s on s.staff_id=ache.staff_id
   order by id asc
 	</select>  --> 
@@ -39,14 +39,14 @@ from Attend_schedule ache join roles r on ache.rolesId=r.rolesId JOIN
 	select * from staff_info
 	</select>
   <insert id="scheSave" parameterType="Attend_schedule">
-  insert into Attend_schedule(departmentId,roleId,staff_id,name,status,date_start,date_end) values(
-  #{departmentId},#{roleId},#{staff_id},#{name},#{status},#{date_start},#{date_end})
+  insert into Attend_schedule(departmentId,rolesId,staff_id,name,status,date_start,date_end) values(
+  #{departmentId},#{rolesId},#{staff_id},#{name},#{status},#{date_start},#{date_end})
   </insert>
   <delete id="scheDelete" parameterType="Attend_schedule">
   delete from Attend_schedule where id=#{id}
   </delete>
   <update id="scheUpdate" parameterType="Attend_schedule">
-  update Attend_schedule set departmentId=#{departmentId},roleId=#{roleId},staff_id=#{staff_id},name=#{name},
+  update Attend_schedule set departmentId=#{departmentId},rolesId=#{rolesId},staff_id=#{staff_id},name=#{name},
   status=#{status},date_start=#{date_start},date_end=#{date_end} where id=#{id}
   </update>
   <update id="updateState" parameterType="Attend_schedule">

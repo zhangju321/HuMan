@@ -321,17 +321,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					 $("#tbody").empty()
 					 for(var i=0;i<data.length;i++){
 					 	var obj=data[i];
-					 	alert(obj.staff_id);
+					 	var sex1=null;
+					 	if(obj.STAFF_SEX=='0'){
+					 	sex1="男"
+					 	}if(obj.STAFF_SEX=='1'){
+					 	sex1="女"
+					 	}
 	           			var tr="<tr>";
 	           			tr+="<td><input type='checkbox' ></td>";
 	           			tr+="<td>"+obj.STAFF_NAME+"</td>";
-		                tr+="<td>"+obj.rname+"</td>";
-		                tr+="<td>"+obj.STAFF_SEX+"</td>";
+		                tr+="<td>"+obj.rolesName+"</td>";
+		                tr+="<td>"+sex1+"</td>";
 		                tr+="<td>"+obj.STAFF_BIRTH+"</td>";
 		                tr+="<td>"+obj.STAFF_NATIONALITY+"</td>";
 		                tr+="<td>"+obj.STAFF_NATIVE_PLACE+"</td>";
-		                tr+="<td>"+obj.STAFF_POLITICAL_STATUS+"</td>"
-		                tr+="<td>"+obj.DATES_EMPLOYED+"</td>"
+		                tr+="<td>"+obj.STAFF_POLITICAL_STATUS+"</td>";
+		                tr+="<td>"+obj.DATES_EMPLOYED+"</td>";
 		                tr+="<td><input type='button' data-toggle='modal' data-target='#staffModal' title=" + obj.staff_id+ "  class='selId btn btn-default' value='修改'></td>";
 		                tr+="<td><input type='button' id='"+obj.staff_id+"' class='delete  btn btn-default' value='删除'></td>";
 		                tr+="</tr>";
@@ -353,7 +358,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						dataType: 'Json',
 						success:function(data){
 						    $("#departmentId").val(data[0].departmentId);
-						    $("#rolesId").val(data[0].rolesId);
+						    $("#rolesId").val(data[0].rolesName);
 						    $("#staffNo").val(data[0].STAFF_NO);
 							$("#staffName").val(data[0].STAFF_NAME);
 							$("#staffCardNo").val(data[0].STAFF_CARD_NO);
@@ -389,7 +394,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			/* 模态框修改 */
 	   function update(){
 			var obj=$("#form1").serialize();
-			alert(obj);
 		    $.ajax({
 		       url:"staff/staff_update",
         	    type:"post",

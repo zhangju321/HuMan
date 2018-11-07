@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="zj.dao.Hr_recruit_poolMapper" >
  	<select id="queryAll" resultType="Map">
- 		 	select hl.EXPERT_ID,h.PLAN_NAME,hl.EMPLOYEE_NAME,hl.EMPLOYEE_BIRTH,hl.EMPLOYEE_PHONE,hl.EMPLOYEE_HIGHEST_SCHOOL,hl.EMPLOYEE_MAJOR,hl.POSITION from hr_recruit_plan h join hr_recruit_pool hl on h.PLAN_No=hl.PLAN_No
+ 		 	select hl.EXPERT_ID,h.PLAN_NAME,hl.EMPLOYEE_NAME,hl.EMPLOYEE_BIRTH,hl.EMPLOYEE_PHONE,hl.EMPLOYEE_HIGHEST_SCHOOL,hl.EMPLOYEE_MAJOR,hl.POSITION,hl.RUKUTIME from hr_recruit_plan h join hr_recruit_pool hl on h.PLAN_No=hl.PLAN_No
  	</select>
  	<!-- 招聘计划 -->
  	<select id="queryplan" resultType="Map">

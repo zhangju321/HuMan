@@ -11,7 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 import zj.entity.Department;
 import zj.entity.Position;
@@ -27,9 +31,12 @@ public class Staff_leaveController {
     //查询离职表 
     @RequestMapping("/selectleave")
     @ResponseBody
-	public List<Map<String,Object>> selectleave(){
+	public PageInfo<Map<String,Object>> selectleave(@RequestParam(required = false, defaultValue = "1") Integer startPage,
+            @RequestParam(required = false, defaultValue = "2") Integer PageSize){
+    	PageHelper.startPage(startPage,PageSize);
 		List<Map<String,Object>> list=ser.selectleave();
-		return list;
+    	PageInfo<Map<String,Object>> pi=new PageInfo<Map<String,Object>>(list);
+		return pi;
 	}
     
     //查询在职员工

@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -42,7 +43,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<li class="layui-nav-item layui-hide-xs" lay-unselect><input
 						type="text" placeholder="搜索..." autocomplete="off"
 						class="layui-input layui-input-search" layadmin-event="serach"
-						lay-action="template/search.html?keywords="></li>
+						lay-action="index.jsp"></li>
 				</ul>
 				<ul class="layui-nav layui-layout-right"
 					lay-filter="layadmin-layout-right">
@@ -66,21 +67,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							class="layui-icon layui-icon-screen-full"></i>
 					</a></li>
 					<li class="layui-nav-item" lay-unselect><a href="javascript:;">
-							<cite>哈哈</cite>
+							<cite>${user.uname}</cite>
 					</a>
 						<dl class="layui-nav-child">
-							<dd layadmin-event="logout" style="text-align: center;">
-								<a>退出</a>
+							<dd  style="text-align: center;">
+								<a href="denglu.jsp">退出</a>
 							</dd>
 						</dl></li>
-
-					<li class="layui-nav-item layui-hide-xs" lay-unselect>
-					<a
-						href="javascript:;" layadmin-event="about"><i
-							class="layui-icon layui-icon-more-vertical"></i></a></li>
-					<li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm"
-						lay-unselect><a href="javascript:;" layadmin-event="more"><i
-							class="layui-icon layui-icon-more-vertical"></i></a></li>
 				</ul>
 			</div>
 
@@ -136,7 +129,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									</dl>
 								</dd>
 								<dd data-name="tabs" class="">
-									<a lay-href="component/tabs/index.html">招聘需求</a>
+									<a lay-href="/HuManManger/wmw/requirements_save.jsp">招聘需求</a>
 								</dd>
 								
 								
@@ -153,7 +146,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										
 									</dl>
 								</dd>
-								
+								<dd data-name="layer" class="">
+									<a href="javascript:;">人才录用<span class="layui-nav-more"></span></a>
+									<dl class="layui-nav-child">
+										 <dd data-name="list" class="">
+											<a lay-href="/HuManManger/wmw/recruitment_save.jsp" lay-text="layer 创建筛选">创建录用</a>
+										</dd>
+										<dd data-name="special-demo" class="">
+											<a lay-href="/HuManManger/wmw/recruitment_select.jsp"
+												lay-text="layer 办理筛选">录用管理</a>
+										</dd>
+									</dl>
+								</dd>
 								
 								
 								
@@ -168,7 +172,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<dd>
 									<a lay-href="attend.jsp">考勤登记/审批</a>
 								</dd>
-								
+								<dd>
+									<a lay-href="record.jsp">考勤记录</a>
+								</dd>
 								<dd>
 									<a lay-href="template/caller.html">上下班打卡</a>
 								</dd>
@@ -183,16 +189,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</a>
 						<dl class="layui-nav-child">
 								<dd>
-									<a lay-href="template/personalpage.html">福利项目设置</a>
+									<a lay-href="welf.jsp">福利项目设置</a>
 								</dd>
 								<dd>
-									<a lay-href="template/addresslist.html">薪资基数设置</a>
+									<a lay-href="test.jsp">薪资基数设置</a>
 								</dd>
 								<dd>
-									<a lay-href="template/caller.html">薪资基数操作</a>
+									<a lay-href="querypay.jsp">薪资基数操作</a>
 								</dd>
 								<dd>
-									<a lay-href="template/caller.html">薪资报表</a>
+									<a lay-href="after_tax_ty.jsp">薪资报表</a>
 								</dd>
 							</dl></li>
 						<li data-name="senior" class="layui-nav-item"><a
@@ -201,10 +207,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</a>
 							<dl class="layui-nav-child">
 								<dd>
-									<a lay-href="config.jsp">排班管理</a>
+									<a lay-href="config.jsp">班次管理</a>
 								</dd>
 								<dd>
-									<a lay-href="schedule.jsp">班次管理</a>
+									<a lay-href="schedule.jsp">排班管理</a>
 								</dd>
 								<dd>
 									<a lay-href="rule.jsp">考勤统计规则</a>
@@ -219,14 +225,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</a>
 							<dl class="layui-nav-child">
 								<dd>
-									<a lay-href="user/user/list.html">权限1</a>
+									<a lay-href="roles.jsp">角色管理</a>
 								</dd>
 								<dd>
-									<a lay-href="user/administrators/list.html">权限2</a>
+									<a lay-href="menu.jsp">分配权限</a>
 								</dd>
-								<dd>
-									<a lay-href="user/administrators/role.html">权限3</a>
-								</dd>
+								
 							</dl></li>
 						<li data-name="set" class="layui-nav-item"><a
 							href="javascript:;" lay-tips="设置" lay-direction="2"> <i
@@ -299,7 +303,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<!-- 主体内容 -->
 			<div class="layui-body" id="LAY_app_body">
 				<div class="layadmin-tabsbody-item layui-show">
-					<iframe src="attend.jsp" frameborder="0"
+					<iframe src="roles.jsp" frameborder="0"
 						class="layadmin-iframe"></iframe>
 
 				</div>

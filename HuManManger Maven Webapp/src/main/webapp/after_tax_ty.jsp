@@ -1,145 +1,75 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html>
-  <head>
-    <base href="<%=basePath%>">
-    
-    <title>My JSP 'after_tax_ty.jsp' starting page</title>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css">
-<script
-	src="${pageContext.request.contextPath}/resources/bootstrap/jquery-1.11.3.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/demo.css">
-  </head>
-  
-  <body>
+<head>
+  <meta charset="utf-8">
+  <title>layui</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="resource/layui/css/layui.css"  media="all">
+  <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->          
+<script src="resource/layui/layui.js" charset="utf-8"></script>
+<script src="resource/layui/layui.all.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 --> 
+</head>
+<body>
+<h2>薪资统计</h2>
+<table class="layui-hide" id="test" lay-filter="test"></table>
+              
 
-	<div class="row clearfix">
-		<div class="col-md-12 column">
-  	<table  class="table table-bordered">
- 
-				<thead>
-				<caption>员工薪资福利报表</caption>
-					<tr class="success">
-					   <th>部门名</th>
-						<th>职务名</th>
-						<th>员工名</th>
-						<th>职务工资</th>
-						<th>奖金</th>
-						<th>津贴</th>	
-						<th>迟到次数</th>
-						<th>早退次数</th>
-						<th>旷工次数</th>
-						<th>考勤扣款总额(元)</th>
-						<th>个人养老保险(元)</th>
-						<th>个人医疗保险(元)</th>
-						<th>个人生育保险(元)</th>
-						<th>个人失业保险(元)</th>
-						<th>个人工伤保险(元)</th>
-						<th>个人住房公积金(元)</th>
-						<th>个人保险扣款总额(元)</th>
-						<th>单位养老保险(元)</th>
-						<th>单位医疗保险(元)</th>
-						<th>单位生育保险(元)</th>
-						<th>单位失业保险(元)</th>
-						<th>单位工伤保险(元)</th>
-						<th>单位住房公积金(元)</th>
-						<th>单位保险扣款总额(元)</th>
-						<th>保险缴费总额(元)</th>
-						<th>应发工资(元)</th>
-						<th>福利项目名</th>
-						<th>福利(金额/元)</th>
-						<th>福利(物品)</th>
-						<!-- <th>福利活动时间</th> -->
-						<th>备注</th>
-					</tr>
-				
-				<tbody id="tbody">
 
-				</tbody>
-				</thead>
-			</table>
-			<div class="form-group">
-		<input type="file" id="inputfile">
-	</div>
-  </div>
-  </div>
+<script>
+layui.use('table', function(){
+  var table = layui.table;
+  table.render({
+    elem: '#test'
+    ,url:'pay/queryAll3'
+    ,toolbar: true
+    ,title: '用户数据表'
+    ,totalRow: true
+    ,cols: [[
+      {field:'departmentName', title:'部门户名', width:120, edit: 'text'}
+      ,{field:'positionName', title:'职务名', width:150, edit: 'text'}
+      ,{field:'STAFF_NAME', title:'人员名', width:150,}
+      ,{field:'tax_salary', title:'职务工资', width:150,  sort: true ,totalRow: true}
+      ,{field:'Bonus', title:'奖金', width:100, sort: true, totalRow: true}
+      ,{field:'subvention', title:'津贴',width:100,totalRow: true, sort: true}
+      ,{field:'late', title:'迟到次数', width:120, sort: true}
+      ,{field:'early_retreat', title:'早退次数', width:120, sort: true}
+      ,{field:'absenteeism', title:'旷工次数', width:120, sort: true}
+      
+       ,{field:'K_withhold', title:'考勤扣款总额(元)', width:160, edit: 'text',totalRow: true, sort: true}
+      ,{field:'endowment_insurance', title:'个人养老保险(元)', width:160, edit: 'text',totalRow: true, sort: true}
+      ,{field:'medical_insurance', title:'个人医疗保险(元)', width:160,  totalRow: true, sort: true}
+      ,{field:'birth_insurance', title:'个人生育保险(元)', width:160, edit: 'text', sort: true,totalRow: true}
+      ,{field:'unemployment_insurance', title:'个人失业保险(元)', width:160, sort: true, totalRow: true}
+      ,{field:'injury_insurance', title:'个人工伤保险(元)',totalRow: true, sort: true, width:160}
+      ,{field:'housing_fund', title:'个人住房公积金(元)', width:180,totalRow: true, sort: true}
+      ,{field:'B_withhold', title:'个人保险扣款总额(元)', width:190,totalRow: true, sort: true}
+      ,{field:'endowment_insurance_d', title:'单位养老保险(元)', width:160, sort: true}
+      
+      
+      ,{field:'medical_insurance_d', title:'单位医疗保险(元)', width:160, edit: 'text',totalRow: true, sort: true}
+      ,{field:'birth_insurance_d', title:'单位生育保险(元)', width:160, edit: 'text',totalRow: true, sort: true}
+      ,{field:'unemployment_insurance_d', title:'单位失业保险(元)', width:160, sort: true, totalRow: true}
+      ,{field:'injury_insurance_d', title:'单位工伤保险(元)', width:160, edit: 'text', sort: true,totalRow: true}
+      ,{field:'housing_fund_d', title:'单位住房公积金(元)', width:180, sort: true, totalRow: true}
+      ,{field:'D_withhold', title:'单位保险扣款总额(元)',width:190,totalRow: true, sort: true}
+      ,{field:'insurance', title:'保险缴费总额(元)', width:180,totalRow: true, sort: true}
+      ,{field:'after_tax_salary', title:'应发工资(元)', width:150,totalRow: true, sort: true}
+      ,{field:'welfare_type', title:'福利项目名', width:120}
+      
+      ,{field:'welfare_monery', title:'福利(金额/元)', width:150,totalRow: true, sort: true}
+      ,{field:'goods', title:'福利(物品)', width:120}
+      ,{field:'remark', title:'备注', width:120} 
+    ]]
+    ,page: false
+    ,response: {
+      statusCode: 200 //重新规定成功的状态码为 200，table 组件默认为 0
+    }
+  });
+});
+</script>
 
-  
-  
-  
-  
-  </body>
-  <script>
-	 function findAll() {
-		 
-		$.ajax({
-			url : "pay/queryAll3",
-			type : "post",
-			async : true,
-			dataType : 'Json',
-			success : function(data) {
-				
-
-				$("#tbody").html("");
-				for (var i = 0; i < data.length; i++) {
-					var obj = data[i];
-					var tr = "<tr>";
-					tr += "<td>" + obj.departmentName + "</td>";
-					tr += "<td>" + obj.positionName + "</td>";
-					tr += "<td>" + obj.STAFF_NAME + "</td>";
-					tr += "<td>" + obj.tax_salary + "</td>";
-					tr += "<td>" + obj.Bonus + "</td>";
-					tr += "<td>" + obj.subvention + "</td>";
-					tr += "<td>" + obj.late + "</td>";
-					tr += "<td>" + obj.early_retreat + "</td>";
-					tr += "<td>" + obj.absenteeism + "</td>";
-					tr += "<td>" + obj.K_withhold + "</td>";
-					tr += "<td>" + obj.endowment_insurance + "</td>";//个人养老
-					tr += "<td>" + obj.medical_insurance + "</td>";//个人医疗
-					tr += "<td>" + obj.birth_insurance + "</td>";//个人生育
-					tr += "<td>" + obj.unemployment_insurance + "</td>";//个人失业
-					tr += "<td>" + obj.injury_insurance + "</td>";//个人工伤
-					tr += "<td>" + obj.housing_fund + "</td>";//个人住房
-					tr += "<td>" + obj.B_withhold + "</td>";//个人总额
-					tr += "<td>" + obj.endowment_insurance_d + "</td>";
-					tr += "<td>" + obj.medical_insurance_d + "</td>";
-					tr += "<td>" + obj.birth_insurance_d + "</td>";
-					tr += "<td>" + obj.unemployment_insurance_d + "</td>";
-					tr += "<td>" + obj.injury_insurance_d + "</td>";
-					tr += "<td>" + obj.housing_fund_d + "</td>";
-					tr += "<td>" + obj.D_withhold + "</td>";
-					tr += "<td>" + obj.insurance + "</td>";//保险总额
-					tr += "<td>" + obj.after_tax_salary + "</td>";//应发工资
-					tr += "<td>" + obj.welfare_type + "</td>";//福利项目
-					tr += "<td>" + obj.welfare_monery + "</td>";//金额
-					tr += "<td>" + obj.goods + "</td>";//物品
-					tr += "<td>" + obj.remark + "</td>";//备注
-					tr += "</tr>";
-					$("#tbody").append(tr);
-					
-				}
-			}
-		});
-	}
-
-	$(function() {
-		findAll();
-	}) 
-	</script>
+</body>
 </html>

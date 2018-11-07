@@ -32,9 +32,9 @@ public class StaffInfoServiceImpl implements StaffInfoService {
 	}*/
 
 	@Override
-	public List<Map> queryDepartId(int departmentid) {
+	public List<Map> queryDepartId(int departmentId) {
 		// TODO Auto-generated method stub
-		return smapper.queryDepartId(departmentid);
+		return smapper.queryDepartId(departmentId);
 	}
 
 	@Override

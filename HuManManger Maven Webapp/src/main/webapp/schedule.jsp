@@ -30,6 +30,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
+  <div style="text-align: center">
+  <input type="button"  data-toggle="modal" data-target="#myModal"  class="em btn btn-default" value="新建排班">
+ </div>
    <table border="1" class="table">
      <thead>
        <tr class="success">
@@ -41,9 +44,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          <th>是/否</th>
          <th>排班开始日期</th>
          <th>排班结束日期</th>
-         
-         <th><input type="button"  data-toggle="modal" data-target="#myModal"  class="aa btn btn-default" value="添加"></th>
-       </tr>
+         <th></th>
+         <th></th>
+         <th></th>
+                </tr>
      </thead>
      <tbody id="tbody">
      
@@ -111,7 +115,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="form-group">
 								<label for="description" class="col-sm-2 control-label">是/否:</label>
 								<div class="col-sm-4">
-								<input type="radio" id="status" name="status" value="1" checked="checked">是
+								<input type="radio" id="status" name="status" value="1" >是
 								<input type="radio" id="status" name="status" value="2" >否
 								</div>
 							</div>
@@ -269,7 +273,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
    $(document).on("click","#saveOrUpdate",function(){
      var obj=$("#file1").serializeObject();//将表单数据转换json对象
-     alert(JSON.stringify(obj));
+     
      $.ajax({
        url:"attend_schedule/saveOrUpdate",
        type:"post",

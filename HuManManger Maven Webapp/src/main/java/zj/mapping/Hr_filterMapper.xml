@@ -18,7 +18,7 @@
      select 
        filter.*,plan.PLAN_NAME
      from
-       hr_recruit_filter filter LEFT JOIN hr_recruit_plan plan on filter.PLAN_NO=plan.PLAN_NO
+       hr_recruit_filter filter LEFT JOIN hr_recruit_plan plan on filter.PLAN_NO=plan.PLAN_NO where FILTER_ID &lt;&gt; 4
    </select>
    <!-- 根据id查询 -->
    <select id="selectId" resultType="Map" parameterType="int">
@@ -138,4 +138,12 @@
         </set>
         where FILTER_ID=#{filterId}
    </update>
+    
+     <!-- 查询 -->
+   <select id="FilterName" resultType="Map" >
+      select filter.EMPLOYEE_NAME,plan.PLAN_NO,plan.PLAN_NAME,filter.POSITION from hr_recruit_filter filter left JOIN hr_recruit_plan plan on filter.PLAN_NO=plan.PLAN_NO
+         where STEP_FLAG=1 and END_FLAG=2 and PASS_OR_NOT1=1 union ALL
+      select filter.EMPLOYEE_NAME,plan.PLAN_NO,plan.PLAN_NAME,filter.POSITION from hr_recruit_filter filter left JOIN hr_recruit_plan plan on filter.PLAN_NO=plan.PLAN_NO
+         where STEP_FLAG=2 and END_FLAG=2 and PASS_OR_NOT2=1
+   </select>
 </mapper>

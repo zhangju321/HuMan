@@ -70,6 +70,13 @@
 
 		</tbody>
 	</table>
+	<ul class="pager">
+		<li><button type="button" class="btn btn-default" id="shouye">首页</button></li>
+		<li><button type="button" class="btn btn-default" id="syy">上一页</button></li>
+		<li><button type="button" class="btn btn-default" id="xyy">下一页</button></li>
+		<li><button type="button" class="btn btn-default" id="weiye">尾页</button></li>
+		<li style="font-weight: lighter;">当前第<input type="text" id="currPage" style="height:35px;width:50px;border-radius:10px;text-align: center;"/>页</li>
+	</ul>
 	<!-- 模态框弹出录入内容 -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 		aria-labelledby="modalTitle1" aria-hidden="true">
@@ -250,16 +257,20 @@
 		selectdepartment();
 	});
 
-	function selectRein() {
+	function selectRein(startPage) {
 		
 		$.ajax({
 			url : "Rein/selectRein",
 			type : "post",
+			data : {
+				"startPage" : startPage
+			},
 			dataType : "json",
 			success : function(data) {
+					var list=data.list;
 				$("#tbody").empty();
-				for (var i = 0; i < data.length; i++) {
-					var obj = data[i];
+				for (var i = 0; i < list.length; i++) {
+					var obj = list[i];
 					//在职状态
                     var status=null;
                       if(obj.WORK_STATUS=='1'){
@@ -310,9 +321,56 @@
 					tr += "</tr>";
 					$("#tbody").append(tr);
 				}
-			}
-		});
-	}
+			//当前页的值
+				$("#currPage").val(data.pageNum);
+				$("#weiye").click(function() {
+					var last = Math.ceil(data.total / data.pageSize);
+					selectRein(last);
+				})
+				$("#currPage").blur(function() {
+					var last = Math.ceil(data.total / data.pageSize);
+					var curr = $("#currPage").val();
+					if(last<curr){
+					   $("#currPage").val(last);
+					   selectRein(last);
+					}
+					if(curr<=0){
+					  $("#currPage").val(1);
+					   selectRein(1);
+					}
+					 selectRein(curr);
+				});
+				
+				if (data.isFirstPage) {
+					$("#syy").attr("disabled", "disabled");
+					$("#shouye").attr("disabled", "disabled");
+				} else {
+					$("#syy").removeAttr("disabled", "disabled");
+					$("#shouye").removeAttr("disabled", "disabled");
+				}
+				if (data.isLastPage) {
+					$("#xyy").attr("disabled", "disabled");
+					$("#weiye").attr("disabled", "disabled");
+				} else {
+					$("#xyy").removeAttr("disabled", "disabled");
+					$("#weiye").removeAttr("disabled", "disabled");
+				}
+       }
+    });
+  }
+  /* 按钮的赋值 */
+	$("#syy").click(function() {
+		var currPage = parseInt($("#currPage").val());
+		selectRein(currPage - 1);
+	})
+	$("#xyy").click(function() {
+		var currPage = parseInt($("#currPage").val());
+		selectRein(currPage + 1);
+	})
+	$("#shouye").click(function() {
+		selectRein(1);
+	})
+	
 	/* 职务 */
 	 function selectposition(){
      $.ajax({

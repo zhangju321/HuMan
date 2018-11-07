@@ -52,14 +52,15 @@ public class Hr_recruit_pool {
     private String EMPLOYEE_AGE;//年龄 
     private String WHETHER_BY_SCREENING;//是否通过筛  
     private String RECRU_CHANNEL;//招聘渠道
-    private String RUKUTIME;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date RUKUTIME;//入库时间
     private Hr_recruit_plan hrreplan;
     
 	
-	public String getRUKUTIME() {
+	public Date getRUKUTIME() {
 		return RUKUTIME;
 	}
-	public void setRUKUTIME(String rUKUTIME) {
+	public void setRUKUTIME(Date rUKUTIME) {
 		RUKUTIME = rUKUTIME;
 	}
 	public Integer getEXPERT_ID() {

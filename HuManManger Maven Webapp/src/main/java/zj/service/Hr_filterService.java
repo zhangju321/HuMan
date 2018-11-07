@@ -13,5 +13,5 @@ public interface Hr_filterService {
     public int Delete(int filterId);
     public int oneUpdate(Hr_recruit_filter filter);
     public int twoUpdate(Hr_recruit_filter filter);
-
+    public List<Map<String,Object>> FilterName();
 }

@@ -21,7 +21,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" type="text/css"href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css">
 <script	src="${pageContext.request.contextPath}/resource/jquery-1.11.3.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/demo.css">
 </head>
 <body>     
 
@@ -65,13 +64,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</td>
 							<td nowrap class="col-md-4 control-label" style="width: 20%">招聘部门:</td>
 							<td class="TableData" style="width: 20%">
-							    <input type="text" name="recruitDept" class="form-control" id="RECRUIT_DEPT">
+							    <input type="text" name="departmentId" class="form-control" id="RECRUIT_DEPT">
 							</td>
 						</tr>
 						<tr>
 							<td nowrap class="col-md-2 control-label" style="width: 20%">招聘岗位:</td>
 							<td class="TableData">
-							   <input type="text" name="recruitPosition" class="form-control"id="RECRUIT_POSITION">
+							   <input type="text" name="positionId" class="form-control"id="RECRUIT_POSITION">
 							</td>
 							<td nowrap class="col-md-2 control-label">招聘人数:</td>
 							<td class="TableData">
@@ -210,8 +209,8 @@ function queryAll(){
 						success:function(data){
 						    $("#PLAN_NO").val(data[0].PLAN_NO);
 							$("#PLAN_NAME").val(data[0].PLAN_NAME);
-							$("#RECRUIT_DEPT").val(data[0].RECRUIT_DEPT);
-							$("#RECRUIT_POSITION").val(data[0].RECRUIT_POSITION);
+							$("#departmentId").val(data[0].departmentId);
+							$("#positionId").val(data[0].positionId);
 							$("#PLAN_RECR_NO").val(data[0].PLAN_RECR_NO);
 							$("#PLAN_DITCH option[value='"+data[0].PLAN_DITCH+"']").attr("selected", true);
 							$("#PLAN_BCWS").val(data[0].PLAN_BCWS);
@@ -270,7 +269,7 @@ function queryAll(){
 						data:JSON.stringify(id),
 						dataType: 'Json',
 						success:function(data){
-						
+						  
 						}
 					});
 				})

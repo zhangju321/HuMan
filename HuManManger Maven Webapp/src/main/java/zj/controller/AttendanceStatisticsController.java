@@ -7,8 +7,11 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 import zj.service.AttendanceStatisticsService;
 
@@ -21,9 +24,12 @@ public class AttendanceStatisticsController {
     //查询考勤统计 
     @RequestMapping("/selectas")
     @ResponseBody
-	public List<Map<String,Object>> selectas(){
+	public PageInfo<Map<String,Object>> selectas(@RequestParam(required = false, defaultValue = "1") Integer startPage,
+            @RequestParam(required = false, defaultValue = "2") Integer PageSize){
+    	PageHelper.startPage(startPage,PageSize);
 		List<Map<String,Object>> list=ser.selectas();
-		return list;
+    	PageInfo<Map<String,Object>> pi=new PageInfo<Map<String,Object>>(list);
+		return pi;
 	}
     //查询出差
     @RequestMapping("/selecttra")
