@@ -3,13 +3,15 @@ package zj.entity;
 public class Springfestival {
     private Integer sfId;
 
-    private Integer departmentId;
+    /*private int departmentId;*/
 
     private String sfName;
 
     private String sfTime;
 
     private String sfTimeEnd;
+    
+    private String departId;
 
 	public Integer getSfId() {
 		return sfId;
@@ -19,12 +21,22 @@ public class Springfestival {
 		this.sfId = sfId;
 	}
 
-	public Integer getDepartmentId() {
+	
+
+	/*public int getDepartmentId() {
 		return departmentId;
 	}
 
-	public void setDepartmentId(Integer departmentId) {
+	public void setDepartmentId(int departmentId) {
 		this.departmentId = departmentId;
+	}*/
+
+	public String getDepartId() {
+		return departId;
+	}
+
+	public void setDepartId(String departId) {
+		this.departId = departId;
 	}
 
 	public String getSfName() {

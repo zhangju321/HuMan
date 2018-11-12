@@ -11,7 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 import zj.entity.Staff_info;
 import zj.entity.Travel;
@@ -26,26 +30,32 @@ public class TravelController {
 	 
 	 @RequestMapping("/queryAll")
 	 @ResponseBody
-	 public List<Map> queryAll(){
-		  List<Map> vo=tser.queryAll();
-		  return vo;	  
-	 }
+	 public PageInfo<Map> queryAll(@RequestParam(required = false, defaultValue = "1") Integer startPage){
+		 PageHelper.startPage(startPage, 5);
+		 List<Map> list=tser.queryAll();
+		 PageInfo<Map> tr = new PageInfo<>(list);
+		 return tr;
+	}	
 	 @RequestMapping("/findAll")
 	 @ResponseBody
 	 public List<Staff_info> findAll(){
 		  List<Staff_info> lists=tser.findAll();
 		  return lists;	  
 	 }
-	 @RequestMapping("/queryById")
+	 @RequestMapping("/queryDetails")
 	 @ResponseBody
-		public Travel queryById(int travel_Id){
+	 public List<Map<String, Object>> queryDetails(int travel_Id){
+		 List<Map<String, Object>> map=tser.queryDetails(travel_Id);
+	             return map;			  
+		 }
+		/*public Travel queryById(int travel_Id){
 		 Travel tra=tser.queryById(travel_Id);
 	             return tra;			  
-		 }
+		 }*/
 	 @RequestMapping("/queryStaff2")
 	 @ResponseBody
-		public List<Map> queryStaff2(int staff_Id){
-		 List<Map> fo=tser.queryStaff2(staff_Id);
+		public List<Map> queryStaff2(int sta_Staff_Id){
+		 List<Map> fo=tser.queryStaff2(sta_Staff_Id);
 	             return fo;			  
 		 }
 	 @RequestMapping("/save")
@@ -72,5 +82,11 @@ public class TravelController {
 			PrintWriter out=response.getWriter();
 			System.out.println(statu.getTravel_Id());
 			tser.updateStatu2(statu);			  
+		 }
+	 @RequestMapping("/overrule")
+	 @ResponseBody
+		public Travel overrule(int travel_Id){
+		 Travel tral=tser.overrule(travel_Id);
+	             return tral;			  
 		 }
 }

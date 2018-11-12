@@ -21,10 +21,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	-->
 	<link rel="stylesheet" type="text/css"href="${pageContext.request.contextPath}/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css"href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css">
-    <script	src="${pageContext.request.contextPath}/resource/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-1.11.3.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/demo.css">
-
   </head>
   
   <body>
@@ -52,31 +50,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <tr>
       <td nowrap class="col-md-2 control-label" style="width: 20%">工号:</td>
       <td class="TableData">
-         <input type="text" name="STAFF_NO" class="form-control" id="staffNo">
+         <input type="text" name="STAFF_NO" class="form-control">
       </td>
       <td nowrap class="col-md-2 control-label">姓名:</td>
       <td class="TableData">
-        <input type="text"name="STAFF_NAME" class="form-control" id="staffName" >
+        <input type="text"name="STAFF_NAME" class="form-control">
       </td>
    </tr>
    <tr>
       <td nowrap class="col-md-2 control-label">身份证:</td>
       <td class="TableData">
-         <input type="text" name="STAFF_CARD_NO" class="form-control" id="staffCardNo" >
+         <input type="text" name="STAFF_CARD_NO" class="form-control">
       </td>
       <td nowrap class="col-md-2 control-label">出生日期:</td>
       <td class="TableData">
-        <input type="date"name="STAFF_BIRTH" class="form-control" id="staffBirth" >
+        <input type="date"name="STAFF_BIRTH" class="form-control">
       </td>
    </tr>
    <tr>
       <td nowrap class="col-md-2 control-label">年龄:</td>
       <td class="TableData">
-         <input type="text" name="STAFF_AGE" class="form-control" id="staffAge" >
+         <input type="text" name="STAFF_AGE" class="form-control">
       </td>
       <td nowrap class="col-md-2 control-label">性别:</td>
       <td class="TableData">
-       <select class="sele form-control" name=" STAFF_SEX" id="staffSex">
+       <select class="sele form-control" name=" STAFF_SEX">
         	                              <option value="1">男</option>
         	                              <option value="2">女</option>
         	                            </slect>
@@ -85,7 +83,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <tr>
       <td nowrap class="col-md-2 control-label">籍贯:</td>
       <td class="TableData">
-         <select class="sele form-control" name="STAFF_NATIVE_PLACE" id="staffNativePlace">
+         <select class="sele form-control" name="STAFF_NATIVE_PLACE">
         	                              <option value="1">北京</option>
         	                              <option value="2">天津</option>
         	                              <option value="3">上海</option>
@@ -125,13 +123,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </td>
       <td nowrap class="col-md-2 control-label">民族:</td>
       <td class="TableData">
-        <input type="text"name="STAFF_NATIONALITY" class="form-control" id="staffNationality" >
+        <input type="text"name="STAFF_NATIONALITY" class="form-control">
       </td>
    </tr>
     <tr>
       <td nowrap class="col-md-2 control-label">政治面貌:</td>
       <td class="TableData">
-         <select class="sele form-control" id="STAFF_POLITICAL_STATUS" name="staffPoliticalStatus">
+         <select class="sele form-control" id="STAFF_POLITICAL_STATUS">
         	                              <option value="1">群众</option>
         	                              <option value="2">共青团员</option>
         	                              <option value="3">中共党员</option>
@@ -143,17 +141,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </td>
       <td nowrap class="col-md-2 control-label">健康状况:</td>
       <td class="TableData">
-	         <input type="text" name="STAFF_HEALTH" class="form-control" id="staffHealth" >
+	         <input type="text" name="STAFF_HEALTH" class="form-control">
       </td>
    </tr>
    <tr>
       <td nowrap class="col-md-2 control-label">职称:</td>
       <td class="TableData">
-         <select class="positionId form-control" id="positionId" name="positionId">
+         <select class="positionId form-control" id="positionId">
       </td>
       <td nowrap class="col-md-2 control-label">员工类型:</td>
       <td class="TableData">
-        <select class="sele form-control" id="STAFF_OCCUPATION" name="staffOccupation">
+        <select class="sele form-control" id="STAFF_OCCUPATION">
         	                              <option value="1">合同</option>
         	                              <option value="2">正式</option>
         	                              <option value="3">临时</option>
@@ -163,21 +161,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <tr>
       <td nowrap class="col-md-2 control-label">入职时间:</td>
       <td class="TableData">
-         <input type="date" name="DATES_EMPLOYED" class="form-control" id="datesEmployed" >
+         <input type="date" name="DATES_EMPLOYED" class="form-control">
       </td>
       <td nowrap class="col-md-2 control-label">本单位工龄:</td>
       <td class="TableData">
-        <input type="text"name="JOB_AGE" class="form-control" id="jobAge" >
+        <input type="text"name="JOB_AGE" class="form-control">
       </td>
    </tr>
    <tr>
       <td nowrap class="col-md-2 control-label">起薪时间:</td>
       <td class="TableData">
-         <input type="text" name="BEGIN_SALSRY_TIME" class="form-control" id="beginSalsryTime" >
+         <input type="text" name="BEGIN_SALSRY_TIME" class="form-control">
       </td>
       <td nowrap class="col-md-2 control-label">在职状态:</td>
       <td class="TableData">
-         <select class="sele form-control" id="WORK_STATUS" name="workStatus">
+         <select class="sele form-control"name="workStatus">
         	                              <option value="1">在职</option>
         	                              <option value="2">离职</option>
         	                              <option value="3">退休</option>
@@ -187,7 +185,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <tr>
       <td nowrap class="col-md-2 control-label">总工龄:</td>
       <td class="TableData">
-         <input type="text" name="WORK_AGE" class="form-control" id="workAge" >
+         <input type="text" name="WORK_AGE" class="form-control">
       </td>
       <td nowrap class="col-md-2 control-label">参加工作时间:</td>
       <td class="TableData">

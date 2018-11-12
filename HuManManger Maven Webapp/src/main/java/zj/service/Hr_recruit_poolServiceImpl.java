@@ -12,38 +12,42 @@ import zj.entity.Hr_recruit_pool;
 public class Hr_recruit_poolServiceImpl implements Hr_recruit_poolService{
 	@Autowired
 	private Hr_recruit_poolMapper mapper;
+
 	@Override
-	public List<Map<String,Object>> queryAll() {
+	public List<Map<String, Object>> queryAll() {
 		// TODO Auto-generated method stub
-		List<Map<String,Object>> list=mapper.queryAll();
-		return list;
+		return mapper.queryAll();
 	}
-	public void deletePool(Hr_recruit_pool pool) {
-		// TODO Auto-generated method stub
-		mapper.deletePool(pool);
-	}
-	
-	
+
 	@Override
-	public void savehrpool(Hr_recruit_pool pool) {
+	public int savehrpool(Hr_recruit_pool pool) {
 		// TODO Auto-generated method stub
-		mapper.savehrpool(pool);
+		return mapper.savehrpool(pool);
 	}
+
 	@Override
-	public Hr_recruit_pool queryByid(int EXPERT_ID) {
+	public int deletePool(Hr_recruit_pool pool) {
 		// TODO Auto-generated method stub
-		Hr_recruit_pool list=mapper.queryByid(EXPERT_ID);
-		return list;
+		return mapper.deletePool(pool);
 	}
+
 	@Override
-	public void updatePool(Hr_recruit_pool pool) {
+	public List<Map<String, Object>> queryByid(int EXPERT_ID) {
 		// TODO Auto-generated method stub
-		 mapper.updatePool(pool);
+		return mapper.queryByid(EXPERT_ID);
 	}
+
+	@Override
+	public int updatePool(Hr_recruit_pool pool) {
+		// TODO Auto-generated method stub
+		return mapper.updatePool(pool);
+	}
+
 	@Override
 	public List<Map<String, Object>> queryplan() {
 		// TODO Auto-generated method stub
 		return mapper.queryplan();
 	}
+
 }
 	

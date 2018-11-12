@@ -20,5 +20,15 @@ public interface Staff_contractService {
 	public Staff_contract selectByID(int contractId);
     //查询员工
 	public List<Staff_info> selectstaffinfo();
+	//查询合同到期信息
+	public List<Map<String,Object>> hetongdaoqi();
+	//查询试用到期信息
+	public List<Map<String,Object>> shiyongdaoqi();
+/*	//修改合同状态  使用中
+	public int updatestatus1(int contractId);
+	//修改合同状态  试用到期
+	public int updatestatus2(int contractId);
+	//修改合同状态  合同到期
+	public int updatestatus3(int contractId);*/
 
 }

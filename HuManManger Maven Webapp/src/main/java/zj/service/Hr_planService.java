@@ -11,9 +11,8 @@ public interface Hr_planService {
     public List<Map<String,Object>> QueryId(int planNo);
     public int Update(Hr_recruit_plan plan);
     public int Delete(int planNo);
-    public List<Map<String,Object>> Queryzero(int planStatus);
-    public int oneupdae(int planNo);
-    public int twoupdae(int planNo);
-    public List<Map<String,Object>> departName();
+    public List<Map<String,Object>> Queryzero(Hr_recruit_plan plan);
+    public int statusUpdae(Hr_recruit_plan plan);
 
+    
 }

@@ -49,7 +49,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					lay-filter="layadmin-layout-right">
 
 					<li class="layui-nav-item" lay-unselect><a
-						lay-href="app/message/index.html" layadmin-event="message"
+						lay-href="index.jsp" layadmin-event="message"
 						lay-text="消息中心"> <i class="layui-icon layui-icon-notice"></i>
 
 							<!-- 如果有新消息，则显示小圆点 --> <span class="layui-badge-dot"></span>
@@ -95,6 +95,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<a lay-href="csj/staffion.jsp">人事档案</a>
 								</dd>
 								<dd data-name="console">
+									<a lay-href="csj/Diaos.jsp">人事调动</a>
+								</dd>
+								<dd data-name="console">
 									<a lay-href="csj/rencai.jsp">人才库</a>
 								</dd>
 								
@@ -124,7 +127,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<a lay-href="/HuManManger/wmw/plan_select.jsp">招聘计划管理</a>
 										</dd>
 										<dd data-name="list">
-											<a lay-href="/HuManManger/wmw/plan_blurry.jsp">招聘计划审批</a>
+											<a lay-href="/HuManManger/wmw/plan_zero.jsp">招聘计划审批</a>
 										</dd>
 									</dl>
 								</dd>
@@ -176,7 +179,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<a lay-href="record.jsp">考勤记录</a>
 								</dd>
 								<dd>
-									<a lay-href="template/caller.html">上下班打卡</a>
+									<a lay-href="csj/work.jsp">上下班打卡</a>
 								</dd>
 								<dd>
 									<a lay-href="attendancestatistics.jsp">考勤统计</a>
@@ -194,6 +197,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<dd>
 									<a lay-href="test.jsp">薪资基数设置</a>
 								</dd>
+								<dd>
+									<a lay-href="paystate.jsp">薪资基数状态</a>
+								</dd>
+								
 								<dd>
 									<a lay-href="querypay.jsp">薪资基数操作</a>
 								</dd>

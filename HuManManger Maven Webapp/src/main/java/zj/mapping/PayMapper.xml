@@ -4,8 +4,8 @@
 <mapper namespace="zj.dao.PayDao">
 <!--pay表添加 -->
 <insert id="paySave" parameterType="Pay">
-  insert into pay(staff_id,departmentId,tax_salary,insurance,endowment_insurance,medical_insurance,birth_insurance,unemployment_insurance,injury_insurance,housing_fund,B_withhold,endowment_insurance_d,medical_insurance_d,birth_insurance_d,unemployment_insurance_d,injury_insurance_d,housing_fund_d,subvention,Bonus,K_withhold,after_tax_salary,D_withhold,positionId) 
-  values(#{staff_id},#{departmentId},#{tax_salary},#{insurance},#{endowment_insurance},#{medical_insurance},#{birth_insurance},#{unemployment_insurance},#{injury_insurance},#{housing_fund},#{B_withhold},#{endowment_insurance_d},#{medical_insurance_d},#{birth_insurance_d},#{unemployment_insurance_d},#{injury_insurance_d},#{housing_fund_d},#{subvention},#{Bonus},#{K_withhold},#{after_tax_salary},#{D_withhold},#{positionId})
+  insert into pay(staff_id,tax_salary,insurance,endowment_insurance,medical_insurance,birth_insurance,unemployment_insurance,injury_insurance,housing_fund,B_withhold,endowment_insurance_d,medical_insurance_d,birth_insurance_d,unemployment_insurance_d,injury_insurance_d,housing_fund_d,subvention,Bonus,after_tax_salary,D_withhold,tax_time,state) 
+  values(#{staff_id},#{tax_salary},#{insurance},#{endowment_insurance},#{medical_insurance},#{birth_insurance},#{unemployment_insurance},#{injury_insurance},#{housing_fund},#{B_withhold},#{endowment_insurance_d},#{medical_insurance_d},#{birth_insurance_d},#{unemployment_insurance_d},#{injury_insurance_d},#{housing_fund_d},#{subvention},#{Bonus},#{after_tax_salary},#{D_withhold},#{tax_time},2)
 </insert>
 <!-- 判断人员id 是否重复 -->
 <select id="querystaffid" resultType="int" parameterType="int"> 
@@ -28,10 +28,10 @@ select early,withhold,absent from hr_check where check_id=#{id}
 <!--查询人员的考勤次数,考勤扣款标准  -->
 <select id="queryAll2" resultType="Map">
 select  d.departmentId,d.departmentName,pp.positionId,pp.positionName,s.staff_id,s.STAFF_NAME,w.absenteeism,w.late,w.early_retreat
-from  staff_info s
-left join department d on s.departmentId=d.departmentId
-left join work_register w on s.departmentId=w.departmentId
-left join position pp on s.departmentId=pp.departmentId group by s.staff_id
+from department d 
+left join staff_info s on d.departmentId=s.departmentId
+left join work_register w on d.departmentId=w.departmentId
+left join position pp on d.departmentId=pp.departmentId
 </select>
 
 <!-- 查询部门职务人事名称 -->
@@ -53,13 +53,10 @@ left join department d on pp.departmentId=d.departmentId where s.staff_id=#{id}
 
 <!-- 报表 -->
 <select id="queryAll3" resultType="Map">
-select w.welfare_type,w.welfare_monery,w.goods,w.remark,d.departmentName,pp.positionName,s.STAFF_NAME,ww.absenteeism,ww.late,ww.early_retreat,p.tax_salary,p.insurance,p.endowment_insurance,p.medical_insurance,p.birth_insurance,p.unemployment_insurance,p.injury_insurance,housing_fund,p.B_withhold,p.endowment_insurance_d,p.medical_insurance_d,p.birth_insurance_d,p.unemployment_insurance_d,p.injury_insurance_d,p.housing_fund_d,p.subvention,p.Bonus,p.K_withhold,p.after_tax_salary,p.D_withhold
-from welfare w
-left join department d on w.departmentId=d.departmentId
-left join position pp on pp.departmentId=d.departmentId
-left join staff_info s on s.departmentId=d.departmentId
-left join work_register ww on ww.departmentId=d.departmentId
-left join pay p on ww.departmentId=d.departmentId group by p.payid
+select w.welfare_type,w.welfare_monery,w.goods,w.remark,s.STAFF_NAME,p.tax_salary,p.insurance,p.endowment_insurance,p.medical_insurance,p.birth_insurance,p.unemployment_insurance,p.injury_insurance,housing_fund,p.B_withhold,p.endowment_insurance_d,p.medical_insurance_d,p.birth_insurance_d,p.unemployment_insurance_d,p.injury_insurance_d,p.housing_fund_d,p.subvention,p.Bonus,p.K_withhold,p.after_tax_salary,p.D_withhold,p.tax_time
+from staff_info s 
+left join welfare w on s.staff_id=w.staff_id
+left join pay p on s.staff_id=p.staff_id where state=1
 </select>
 
 <!--查询薪资标准  -->
@@ -76,7 +73,7 @@ select staff_id from staff_info where staff_id=#{id}
 
 <!-- 修改薪资基数 -->
  <update id="payUpdate" parameterType="Pay">
-update pay set tax_salary=#{tax_salary},insurance=#{insurance},subvention=#{subvention},Bonus=#{Bonus},K_withhold=#{K_withhold},after_tax_salary=#{after_tax_salary} where payid=#{payid}
+update pay set tax_salary=#{tax_salary},insurance=#{insurance},subvention=#{subvention},Bonus=#{Bonus},after_tax_salary=#{after_tax_salary},state=1 where payid=#{payid}
 </update> 
 <!-- 删除薪资 -->
 <delete id="payDelete" parameterType="Pay">
@@ -84,11 +81,11 @@ delete from pay where payid=#{payid}
 </delete>
 <!-- 查询薪资各个总额-->
 <select id="queryPay" resultType="Map">
-select d.departmentId,d.departmentName,pp.positionId,pp.positionName,s.staff_id,s.STAFF_NAME,p.payid,p.tax_salary,p.insurance,p.K_withhold,p.Bonus,p.subvention,p.after_tax_salary
+select d.departmentId,d.departmentName,pp.positionId,pp.positionName,s.staff_id,s.STAFF_NAME,p.payid,p.tax_salary,p.insurance,p.K_withhold,p.Bonus,p.subvention,p.after_tax_salary,p.state
 from pay p 
 left join staff_info s on p.staff_id=s.staff_id 
 left join department d on p.departmentId=d.departmentId
-left join position pp on  p.positionId=pp.positionId
+left join position pp on  p.positionId=pp.positionId where p.state=2
 </select>
 <!-- 单条查询详情 -->
 <select id="queryPayId" resultType="Map" parameterType="int">

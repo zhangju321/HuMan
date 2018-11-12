@@ -25,11 +25,6 @@ public class StaffInfoServiceImpl implements StaffInfoService {
 		return smapper.findAll();
 	}
 
-	/*@Override
-	public StaffInfo queryById(int staff_Id) {
-		// TODO Auto-generated method stub
-		return smapper.queryById(staff_Id);
-	}*/
 
 	@Override
 	public List<Map> queryDepartId(int departmentId) {
@@ -41,6 +36,12 @@ public class StaffInfoServiceImpl implements StaffInfoService {
 	public Map queryById(Staff_info s) {
 		// TODO Auto-generated method stub
 		return smapper.queryById(s);
+	}
+
+	@Override
+	public List<Map<String, Object>> querymh(Staff_info s) {
+		// TODO Auto-generated method stub
+		return smapper.querymh(s);
 	}
 
 }

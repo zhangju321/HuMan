@@ -22,19 +22,19 @@ private Hr_filterService service;
 @ResponseBody
 @RequestMapping("/filtersave")
 public int Save(Hr_recruit_filter filter){
+	System.out.println(filter);
 	return service.saveFilter(filter);
 }
 /*查询全部招聘计划*/
 @RequestMapping("/select")
 @ResponseBody
-public List<Map<String,Object>> selectFilter(){
-	return service.selectFilter();
+public List<Map<String,Object>> selectFilter(int id){
+	return service.selectFilter(id);
 }
 /*根据id查询*/
 @RequestMapping("/filterId")
 @ResponseBody
 public List<Map<String,Object>> selectId(@RequestBody int filterId){
-
 	return service.selectId(filterId);
 }
 /*修改*/
@@ -53,8 +53,6 @@ public void oneSave(Hr_recruit_filter filter){
 @ResponseBody
 @RequestMapping("/filterTwoUpdate")
 public void twoSave(Hr_recruit_filter filter){
-	System.out.println(123);
-	System.out.println(filter);
 	service.twoUpdate(filter);
 }
 /*删除*/
@@ -67,7 +65,18 @@ public int planDelete(@RequestBody int filterId){
 @ResponseBody
 @RequestMapping("/filterName")
 public List<Map<String,Object>> FilterName(){
-	
 	return service.FilterName();
+}
+/*查询未筛选人才*/
+@RequestMapping("/selectpool")
+@ResponseBody
+public List<Map<String,Object>> selectpool(){
+	return service.selectpool();
+}
+/*查询全部人才*/
+@RequestMapping("/selectid")
+@ResponseBody
+public List<Map<String,Object>> selectid (@RequestBody int expertId){
+	return service.selectid(expertId);
 }
 }

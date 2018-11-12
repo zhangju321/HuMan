@@ -3,24 +3,23 @@
 <mapper namespace="zj.dao.StaffInfoMapper" >
    <select id="queryStaff" resultType="java.util.Map">
     <!-- select * from StaffInfo -->
-    select d.departmentName,s.staff_Id,s.staff_Name from staff_info s left join department d on
+    select d.departmentname,s.staff_Id,s.staff_Name from staff_info s left join department d on
        s.departmentId=d.departmentId    
   </select>  
+  <select id="querymh" parameterType="Staff_info" resultType="Map">
+      select d.departmentname,s.staff_Id ,s.STAFF_NAME from staff_info s left join 
+      department d on s.departmentId=d.departmentId where s.STAFF_NAME like concat('%',#{staffName},'%') 
+    </select>
   
   <select id="findAll" resultType="Department" parameterType="int">
-    select * from department
-    
-  
+    select * from department    
   </select>
-   <!-- <select id="queryById" resultType="StaffInfo" parameterType="int">
-     select * from staff_Info where staff_Id=#{staff_Id}
-  </select> -->
    <select id="queryById" resultType="java.util.Map">
      select s.staff_Id,s.staff_Name from staff_Info s where staff_Id=#{staff_Id}
   </select> 
   <select id="queryDepartId" resultType="java.util.Map" parameterType="int">
-     select d.departmentName,s.staff_Id,s.staff_Name from staff_info s inner join department d on
-       s.departmentId=d.departmentId and s.departmentId=#{departmentId}    
+     select d.departmentname,s.staff_Id,s.staff_Name from staff_info s inner join department d on
+     s.departmentId=d.departmentId and s.departmentId=#{departmentId}    
   </select>
       
 </mapper>

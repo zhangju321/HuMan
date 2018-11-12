@@ -26,8 +26,17 @@ public class Travel {
     private String status_Name;
 
     private String operate;
+    private Integer uid; 
+    
+    public Integer getUid() {
+		return uid;
+	}
 
-    public Integer getTravel_Id() {
+	public void setUid(Integer uid) {
+		this.uid = uid;
+	}
+
+	public Integer getTravel_Id() {
         return travel_Id;
     }
 

@@ -27,7 +27,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      <ul class="nav nav-tabs">
 	  <li class="active"><a href="/HuManManger/wmw/requirements_select.jsp">招聘需求管理</a></li>
 	  <li><a href="/HuManManger/wmw/requirements_save.jsp">创建招聘需求</a></li>
-	  <li><a href="/HuManManger/wmw/requirements_select.jsp">招聘需求查询</a></li>
     </ul>
 
 <div id="none_select">
@@ -56,13 +55,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<form method="post" id="from_requ">
 					<table class="Table" width="60%" align="center">
 					     <tr>
-						    <td nowrap class="col-md-1 control-label" style="width: 10%">招聘需求编号:</td>
-							<td class="TableData" style="width: 20%">
-							   <input type="text" name="requirementsId" id="requirementsId"class="form-control">
-							</td>
-							<td nowrap class="col-md-4 control-label" style="width: 20%">招聘计划:</td>
+					        <input type="hidden" name="requirementsId" class="form-control" id="requirementsId">
+							<td nowrap class="col-md-4 control-label" style="width: 20%">招聘名称:</td>
 							<td class="TableData" style="width: 20%">
 							    <input type="text" id="planName" class="form-control" >
+							    <input type="hidden" name="planNo" class="form-control" id="planNo">
+							</td>
+							<td nowrap class="col-md-2 control-label" style="width: 20%">招聘人数:</td>
+							<td class="TableData">
+							   <input type="text" name="requNum" id="requNum" class="form-control">
 							</td>
 						</tr>
 						<tr>
@@ -76,36 +77,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</td>
 						</tr>
 						<tr>
-							<td nowrap class="col-md-2 control-label" style="width: 20%">招聘人数:</td>
-							<td class="TableData">
-							   <input type="text" name="requNum" id="requNum" class="form-control">
-							</td>
 							<td nowrap class="col-md-2 control-label">用工日期:</td>
 							<td class="TableData">
 							   <input type="date" name="requTime" class="form-control" id="requTime">
 							</td>
-						</tr>
-						<tr>
 							<td nowrap class="col-md-2 control-label">申请人:</td>
 							<td class="TableData">
 							   <input type="text" name="petitioner" class="form-control" id="petitioner">
 							</td>
-							
-							   <input type="hidden" name="planNo" class="form-control" id="planNo">
-							
 						</tr>
 							<tr>
 								<td nowrap class="col-md-2 control-label">岗位要求:</td>
-								<td class="TableData">
-								<input type="text" name="requRequires"class="form-control" id="requRequires"></td>
+								<td class="TableData" colspan=3>
+                                <textarea class="form-control" name="requRequires" id="requRequires"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
 								<td nowrap class="col-md-2 control-label">备注:</td>
-								<td class="TableData">
-								<input type="text" name="remark"class="form-control" id="remark"></td>
-							</tr>
-							<tr>
-								<td nowrap class="col-md-2 control-label">附件:</td>
-								<td class="TableData">
-								<input type="text" name="attachmentName"class="form-control" id="attachmentName"></td>
+								<td class="TableData" colspan=3>
+                                <textarea class="form-control" name="remark" id="remark"></textarea>
+                                </td>
 							</tr>
 						</table>
                    </form>
@@ -178,7 +169,6 @@ function queryAll(){
 			/* 修改 */
 			function requ_update(){
 			var obj=$("#from_requ").serialize();
-			alert(obj);
 		    $.ajax({
 		       url : "require/requUpdate",
         	   type : "post",

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import zj.dao.TravelMapper;
+import zj.entity.GoOut;
 import zj.entity.Staff_info;
 import zj.entity.Travel;
 
@@ -48,16 +49,28 @@ public class TravelServiceImpl implements TravelService {
 
 	}
 
-	@Override
+	/*@Override
 	public Travel queryById(int travel_Id) {
 		// TODO Auto-generated method stub
 		return tdao.queryById(travel_Id);
+	}*/
+
+	@Override
+	public List<Map> queryStaff2(int sta_Staff_Id) {
+		// TODO Auto-generated method stub
+		return tdao.queryStaff2(sta_Staff_Id);
 	}
 
 	@Override
-	public List<Map> queryStaff2(int staff_Id) {
+	public Travel overrule(int travel_Id) {
 		// TODO Auto-generated method stub
-		return tdao.queryStaff2(staff_Id);
+		return tdao.overrule(travel_Id);
+	}
+
+	@Override
+	public List<Map<String, Object>> queryDetails(int travel_Id) {
+		// TODO Auto-generated method stub
+		return tdao.queryDetails(travel_Id);
 	}
 
 }

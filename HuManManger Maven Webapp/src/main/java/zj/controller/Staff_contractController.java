@@ -36,12 +36,28 @@ public class Staff_contractController {
     	PageInfo<Map<String,Object>> pi=new PageInfo<Map<String,Object>>(list);
 		return pi;
 	}
+	  //查询合同到期信息
+    @RequestMapping("/hetongdaoqi")
+    @ResponseBody
+	public List<Map<String,Object>> hetongdaoqi(){
+		List<Map<String,Object>> list=ser.hetongdaoqi();
+		return list;
+	}
+	  //查询试用到期信息
+    @RequestMapping("/shiyongdaoqi")
+    @ResponseBody
+	public List<Map<String,Object>> shiyongdaoqi(){
+		List<Map<String,Object>> list=ser.shiyongdaoqi();
+		return list;
+	}
+    
          //查询员工
          @RequestMapping("/selectstaffinfo")
          @ResponseBody
 	     public List<Staff_info> selectstaffinfo() {
 	     	// TODO Auto-generated method stub
-	     	return ser.selectstaffinfo();
+	    	 List<Staff_info> list=ser.selectstaffinfo();
+	     	  return list;
 	     }
 	    //查询单个
 	    @RequestMapping("/selectByID")

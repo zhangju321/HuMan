@@ -7,7 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Staff_contract {
     private int contractId;//合同编号
 
-    private int staffId;//员工外键
+    private Integer staffId;//员工外键
 
     private int contractType;//合同类型
 
@@ -84,12 +84,13 @@ public class Staff_contract {
 	public void setContractId(int contractId) {
 		this.contractId = contractId;
 	}
+   
 
-	public int getStaffId() {
+	public Integer getStaffId() {
 		return staffId;
 	}
 
-	public void setStaffId(int staffId) {
+	public void setStaffId(Integer staffId) {
 		this.staffId = staffId;
 	}
 

@@ -8,9 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    
     <title>招聘筛选</title>
-    
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -22,31 +20,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 
   </head>
-  
   <body>
   <p>人才筛选</p>
       <ul class="nav nav-tabs">
 	  <li><a href="/HuManManger/wmw/filter_select.jsp">人才筛选管理</a></li>
 	  <li class="active"><a href="/HuManManger/wmw/filter_save.jsp">创建筛选计划</a></li>
-	  <li><a href="/HuManManger/wmw/filter_select.jsp">人才筛选查询</a></li>
     </ul>
 	<!-- 添加招聘筛选 -->
 <div style="width:1000px" class="col-md-4 control-label">
+<p></p>
 	<form method="post" id="filter_form">
-		<table class="Table" width="50%" align="center" >
+		<table class="table table-bordered" width="50%" align="center" >
 			<tr align="center" class="TableControl">
 				<td colspan=4 nowrap>
 					<p>创建招聘筛选</p>
 				</td>
 			</tr>
 			<tr>
+			    <td nowrap class="col-md-4 control-label" style="width: 20%">应聘人员:</td>
+				<td class="TableData" style="width: 20%">
+                    <input type="text" id="employeeName" name="employeeName">
+				    <input type="hidden" id="expertId"  class="form-control"><!-- name="expertId" -->
+                    <input type="button"  href="#pool_modal" value="添加" data-toggle='modal' >
+				</td>
 				<td nowrap class="col-md-2 control-label" style="width: 10%">计划名称:</td>
 				<td class="TableData" style="width: 20%">
-				   <input type="text"name="planNo" id="planNo" class="form-control">
-				</td> 
-				<td nowrap class="col-md-4 control-label" style="width: 20%">应聘人员:</td>
-				<td class="TableData" style="width: 20%">
-				    <input type="text"name="employeeName" id="employeeName"  class="form-control">
+				   <input type="hidden"name="planNo" id="planNo" class="form-control">
+				   <input type="text" id="planName" class="form-control">
 				</td>
 			</tr>
 			<tr>
@@ -74,10 +74,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				   <input type="hidden"name="endFlag" id="endFlag" class="form-control" value="0">
 			</tr>
 			<tr>
-				<td nowrap class="col-md-4 control-label" style="width: 20%">下一次筛选人员:</td>
-				<td class="TableData" style="width: 20%">
-				    <input type="text"name="nextTransaStep"  id="nextTransaStep"  class="form-control">
-				</td>
+				    <td>下一次筛选人员:</td>
+                    <td>
+                    <input type="text"   id="uname" readonly="readonly">
+                    <input type="hidden"  name="nextTransaStep" id="uid">
+                    <input type="button"  href="#user_modal" value="添加" data-toggle='modal'  >
+               </td>
 				<td nowrap class="col-md-1 control-label" style="width: 10%">下一次筛选时间:</td>
 				<td class="TableData" style="width: 20%">
 				   <input type="date"name="nextDateTime" id="nextDateTime"  class="form-control">
@@ -91,12 +93,148 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</table>
 	</form>
  </div>
+ 
+ <!-- 未筛选人员 模态框 -->
+<div class="modal fade" id="pool_modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:700px">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"aria-hidden="true">×</button>
+					<h4 class="modal-title" id="myModalLabel">招聘部门</h4>
+				</div>
+				<div class="modal-body">
+				<form method="post" >
+					<table class="table table-bordered" width="60%" align="center">
+					      <tbody id="poolName"></tbody>
+				    </table>
+               </form>
+			</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default"data-dismiss="modal"  onclick="empty(1)">清空</button>
+			<button type="button" class="btn btn-default"data-dismiss="modal">关闭</button>
+		</div>
+		</div>
+      </div>
+   </div>
+    <!-- 审批人 模态框-->
+   <div class="modal fade" id="user_modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:700px">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"aria-hidden="true">×</button>
+					<h4 class="modal-title" >审批人</h4>
+				</div>
+				<div class="modal-body">
+				<form method="post" id="from_user">
+					<table class="table table-bordered" width="60%" align="center">
+							  <tbody id="userName"></tbody>
+				</table>
+               </form>
+			</div>
+		<div class="modal-footer">
+		    <button type="button" class="btn btn-default"data-dismiss="modal"  onclick="empty(0)">清空</button>
+			<button type="button" class="btn btn-default"data-dismiss="modal">关闭</button>
+		</div>
+		</div>
+      </div>
+   </div>
 </body>
 </html>
 
 <script>
+      /* 面试人员查询 */
+     $('#pool_modal').on('show.bs.modal', function () {
+        $.ajax({
+        	url : "filter/selectpool",
+        	type : "post",
+        	async : true,
+        	contentType: "application/json; charset=utf-8",
+       	 	dataType : 'json', 
+        	success : function(data) {
+           		$("#poolName").html("");
+        		 for(var i=0; i<data.length;i++){
+        		    var tr="<tr>";
+        		    var pool=data[i].EXPERT_ID+","+data[i].EMPLOYEE_NAME+","+data[i].EMPLOYEE_NAME
+        		    +","+data[i].PLAN_NO+","+data[i].POSITION+","+data[i].EMPLOYEE_MAJOR
+        		    +","+data[i].EMPLOYEE_PHONE;
+        		    tr+="<td><button type='button' id='"+pool+"' class='insert btn btn-default' data-dismiss='modal'>'"+data[i].EMPLOYEE_NAME+"'</button></td>";
+        		    tr+="</tr>";
+        		     $("#poolName").append(tr); 
+        	}}
+ 		}); 
+     })
+	$(function(){
+				$("#poolName").on("click",".insert",function(){
+				    var pool=this.id;
+					var pool= pool.split(",");
+					for(var i=0; i<pool.length;i++){
+        		      var expertId=pool[0];
+        		      var employeeName=pool[1];
+        		      var planName=pool[2];
+        		      var planNo=pool[3];
+        		      var position=pool[4];
+        		      var employeeMajor=pool[5];
+        		      var employeePhone=pool[6];
+					}
+           		/*赋值*/
+				$("#expertId").val(expertId);
+			    $("#employeeName").val(employeeName); 
+			    $("#planNo").val(planNo);
+			    $("#planName").val(planName); 
+			    $("#position").val(position);
+			    $("#employeeMajor").val(employeeMajor); 
+			    $("#employeePhone").val(employeePhone);
+				})
+			}) 
+		/* 清空 */
+		function empty(none){
+            if (none==1) {
+                $("#expertId").val("");
+			    $("#employeeName").val(""); 
+			    $("#planNo").val("");
+			    $("#planName").val(""); 
+			    $("#position").val("");
+			    $("#employeeMajor").val(""); 
+			    $("#employeePhone").val("");
+            }else if(none==0){
+                $("#uname").val("");
+            }
+	 }
+	 	/*审批人查询*/
+	$('#user_modal').on('show.bs.modal', function () {
+        $.ajax({
+        	url : "findAll",
+        	type : "post",
+        	async : true,
+        	contentType: "application/json; charset=utf-8",
+        	dataType : 'json', 
+        	success : function(data) {
+           		$("#userName").html("");
+        		 for(var i=0; i<data.length;i++){
+        		    var tr="<tr>";
+        		    var user=data[i].id+","+data[i].uname;
+        		    tr+="<td><button type='button' id='"+user+"' class='insert btn btn-default' data-dismiss='modal'>'"+data[i].uname+"'</button></td>";
+        		    tr+="</tr>";
+        		     $("#userName").append(tr); 
+        	}}
+ 		}); 
+     })
+	$(function(){
+				$("#userName").on("click",".insert",function(){
+				    var user=this.id;
+					var users= user.split(",");
+					for(var i=0; i<users.length;i++){
+        		      var uid=users[0];
+        		      var uname=users[1];
+					}
+				$("#uid").val(uid);
+			    $("#uname").val(uname); 
+				})
+			})
+			
      function filtersave(){
              var obj=$("#filter_form").serialize();
+             alert(obj);
 		     $.ajax({
 		       url : "filter/filtersave",
         	   type : "post",

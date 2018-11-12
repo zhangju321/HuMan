@@ -3,6 +3,7 @@ package zj.dao;
 import java.util.List;
 import java.util.Map;
 
+import zj.entity.GoOut;
 import zj.entity.Staff_info;
 import zj.entity.Travel;
 
@@ -18,6 +19,8 @@ public interface TravelMapper {
 	    public void updateStatu(Travel statu);
 	    public void updateStatu2(Travel statu);
 	  //¸ù¾Ýid²éÑ¯
-	    public Travel queryById(int travel_Id);
+	    //public Travel queryById(int travel_Id);
 	    public List<Map> queryStaff2(int sta_Staff_Id); 
+	    public Travel overrule (int travel_Id);
+	    public List<Map<String,Object>> queryDetails(int travel_Id);
 }

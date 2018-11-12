@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="zj.dao.Hr_filterMapper" >
+   <!-- 查询人才库 -->
+   <select id="selectpool" resultType="Map" >
+     select pool.* from
+       hr_recruit_pool pool LEFT JOIN hr_recruit_plan plan on pool.PLAN_NO=plan.PLAN_NO
+<!--         where pool.WHETHER_BY_SCREENING=0 -->
+   </select>
+   <select id="selectid" resultType="Map" parameterType="int" >
+     select 
+       pool.*,plan.PLAN_NAME
+     from
+       hr_recruit_pool pool LEFT JOIN hr_recruit_plan plan on pool.PLAN_NO=plan.PLAN_NO
+        where EXPERT_ID=#{expertId}
+   </select>
   <!-- 添加 -->
   <insert id="saveFilter" parameterType="zj.entity.Hr_recruit_filter" >
 	   insert into hr_recruit_filter
@@ -14,11 +27,12 @@
        )
   </insert>
   <!-- 查询全部 -->
-  <select id="selectFilter" resultType="Map" >
+  <select id="selectFilter" resultType="Map" parameterType="int" >
      select 
        filter.*,plan.PLAN_NAME
      from
-       hr_recruit_filter filter LEFT JOIN hr_recruit_plan plan on filter.PLAN_NO=plan.PLAN_NO where FILTER_ID &lt;&gt; 4
+       hr_recruit_filter filter LEFT JOIN hr_recruit_plan plan on filter.PLAN_NO=plan.PLAN_NO 
+       where  filter.TRANSACTOR_STEP=#{id} or filter.NEXT_TRANSA_STEP=#{id} or filter.NEXT_TRANSA_STEP1=#{id}
    </select>
    <!-- 根据id查询 -->
    <select id="selectId" resultType="Map" parameterType="int">
@@ -138,8 +152,8 @@
         </set>
         where FILTER_ID=#{filterId}
    </update>
-    
-     <!-- 查询 -->
+     
+   <!-- 查询 -->
    <select id="FilterName" resultType="Map" >
       select filter.EMPLOYEE_NAME,plan.PLAN_NO,plan.PLAN_NAME,filter.POSITION from hr_recruit_filter filter left JOIN hr_recruit_plan plan on filter.PLAN_NO=plan.PLAN_NO
          where STEP_FLAG=1 and END_FLAG=2 and PASS_OR_NOT1=1 union ALL

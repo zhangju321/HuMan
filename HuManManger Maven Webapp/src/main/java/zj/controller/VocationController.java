@@ -16,31 +16,42 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 import zj.entity.Staff_info;
 import zj.entity.Vocation;
+import zj.service.VocationService;
 
 
 @Controller
 @RequestMapping("/vocation")
 public class VocationController {
  @Autowired
- private zj.service.VocationService vser;
+ private VocationService vser;
  
  @RequestMapping("/queryAll")
  @ResponseBody
- public List<Map> queryAll(){
-	  List<Map> vo=vser.queryAll();
-	  return vo;	  
- }
+ public PageInfo<Map> queryAll(@RequestParam(required = false, defaultValue = "1") Integer startPage){
+	 PageHelper.startPage(startPage, 5);
+	 List<Map> list=vser.queryAll();
+	 PageInfo<Map> vo = new PageInfo<>(list);
+	 return vo;
+}
  @RequestMapping("/findAll")
  @ResponseBody
- public List<Staff_info> findAll(){
-	  List<Staff_info> lists=vser.findAll();
+ public List<Map> findAll(){
+	  List<Map> lists=vser.findAll();
 	  return lists;	  
  }
- 
+ @ResponseBody
+	@RequestMapping("/usersname")
+	public List<Map<String,Object>> position(){
+		return vser.UserName();
+ }
  @RequestMapping("/save")
  public void save(@RequestBody Vocation v,HttpServletResponse response) throws IOException{
 	  response.setContentType("text/html;charset=utf-8");
@@ -50,10 +61,17 @@ public class VocationController {
 			out.print("²Ù×÷³É¹¦");
 		}
  }
+ 
  @RequestMapping("/queryById")
  @ResponseBody
-	public Vocation queryById(int vocation_Id){
-	 Vocation voc=vser.queryById(vocation_Id);
+ public List<Map<String, Object>> queryById(int vocation_Id){
+	 List<Map<String, Object>> vc=vser.queryById(vocation_Id);
+             return vc;			  
+	 }	
+ @RequestMapping("/queryId")
+ @ResponseBody
+	public Vocation queryId(int vocation_Id){
+	 Vocation voc=vser.queryId(vocation_Id);
              return voc;			  
 	 }
  @RequestMapping("/queryStaff")
@@ -87,8 +105,6 @@ public class VocationController {
 		System.out.println(statu.getVocation_Id());
 		vser.updateStatu2(statu);			  
 	 }
- 
- 
  
 }
 

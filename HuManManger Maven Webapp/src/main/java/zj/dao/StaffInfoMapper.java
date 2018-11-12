@@ -9,9 +9,9 @@ import zj.entity.Staff_info;
 
 
 public interface StaffInfoMapper {
-    public List<Map> queryStaff();
-    public List<Department> findAll();
-    public List<Map> queryDepartId(int departmentId);
-    //public StaffInfo queryById(int staff_Id);
-    public Map queryById(Staff_info s);
+	 public List<Map> queryStaff();
+	    public List<Department> findAll();
+	    public List<Map> queryDepartId(int departmentId);
+	    public Map queryById(Staff_info s);
+	    public List<Map<String,Object>> querymh(Staff_info s);
 }

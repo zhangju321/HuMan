@@ -4,20 +4,25 @@
   
   <select id="queryAll" resultType="java.util.Map">
     <!-- select * from vocation -->
-    select v.status_Name,v.vocation_Id,s.staff_Name,v.vocation_Reason,v.vocation_Qi_Time,v.vocation_Jie_Time,
+    select v.status_Name,v.vocation_Id,s.STAFF_NAME,v.vocation_Reason,v.vocation_Qi_Time,v.vocation_Jie_Time,
        v.examine_Person,v.circulate from vocation v left join staff_Info s on
        v.sta_Staff_Id=s.Staff_Id order by v.vocation_Id    
   </select>  
   
-  <select id="findAll" resultType="Staff_info">
-    select staff_Id staffId,staff_Name staffName from staff_Info
+  <select id="findAll" resultType="java.util.Map">
+    select staff_Id,STAFF_NAME from staff_Info
+  </select>    
+  <select id="queryById" resultType="Map" parameterType="int">
+     select d.departmentName,s.STAFF_NAME,s.staff_Id,v.vocation_Reason,v.vocation_Qi_Time,v.vocation_Jie_Time,v.status_Name
+     from vocation v left join staff_Info s on v.sta_Staff_Id=s.STAFF_ID
+     join department d on d.departmentId=s.departmentId
+     where v.vocation_Id=#{vocation_Id}
   </select>
-  
-  <select id="queryById" resultType="Vocation" parameterType="int">
-     select * from vocation where vocation_Id=#{vocation_Id}
+  <select id="queryId" resultType="Vocation" parameterType="int">
+     select operate from vocation where vocation_Id=#{vocation_Id}
   </select>
   <select id="queryStaff" resultType="java.util.Map" parameterType="int">
-     select s.staff_Name,v.vocation_Id,v.vocation_Reason,v.vocation_Qi_Time,v.vocation_Jie_Time,v.status_Name
+     select s.STAFF_NAME,v.vocation_Id,v.vocation_Reason,v.vocation_Qi_Time,v.vocation_Jie_Time,v.status_Name
      from vocation v left join staff_Info s on v.sta_Staff_Id=s.STAFF_ID
      where v.sta_Staff_Id=#{sta_Staff_Id}
   </select>
@@ -25,19 +30,23 @@
     delete from vocation where vocation_Id=#{vocation_Id}
   </delete>
 
-  
+  <select id="UserName" resultType="Map">
+     select * from  users
+  </select>
   <insert id="save" parameterType="Vocation" >
     insert into vocation (sta_Staff_Id, vocation_Reason, 
       vocation_Qi_Time, vocation_Jie_Time, vocation_Type, 
-      status_Name, examine_Person, circulate)
+      status_Name, uid, circulate)
     values (#{sta_Staff_Id,jdbcType=INTEGER}, #{vocation_Reason,jdbcType=VARCHAR}, 
       #{vocation_Qi_Time,jdbcType=TIMESTAMP}, #{vocation_Jie_Time,jdbcType=TIMESTAMP}, #{vocation_Type,jdbcType=VARCHAR}, 
-      #{status_Name,jdbcType=VARCHAR}, #{examine_Person,jdbcType=VARCHAR}, #{circulate,jdbcType=VARCHAR})
+      #{status_Name,jdbcType=VARCHAR}, #{uid,jdbcType=INTEGER}, #{circulate,jdbcType=VARCHAR})
   </insert>
+  
   <update id="updateStatu" parameterType="Vocation">
     update vocation set status_Name='1' where vocation_Id=#{vocation_Id} 
   </update>
   <update id="updateStatu2" parameterType="Vocation">
-    update vocation set status_Name='2' where vocation_Id=#{vocation_Id} 
+    update vocation set status_Name='2',operate=#{operate} where vocation_Id=#{vocation_Id} 
   </update>
+  
 </mapper>

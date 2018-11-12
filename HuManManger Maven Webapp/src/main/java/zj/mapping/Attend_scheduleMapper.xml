@@ -46,8 +46,7 @@ from Attend_schedule ache join roles r on ache.rolesId=r.rolesId JOIN
   delete from Attend_schedule where id=#{id}
   </delete>
   <update id="scheUpdate" parameterType="Attend_schedule">
-  update Attend_schedule set departmentId=#{departmentId},rolesId=#{rolesId},staff_id=#{staff_id},name=#{name},
-  status=#{status},date_start=#{date_start},date_end=#{date_end} where id=#{id}
+  update Attend_schedule set departmentId=#{departmentId},rolesId=#{rolesId},staff_id=#{staff_id},name=#{name},status=#{status},date_start=#{date_start},date_end=#{date_end} where id=#{id}
   </update>
   <update id="updateState" parameterType="Attend_schedule">
   update Attend_schedule set status=#{status} where id=#{id}

@@ -12,6 +12,7 @@
    <!-- 修改 -->
    <update id="Update"  parameterType="Hr_recruit_requirements" >
       update hr_recruit_requirements set
+      PLAN_NO=#{planNo},
      REQU_DEPT=#{requDept},REQU_JOB=#{requJob},
      REQU_NUM=#{requNum},REQU_REQUIRES=#{requRequires},REQU_TIME=#{requTime},
      PETITIONER=#{petitioner},REMARK=#{remark}

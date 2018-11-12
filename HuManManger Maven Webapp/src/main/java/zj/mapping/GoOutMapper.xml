@@ -3,38 +3,46 @@
 <mapper namespace="zj.dao.GoOutMapper" >
   <select id="queryAll" resultType="java.util.Map">
     <!-- select * from goout -->
-    select g.status_Name,g.out_Id,s.staff_Name,g.reason,g.out_Time,g.start_Time,
+    select g.status_Name,g.out_Id,s.STAFF_NAME,g.reason,g.out_Time,g.start_Time,
        g.end_Time,g.place from hr_go_out g left join staff_Info s on
        g.sta_Staff_Id=s.STAFF_ID order by g.out_Id
     
   </select>
   
   <select id="findAll" resultType="Staff_info">
-    select staff_Id staffId,staff_Name staffName from staff_info
+    select staff_Id,STAFF_NAME from staff_info
   </select>
-   <select id="queryById" resultType="GoOut" parameterType="int">
+   <!-- <select id="queryById" resultType="GoOut" parameterType="int">
      select * from hr_go_out where out_Id=#{out_Id}
+  </select> -->
+  <select id="queryDetails" resultType="Map" parameterType="int">
+     select d.departmentName,s.STAFF_NAME,s.staff_Id,g.reason,g.out_Time,g.start_Time,
+       g.end_Time,g.place,g.status_Name 
+     from hr_go_out g left join staff_Info s on g.sta_Staff_Id=s.STAFF_ID
+     join department d on d.departmentId=s.departmentId
+     where g.out_Id=#{out_Id}
+  </select>
+  <select id="queryId" resultType="GoOut" parameterType="int">
+     select operate from hr_go_out where out_Id=#{out_Id}
   </select>   
   <select id="queryStaff3" resultType="java.util.Map" parameterType="int">
-     select s.staff_Name,g.reason,g.start_Time,g.end_Time,g.place,g.status_Name
+     select s.STAFF_NAME,g.reason,g.start_Time,g.end_Time,g.place,g.status_Name
      from hr_go_out g left join staff_Info s on g.sta_Staff_Id=s.STAFF_ID
      where g.sta_Staff_Id=#{sta_Staff_Id}
   </select>
   <insert id="insert" parameterType="GoOut" >
     insert into hr_go_out ( sta_Staff_Id, reason, 
-      out_time, start_time, end_time, 
-      place, examine_Person, circulate, 
-      status_name)
+      out_time, start_time, end_time,place, uid, circulate, status_Name)
     values ( #{sta_Staff_Id,jdbcType=INTEGER}, #{reason,jdbcType=VARCHAR}, 
       #{out_Time,jdbcType=TIMESTAMP}, #{start_Time,jdbcType=TIMESTAMP}, #{end_Time,jdbcType=TIMESTAMP}, 
-      #{place,jdbcType=VARCHAR}, #{examine_Person,jdbcType=VARCHAR}, #{circulate,jdbcType=VARCHAR}, 
+      #{place,jdbcType=VARCHAR}, #{uid}, #{circulate,jdbcType=VARCHAR}, 
       #{status_Name,jdbcType=VARCHAR})
   </insert>
  <update id="updateStatu" parameterType="GoOut">
     update hr_go_out set status_Name='1' where out_Id=#{out_Id} 
   </update>
   <update id="updateStatu2" parameterType="GoOut">
-    update hr_go_out set status_Name='2' where out_Id=#{out_Id} 
+    update hr_go_out set status_Name='2',operate=#{operate} where out_Id=#{out_Id} 
   </update>
   
 

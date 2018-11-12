@@ -35,42 +35,40 @@ public class Hr_recruit_poolController {
 		List<Map<String,Object>> list1=pools.queryAll();
 		return list1;
 	}
-	@RequestMapping("/Save")
-	@ResponseBody
-	public void savehrpool(Hr_recruit_pool pool,HttpServletResponse response) throws IOException{
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out=response.getWriter();
-	   pools.savehrpool(pool);
-	   out.print("添加成功");
+	//根据id查
+		@RequestMapping("/queryByid")
+		@ResponseBody
+		public List<Map<String, Object>> queryByid(@RequestBody int EXPERT_ID){
+			List<Map<String, Object>> list=pools.queryByid(EXPERT_ID);
+			System.out.println(list.size());
+			return list;
+			
+		}
+		//修改
+			@RequestMapping("/updatePool")
+			@ResponseBody
+		public int updatePool(Hr_recruit_pool pool){
+			return pools.updatePool(pool);
+			
+		}
+			//删除
+			@RequestMapping("/deletePool")
+			@ResponseBody
+			public int deletePool(Hr_recruit_pool pool){
+				System.out.println(pool.getEXPERT_ID());
+				return pools.deletePool(pool);
+			}
+			//添加
+			@RequestMapping("/savehrpool")
+			@ResponseBody
+			public int savehrpool(Hr_recruit_pool pool){
+				return pools.savehrpool(pool);
+			}
+			//招聘计划
+			@RequestMapping("/queryplan")
+			@ResponseBody
+			public List<Map<String,Object>> queryplan(){
+				  List<Map<String,Object>> list=pools.queryplan();
+				return list;
+			}
 	}
-	@RequestMapping("/dele")
-	@ResponseBody
-	
-	public void deletePool(Hr_recruit_pool pool,HttpServletResponse response) throws IOException{
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out=response.getWriter();
-		pools.deletePool(pool);
-		out.print("删除成功");
-	}
-	@RequestMapping("/queryByid")
-	@ResponseBody
-	public Hr_recruit_pool queryByid(Hr_recruit_pool pool){
-		Hr_recruit_pool list2=pools.queryByid(pool.getEXPERT_ID());
-		
-		return list2;
-		
-	}
-	@RequestMapping("/updateP")
-	public void updatePool(Hr_recruit_pool pool,HttpServletResponse response) throws IOException{
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out=response.getWriter();
-	  pools.updatePool(pool);
-	   out.print("修改成功");
-	}
-	@RequestMapping("/queryplan")
-	@ResponseBody
-	public List<Map<String,Object>> queryplan(){
-		return pools.queryplan();
-		
-	} 
-}

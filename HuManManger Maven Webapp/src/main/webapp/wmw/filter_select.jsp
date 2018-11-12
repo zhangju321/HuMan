@@ -22,7 +22,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" type="text/css"href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css">
     <script	src="${pageContext.request.contextPath}/resource/jquery-1.11.3.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-
   </head>
   
   <body>
@@ -30,11 +29,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <ul class="nav nav-tabs">
 	  <li class="active"><a href="/HuManManger/wmw/filter_select.jsp">人才筛选管理</a></li>
 	  <li><a href="/HuManManger/wmw/filter_save.jsp">创建筛选计划</a></li>
-	  <li><a href="/HuManManger/wmw/filter_select.jsp">人才筛选查询</a></li>
     </ul>
 <!-- 筛选计划查询 -->
-<div  style="width:1300px">
-	<table class="table table-condensed">
+<div  style="width:1300px; margin:0 auto;">
+<p></p>
+	<table class="table table-bordered">
 		<tr>
 			<td>应聘人姓名</td>
 			<td>应聘岗位</td>
@@ -167,9 +166,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</tr>
 			<tr>
 				<td nowrap class="col-md-2 control-label" style="width: 10%">初选方式:</td>
-				<td class="TableData" style="width: 20%">
-				   <input type="text"name="filterMethod1"  class="form-control">
-				</td> 
+                <td class="TableData">
+                   <select name="filterMethod1" style="background: white;" class="form-control" > 
+					  <option value="">请选择</option>
+					  <option value="1">笔试</option>
+                      <option value="2">面试</option>
+		          </select>
+               </td>
 				<td nowrap class="col-md-4 control-label" style="width: 20%">初选时间:</td>
 				<td class="TableData" style="width: 20%">
 				    <input type="date"name="filterDateTime1"  class="form-control">
@@ -199,9 +202,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </td>
 			</tr>
 			<tr id="next1" style="display:none">
-                <td nowrap class="TableData">下一步骤办理人：</td>
-                <td class="TableData">
-                  <input type="text" name="nextTransaStep1" size="15" class="form-control" >
+                <td nowrap class="col-md-2 control-label">下一步骤办理人:</td>
+                <td class="TableData" style="width: 20%">
+                  <input type="text"   id="uname"  name="nextTransaStep1"  readonly="readonly">
+                  <input type="button"  href="#user_modal" value="添加" data-toggle='modal'  >
                 </td>
                 <td nowrap class="TableData">下一次筛选时间：</td>
                 <td class="TableData">
@@ -236,9 +240,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</tr>
 			<tr>
 				<td nowrap class="col-md-2 control-label" style="width: 10%">复选方式:</td>
-				<td class="TableData" style="width: 20%">
-				   <input type="text"name="filterMethod2"  class="form-control">
-				</td> 
+                <td class="TableData">
+                   <select name="filterMethod2" style="background: white;" class="form-control" > 
+					  <option value="">请选择</option>
+					  <option value="1">笔试</option>
+                      <option value="2">面试</option>
+		          </select>
+               </td>
 				<td nowrap class="col-md-4 control-label" style="width: 20%">复选时间:</td>
 				<td class="TableData" style="width: 20%">
 				    <input type="date"name="filterDateTime2"  class="form-control">
@@ -267,17 +275,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </select>
                 </td>
 			</tr>
-			<tr id="next2" style="display:none">
-                <td nowrap class="TableData">下一步骤办理人：</td>
-                <td class="TableData">
-                  <input type="text" name="nextTransaStep2" size="15" class="form-control" >
-                </td>
-                <td nowrap class="TableData">下一次筛选时间：</td>
-                <td class="TableData">
-                 <input type="date" name="nextDateTime2" size="20" maxlength="20" class="form-control" value="" />
-                </td>
-             </tr>
-             </table>
+	   </table>
              <!-- 下一步,结束按钮 -->
              <table>
 		     <tr>
@@ -292,7 +290,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 </div>
 </div>	
-
+ <!-- 审批人 模态框-->
+   <div class="modal fade" id="user_modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:700px">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"aria-hidden="true">×</button>
+					<h4 class="modal-title" >审批人</h4>
+				</div>
+				<div class="modal-body">
+				<form method="post" id="from_user">
+					<table class="table table-bordered" width="60%" align="center">
+							  <tbody id="userName"></tbody>
+				</table>
+               </form>
+			</div>
+		<div class="modal-footer">
+		    <button type="button" class="btn btn-default"data-dismiss="modal"  onclick="empty(0)">清空</button>
+			<button type="button" class="btn btn-default"data-dismiss="modal">关闭</button>
+		</div>
+		</div>
+      </div>
+   </div>
 </body>
 </html>
 <script>
@@ -302,25 +321,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 })
 	 /* 查询全部 */
 function filterSelect(){
+var id=1;
 		$.ajax({
         	url : "filter/select",
         	type : "post",
         	async : true,
-        	contentType: "application/json; charset=utf-8",
+        	data:{"id":id},
        	 	dataType : 'json', 
         	success : function(data) {
         		$("#filterSelect_tbody").html("");
         		 for(var i=0; i<data.length;i++){
         		    var tr="<tr>";
-        		    tr+="<td>"+data[i].PLAN_NAME+"</td>";
         		    tr+="<td>"+data[i].EMPLOYEE_NAME+"</td>";
         		    tr+="<td>"+data[i].POSITION+"</td>";
         		    tr+="<td>"+data[i].EMPLOYEE_MAJOR+"</td>";
         		    tr+="<td>"+data[i].EMPLOYEE_PHONE+"</td>"; 
         		    tr+="<td>"+data[i].TRANSACTOR_STEP+"</td>";
-        		     var filter_step=data[i].FILTER_ID+","+data[i].STEP_FLAG;
-        		    /* alert(filter_step);  */
-        		    if(data[i].END_FLAG==0 || data[i].END_FLAG==1){
+        		    tr+="<td>"+flag(data[i].END_FLAG,data[i].STEP_FLAG,data[i].PASS_OR_NOT1,data[i].PASS_OR_NOT2)+"</td>";
+        		    var filter_step=data[i].FILTER_ID+","+data[i].STEP_FLAG;
+        		    if(data[i].STEP_FLAG==0 || data[i].STEP_FLAG==1){
         		    tr+="<td>"+
         		    "<input type='button' id='"+data[i].FILTER_ID+"' value='修改' href='#filterUpdate_modal' data-toggle='modal' class='update btn btn-primary'>"+
         		    "<input type='button' id='"+data[i].FILTER_ID+"' value='删除' class='delete btn btn-primary'>"+
@@ -509,8 +528,6 @@ function filterSelect(){
 	 /*第二次筛选信息添加*/
 	 function filterTwo_Update(){
              var obj=$("#filterTwo_FilterForm").serialize();
-             alert(2);
-             alert(obj);
 		     $.ajax({
 		       url : "filter/filterTwoUpdate",
         	  type : "post",
@@ -573,16 +590,61 @@ function filterSelect(){
         		            tr+="<tr>";
         		            tr+="<td>复选办理人：</td><td>"+data[0].TRANSACTOR_STEP2+"</td><td>复选是否通过：</td><td>"+data[0].PASS_OR_NOT2+"</td>";        		            
         		            tr+="</tr>";
-        		            tr+="<tr>";
-        		            tr+="<td>复选下一步办理人：</td><td>"+data[0].NEXT_TRANSA_STEP2+"</td><td>复选下步筛选时间：</td><td>"+data[0].NEXT_DATE_TIME2+"</td>";
-        		            tr+="</tr>";
         		            $("#filterTwo_Infor").append(tr); 
 						}
 					});
 	 }
 	  
-	 
-	 
+	 function flag(edg,step,one,two){
+	   if(edg==0){
+	     return "待筛选";
+	   }else{
+	      if(step==1){
+	        if(one==1){
+	          return "已通过";
+	        }else {
+	          return "未通过";
+	        }
+	      }else if(step==2){
+	        if(two==1){
+	           return "已通过";
+	         }else {
+	          return "未通过";
+	         }
+	      }
+	   }
+	 }
+	 /* 筛选办理人 */
+	 $('#user_modal').on('show.bs.modal', function () {
+        $.ajax({
+        	url : "findAll",
+        	type : "post",
+        	async : true,
+        	contentType: "application/json; charset=utf-8",
+        	dataType : 'json', 
+        	success : function(data) {
+           		$("#userName").html("");
+        		 for(var i=0; i<data.length;i++){
+        		    var tr="<tr>";
+        		    var user=data[i].id+","+data[i].uname;
+        		    tr+="<td><button type='button' id='"+user+"' class='insert btn btn-default' data-dismiss='modal'>'"+data[i].uname+"'</button></td>";
+        		    tr+="</tr>";
+        		     $("#userName").append(tr); 
+        	}}
+ 		}); 
+     })
+	$(function(){
+				$("#userName").on("click",".insert",function(){
+				    var user=this.id;
+					var users= user.split(",");
+					for(var i=0; i<users.length;i++){
+        		      var uid=users[0];
+        		      var uname=users[1];
+					}
+				$("#uid").val(uid);
+			    $("#uname").val(uname); 
+				})
+			})
 	 
 	                                                                    /* 按钮 */
 	 /* 结束筛选判断按钮 */

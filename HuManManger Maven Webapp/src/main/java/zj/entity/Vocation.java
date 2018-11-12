@@ -23,8 +23,21 @@ public class Vocation {
     private String circulate;
 
     private String operate;
+    private Integer uid; 
+    
+    public Integer getUid() {
+		return uid;
+	}
 
-    public Integer getVocation_Id() {
+	public void setUid(Integer uid) {
+		this.uid = uid;
+	}
+
+	public void setVocation_Qi_Time(String vocation_Qi_Time) {
+		this.vocation_Qi_Time = vocation_Qi_Time;
+	}
+
+	public Integer getVocation_Id() {
         return vocation_Id;
     }
 

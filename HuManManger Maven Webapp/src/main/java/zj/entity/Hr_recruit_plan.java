@@ -25,16 +25,24 @@ public class Hr_recruit_plan {
     private String positionRequire;
     private String recruitDirection;
     private String recruitRemark;
-    private String registerTime;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date registerTime;
     private int planStatus;
     private String attachmentName;
-    private String approvePerson;
+    private int id;
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date approveDate;
     private String approveComment;
     private List<Hr_recruit_filter> filter;
     private List<Hr_recruit_requirements> requ;
     private List<Hr_recruit_recruitment> recru;
+    private Users user;
+	public Users getUser() {
+		return user;
+	}
+	public void setUser(Users user) {
+		this.user = user;
+	}
 	public int getPlanNo() {
 		return planNo;
 	}
@@ -131,10 +139,10 @@ public class Hr_recruit_plan {
 	public void setRecruitRemark(String recruitRemark) {
 		this.recruitRemark = recruitRemark;
 	}
-	public String getRegisterTime() {
+	public Date getRegisterTime() {
 		return registerTime;
 	}
-	public void setRegisterTime(String registerTime) {
+	public void setRegisterTime(Date registerTime) {
 		this.registerTime = registerTime;
 	}
 	public int getPlanStatus() {
@@ -149,11 +157,11 @@ public class Hr_recruit_plan {
 	public void setAttachmentName(String attachmentName) {
 		this.attachmentName = attachmentName;
 	}
-	public String getApprovePerson() {
-		return approvePerson;
+	public int getId() {
+		return id;
 	}
-	public void setApprovePerson(String approvePerson) {
-		this.approvePerson = approvePerson;
+	public void setId(int id) {
+		this.id = id;
 	}
 	public Date getApproveDate() {
 		return approveDate;
@@ -185,6 +193,5 @@ public class Hr_recruit_plan {
 	public void setRecru(List<Hr_recruit_recruitment> recru) {
 		this.recru = recru;
 	}
-	
 	
 }

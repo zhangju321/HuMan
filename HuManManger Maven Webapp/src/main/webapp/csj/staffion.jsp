@@ -21,7 +21,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" type="text/css"href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css">
     <script type="text/javascript" src="${pageContext.request.contextPath}/resource/jquery-1.11.3.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-   
+   <%--  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/demo.css"> --%>
+
 		
   </head>
   
@@ -71,11 +72,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <td nowrap class="col-md-1 control-label" style="width: 10%">部门:</td>
       <td class="TableData" style="width: 20%">
          <!-- <input type="text" name="departmentId" id="departmentId" class="form-control" > -->
-         <select class="department form-control" id="departmentId" name="departmentId">
+         <select class="department form-control" id="staffFind" name="departmentId">
+         </select>
       </td>
       <td nowrap class="col-md-4 control-label" style="width: 20%">角色:</td>
       <td class="TableData" style="width: 20%">
-         <select class="rolesId form-control" id="rolesId" name="rolesId">
+         <select class="roleId form-control" id="rolesFind" name="rolesId">
+         </select>
       </td>
    </tr>
    <tr>
@@ -108,7 +111,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        <select class="sele form-control" name=" STAFF_SEX" id="staffSex">
         	                              <option value="1">男</option>
         	                              <option value="2">女</option>
-        	                            </slect>
+        	                            </select>
       </td>
    </tr>
    <tr>
@@ -149,7 +152,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	                              <option value="33">新疆</option>
         	                              <option value="34">香港</option>
         	                              <option value="35">澳门</option>
-        	                            </slect>
+        	                            </select>
 
       </td>
       <td nowrap class="col-md-2 control-label">民族:</td>
@@ -177,7 +180,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	                              <option value="4">中共预备党员</option>
         	                              <option value="3">民主党派</option>
         	                              <option value="4">无党派人士</option>
-        	                            </slect>
+        	                            </select>
 
       </td>
       <td nowrap class="col-md-2 control-label">健康状况:</td>
@@ -189,6 +192,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <td nowrap class="col-md-2 control-label">职称:</td>
       <td class="TableData">
          <select class="positionId form-control" id="positionId" name="positionId">
+         </select>
       </td>
       <td nowrap class="col-md-2 control-label">员工类型:</td>
       <td class="TableData">
@@ -196,7 +200,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	                              <option value="1">合同</option>
         	                              <option value="2">正式</option>
         	                              <option value="3">临时</option>
-        	                            </slect>
+        	                            </select>
       </td>
    </tr>
    <tr>
@@ -220,7 +224,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	                              <option value="1">在职</option>
         	                              <option value="2">离职</option>
         	                              <option value="3">退休</option>
-        	                            </slect>
+        	                            </select>
       </td>
    </tr>
    <tr>
@@ -247,7 +251,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	                              <option value="4">研究生</option>
         	                                <option value="5">博士</option>
         	                              <option value="6">博士后</option>
-        	                            </slect>
+        	                            </select>
       </td>
    </tr>
    <tr>
@@ -258,7 +262,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	                              <option value="2">博士后</option>
         	                              <option value="3">学士</option>
         	                              <option value="4">MBA</option>
-        	                            </slect>
+        	                            </select>
       </td>
       <td nowrap class="col-md-2 control-label">毕业时间:</td>
       <td class="TableData">
@@ -309,8 +313,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </html>
 <script>
 	$(function(){ 
-			
-			queryAll();
+		queryAll();
+		staffFind();
+		rolesFind();
 		})
 	function queryAll(){
 			$.ajax({
@@ -321,22 +326,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					 $("#tbody").empty()
 					 for(var i=0;i<data.length;i++){
 					 	var obj=data[i];
-					 	var sex1=null;
-					 	if(obj.STAFF_SEX=='0'){
-					 	sex1="男"
-					 	}if(obj.STAFF_SEX=='1'){
-					 	sex1="女"
-					 	}
 	           			var tr="<tr>";
 	           			tr+="<td><input type='checkbox' ></td>";
 	           			tr+="<td>"+obj.STAFF_NAME+"</td>";
 		                tr+="<td>"+obj.rolesName+"</td>";
-		                tr+="<td>"+sex1+"</td>";
+		                tr+="<td>"+obj.STAFF_SEX+"</td>";
 		                tr+="<td>"+obj.STAFF_BIRTH+"</td>";
 		                tr+="<td>"+obj.STAFF_NATIONALITY+"</td>";
 		                tr+="<td>"+obj.STAFF_NATIVE_PLACE+"</td>";
-		                tr+="<td>"+obj.STAFF_POLITICAL_STATUS+"</td>";
-		                tr+="<td>"+obj.DATES_EMPLOYED+"</td>";
+		                tr+="<td>"+obj.STAFF_POLITICAL_STATUS+"</td>"
+		                tr+="<td>"+obj.DATES_EMPLOYED+"</td>"
 		                tr+="<td><input type='button' data-toggle='modal' data-target='#staffModal' title=" + obj.staff_id+ "  class='selId btn btn-default' value='修改'></td>";
 		                tr+="<td><input type='button' id='"+obj.staff_id+"' class='delete  btn btn-default' value='删除'></td>";
 		                tr+="</tr>";
@@ -350,43 +349,42 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				$("#tbody").on("click",".selId",function(){
 					var id=this.title;
 					$.ajax({
-						url:"staff/selId",
+						url:"staff/selectId",
 						type:"post",
 						async:true,
-						contentType:"application/json;charset=utf-8",
-						data:JSON.stringify(id),
+						data:{"staff_id":id},
 						dataType: 'Json',
 						success:function(data){
-						    $("#departmentId").val(data[0].departmentId);
-						    $("#rolesId").val(data[0].rolesName);
-						    $("#staffNo").val(data[0].STAFF_NO);
-							$("#staffName").val(data[0].STAFF_NAME);
-							$("#staffCardNo").val(data[0].STAFF_CARD_NO);
-							$("#staffBirth").val(data[0].STAFF_BIRTH);
-							$("#staffAge").val(data[0].STAFF_AGE);
-							$("#staffSex").val(data[0]. STAFF_SEX);
-							$("#staffNativePlace").val(data[0].STAFF_NATIVE_PLACE);
-							$("#staffNationality").val(data[0].STAFF_NATIONALITY);
-							$("#staffemall").val(data[0].STAFF_EMAIL);
-							$("#homeaddress").val(data[0].HOME_ADDRESS);
-							$("#staffPoliticalStatus").val(data[0].STAFF_POLITICAL_STATUS);
-							$("#staffHealth").val(data[0].STAFF_HEALTH);
-							$("#positionId").val(data[0].positionId);
-							$("#staffOccupation").val(data[0].STAFF_OCCUPATION);
-							$("#datesEmployed").val(data[0].DATES_EMPLOYED);
-							$("#jobAge").val(data[0].JOB_AGE);
-							$("#beginSalsryTime").val(data[0].BEGIN_SALSRY_TIME);
-							$("#workAge").val(data[0].WORK_AGE);
-							$("#jobBeginning").val(data[0].JOB_BEGINNING);
-							$("#staffPhone").val(data[0].STAFF_PHONE);
-							$("#staffHighestSchool").val(data[0].STAFF_HIGHEST_SCHOOL);
-							$("#staffHighseDegree").val(data[0].STAFF_HIGHEST_DEGREE);
-							$("#graduationDate").val(data[0].GRADUATION_DATE);
-							$("#graduationSchool").val(data[0].GRADUATION_SCHOOL);
-							$("#staffMajor").val(data[0].STAFF_MAJOR);
-							$("#staffSkills").val(data[0].STAFF_SKILLS);
-							$("#remark").val(data[0].REMARK);
-							$("#resume").val(data[0].RESUME);
+						    $("#departmentId").val(data.departmentId);
+						    $("#rolesId").val(data.roleId);
+						    $("#staffNo").val(data.STAFF_NO);
+							$("#staffName").val(data.STAFF_NAME);
+							$("#staffCardNo").val(data.STAFF_CARD_NO);
+							$("#staffBirth").val(data.STAFF_BIRTH);
+							$("#staffAge").val(data.STAFF_AGE);
+							$("#staffSex").val(data.STAFF_SEX);
+							$("#staffNativePlace").val(data.STAFF_NATIVE_PLACE);
+							$("#staffNationality").val(data.STAFF_NATIONALITY);
+							$("#staffemall").val(data.STAFF_EMAIL);
+							$("#homeaddress").val(data.HOME_ADDRESS);
+							$("#staffPoliticalStatus").val(data.STAFF_POLITICAL_STATUS);
+							$("#staffHealth").val(data.STAFF_HEALTH);
+							$("#positionId").val(data.positionId);
+							$("#staffOccupation").val(data.STAFF_OCCUPATION);
+							$("#datesEmployed").val(data.DATES_EMPLOYED);
+							$("#jobAge").val(data.JOB_AGE);
+							$("#beginSalsryTime").val(data.BEGIN_SALSRY_TIME);
+							$("#workAge").val(data.WORK_AGE);
+							$("#jobBeginning").val(data.JOB_BEGINNING);
+							$("#staffPhone").val(data.STAFF_PHONE);
+							$("#staffHighestSchool").val(data.STAFF_HIGHEST_SCHOOL);
+							$("#staffHighseDegree").val(data.STAFF_HIGHEST_DEGREE);
+							$("#graduationDate").val(data.GRADUATION_DATE);
+							$("#graduationSchool").val(data.GRADUATION_SCHOOL);
+							$("#staffMajor").val(data.STAFF_MAJOR);
+							$("#staffSkills").val(data.STAFF_SKILLS);
+							$("#remark").val(data.REMARK);
+							$("#resume").val(data.RESUME);
 						}
 					});
 				})
@@ -394,6 +392,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			/* 模态框修改 */
 	   function update(){
 			var obj=$("#form1").serialize();
+			alert(obj);
 		    $.ajax({
 		       url:"staff/staff_update",
         	    type:"post",
@@ -408,17 +407,50 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 $(function(){
 				$("#tbody").on("click",".delete",function(){
 					var id=this.id;
+					alert(id);
 					$.ajax({
 						url:"staff/delete",
 						type:"post",
 						async:true,
-						contentType:"application/json;charset=utf-8",
-						data:JSON.stringify(id),
-						dataType: 'Json',
+						data:{"staff_id":id},
+						dataType: 'text',
 						success:function(data){
+						alert(data);
 						queryAll();
 						}
 					});
 				})
 			})
+			//部门查询
+			function staffFind(){
+				  $.ajax({
+				        url:"staff/selectDep",
+				        dataType:"json",
+				        type:"post",
+				        success:function(data){
+				        	  for(var i=0;i<data.length;i++){
+				        		$("#staffFind").append("<option value='"+data[i].departmentId+"'>"+data[i].departmentName+"</option>"); 
+				         	
+				        	}  
+				        	
+				        }
+			      }); 
+	
+	 } 
+	 //角色
+			function rolesFind(){
+				  $.ajax({
+				        url:"staff/selectRole",
+				        dataType:"json",
+				        type:"post",
+				        success:function(data){
+				        	  for(var i=0;i<data.length;i++){
+				        		$("#rolesFind").append("<option value='"+data[i].rolesId+"'>"+data[i].rolesName+"</option>"); 
+				         	
+				        	}  
+				        	
+				        }
+			      }); 
+	
+	 } 
 </script>

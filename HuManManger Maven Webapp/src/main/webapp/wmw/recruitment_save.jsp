@@ -27,7 +27,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      <ul class="nav nav-tabs">
 	  <li class="active"><a href="/HuManManger/wmw/recruitment_select.jsp">招聘录用管理</a></li>
 	  <li><a href="/HuManManger/wmw/recruitment_save.jsp">新建招聘录用</a></li>
-	  <li><a href="/HuManManger/wmw/recruitment_select.jsp">招聘录用查询</a></li>
     </ul>
 
 <!-- 添加招聘需求-->
@@ -137,7 +136,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script>
     function recru_save(){
 			var obj=$("#recruitsave").serialize();
-			alert(obj);
 		    $.ajax({
 		       url : "recru/save",
         	   type : "post",

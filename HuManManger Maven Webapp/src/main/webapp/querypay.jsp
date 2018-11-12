@@ -35,15 +35,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 				<thead>
 					<tr  class="warning">
-					<th>部门名称</th>	
-					<th>职务名称</th>
+					
 					<th>人员名称</th>
 						<th>职务工资</th>
 						<th>应缴保险总额</th>
 						<th>津贴</th>
 						<th>奖金</th>
-						<th>考勤扣款总额</th>
 						<th>应发工资</th>
+						<th>薪资计划状态</th>
 					</tr>
 				</thead>
 				<tbody id="tbody">
@@ -130,14 +129,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<input type="hidden"  name="payid"  id="pid">
 					</div>
 				</div>
-					<div class="form-group">
-					<label for="firstname" class="col-sm-2 control-label">部门名称</label>
-					<div class="col-sm-3">
-						<input type="text" class="form-control" 
-							placeholder="请项目编号"  id="deparname" readonly="readonly">
-							<input type="hidden"  name="departmentId"  id="deparid">
-					</div>
-				</div>
+					
 				
 				
 				<div class="form-group">
@@ -188,13 +180,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div>
 				</div>
 				
-				<div class="form-group">
-					<label for="firstname" class="col-sm-2 control-label">考勤扣款总额</label>
-					<div class="col-sm-3">
-						<input type="text" class="form-control" 
-							placeholder="请项目编号" name="K_withhold" id="with" readonly="readonly">
-					</div>
-				</div>
+				
 				
 				
 				<div class="form-group">
@@ -277,10 +263,7 @@ $(function(){
 	    var bonus=$(this).parent().parent().find("#bon").html();
 	  $("#bonus").val(bonus);
 	   
-	   //获取考勤扣款  并将值加到修改的input内
-	    var withhold=$(this).parent().parent().find("#withhold").html();
-	  $("#with").val(withhold);
-	   
+	
 	  });
 	})
 	//计算保险总额
@@ -300,18 +283,11 @@ $(function(){
   		  var num3 = parseInt(yf3); 
   		var yf4 = $("#bonus").val(); //奖金
   		  var num4 = parseInt(yf4);  
-  		var yf5 = $("#with").val(); //考勤扣款
-  	  var num5 = parseInt(yf5);  
+
       
-  		var yf = num1 - num2 + num3 + num4 - num5; //应发工资=职务工资-个人保险扣款+津贴+奖金-考勤扣款
+  		var yf = num1 - num2 + num3 + num4; //应发工资=职务工资-个人保险扣款+津贴+奖金-考勤扣款
   		$("#after_tax").val(yf);
-  		  if(yf5>30){
-	 			$("#bonus").val(0);
-	 			}else{
-	 			$("#bonus").val(200);
-	 			}
   	}
-  	
   	
   	//单挑查询薪资各个总额详情
   	
@@ -390,12 +366,12 @@ $(function(){
 					var obj = data[i];
 					
 					var tr = "<tr>";
-					tr += "<tr>"
+				/* 	tr += "<tr>"
 					tr += "<td>部门名称</td><td>" + obj.departmentName + "</td>";
 					tr += "</tr>";
 					tr += "<tr>"
 					tr += "<td>职务名称 </td><td>" + obj.positionName + "</td>";
-					tr += "</tr>";
+					tr += "</tr>"; */
 					tr += "<tr>"
 					tr += "<td>员工名称</td><td>" + obj.STAFF_NAME + "</td>";
 					tr += "</tr>";
@@ -460,6 +436,7 @@ $(function(){
 					tr += "<td>应发工资(元)</td><td>" + obj.after_tax_salary + "</td>";//应发工资
 					tr += "</tr>";
 					$("#tbody2").append(tr);
+					
 					}
 						}
 					});
@@ -488,22 +465,23 @@ $(function(){
 					var tr = "<tr>";
 					tr += "<td id='pay' style='display:none'>" + obj.payid + "</td>";
 					tr += "<td id='did' style='display:none'>" + obj.departmentId + "</td>";
-					tr += "<td id='dname'>" + obj.departmentName + "</td>";
+					tr += "<td id='dname' style='display:none'>" + obj.departmentName + "</td>";
 				    tr += "<td id='positid' style='display:none'>" + obj.positionId + "</td>";
-					tr += "<td id='pay' id='positiname'>" + obj.positionName + "</td>";
-					tr += "<td id='stid' style='display:none'>" + obj.staff_id + "</td>";
+					tr += "<td id='pay' id='positiname' style='display:none'>" + obj.positionName + "</td>";
+					tr += "<td id='stid' style='display:none' >" + obj.staff_id + "</td>";
 					tr += "<td id='staname'>" + obj.STAFF_NAME + "</td>";
 					tr += "<td id='sal'>" + obj.tax_salary + "</td>";	
 					tr += "<td id='insuran'>" + obj.insurance + "</td>";//保险总额
 					tr += "<td id='subven'>" + obj.subvention + "</td>";//津贴
 					tr += "<td id='bon'>" + obj.Bonus + "</td>";//奖金
-					tr += "<td id='withhold'>" + obj.K_withhold + "</td>";//考勤扣款总额
 					tr += "<td id='tax_sala'>" + obj.after_tax_salary + "</td>";//应发工资
+					 tr += "<td>" + adc(obj.state) + "</td>"; 
 					tr += "<td><input type='button' id='" + obj.payid + "' value='修改' class='update  btn btn-default' href='#modal-container-8802612' data-toggle='modal'></td>";
                     tr +="<td><input type='button' id='" + obj.payid + "' value='删除' class='delete btn btn-default'></td>";
                     tr +="<td><input type='button' id='" + obj.payid + "' value='查看详情' class='xq btn btn-default' href='#modal-xq' data-toggle='modal'></td>";
 					tr += "</tr>";
 					$("#tbody").append(tr);
+					
           }
           //当前页的值
 				$("#currPage").val(data.pageNum);
@@ -556,6 +534,14 @@ $(function(){
 	$("#shouye").click(function() {
 		findAll(1);
 	})
-	
+	//状态
+function adc(num){
+  	   if(num==1){
+  	       return '批准';
+  	 
+  	   }else if(num==2){
+  	       return '不批准';
+  	   }
+  	}
   </script>
 </html>

@@ -28,17 +28,14 @@ layui.use('table', function(){
     ,title: '用户数据表'
     ,totalRow: true
     ,cols: [[
-      {field:'departmentName', title:'部门户名', width:120, edit: 'text'}
-      ,{field:'positionName', title:'职务名', width:150, edit: 'text'}
-      ,{field:'STAFF_NAME', title:'人员名', width:150,}
+
+      {field:'STAFF_NAME', title:'人员名', width:150,}
+      ,{field:'tax_time', title:'薪资日期', width:150,  sort: true }
       ,{field:'tax_salary', title:'职务工资', width:150,  sort: true ,totalRow: true}
       ,{field:'Bonus', title:'奖金', width:100, sort: true, totalRow: true}
       ,{field:'subvention', title:'津贴',width:100,totalRow: true, sort: true}
-      ,{field:'late', title:'迟到次数', width:120, sort: true}
-      ,{field:'early_retreat', title:'早退次数', width:120, sort: true}
-      ,{field:'absenteeism', title:'旷工次数', width:120, sort: true}
+
       
-       ,{field:'K_withhold', title:'考勤扣款总额(元)', width:160, edit: 'text',totalRow: true, sort: true}
       ,{field:'endowment_insurance', title:'个人养老保险(元)', width:160, edit: 'text',totalRow: true, sort: true}
       ,{field:'medical_insurance', title:'个人医疗保险(元)', width:160,  totalRow: true, sort: true}
       ,{field:'birth_insurance', title:'个人生育保险(元)', width:160, edit: 'text', sort: true,totalRow: true}

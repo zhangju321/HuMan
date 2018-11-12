@@ -18,8 +18,8 @@ public class Hr_filterServiceImpl implements Hr_filterService {
 		 return dao.saveFilter(filter);
 	}
 	@Override
-	public List<Map<String, Object>> selectFilter() {
-		return dao.selectFilter();
+	public List<Map<String, Object>> selectFilter(int id) {
+		return dao.selectFilter(id);
 	}
 	@Override
 	public int updateFilter(Hr_recruit_filter filter) {
@@ -48,6 +48,16 @@ public class Hr_filterServiceImpl implements Hr_filterService {
 	public List<Map<String, Object>> FilterName() {
 		// TODO Auto-generated method stub
 		return dao.FilterName();
+	}
+	@Override
+	public List<Map<String, Object>> selectpool() {
+		// TODO Auto-generated method stub
+		return dao.selectpool();
+	}
+	@Override
+	public List<Map<String, Object>> selectid(int expertId) {
+		// TODO Auto-generated method stub
+		return dao.selectid(expertId);
 	}
 
 }

@@ -10,11 +10,14 @@ import zj.entity.Vocation;
 
 public interface VocationService {
 	public List<Map> queryAll();
-	public List<Staff_info> findAll();
-	public int save(Vocation v);
-	public Vocation queryById(int vocation_Id);
+	public List<Map> findAll();
+	public int save(Vocation v);	
+	//public Vocation queryById(int vocation_Id);
+	public List<Map<String,Object>> queryById(int vocation_Id);
 	public List<Map> queryStaff(int sta_Staff_Id);
     public void updateStatu(Vocation statu); 
     public void updateStatu2(Vocation statu);
     public int delete(int vocation_Id);
+    public Vocation queryId(int vocation_Id);
+    public List<Map<String,Object>> UserName();
 }

@@ -20,49 +20,41 @@ private Staff_infoMapper mper;
 		// TODO Auto-generated method stub
 		return mper.selectAll();
 	}
-
 	@Override
-	public void save(Staff_info stinfo) {
+	public int save(Staff_info stinfo) {
 		// TODO Auto-generated method stub
-		mper.save(stinfo);
-		
+		return mper.save(stinfo);
 	}
-
 	@Override
-	public	List<Staff_info> selectId(int staff_id){
- 
+	public List<Map<String, Object>> selectId(int staff_id) {
 		// TODO Auto-generated method stub
 		return mper.selectId(staff_id);
 	}
-
 	@Override
 	public int update(Staff_info stinfo) {
 		// TODO Auto-generated method stub
 		return mper.update(stinfo);
 	}
-
 	@Override
-	public int delete(int staff_id) {
+	public int delete(Staff_info stinfo) {
 		// TODO Auto-generated method stub
-		return mper.delete(staff_id);
+		return mper.delete(stinfo);
 	}
-
 	@Override
-	public List<Role> selectRole() {
+	public List<Map<String, Object>> selectRole() {
 		// TODO Auto-generated method stub
 		return mper.selectRole();
 	}
-
 	@Override
-	public List<Position> selectPost() {
+	public List<Map<String, Object>> selectPost() {
 		// TODO Auto-generated method stub
 		return mper.selectPost();
 	}
-
 	@Override
-	public List<Department> selectDep() {
+	public List<Map<String, Object>> selectDep() {
 		// TODO Auto-generated method stub
 		return mper.selectDep();
 	}
+
 
 }

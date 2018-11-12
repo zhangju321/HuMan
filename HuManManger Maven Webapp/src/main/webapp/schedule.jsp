@@ -30,8 +30,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
+  
+  
   <div style="text-align: center">
-  <input type="button"  data-toggle="modal" data-target="#myModal"  class="em btn btn-default" value="新建排班">
+  <input type="button"  data-toggle="modal" data-target="#myModal"  class="aa btn btn-default" value="新建排班">
  </div>
    <table border="1" class="table">
      <thead>
@@ -115,8 +117,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="form-group">
 								<label for="description" class="col-sm-2 control-label">是/否:</label>
 								<div class="col-sm-4">
-								<input type="radio" id="status" name="status" value="1" >是
-								<input type="radio" id="status" name="status" value="2" >否
+								<!-- <input type="radio" id="status" name="status" value="1" checked="checked">是
+								<input type="radio" id="sta" name="status" value="2" >否 -->
+								<select id="status" name="status" class="form-control">
+								<option value="1">是</option>
+								<option value="2">否</option>
+								</select>
 								</div>
 							</div>
 							
@@ -124,7 +130,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<label for="description" class="col-sm-2 control-label">排班开始日期:</label>
 								<div class="col-sm-4">
 									<input type="date" id="date_start" class="form-control" name="date_start"/>   
-						
+						            <span style="color: red">法定节假日不排班</span><a href="test1.jsp">参考日历</a>
 								</div>
 							</div>
 							
@@ -132,7 +138,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<label for="description" class="col-sm-2 control-label">排班结束日期:</label>
 								<div class="col-sm-4">
 									 <input type="date" id="date_end" class="form-control" name="date_end"/> 
-										
+										<span style="color: red">法定节假日不排班</span>
 								</div>
 							</div>
 							        
@@ -201,10 +207,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                  tr+="<td>"+stsstr+"</td>"; 
                  tr+="<td>"+obj.date_start+"</td>";
                  tr+="<td>"+obj.date_end+"</td>";
-                /*  name="+obj.departmentName+" */
                  tr+="<td><input type='button' data-toggle='modal' data-target='#myModal' id="+obj.id+" class='findById btn btn-default' value='修改'></td>";
                  tr+="<td><input type='button' id="+obj.id+"  class='delete btn btn-default' value='删除'></td>";
-                 tr+="<td><input type='button' id="+obj.id+"  class='updateState btn btn-default' value='状态修改'></td>";
+                 tr+="<td><input type='button' id="+obj.id+"  class='updateState btn btn-default' value='状态'></td>";
                                  tr+="</tr>";
                  $("#tbody").append(tr);
           }
@@ -272,14 +277,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   
    $(document).on("click","#saveOrUpdate",function(){
-     var obj=$("#file1").serializeObject();//将表单数据转换json对象
-     
+   var obj=$("#file1").serializeObject();//将表单数据转换json对象
      $.ajax({
        url:"attend_schedule/saveOrUpdate",
        type:"post",
        async:true,
-       contentType:"application/json;charset=utf-8",//发送的内容类型utf-8 
-       data:JSON.stringify(obj),//将json对象转换成json字符串
+        contentType:"application/json;charset=utf-8", //发送的内容类型utf-8 
+        data:JSON.stringify(obj), //将json对象转换成json字符串
        dataType:"text",
        success:function(data){
           scheFind();
@@ -379,13 +383,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    $(document).on("click",".updateState",function(){
     
     var id=this.id;
-    alert(id);
-  
+    var status=$(this).parent().parent().children().eq(4).html();
+    alert("状态值"+status);
+
     $.ajax({
        url:"attend_schedule/updateState",
-       data:{"id":id},   
+       data:{"id":id,"status":status},   
        type:"post",
-       dataType:"text",
        success:function(data){
          alert(data);
          scheFind();
@@ -429,18 +433,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				        		$("#staffFind").append("<option value='"+data[i].staff_id+"'>"+data[i].STAFF_NAME+"</option>"); 
 				         	
 				        	}  
-				        	 /*  $.each(data,function(i,n){
-				        		/* $("#staffFind").append("<option value='"+data[i].staff_id+"'>"+data[i].STAFF_NAME+"</option>"); */ 
-				         	 	/* if(n.staff_id==${staff_id}){
-                             	$("#staffFind").append("<option value='"+n.staff_id+"' selected='selected'>"+n.STAFF_NAME+"</option>");
-	                            }else{
-	                           $("#staffFind").append("<option value='"+n.staff_id+"'>"+n.STAFF_NAME+"</option>");
-	                          	}  
-				        	}   */
-	 
+				        	
 				        }
 			      }); 
 	
 	 } 
+
 
 </script>

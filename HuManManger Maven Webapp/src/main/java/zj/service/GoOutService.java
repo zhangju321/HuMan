@@ -5,6 +5,7 @@ import java.util.Map;
 
 import zj.entity.GoOut;
 import zj.entity.Staff_info;
+import zj.entity.Vocation;
 
 
 public interface GoOutService {
@@ -13,7 +14,8 @@ public interface GoOutService {
 	  public int insert(GoOut g);
 	  public void updateStatu(GoOut statu); 
 	  public void updateStatu2(GoOut statu);
-	  public GoOut queryById(int out_Id);	  
-	  public List<Map> queryStaff3(int staff_Id);
-	 
+	  //public GoOut queryById(int out_Id);
+	  public List<Map<String,Object>> queryDetails(int out_Id);
+	  public List<Map> queryStaff3(int sta_Staff_Id);
+	  public GoOut queryId(int out_Id);
 }

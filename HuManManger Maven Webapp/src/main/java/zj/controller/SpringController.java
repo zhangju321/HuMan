@@ -29,13 +29,13 @@ public class SpringController {
 	@ResponseBody
 	@RequestMapping("/sfFind")
 	public PageInfo<Map<String, Object>> sfFind(@RequestParam(required = false, defaultValue = "1") Integer startPage){
-		 PageHelper.startPage(startPage, 5);
+		 PageHelper.startPage(startPage, 8);
 		 List<Map<String, Object>> list=sfsService.sfFind();
 		 PageInfo<Map<String, Object>> pi = new PageInfo<>(list);
 		 return pi;
 	}
 	@RequestMapping("/saveOrUpdate")
-	public void saveOrUpdate(@RequestBody Springfestival sf,HttpServletResponse response) throws IOException{
+	public void saveOrUpdate(Springfestival sf,HttpServletResponse response) throws IOException{
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out=response.getWriter();
 		sfsService.saveOrUpdate(sf);

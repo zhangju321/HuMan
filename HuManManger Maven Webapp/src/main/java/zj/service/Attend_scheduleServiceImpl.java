@@ -41,10 +41,9 @@ public class Attend_scheduleServiceImpl implements Attend_scheduleService {
 	}
 
 	@Override
-	public void updateState(Attend_schedule schedule) {
-		
+	public int updateState(Attend_schedule schedule) {
 	
-			as.updateState(schedule);
+			return as.updateState(schedule);
 		
 	}
 

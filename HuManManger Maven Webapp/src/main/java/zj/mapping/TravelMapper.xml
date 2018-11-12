@@ -3,20 +3,29 @@
 <mapper namespace="zj.dao.TravelMapper" >
   <select id="queryAll" resultType="java.util.Map">
     <!-- select * from travel -->
-    select t.status_Name,t.travel_Id,s.staff_Name,t.travel_Reason,t.travel_Place,t.start_Time,
+    select t.status_Name,t.travel_Id,s.STAFF_NAME,t.travel_Reason,t.travel_Place,t.start_Time,
        t.end_Time,t.examine_Person,t.circulate from travel t left join staff_Info s on
-       t.sta_Staff_Id=s.STAFF_ID order by t.travel_Id
-    
+       t.sta_Staff_Id=s.STAFF_ID order by t.travel_Id   
   </select>
   
   <select id="findAll" resultType="Staff_info">
-    select staff_Id staffId,staff_Name staffName from staff_info
+    select staff_Id ,STAFF_NAME from staff_info
   </select>
-  <select id="queryById" resultType="Travel" parameterType="int">
+  <!-- <select id="queryById" resultType="Travel" parameterType="int">
      select * from travel where travel_Id=#{travel_Id}
+  </select> -->
+  <select id="queryDetails" resultType="Map" parameterType="int">
+     select d.departmentName,s.STAFF_NAME,s.staff_Id,t.travel_Reason,
+     t.travel_Place,t.start_Time,t.end_Time,t.status_Name 
+     from travel t left join staff_Info s on t.sta_Staff_Id=s.STAFF_ID
+     join department d on d.departmentId=s.departmentId
+     where t.travel_Id=#{travel_Id}
+  </select>
+   <select id="overrule" resultType="Travel" parameterType="int">
+     select operate from travel where travel_Id=#{travel_Id}
   </select>
   <select id="queryStaff2" resultType="java.util.Map" parameterType="int">
-     select s.staff_Name,t.travel_Reason,t.travel_Place,t.start_Time,t.end_Time,t.status_Name
+     select s.STAFF_NAME,t.travel_Reason,t.travel_Place,t.start_Time,t.end_Time,t.status_Name
      from travel t left join staff_Info s on t.sta_Staff_Id=s.STAFF_ID
      where t.sta_Staff_Id=#{sta_Staff_Id}
   </select>
@@ -33,6 +42,6 @@
     update travel set status_Name='1' where travel_Id=#{travel_Id} 
   </update>
   <update id="updateStatu2" parameterType="Travel">
-    update travel set status_Name='2' where travel_Id=#{travel_Id} 
+    update travel set status_Name='2',operate=#{operate} where travel_Id=#{travel_Id} 
   </update>
 </mapper>

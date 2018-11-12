@@ -3,24 +3,14 @@
 <mapper namespace="zj.dao.Staff_infoMapper" >
 	<!-- 查询全部 -->
 	<select id="selectAll" resultType="Map">
-		select info.*,depa.departmentName,p.positionName,r.rolesName 
+		select info.*,depa.departmentName,p.positionName,r.rolesName
 		from staff_info info
-	  LEFT JOIN department depa on info.departmentId=depa.departmentId 
+	    LEFT JOIN department depa on info.departmentId=depa.departmentId 
 		LEFT JOIN position p on info.positionId=p.positionId 
 		LEFT JOIN roles r on info.rolesId=r.rolesId
 	</select>
 	
-	<select id="selectDep" parameterType="zj.entity.Department"> 
-		select * from department
-	</select>
-	<!--角色  -->
-<select id="selectRole" parameterType="zj.entity.Roles">
-		select * from roles
-	</select>
-<!-- 职务 -->
-		<select id="selectPost" parameterType="zj.entity.Position">
-		select * from position
-	</select>
+	
 	<!-- 添加 -->
 	<insert id="save" parameterType="Staff_info">
 		insert into staff_info (departmentId,positionId,STAFF_NO,PHOTO_NAME,STAFF_NAME,STAFF_CARD_NO,STAFF_SEX,STAFF_BIRTH,STAFF_AGE,STAFF_NATIVE_PLACE,STAFF_NATIONALITY,STAFF_POLITICAL_STATUS,
@@ -32,18 +22,17 @@
 	</insert>
 	<!-- 删除 -->
 	<delete id="delete" parameterType="Staff_info">
-		delete from staff_info where staff_id=#{staff_id}
+		delete from staff_info where staff_id=#{staffId}
 	</delete>
-	<!--修改前查询  -->
+	<!--根据id查询  -->
 	<select id="selectId" parameterType="int" resultType="Map">
 		select * from staff_info where staff_id=#{staff_id}
 	</select>
 	<update id="update" parameterType="Staff_info" >
 		update staff_info  
 		<set>
-			<if test="departmentId != null">departmentId=#{departmentId},</if>
-			<if test="rolesId != null">rolesId=#{rolesId},</if>
-			<if test="positionId != null">positionId=#{positionId},</if>
+			<if test="DepartmentId != null">DepartmentId=#{DepartmentId},</if>
+			<if test="PositionId != null">PositionId=#{PositionId},</if>
 			<if test="STAFF_NO !=null">STAFF_NO=#{STAFF_NO},</if>
 			<if test="PHOTO_NAME !=null">PHOTO_NAME=#{PHOTO_NAME},</if>
 			<if test="STAFF_NAME !=null">STAFF_NAME=#{STAFF_NAME},</if>
@@ -79,4 +68,16 @@
 		</set>
 		where Dtaff_id=#{Dtaff_id}
 	</update>
+	<!--角色  -->
+	<select id="selectRole" resultType="Map">
+		select * from roles
+	</select>
+	<!-- 部门 -->
+	<select id="selectDep" resultType="Map">
+		select * from department
+	</select>
+	<!-- 职务 -->
+	<select id="selectPost" resultType="Map"> 
+		select * from position
+	</select>
 </mapper>

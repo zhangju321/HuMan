@@ -29,17 +29,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
        
-    <form id="form1" method="post" class="form-horizontal">
-      <div class="form-group">
-        <label for="departmentId" class="col-md-4 control-label">部门:</label>
-         <div class="col-md-6">
-           <select id="depart" name="departmentId" >
-                <option selected>显示所有部门员工</option>
-           </select>
-         </div>
-      </div>
-     </form>
+    <form id="form1" >
      
+                部门:  <select id="depart" name="departmentId" >
+                <option value="0" selected>--选择部门--</option>
+           </select>         
+     </form>
+      <form>
+                               员工姓名:<input type="text" name="staffName" id="staffName"/></td>                
+           <input type="button" value="搜索" id="like1"/></td>                           
+    </form>  
     
      <div class="modal-body">
   
@@ -136,14 +135,41 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </body>
 </html>
 <script>
-$(function(){
+  function querymh(){
+  var staffName=$("#staffName").val();  
+  //alert(staffName);
+  $.ajax({
+        	url : "staffInfo/querymh",
+        	type : "post",
+        	async : true,
+        	data:{"staffName":staffName},
+       	 	dataType : 'Json',
+        	success : function(data) {
+        		$("#tbody").html("");
+        		for(var i=0;i<data.length;i++){
+        			var obj=data[i];
+        			var tr="<tr>"; 
+        			tr+="<td>"+data[i].departmentname+"</td>";
+        			tr+="<td>"+data[i].staff_Id+"</td>";
+        			tr+="<td>"+data[i].STAFF_NAME+"</td>";        			
+        			tr+="<td><button class='queryId btn btn-primary' id='"+data[i].staff_Id+"' data-toggle='modal' data-target='#myModall'>详情</button></td>";          			      					        	  		     
+        			tr+="</tr>";
+        			$("#tbody").append(tr);
+        		}     
+        	}
+ 		});
+  }
+  $("#like1").click(function(){
+	    querymh();
+	})
+  $(function(){
     conFind(1);
   });
   function conFind(startPage){
     $.ajax({
        url:"staffInfo/queryStaff",
        type:"post",
-       data : {
+       data : {                
 				"startPage" : startPage
 			}, 
        dataType:"json",
@@ -151,9 +177,9 @@ $(function(){
           $("#tbody").empty();
           var ary = data.list;
           for(var i=0;i<ary.length;i++){
-           var obj = ary[i];
+           var obj = ary[i];//获取当前对象
             var tr="<tr>";
-                 tr+="<td>"+obj.departmentName+"</td>";
+                 tr+="<td>"+obj.departmentname+"</td>";
         			tr+="<td>"+obj.staff_Id+"</td>";
         			tr+="<td>"+obj.staff_Name+"</td>";        			
         			tr+="<td><button class='queryId btn btn-primary' id='"+obj.staff_Id+"' data-toggle='modal' data-target='#myModall'>详情</button></td>";          			      					        	  		     
@@ -201,24 +227,18 @@ $(function(){
 		var currPage = parseInt($("#currPage").val());
 		conFind(currPage - 1);
 	})
-	$("#xyy").click(function() {
+	$("#xyy").click(function(){
 		var currPage = parseInt($("#currPage").val());
 		conFind(currPage + 1);
 	})
 	$("#shouye").click(function() {
 		conFind(1);
 	})
-
-
-
-
-
-
-
 	/* 根据下拉框选中的类型进行查询 */
 	$("#depart").bind("change",function(){
             var departmentId = $(this).val();
             godeptId(departmentId);
+            
         });
 function godeptId(departmentId){
      $.ajax({
@@ -233,7 +253,7 @@ function godeptId(departmentId){
         		for(var i=0;i<data.length;i++){
         			var obj=data[i];
         			var tr="<tr>"; 
-        			tr+="<td>"+data[i].departmentName+"</td>";
+        			tr+="<td>"+data[i].departmentname+"</td>";
         			tr+="<td>"+data[i].staff_Id+"</td>";
         			tr+="<td>"+data[i].staff_Name+"</td>";        			
         			tr+="<td><button class='queryId btn btn-primary' id='"+data[i].staff_Id+"' data-toggle='modal' data-target='#myModall'>记录</button></td>";          			      					        	  		     
@@ -244,28 +264,6 @@ function godeptId(departmentId){
       })
 
 }
-/*  function goStaff(){
-		 	$.ajax({
-        	url : "staffInfo/queryStaff",
-        	type : "post",
-        	async : true,
-        	data:$("#tbody").serialize(),
-       	 	dataType : 'Json',
-        	success : function(data) {
-        		$("#tbody").html("");
-        		for(var i=0;i<data.length;i++){
-        			var obj=data[i];
-        			var tr="<tr>"; 
-        			tr+="<td>"+data[i].departmentName+"</td>";
-        			tr+="<td>"+data[i].staff_Id+"</td>";
-        			tr+="<td>"+data[i].staff_Name+"</td>";        			
-        			tr+="<td><button class='queryId btn btn-primary' id='"+data[i].staff_Id+"' data-toggle='modal' data-target='#myModall'>详情</button></td>";          			      					        	  		     
-        			tr+="</tr>";
-        			$("#tbody").append(tr);
-        		}     
-        	}
- 		});
-		}  */
  $(function(){
 		findDepart();
 		conFind();

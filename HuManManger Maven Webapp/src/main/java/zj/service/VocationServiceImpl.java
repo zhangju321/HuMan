@@ -22,7 +22,7 @@ public class VocationServiceImpl implements VocationService {
 	}
 
 	@Override
-	public List<Staff_info> findAll() {
+	public List<Map> findAll() {
 		// TODO Auto-generated method stub
 		return vdao.findAll();
 	}
@@ -47,11 +47,11 @@ public class VocationServiceImpl implements VocationService {
 
 	}
 
-	@Override
+	/*@Override
 	public Vocation queryById(int vocation_Id) {
 		// TODO Auto-generated method stub
 		return vdao.queryById(vocation_Id);
-	}
+	}*/
 
 	@Override
 	public List<Map> queryStaff(int sta_Staff_Id) {
@@ -65,7 +65,24 @@ public class VocationServiceImpl implements VocationService {
 		return vdao.delete(vocation_Id);
 	}
 
-	
+	@Override
+	public Vocation queryId(int vocation_Id) {
+		// TODO Auto-generated method stub
+		return vdao.queryId(vocation_Id);
+	}
 
+	@Override
+	public List<Map<String, Object>> queryById(int vocation_Id) {
+		// TODO Auto-generated method stub
+		return vdao.queryById(vocation_Id);
+	}
+
+	@Override
+	public List<Map<String, Object>> UserName() {
+		// TODO Auto-generated method stub
+		return vdao.UserName();
+	}
+
+	
 
 }

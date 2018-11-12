@@ -22,7 +22,7 @@ public class Staff_contractServiceImpl implements Staff_contractService{
 		if(contract.getContractId()!=0 && contract.getContractId()>0){
 			return mapper.update(contract);
 		}
-		
+		mapper.updatestatus1(contract.getContractId());
 		return mapper.insert(contract);
 	}
 
@@ -37,6 +37,10 @@ public class Staff_contractServiceImpl implements Staff_contractService{
 	//查询合同信息
 	public List<Map<String, Object>> selectcontract() {
 		// TODO Auto-generated method stub
+		mapper.updatestatus2();
+		mapper.updatestatus3();
+		mapper.updatestatus4();
+		mapper.updatestatus5();
 		return mapper.selectcontract();
 	}
 
@@ -53,6 +57,19 @@ public class Staff_contractServiceImpl implements Staff_contractService{
 	public List<Staff_info> selectstaffinfo() {
 		// TODO Auto-generated method stub
 		return mapper.selectstaffinfo();
+	}
+
+	@Override
+	public List<Map<String, Object>> hetongdaoqi() {
+		// TODO Auto-generated method stub
+		return mapper.hetongdaoqi();
+	}
+
+	@Override
+	public List<Map<String, Object>> shiyongdaoqi() {
+		// TODO Auto-generated method stub
+		mapper.updatestatus2();
+		return mapper.shiyongdaoqi();
 	}
 
 

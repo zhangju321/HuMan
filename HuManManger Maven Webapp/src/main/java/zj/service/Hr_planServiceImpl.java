@@ -31,25 +31,16 @@ private Hr_planMapper dao;
 	}
 	/*²éÑ¯×´Ì¬*/
 	@Override
-	public List<Map<String, Object>> Queryzero(int planStatus) {
-		return dao.Querystatus(planStatus);
+	public List<Map<String, Object>> Queryzero(Hr_recruit_plan plan) {
+		return dao.Querystatus(plan);
 	}
 	@Override
-	public int oneupdae(int planNo) {
-	return dao.oneupdate(planNo);	
+	public int statusUpdae(Hr_recruit_plan plan) {
+	     return dao.statusUpdate(plan);	
 	}
-	public int twoupdae(int planNo) {
-	     return dao.twoupdate(planNo);		
-		}
 	@Override
 	public int Delete(int planNo) {
 		return dao.Delete(planNo);
 	}
-	@Override
-	public List<Map<String, Object>> departName() {
-		// TODO Auto-generated method stub
-		return dao.departName();
-	}
-
 
 }

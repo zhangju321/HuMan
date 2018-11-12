@@ -29,7 +29,6 @@ public List<Map<String,Object>> select(){
 @ResponseBody
 @RequestMapping("/planSave")
 public int plansave(Hr_recruit_plan plan){
-	System.out.println(plan);
 	return service.Save(plan);
 }
 /*根据id查询*/
@@ -43,38 +42,24 @@ public List<Map<String,Object>> queryId(@RequestBody int planNo){
 @ResponseBody
 @RequestMapping("/planUpdate")
 public int planUpdate(Hr_recruit_plan plan){
-    int a=0;
-	a=service.Update(plan);
-	return a;
+	return service.Update(plan);
 }
 /*删除*/
 @ResponseBody
 @RequestMapping("/planDelete")
 public int planDelete(@RequestBody int planNo){
-    int a=0;
-	a=service.Delete(planNo);
-	return a;
+	return service.Delete(planNo);
 }
 /*待审批*/
 @RequestMapping("/querystatus")
 @ResponseBody
-public List<Map<String,Object>> Queryzero(@RequestBody int planStatus){
-	List<Map<String,Object>> list=service.Queryzero(planStatus);
+public List<Map<String,Object>> Queryzero(Hr_recruit_plan plan){
+	List<Map<String,Object>> list=service.Queryzero(plan);
 	return list;
 }
-@RequestMapping("/oneupdate")
+@RequestMapping("/statusUpdate")
 @ResponseBody
-public int oneupdate(@RequestBody int planNo){
-	return service.oneupdae(planNo);
-}
-@RequestMapping("/twoupdate")
-@ResponseBody
-public int twoupdate(@RequestBody int planNo){
-	return service.twoupdae(planNo);
-}
-@RequestMapping("/departName")
-@ResponseBody
-public List<Map<String,Object>> departName(){
-	return service.departName();
+public int statusUpdate(Hr_recruit_plan plan){
+	return service.statusUpdae(plan);
 }
 }

@@ -29,6 +29,7 @@ public class UsersController {
 	@RequestMapping("/login")
 	public String login(Users users,HttpSession session){
 		Map<String, Object> map=new HashMap<String, Object>();
+		
 		map.put("uname", users.getUname());
 		map.put("password", users.getPassword());
 		System.out.println(map);
@@ -41,4 +42,5 @@ public class UsersController {
 			return "0";
 		}
 	}
+	
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+import zj.entity.Department;
 import zj.entity.Pay;
 import zj.entity.Project;
 import zj.entity.Welfare;

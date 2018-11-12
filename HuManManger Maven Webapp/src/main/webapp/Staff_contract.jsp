@@ -4,12 +4,10 @@
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-
 <!DOCTYPE html>
 <html>
 <head>
 <base href="<%=basePath%>">
-
 <title>My JSP 'index.jsp' starting page</title>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -37,25 +35,37 @@
 	media="all">
 <script src="layuiadmin/layui/layui.js" charset="utf-8"></script>
 </head>
-
 <body>
 	<table class="table table-hover">
 		<thead>
+		<tr>
+		  <!-- <th>
+				<input type="button" data-toggle="modal" data-target="#select" class="emptys btn btn-info btn-xs" value="查询合同信息">
+		  </th>	 -->
+		  <th>
+				<input type="button" data-toggle="modal" data-target="#select1" class="select1 btn btn-info btn-xs" value="查询合同到期信息">
+		  </th>
+		  <th>
+				<input type="button" data-toggle="modal" data-target="#select2" class="select2 btn btn-info btn-xs" value="查询试用到期信息">
+		  </th>
+		  <!-- <th>
+				<input type="button" data-toggle="modal" data-target="#select3" class="select3 btn btn-info btn-xs" value="未签劳动合同">
+		  </th> -->
+	    </tr>
 			<tr class="success">
 				<th>员工姓名</th>
 				<th>签约公司</th>
 				<th>合同类型</th>
+				<th>合同状态</th>
 				<th>合同签订日期</th>
 				<th>合同到期日期</th>
-				<th><input type="button" data-toggle="modal"
-					data-target="#select" class="emptys btn btn-default" value="查询合同信息"></th>
+				<th> </th>
 				<th>操作</th>
 				<th><input type="button" data-toggle="modal"
 					data-target="#myModal" class="emptys btn btn-default" value="新建合同"></th>
 			</tr>
 		</thead>
 		<tbody id="tbody">
-
 		</tbody>
 	</table>
 	<ul class="pager">
@@ -65,8 +75,6 @@
 		<li><button type="button" class="btn btn-default" id="weiye">尾页</button></li>
 		<li style="font-weight: lighter;">当前第<input type="text" id="currPage" style="height:35px;width:50px;border-radius:10px;text-align: center;"/>页</li>
 	</ul>
-	
-	
 	<!-- 模态框弹出录入内容 -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 		aria-labelledby="modalTitle1" aria-hidden="true">
@@ -83,17 +91,14 @@
 				<div class="modal-body">
 					<!--form提交表单  -->
 					<form class="form-horizontal" id="form1"
-						enctype="multipart/form-data">
-						  
-							<div class="form-group">
-							
+						enctype="multipart/form-data">						  
+							<div class="form-group">							
                                 <div class="col-lg-4">
                                   <label>员工</label>
 								  <input type="hidden" id="contractId" name="contractId" class="form-control" placeholder="请输入">
-										<select class="staff form-control" id="staffId" name="staffId">
+										<select class="form-control" id="staffId" name="staffId">
         	                            </select>
-								</div>
-								
+								</div>							
                                 <div class="col-lg-4">
                                   <label>合同类型</label>
                                 <select class="contractType form-control" id="contractType" name="contractType">
@@ -102,20 +107,15 @@
                                   <option value="3">集体合同</option>
         	                    </select>
                                 </div>
-                            </div>
-                            
-                            <div class="form-group">
-                            
+                            </div>                          
+                            <div class="form-group">                           
 								<div class="col-lg-4">
                                   <label>签约公司</label>
 										<select class="contractEnterpries form-control" id="contractEnterpries" name="contractEnterpries">
         	                               <option value="OA">OA</option>
         	                            </select>
-								</div>
-								
-                            </div>
-                            
-                            
+								</div>								
+                            </div>                   
                            <div class="layui-inline">
 							<label>试用生效日期</label>
 							<div class="layui-input-inline">
@@ -127,8 +127,7 @@
 								<input class="layui-input" id="t4" name="trailOverTime"
 									placeholder="试用到期日期" type="text">
 						    </div>
-                          </div>
-                            
+                          </div>                     
                           <div class="layui-inline">
 							<label>合同签订日期</label>
 							<div class="layui-input-inline">
@@ -139,17 +138,13 @@
 							<div class="layui-input-inline">
 								<input class="layui-input" id="t2" name="contractEndTime"
 									placeholder="合同解除日期" type="text">
-						    </div>
-						    
-                          </div>
-							
+						    </div>				    
+                          </div>						
 						<input type="button" id="insertorupdate" data-toggle='modal'
 							data-target='#myModal' class="btn btn-primary" value="保存">
 					</form>
-
 				</div>
 				<div class="modal-footer">
-
 					<button type="button" class="up btn btn-default"
 						data-dismiss="modal">关闭</button>
 				</div>
@@ -158,50 +153,144 @@
 		</div>
 		<!-- /.modal -->
 	</div>
-
-
-
-</body>
-
-</html>
-
+	<!-- 模态框弹出模糊查询合同内容 -->
+	<div class="modal fade" id="select" tabindex="-1" role="dialog"
+		aria-labelledby="modalTitle1" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">
+						&times;
+						<!-- 关闭按钮 -->
+					</button>
+					<h4 class="modal-title" id="modalTitle1">合同信息查询</h4>
+				</div>
+				<div class="modal-body">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="up btn btn-default"
+						data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+	<!-- 模态框弹出查询合同到期内容 -->
+	<div class="modal fade" id="select1" tabindex="-1" role="dialog"
+		aria-labelledby="modalTitle1" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">
+						&times;
+						<!-- 关闭按钮 -->
+					</button>
+					<h4 class="modal-title" id="modalTitle1">合同到期查询</h4>
+				</div>
+				<div class="modal-body">			
+   <table class="table table-hover">
+		<thead>
+			<tr class="success">
+				<th>员工姓名</th>
+				<th>签约公司</th>
+				<th>合同类型</th>
+				<th>合同签订日期</th>
+				<th>合同到期日期</th>
+			</tr>
+		</thead>
+		<tbody id="select1tbody">
+		</tbody>
+	</table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="up btn btn-default"
+						data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+	<!-- 模态框弹出查询试用到期内容 -->
+	<div class="modal fade" id="select2" tabindex="-1" role="dialog"
+		aria-labelledby="modalTitle1" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">
+						&times;
+						<!-- 关闭按钮 -->
+					</button>
+					<h4 class="modal-title" id="modalTitle1">试用到期查询</h4>
+				</div>
+				<div class="modal-body"> 
+	<table class="table table-hover">
+		<thead>
+			<tr class="success">
+				<th>员工姓名</th>
+				<th>签约公司</th>
+				<th>合同类型</th>
+				<th>试用签订日期</th>
+				<th>试用到期日期</th>
+			</tr>
+		</thead>
+		<tbody id="select2tbody">
+		</tbody>
+	</table> 
+				</div>
+				<div class="modal-footer"> 
+					<button type="button" class="up btn btn-default"
+						data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div> 
+</body> 
+</html> 
 <script>
-
 	/* 页面加载函数 */
 	$(function() {
 		selectcontract();
-	});
-
-	function selectcontract(startPage) {
-		
+	}); 
+	function selectcontract(startPage) { 
 		$.ajax({
 			url : "contract/selectcontract",
 			type : "post",
-			data : {
-				"startPage" : startPage
-			},
+			data : { "startPage" : startPage },
 			dataType : "json",
 			success : function(data) {
 				$("#tbody").empty();
 				var list=data.list;
 				for (var i = 0; i < list.length; i++) {
-					var obj = list[i];
-					
+					var obj = list[i]; 
 					var contype=null;
-					if(obj.CONTRACT_TYPE=1){
+					if(obj.CONTRACT_TYPE=='1'){
 					   contype="聘用合同"
-					}else if(obj.CONTRACT_TYPE=2){
+					}else if(obj.CONTRACT_TYPE=='2'){
 					   contype="兼职合同"
-					}else if(obj.CONTRACT_TYPE=3){
+					}else if(obj.CONTRACT_TYPE=='3'){
 					   contype="集体合同"
-					}
-					
-					
+					};
+				   var ttt=null;
+				   if(obj.STATUS=='1'){
+				      ttt="生效中"
+				   }else if(obj.STATUS=='2'){
+				      ttt="试用到期"
+				   }else if(obj.STATUS=='3'){
+				      ttt="合同到期"
+				   };
 					var tr = "<tr>";
 					tr += "<td style='display:none'>" + obj.CONTRACT_ID + "</td>"; //合同编号
 					tr += "<td id='name'>" + obj.STAFF_NAME + "</td>"; //员工姓名
 					tr += "<td>" + obj.CONTRACT_ENTERPRIES + "</td>"; //合同续签公司
 					tr += "<td>" + contype + "</td>"; //合同类型
+					tr += "<td>" + ttt + "</td>"; //合同状态
 					tr += "<td>" + obj.MAKE_CONTRACT + "</td>"; //合同签订日期
 					tr += "<td>" + obj.CONTRACT_END_TIME + "</td>"; //合同到期日期
 					tr += "<td id='htdq' style='display:none'>" + obj.htdaoqi + "</td>"; //合同剩余时间
@@ -212,7 +301,6 @@
 					tr += "<td></td>";
 					tr += "</tr>";
 					$("#tbody").append(tr);
-
 				}
 				//当前页的值
 				$("#currPage").val(data.pageNum);
@@ -262,11 +350,7 @@
 	})
 	$("#shouye").click(function() {
 		selectcontract(1);
-	})
-      
-
-
-
+	}) 
  /*     
        CONTRACT_ID contractId;//合同编号
        STAFF_ID  staffId;//员工外键
@@ -299,12 +383,8 @@
        IS_TRIAL isTrial;//合同是否试用
        IS_RENEW isRenew;//合同是否续签
        CONTRACT_REMOVE_TIME contractRemoveTime;//合同解除日期
-        */
-
-
-
-	/* 添加之前清空form表单 */           
-                                
+        */ 
+	/* 添加之前清空form表单 */             
 	$(document).on("click", ".emptys", function() {
 		$("#contractId").val("");//合同编号
 		$("#staffId").html("");//员工外键
@@ -316,25 +396,18 @@
 		$("#t3").val("");//试用生效日期
 		$("#t4").val("");//试用到期日期
 		$("#probationaryPeriod").val("");//试用期限
-		$("#passOrNot").val("");//是否转正
-		
-	   $.ajax({
+		$("#passOrNot").val("");//是否转正 
+	    $.ajax({
        url:"contract/selectstaffinfo",
        type:"post",
        dataType:"json",
        success:function(data){
          for(var i=0;i<data.length;i++){
             var obj=data[i];
-            $(".staff").append("<option value='"+obj.staffId+"'>"+obj.staffName+"</option>");
-         }
-       }
-     });
-		
-	});
-	
+            $(".staff").append("<option value='"+obj.staffId+"'>"+obj.STAFF_NAME+"</option>");
+         } } });  }); 
 	//添加与修改
-	$(document).on("click", "#insertorupdate", function() {
-	
+	$(document).on("click", "#insertorupdate", function() { 
 		var obj = $("#form1").serializeObject();
 		$.ajax({
 			url : "contract/insertorupdate",
@@ -345,43 +418,29 @@
 			dataType : "text",
 			success : function(data) {
 				selectcontract();
-			}
-		});
-
-	});
+			} }); });
 	/*修改前查询  */
-	$(document).on("click", ".selectByID", function() {
-	
-	
+	$(document).on("click", ".selectByID", function() { 
 	 	var staffName=$(this).parent().parent().find("#name").html();
 	    //合同到期时间
 	 	var htdq=$(this).parent().parent().find("#htdq").html();
 	 	//试用到期时间
 	 	var sydq=$(this).parent().parent().find("#sydq").html();
 	 	if(sydq<=0){
-	 	  alert(staffName+"试用已过期");
-	 	  
+	 	  alert(staffName+"试用已过期"); 
 	 	}
 	 	if(htdq<=0){
-	 	  alert(staffName+"合同已过期");
-	 	  
-	 	  
-	 	  
-	 	  
+	 	  alert(staffName+"合同已过期"); 
 	 	}
-
-	
-	 	
 		$("#staffId").html("");//职务表外键 职务名称 
 		var id = this.title;
 		$.ajax({
 			url : "contract/selectByID",
 			type : "post",
-			data : {
-				"contractId" : id
-			},
+			data : { "contractId" : id },
 			dataType : "json",
 			success : function(data) {
+			alert(data.staffId);
 						$("#contractId").val(data.contractId);//合同编号
 		                $("#staffId").val(data.staffId);//员工外键
 		                $("#contractType").val(data.contractType);//合同类型
@@ -391,9 +450,6 @@
 	                	$("#t2").val(data.contractEndTime);//合同到期日期
 	                 	$("#t3").val(data.trailEffectiveTime);//试用生效日期
 		                $("#t4").val(data.trailOverTime);//试用到期日期
-	                 	$("#probationaryPeriod").val(data.probationaryPeriod);//试用期限
-		                $("#passOrNot").val(data.passOrNot);//是否转正
-
 			}
 		});
 	   $.ajax({
@@ -403,20 +459,16 @@
        success:function(data){
          for(var i=0;i<data.length;i++){
             var obj=data[i];
-            if(staffName==obj.staffName){
-             $(".staff").append("<option value='"+obj.staffId+"' selected='selected'>"+obj.staffName+"</option>");
+            if(staffName==obj.STAFF_NAME){
+             $("#staffId").append("<option value='"+obj.staffId+"' selected='selected'>"+obj.STAFF_NAME+"</option>");
             }else{
-             $(".staff").append("<option value='"+obj.staffId+"'>"+obj.staffName+"</option>");
-            }
-         }
-       }
-     });
-	});
+             $("#staffId").append("<option value='"+obj.staffId+"'>"+obj.STAFF_NAME+"</option>");
+            } } } });
+             });
 
 	/* 删除 */
 	$(document).on("click", ".delete", function() {
 		var id = this.id;
-		
 		$.ajax({
 			url : "contract/delete",
 			type : "post",
@@ -426,9 +478,70 @@
 			dataType : "text",
 			success : function(data) {
 				selectcontract();
-			}
-		});
-	});
+			} }); });
+	//查询合同到期
+$(document).on("click", ".select1", function() {
+		$.ajax({
+			url : "contract/hetongdaoqi",
+			type : "post",
+			dataType : "json",
+			success : function(data) {
+				$("#select1tbody").empty();
+				for (var i = 0; i < data.length; i++) {
+					var obj = data[i];
+					var contype=null;
+					if(obj.CONTRACT_TYPE=='1'){
+					   contype="聘用合同"
+					}else if(obj.CONTRACT_TYPE=='2'){
+					   contype="兼职合同"
+					}else if(obj.CONTRACT_TYPE=='3'){
+					   contype="集体合同"
+					}
+					var tr = "<tr>";
+					tr += "<td style='display:none'>" + obj.CONTRACT_ID + "</td>"; //合同编号
+					tr += "<td>" + obj.STAFF_NAME + "</td>"; //员工姓名
+					tr += "<td>" + obj.CONTRACT_ENTERPRIES + "</td>"; //合同续签公司
+					tr += "<td>" + contype + "</td>"; //合同类型
+					tr += "<td>" + obj.MAKE_CONTRACT + "</td>"; //合同签订日期
+					tr += "<td>" + obj.CONTRACT_END_TIME + "</td>"; //合同到期日期
+					tr += "</tr>";
+					$("#select1tbody").append(tr);
+				}
+				}})});
+				
+	//查询试用到期
+$(document).on("click", ".select2", function() {
+		$.ajax({
+			url : "contract/shiyongdaoqi",
+			type : "post",
+			dataType : "json",
+			success : function(data) {
+				$("#select2tbody").empty();
+				for (var i = 0; i < data.length; i++) {
+					var obj = data[i];
+					var contype=null;
+					if(obj.CONTRACT_TYPE=='1'){
+					   contype="聘用合同"
+					}else if(obj.CONTRACT_TYPE=='2'){
+					   contype="兼职合同"
+					}else if(obj.CONTRACT_TYPE=='3'){
+					   contype="集体合同"
+					}
+					var tr = "<tr>";
+					tr += "<td style='display:none'>" + obj.CONTRACT_ID + "</td>"; //合同编号
+					tr += "<td>" + obj.STAFF_NAME + "</td>"; //员工姓名
+					tr += "<td>" + obj.CONTRACT_ENTERPRIES + "</td>"; //合同续签公司
+					tr += "<td>" + contype + "</td>"; //合同类型
+					tr += "<td>" + obj.TRAIL_EFFECTIVE_TIME + "</td>"; //试用签订日期
+					tr += "<td>" + obj.TRAIL_OVER_TIME + "</td>"; //试用到期日期
+					tr += "</tr>";
+					$("#select2tbody").append(tr);
+				}
+				}})});
+		
+	
+	
+	
 	
 	layui.use('laydate', function() {
 		var laydate = layui.laydate;

@@ -38,6 +38,14 @@ public class StaffInfoController {
 	  List<Department> lists=staffSer.findAll();
 	  return lists;	  
  }
+ @RequestMapping("/querymh")
+ @ResponseBody
+ public List<Map<String,Object>> querymh(Staff_info s){	 
+	 
+	 List<Map<String,Object>> map=staffSer.querymh(s);
+	 return map;
+	 
+ }
  @RequestMapping("/queryById")
  @ResponseBody
 	public Map queryById(Staff_info s,HttpSession se){

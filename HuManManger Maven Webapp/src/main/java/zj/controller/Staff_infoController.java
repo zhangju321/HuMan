@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import zj.entity.Department;
+import zj.entity.Hr_recruit_pool;
 import zj.entity.Position;
 import zj.entity.Role;
 import zj.entity.Staff_info;
@@ -33,50 +34,52 @@ public class Staff_infoController {
 		return list;
 		
 	}
-	@ResponseBody
-	@RequestMapping("/saveSta")
-	public void save(Staff_info stinfo){
-		ser.save(stinfo);
-	}
-	@ResponseBody
-	@RequestMapping("/srole")
-	public List<Role> sRoles(){
-		return ser.selectRole();
-		
-	}
-	@ResponseBody
-	@RequestMapping("/selpost")
-	public List<Position> sPositions(){
-		return ser.selectPost();
-		
-	}
-	@ResponseBody
-	@RequestMapping("/sedepa")
-	public List<Department> seDepartments(){
-		return ser.selectDep();
-		
-	}
-	@ResponseBody
-	@RequestMapping("/selId")
-	public	List<Staff_info> selectId(@RequestBody int staff_id){
-		System.out.println(staff_id);
-		return ser.selectId(staff_id);
-		
-	}
-	@ResponseBody
-	@RequestMapping("/staff_update")
-	public int update(@RequestBody Staff_info stinfo,HttpServletResponse response) throws IOException{
-		PrintWriter out=response.getWriter();
-		System.out.println(1);
-		System.out.println(stinfo);
-		return ser.update(stinfo);
-	
-		
-	}
-	@ResponseBody
-	@RequestMapping("/delete")
-	public int delete(@RequestBody int staff_id){
-		return ser.delete(staff_id);
-		
-	}
-}
+	//根据id查
+			@RequestMapping("/selectId")
+			@ResponseBody
+			public List<Map<String,Object>> selectId(int staff_id){
+				List<Map<String, Object>> list=ser.selectId(staff_id);
+				return list;
+				
+			}
+			//修改
+				@RequestMapping("/update")
+				@ResponseBody
+			public int update(Staff_info stinfo){
+				return ser.update(stinfo);
+				
+			}
+				//删除
+				@RequestMapping("/delete")
+				@ResponseBody
+				public int  delete(Staff_info stinfo){
+					return ser.delete(stinfo);
+				}
+				//添加
+				@RequestMapping("/save")
+				@ResponseBody
+				public int save(Staff_info stinfo){
+					return ser.save(stinfo);
+				}
+				//部门
+				@RequestMapping("/selectDep")
+				@ResponseBody
+				public List<Map<String,Object>> selectDep(){
+					  List<Map<String,Object>> list=ser.selectDep();
+					return list;
+				}
+				//角色
+				@RequestMapping("/selectRole")
+				@ResponseBody
+				public List<Map<String,Object>> selectRole(){
+					  List<Map<String,Object>> list=ser.selectRole();
+					return list;
+				}
+				//职务
+				@RequestMapping("/selectPost")
+				@ResponseBody
+				public List<Map<String,Object>> selectPost(){
+					  List<Map<String,Object>> list=ser.selectPost();
+					return list;
+				}
+		}

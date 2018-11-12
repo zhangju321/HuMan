@@ -1,6 +1,7 @@
 package zj.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class Staff_info {
     private Integer staffId;//员工编号
@@ -41,8 +42,43 @@ public class Staff_info {
     private String REMARK;//备注
     private Integer ATTACHMENT_ID;//附件编号
     private String ATTACHMENT_NAME;//附件名称
-    private int rolesId;
+    private Roles roles;
+    private Department department;
+    private Position position;
+    private List<Work_register> registers;
+    public List<Work_register> getRegisters() {
+		return registers;
+	}
+	public void setRegisters(List<Work_register> registers) {
+		this.registers = registers;
+	}
+	public Position getPosition() {
+		return position;
+	}
+	public void setPosition(Position position) {
+		this.position = position;
+	}
+	public Department getDepartment() {
+		return department;
+	}
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+	public List<Staff_transfer> getTransfers() {
+		return transfers;
+	}
+	public void setTransfers(List<Staff_transfer> transfers) {
+		this.transfers = transfers;
+	}
+	private List<Staff_transfer> transfers;
 
+	
+	public Roles getRoles() {
+		return roles;
+	}
+	public void setRoles(Roles roles) {
+		this.roles = roles;
+	}
 	public Integer getDepartmentId() {
 		return departmentId;
 	}
@@ -256,12 +292,6 @@ public class Staff_info {
 		ATTACHMENT_NAME = aTTACHMENT_NAME;
 	}
 	
-	public int getRolesId() {
-		return rolesId;
-	}
-	public void setRolesId(int rolesId) {
-		this.rolesId = rolesId;
-	}
 	public Integer getStaffId() {
 		return staffId;
 	}

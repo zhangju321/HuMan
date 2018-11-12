@@ -18,6 +18,6 @@ public interface StaffInfoService {
   //‘±π§id≤È—Ø
     //public StaffInfo queryById2(int staff_Id);
     public Map queryById(Staff_info s);
-    
+    public List<Map<String,Object>> querymh(Staff_info s);
 
 }

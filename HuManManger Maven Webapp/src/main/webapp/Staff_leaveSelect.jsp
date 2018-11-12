@@ -378,8 +378,7 @@
 					tr += "<td>" + obj.APPLICATION_DATE + "</td>"; //申请日期
 					tr += "<td>" + obj.SALARY + "</td>"; //当月薪酬
 					tr += "<td>" + tement + "</td>"; //是否复职
-					tr += "<td>" + blacklist + "</td>"; //黑名单
-					tr += "<td><input type='button' data-toggle='modal' data-target='#Details' class='Details btn btn-default' value='详细信息'></td>";				
+					tr += "<td>" + blacklist + "</td>"; //黑名单			
 					tr += "<td><input type='button' data-toggle='modal' data-target='#myModal' title=" + obj.LEAVE_ID + "  class='selectleaveByID btn btn-default' value='修改'></td>";
 					tr += "<td><input type='button' id=" + obj.LEAVE_ID + "  class='delete btn btn-default' value='删除'></td>";
 					tr += "</tr>";
@@ -497,7 +496,7 @@
        success:function(data){
          for(var i=0;i<data.length;i++){
             var obj=data[i];
-            $(".staffinfo").append("<option value='"+obj.staffId+"'>"+obj.staffName+"</option>");
+            $(".staffinfo").append("<option value='"+obj.staffId+"'>"+obj.STAFF_NAME+"</option>");
          }
        }
      });
@@ -565,10 +564,10 @@
        success:function(data){
          for(var i=0;i<data.length;i++){
             var obj=data[i];
-           if(staffName==obj.staffName){
-             $(".staffinfo").append("<option value='"+obj.staffId+"' selected='selected'>"+obj.staffName+"</option>");
+           if(staffName==obj.STAFF_NAME){
+             $(".staffinfo").append("<option value='"+obj.staffId+"' selected='selected'>"+obj.STAFF_NAME+"</option>");
             }else{
-             $(".staffinfo").append("<option value='"+obj.staffId+"'>"+obj.staffName+"</option>");
+             $(".staffinfo").append("<option value='"+obj.staffId+"'>"+obj.STAFF_NAME+"</option>");
             }
          
          }

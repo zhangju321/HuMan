@@ -1,6 +1,7 @@
 package zj.entity;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -16,8 +17,17 @@ public class Roles implements java.io.Serializable {
 	private String rolesdescribe;
 	private Set usertables = new HashSet(0);
 	private Set rolesmodules = new HashSet(0);
+	private List<Staff_info> infos;
 
 	// Constructors
+
+	public List<Staff_info> getInfos() {
+		return infos;
+	}
+
+	public void setInfos(List<Staff_info> infos) {
+		this.infos = infos;
+	}
 
 	/** default constructor */
 	public Roles() {

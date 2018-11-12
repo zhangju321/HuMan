@@ -27,7 +27,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      <ul class="nav nav-tabs">
 	  <li class="active"><a href="/HuManManger/wmw/recruitment_select.jsp">招聘录用管理</a></li>
 	  <li><a href="/HuManManger/wmw/recruitment_save.jsp">新建招聘录用</a></li>
-	  <li><a href="/HuManManger/wmw/recruitment_select.jsp">招聘录用查询</a></li>
     </ul>
 
 <div id="none_select">
@@ -68,10 +67,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</td>
 						</tr>
 						<tr>
-						    <td nowrap class="col-md-1 control-label" style="width: 10%">招聘部门:</td>
+						    <!-- <td nowrap class="col-md-1 control-label" style="width: 10%">招聘部门:</td>
 							<td class="TableData" style="width: 20%">
 							   <input type="text" name="department" id="department"class="form-control">
-							</td>
+							</td> -->
 							<td nowrap class="col-md-4 control-label" style="width: 20%">任职岗位:</td>
 							<td class="TableData" style="width: 20%">
 							    <input type="text" name="jobStatus" id="jobStatus" class="form-control" >
@@ -151,7 +150,6 @@ function queryAll(){
 	$(function(){
 				$("#recru_tbody").on("click",".update",function(){
 					var id=this.id;
-					alert(id);
 					$.ajax({
 						url:"recru/queryId",
 						type:"post",
@@ -160,7 +158,6 @@ function queryAll(){
 						data:JSON.stringify(id),
 						dataType: 'Json',
 						success:function(data){
-						alert(data);
 						    $("#recruitmentId").val(data[0].RECRUITMENT_ID);
 						    $("#planName").val(data[0].PLAN_NAME);
 						    $("#planNo").val(data[0].PLAN_NO);
@@ -180,7 +177,6 @@ function queryAll(){
 			/* 修改 */
 			function requ_update(){
 			var obj=$("#from_recru").serialize();
-			alert(obj);
 		    $.ajax({
 		       url : "recru/Update",
         	   type : "post",

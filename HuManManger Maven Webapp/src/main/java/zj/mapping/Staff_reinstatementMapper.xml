@@ -36,7 +36,7 @@
 		<id column="staff_id" property="staffId" jdbcType="INTEGER" />
 		<result column="departmentId" property="departmentId" jdbcType="INTEGER" />
 		<result column="positionId" property="positionId" jdbcType="INTEGER" />
-		<result column="STAFF_NAME" property="staffName" jdbcType="VARCHAR" />
+		<result column="STAFF_NAME" property="STAFF_NAME" jdbcType="VARCHAR" />
 		<result column="WORK_STATUS" property="workStatus" jdbcType="INTEGER" />
 	</resultMap>
 	

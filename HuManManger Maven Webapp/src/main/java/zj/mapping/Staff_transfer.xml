@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="zj.dao.Staff_transferMapper">
+ <!-- 查询全部 -->
+  <select id="queryAll" resultType="Map">
+  	select sr.TRANSFER_ID,so.STAFF_NAME,sr.TRANSFER_TYPE,sr.TRANSFER_DATE,sr.TRANSFER_EFFECTIVE_DATE from 
+  	staff_transfer sr LEFT JOIN staff_info so on sr.sta_staff_id=so.staff_id 
+  </select>
+  <!--根据id查询 -->
+  <select id="queryId" resultType="Map" parameterType="int">
+  	
+
+select sr.*,so.STAFF_NAME,
+dt.departmentName from staff_transfer sr LEFT JOIN staff_info so
+ on sr.sta_staff_id=so.staff_id LEFT JOIN department dt ON
+  sr.departmentId=dt.departmentId where TRANSFER_ID=#{TRANSFER_ID}
+  </select>
+  <!-- 修改 -->
+  <update id="update" parameterType="Staff_transfer" >
+  	update staff_transfer
+  	<set>
+  		<if test="sta_staff_Id !=null">sta_staff_Id=#{sta_staff_Id},</if>
+  		<!-- <if test="departmentId !=null">departmentId=#{departmentId},</if> -->
+  		<if test="TRANSFER_DATE !=null">TRANSFER_DATE=#{TRANSFER_DATE},</if>
+  		<if test="TRANSFER_EFFECTIVE_DATE !=null">TRANSFER_EFFECTIVE_DATE=#{TRANSFER_EFFECTIVE_DATE},</if>
+  		<if test="TRANSFER_TYPE !=null">TRANSFER_TYPE=#{TRANSFER_TYPE},</if>
+  		<if test="TRAN_REASON !=null">TRAN_REASON=#{TRAN_REASON},</if>
+  		<if test="DESPACHO !=null">DESPACHO=#{DESPACHO},</if>
+  		<if test="MATERIALS_CONDITION !=null">MATERIALS_CONDITION=#{MATERIALS_CONDITION},</if>
+  		<if test="ATTACHMENT_NAME !=null">ATTACHMENT_NAME=#{ATTACHMENT_NAME},</if>
+  		<if test="ADD_TIME !=null">ADD_TIME=#{ADD_TIME},</if>
+  		<if test="LAST_UPDATE_TIME !=null">LAST_UPDATE_TIME=#{LAST_UPDATE_TIME},</if>
+  		<if test="DIAOQIAN !=null">DIAOQIAN=#{DIAOQIAN},</if>
+  		<if test="DIAOHOU !=null">DIAOHOU=#{DIAOHOU}</if>
+  	</set>
+  	where TRANSFER_ID=#{TRANSFER_ID}
+  </update>
+  <!-- 删除 -->
+  <delete id="delete" parameterType="Staff_transfer">
+  	delete from staff_transfer where TRANSFER_ID=#{TRANSFER_ID}
+  </delete>
+  <!-- 添加 -->
+  <insert id="savetransfer" parameterType="Staff_transfer">
+  	insert into staff_transfer
+  	(sta_staff_Id,TRANSFER_DATE,
+  	TRANSFER_EFFECTIVE_DATE,TRANSFER_TYPE,TRAN_REASON,DESPACHO
+  	,MATERIALS_CONDITION,ATTACHMENT_NAME,ADD_TIME,LAST_UPDATE_TIME,
+  	DIAOQIAN,DIAOHOU)
+  	values(#{sta_staff_Id},#{TRANSFER_DATE},
+  	#{TRANSFER_EFFECTIVE_DATE},#{TRANSFER_TYPE},#{TRAN_REASON},#{DESPACHO},
+  	#{MATERIALS_CONDITION},#{ATTACHMENT_NAME},#{ADD_TIME},#{LAST_UPDATE_TIME},#{DIAOQIAN},#{DIAOHOU})
+  </insert>
+  
+  <!--查询部门  -->
+  <select id="queryDe" resultType="Map">
+  	select * from department
+  </select>
+  <!-- 查询人事 -->
+  <select id="querySta" resultType="Map">
+  	select * from staff_info
+  </select>
+</mapper> 

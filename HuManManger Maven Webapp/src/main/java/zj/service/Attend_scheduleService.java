@@ -7,13 +7,20 @@ import zj.entity.Attend_schedule;
 
 public interface Attend_scheduleService {
 
-	public List<Map<String, Object>> scheFind();
-	public int scheDelete(Attend_schedule schedule);
-	public int saveOrUpdate(Attend_schedule schedule);
-	public Attend_schedule scheFindById(int id);
-	public List<Map<String, Object>> roleFind();
-	public List<Map<String, Object>> departFind();
-	public List<Map<String, Object>> staffFind();
-	//修改状态
-	public void updateState(Attend_schedule schedule);
+	//查询
+		public List<Map<String, Object>> scheFind();
+		//添加//修改
+		public int saveOrUpdate(Attend_schedule schedule);
+		//删除
+		public int scheDelete(Attend_schedule schedule);
+		//根据id查询
+		public Attend_schedule scheFindById(int id);
+		//角色外键
+		public List<Map<String, Object>> roleFind();
+		//部门外键
+		public List<Map<String, Object>> departFind();
+		//员工外键
+		public List<Map<String, Object>> staffFind();
+		//修改状态
+		public int updateState(Attend_schedule schedule);
 }

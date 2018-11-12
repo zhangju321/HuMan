@@ -26,8 +26,17 @@ public class GoOut {
     private String status_Name;
 
     private String operate;
+    private Integer uid; 
+    
+    public Integer getUid() {
+		return uid;
+	}
 
-    public Integer getOut_Id() {
+	public void setUid(Integer uid) {
+		this.uid = uid;
+	}
+
+	public Integer getOut_Id() {
         return out_Id;
     }
 

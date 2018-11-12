@@ -36,7 +36,7 @@
 	<mvc:annotation-driven></mvc:annotation-driven>
 	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/view/"></property>
+		<property name="prefix" value="/webapp/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
 

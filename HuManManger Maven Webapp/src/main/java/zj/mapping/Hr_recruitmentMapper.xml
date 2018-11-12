@@ -50,8 +50,8 @@
        )
   </insert>
   <insert id="Save" parameterType="zj.entity.Hr_recruit_recruitment" >
-    insert into hr_recruit_recruitment (PLAN_NO, APPLYER_NAME,DEPARTMENT,
-     JOB_STATUS, ASS_PASS_TIME, TYPE, ASSESSING_OFFICER,
+    insert into hr_recruit_recruitment ( PLAN_NO, APPLYER_NAME,DEPARTMENT,
+     JOB_STATUS, ASS_PASS_TIME, TYPE,  ASSESSING_OFFICER,
      ON_BOARDING_TIME, STARTING_SALARY_TIME,REMARK
      )
     values (#{planNo,jdbcType=INTEGER}, #{applyerName,jdbcType=VARCHAR},

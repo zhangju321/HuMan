@@ -37,23 +37,38 @@
   </resultMap>
 
 	<!-- 员工 -->
-	<resultMap id="staff_info" type="zj.entity.Staff_info">
+	 <resultMap id="staff_info" type="zj.entity.Staff_info">
 		<id column="staff_id" property="staffId" jdbcType="INTEGER" />
-		<result column="STAFF_NAME" property="staffName" jdbcType="VARCHAR" />
-	</resultMap>
+		<result column="STAFF_NAME" property="STAFF_NAME" jdbcType="VARCHAR" />
+	</resultMap> 
 
-
+<!-- 查询员工 -->
+	<select id="selectstaffinfo"  resultMap="staff_info">
+		select * from staff_info
+	</select>
 	<!-- 查询合同 -->
 	<select id="selectcontract" resultType="map">
 		 select i.STAFF_NAME,c.*,DATEDIFF(contract_end_time,now()) htdaoqi,DATEDIFF(trail_over_time,now()) sydaoqi
          from staff_contract c left JOIN staff_info i on c.STAFF_ID=i.staff_id
          order by c.CONTRACT_ID  asc
 	</select>
-	<!-- 查询员工 -->
-	<select id="selectstaffinfo" resultMap="staff_info"
-		parameterType="zj.entity.Staff_info">
-		select * from staff_info
+	
+		<!-- 查询合同到期 -->
+	<select id="hetongdaoqi" resultType="map">
+		 select i.STAFF_NAME,c.*,DATEDIFF(c.contract_end_time,now())
+         from staff_contract c left JOIN staff_info i on c.STAFF_ID=i.staff_id
+         <![CDATA[ where DATEDIFF(c.contract_end_time,now())<=0 ]]>
+         
 	</select>
+	
+		<!-- 查询试用到期 -->
+	<select id="shiyongdaoqi" resultType="map">
+		 select i.STAFF_NAME,c.*,DATEDIFF(c.trail_over_time,now())
+         from staff_contract c left JOIN staff_info i on c.STAFF_ID=i.staff_id
+         <![CDATA[ where DATEDIFF(c.trail_over_time,now())<=0 ]]>
+	</select>
+	
+	
 	<!-- 添加合同 -->
    <insert id="insert" parameterType="zj.entity.Staff_contract" >
     insert into staff_contract (CONTRACT_ID, STAFF_ID, CONTRACT_TYPE, 
@@ -127,6 +142,33 @@
       REMARK = #{remark,jdbcType=LONGVARCHAR},
       REMIND_USER = #{remindUser,jdbcType=LONGVARCHAR}
     where CONTRACT_ID = #{contractId,jdbcType=INTEGER}
+  </update>
+  
+  
+  <!-- 修改使用中 -->
+   <update id="updatestatus1" parameterType="zj.entity.Staff_contract" >
+    update staff_contract set STATUS = 1
+    where CONTRACT_ID = #{contractId}
+  </update>
+    <!-- 修改试用到期 -->
+   <update id="updatestatus2" parameterType="zj.entity.Staff_contract" >
+    update staff_contract set STATUS = 2
+    <![CDATA[ where DATEDIFF(trail_over_time,now())<=0 ]]>
+  </update>
+    <!-- 修改合同到期 -->
+   <update id="updatestatus3" parameterType="zj.entity.Staff_contract" >
+    update staff_contract set STATUS = 3
+    <![CDATA[ where DATEDIFF(contract_end_time,now())<0 and DATEDIFF(trail_over_time,now())<0 ]]>
+  </update>
+      <!-- 修改  合同到期后续约  状态 -->
+   <update id="updatestatus4" parameterType="zj.entity.Staff_contract" >
+    update staff_contract set STATUS = 1
+    <![CDATA[ where DATEDIFF(contract_end_time,now())>0 and DATEDIFF(trail_over_time,now())>0 ]]>
+  </update>
+        <!-- 修改  试用到期后续约 状态 -->
+   <update id="updatestatus5" parameterType="zj.entity.Staff_contract" >
+    update staff_contract set STATUS = 1
+    <![CDATA[ where DATEDIFF(trail_over_time,now())>0]]>
   </update>
    
 	

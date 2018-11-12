@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Hr_recruit_filter {
 	private int filterId;
     private int planNo;
+    private int id;
     private String employeeName;
     private String position;
     private String employeeMajor;
@@ -41,6 +42,12 @@ public class Hr_recruit_filter {
     private String nextTransaStep2;
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date nextDateTime2;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public int getFilterId() {
 		return filterId;
 	}

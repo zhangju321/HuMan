@@ -3,7 +3,8 @@
 <mapper namespace="zj.dao.Hr_planMapper">
   <!-- 查询全部 -->
   <select id="QueryAll" resultType="Map">
-     select PLAN_NO,PLAN_NAME,PLAN_RECR_NO,START_DATE,END_DATE,WORK_DATE,PLAN_STATUS from  hr_recruit_plan
+     select plan.*,d.departmentName,p.positionName from  hr_recruit_plan plan left join department d on plan.departmentId=d.departmentId
+     left join position p on plan.positionId=p.positionId
   </select>
   <!-- 添加 -->
   <insert id="Save" parameterType="Hr_recruit_plan">
@@ -11,18 +12,22 @@
        (
           PLAN_NAME,departmentId,positionId,PLAN_RECR_NO,PLAN_DITCH,PLAN_BCWS,START_DATE,
           END_DATE,WORK_DATE,SALARY_AREA,POSITION_REQUIRE,RECRUIT_DIRECTION,
-          RECRUIT_REMARK,REGISTER_TIME,ATTACHMENT_NAME,PLAN_STATUS,APPROVE_PERSON,APPROVE_DATE
+          RECRUIT_REMARK,REGISTER_TIME,ATTACHMENT_NAME,PLAN_STATUS,id
        ) 
        values
        (#{planName}, #{departmentId},
          #{positionId}, #{planRecrNo}, #{planDitch},#{planBcws},
          #{startDate}, #{endDate},#{workDate}, #{salaryArea}, #{positionRequire},#{recruitDirection},
-         #{recruitRemark},#{registerTime}, #{attachmentName}, #{planStatus},#{approvePerson},#{approveDate}
+         #{recruitRemark},#{registerTime}, #{attachmentName}, #{planStatus},#{id}
        )
   </insert>
   <!-- 根据id查询 -->
    <select id="QueryId" resultType="Map" parameterType="int">
-     select * from hr_recruit_plan where PLAN_No=#{planNo}
+     select plan.*,p.positionName,d.departmentName,u.id,u.uname from
+      hr_recruit_plan plan left join Position p on plan.positionId=p.positionId
+      left join  department d on plan.departmentId=d.departmentId
+      left join users u on plan.id=u.id
+     where PLAN_No=#{planNo}
    </select>
    <!-- 修改 -->
    <update id="Update"  parameterType="Hr_recruit_plan" >
@@ -32,24 +37,34 @@
      START_DATE=#{startDate},END_DATE=#{endDate},WORK_DATE=#{workDate},SALARY_AREA=#{salaryArea},
      POSITION_REQUIRE=#{positionRequire},RECRUIT_DIRECTION=#{recruitDirection},
      RECRUIT_REMARK=#{recruitRemark},REGISTER_TIME=#{registerTime},ATTACHMENT_NAME=#{attachmentName},
-     PLAN_STATUS=#{planStatus},APPROVE_PERSON=#{approvePerson}
+     PLAN_STATUS=#{planStatus},id=#{id}
      where PLAN_No=#{planNo}
    </update>
    <delete id="Delete" parameterType="int">
      delete from hr_recruit_plan where PLAN_NO=#{planNo}
    </delete>
    <!-- 查询审批状态 -->
-   <select id="Querystatus" resultType="Map" parameterType="int">
-     select * from hr_recruit_plan where PLAN_STATUS=#{planStatus}
+   <select id="Querystatus" resultType="Map" parameterType="Hr_recruit_plan">
+     select plan.*,d.departmentName,p.positionName,u.uname from hr_recruit_plan plan left join department d on plan.departmentId=d.departmentId
+     left join position p on plan.positionId=p.positionId left join users u on plan.id=u.id
+      where plan.PLAN_STATUS=#{planStatus} and u.id=#{id} 
+      <if test="planNo != 0" >
+         and plan.PLAN_NO = #{planNo}
+        </if>
    </select>
-   <update id="oneupdate"  parameterType="int" >
-      update hr_recruit_plan set PLAN_STATUS=1 where PLAN_No=#{planNo}
+   <update id="statusUpdate"  parameterType="Hr_recruit_plan" >
+      update hr_recruit_plan 
+      <set>
+        <if test="planStatus != null" >
+          PLAN_STATUS = #{planStatus},
+        </if>
+        <if test="approveDate != null" >
+          APPROVE_DATE = #{approveDate},
+        </if>
+        <if test="approveComment != null" >
+          APPROVE_COMMENT = #{approveComment}
+        </if>
+        </set>
+         where PLAN_No=#{planNo}
    </update>
-   <update id="twoupdate"  parameterType="int" >
-      update hr_recruit_plan set PLAN_STATUS=2 where PLAN_No=#{planNo}
-   </update>
-   <!-- 查询部门 -->
-   <select id="departName" resultType="Map">
-     select * from  department
-  </select>
 </mapper>
