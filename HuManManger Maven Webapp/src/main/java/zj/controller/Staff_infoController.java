@@ -39,6 +39,7 @@ public class Staff_infoController {
 			@ResponseBody
 			public List<Map<String,Object>> selectId(int staff_id){
 				List<Map<String, Object>> list=ser.selectId(staff_id);
+				System.out.println(list);
 				return list;
 				
 			}
@@ -46,6 +47,8 @@ public class Staff_infoController {
 				@RequestMapping("/update")
 				@ResponseBody
 			public int update(Staff_info stinfo){
+					System.out.println(stinfo.getStaffName());
+					System.out.println(stinfo.getStaffId());
 				return ser.update(stinfo);
 				
 			}

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="zj.dao.Attend_configMapper" >
   <select id="conFind" resultType="map">
-  select * from attend_config
+  select * from attend_config order by duty_id desc
   </select>
   <insert id="conSave" parameterType="Attend_config">
   insert into attend_config(duty_name,duty_time1,duty_time2,duty_time3,duty_time4,duty_after1,duty_after2,duty_after3,duty_after4)

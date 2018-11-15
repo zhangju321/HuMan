@@ -1,7 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -23,59 +24,92 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script
 	src="${pageContext.request.contextPath}/resource/jquery-1.11.3.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="resource/bootstrapValidator.min.css">
+<script src="resource/bootstrapValidator.min.js"></script>
 
 <style>
-th{border:1px solid #000;text-align:center;}
- tr{border:1px solid #000;hieght:40px;line-height:40px;}
- td{border:1px solid #000;hieght:40px;line-height:40px;}
+th {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+tr {
+	border: 1px solid #000;
+	hieght: 40px;
+	line-height: 40px;
+}
+
+td {
+	border: 1px solid #000;
+	hieght: 40px;
+	line-height: 40px;
+}
 </style>
 </head>
 
 <body>
-	<!--查询人员考勤情况  -->
-	<form action="paystate/pupdate">
-		<table style="border:1px solid #000;width:3500px;text-align:center;position:absolute; top:40px;">
-            <caption style="font-size:30px;color:BLACK;">薪资报表审核</caption>
-			<thead >
-				<tr class="warning" style="border:1px solid #000;width:500px">
-					<th>人员名称</th>
-					<th>工资时间</th>
-					<th>职务工资</th>
-					<th>应缴保险总额</th>
-					<th>个人养老保险</th>
-					<th>个人医疗保险</th>
-					<th>个人生育保险</th>
-					<th>个人失业保险</th>
-					<th>个人工伤保险</th>
-					<th>个人住房公积金</th>
-					<th>个人保险扣款总额</th>
-					<th>单位养老保险</th>
-					<th>单位医疗保险</th>
-					<th>单位生育保险</th>
-					<th>单位失业保险</th>
-					<th>单位工伤保险</th>
-					<th>单位住房公积金</th>
-                    <th>单位保险扣款总额</th>
-                    
-					<th>津贴</th>
-					<th>奖金</th>
-					<th>应发工资</th>
-					<th>薪资状态</th>
-					<th><input type="button" value="禁止薪资计划" onclick="checkUpdate()" class="xz btn btn-default">
-					<input type="button" value="启用薪资计划" onclick="checkUpdate2()" class="xz btn btn-default">
-					全选/全不选<input type="checkbox" id="selectAll" />
-					</th>
-					
-				</tr>
-			</thead>
-			<tbody id="tbody">
+	<form id="form">
 
-			</tbody>
-		</table>
+		<div class="col-sm-3">
+
+			<input type="text" class="form-control" placeholder="薪资时间"
+				name="tax_time" id="tax_time">
+		</div>
+		<input type="button" value="搜索" id="like" onclick="queryTime()"
+			class="btn btn-primary" data-toggle="modal"/>
+
 	</form>
+	<!--查询人员考勤情况  -->
+	<table
+		style="border:1px solid #000;width:1350px;text-align:center;position:absolute; top:60px;">
+		<caption style="font-size:30px;color:BLACK;">薪资报表审核</caption>
+		<thead>
+
+			<tr class="warning" style="border:1px solid #000;width:500px">
+
+				<th>人员名称</th>
+				<th>工资时间</th>
+				<th>职务工资</th>
+				<!-- <th>应缴保险总额</th>
+				<th>个人养老保险</th>
+				<th>个人医疗保险</th>
+				<th>个人生育保险</th>
+				<th>个人失业保险</th>
+				<th>个人工伤保险</th>
+				<th>个人住房公积金</th> -->
+				<th>个人保险扣款总额</th>
+				<!-- <th>单位养老保险</th>
+				<th>单位医疗保险</th>
+				<th>单位生育保险</th>
+				<th>单位失业保险</th>
+				<th>单位工伤保险</th>
+				<th>单位住房公积金</th> -->
+				<th>单位保险扣款总额</th>
+
+				<th>津贴</th>
+				<th>奖金</th>
+				<th>应发工资</th>
+				<th>薪资状态</th>
+				<th><input type="button" value="禁止薪资计划" onclick="checkUpdate()"
+					class="btn btn-primary" data-toggle="modal"> <input type="button"
+					value="启用薪资计划" onclick="checkUpdate2()" class="btn btn-primary" data-toggle="modal">
+					全选/全不选<input type="checkbox" id="selectAll" /></th>
+
+			</tr>
+		</thead>
+		<tbody id="tbody">
+
+		</tbody>
+	</table>
+
+
+
+
 </body>
 <script>
 
+	
  //复选框全选全不选
 
 $(function() { $("#selectAll").click(function() { 
@@ -112,7 +146,7 @@ $(":checkbox[name='checkid']").prop("checked", this.checked)
 			if (obj[k].checked)
 				check_val.push(obj[k].value);
 		} 
-		alert(check_val);
+		
 		$.ajax({
 			url : "paystate/updateCheck2?check_val="+check_val+"",
         	type : "post",
@@ -139,7 +173,7 @@ $(":checkbox[name='checkid']").prop("checked", this.checked)
       /*   			tr += "<td>" + obj.departmentName + "</td>";
 
 					tr += "<td>" + obj.positionName + "</td>"; */
-tr += "<td style='display:none'>" + obj.payid + "</td>";
+                    tr += "<td style='display:none'>" + obj.payid + "</td>";
 					tr += "<td>" + obj.STAFF_NAME + "</td>";
 					
 					tr += "<td>" + obj.tax_time + "</td>";
@@ -150,31 +184,31 @@ tr += "<td style='display:none'>" + obj.payid + "</td>";
                     tr += "<td>" + obj.insurance + "</td>";
 					/* tr += "<td>" + obj.K_withhold + "</td>"; */
 
-					tr += "<td>" + obj.endowment_insurance + "</td>"; //个人养老
+					tr += "<td style='display:none'>" + obj.endowment_insurance + "</td>"; //个人养老
 
-					tr += "<td>" + obj.medical_insurance + "</td>"; //个人医疗
+					tr += "<td style='display:none'>" + obj.medical_insurance + "</td>"; //个人医疗
 
-					tr += "<td>" + obj.birth_insurance + "</td>"; //个人生育
+					tr += "<td style='display:none'>" + obj.birth_insurance + "</td>"; //个人生育
 
-					tr += "<td>" + obj.unemployment_insurance + "</td>"; //个人失业
+					tr += "<td style='display:none'>" + obj.unemployment_insurance + "</td>"; //个人失业
 
-					tr += "<td>" + obj.injury_insurance + "</td>"; //个人工伤
+					tr += "<td style='display:none'>" + obj.injury_insurance + "</td>"; //个人工伤
 
-					tr += "<td>" + obj.housing_fund + "</td>"; //个人住房
+					tr += "<td style='display:none'>" + obj.housing_fund + "</td>"; //个人住房
 
 					tr += "<td>" + obj.B_withhold + "</td>"; //个人总额
 
-					tr += "<td>" + obj.endowment_insurance_d + "</td>";
+					tr += "<td style='display:none'>" + obj.endowment_insurance_d + "</td>";
 
-					tr += "<td>" + obj.medical_insurance_d + "</td>";
+					tr += "<td style='display:none'>" + obj.medical_insurance_d + "</td>";
 
-					tr += "<td>" + obj.birth_insurance_d + "</td>";
+					tr += "<td style='display:none'>" + obj.birth_insurance_d + "</td>";
 
-					tr += "<td>" + obj.unemployment_insurance_d + "</td>";
+					tr += "<td style='display:none'>" + obj.unemployment_insurance_d + "</td>";
 
-					tr += "<td>" + obj.injury_insurance_d + "</td>";
+					tr += "<td style='display:none'>" + obj.injury_insurance_d + "</td>";
 
-					tr += "<td>" + obj.housing_fund_d + "</td>";
+					tr += "<td style='display:none'>" + obj.housing_fund_d + "</td>";
 
 					tr += "<td>" + obj.D_withhold + "</td>";
 
@@ -205,6 +239,75 @@ tr += "<td style='display:none'>" + obj.payid + "</td>";
   	   }else if(num==2){
   	       return '不批准';
   	   }
-  	}
+	}
+
+	//根据时间查询薪资
+	function queryTime() {
+		var tax_time = $("#tax_time").val();
+		alert(tax_time);
+		$.ajax({
+			url : "paystate/queryTime",
+			type : "post",
+			async : true,
+			data : {
+				"tax_time" : tax_time
+			},
+			dataType : 'Json',
+			success : function(data) {
+				$("#tbody").html("");
+				for (var i = 0; i < data.length; i++) {
+					var obj = data[i];
+					var tr = "<tr>";
+					tr += "<td style='display:none'>" + obj.payid + "</td>";
+					tr += "<td>" + obj.STAFF_NAME + "</td>";
+
+					tr += "<td>" + obj.tax_time + "</td>";
+
+					tr += "<td>" + obj.tax_salary + "</td>";
+
+
+					tr += "<td>" + obj.insurance + "</td>";
+					/* tr += "<td>" + obj.K_withhold + "</td>"; */
+
+					tr += "<td style='display:none'>" + obj.endowment_insurance + "</td>"; //个人养老
+
+					tr += "<td style='display:none'>" + obj.medical_insurance + "</td>"; //个人医疗
+
+					tr += "<td style='display:none'>" + obj.birth_insurance + "</td>"; //个人生育
+
+					tr += "<td style='display:none'>" + obj.unemployment_insurance + "</td>"; //个人失业
+
+					tr += "<td style='display:none'>" + obj.injury_insurance + "</td>"; //个人工伤
+
+					tr += "<td style='display:none'>" + obj.housing_fund + "</td>"; //个人住房
+
+					tr += "<td>" + obj.B_withhold + "</td>"; //个人总额
+
+					tr += "<td style='display:none'>" + obj.endowment_insurance_d + "</td>";
+
+					tr += "<td style='display:none'>" + obj.medical_insurance_d + "</td>";
+
+					tr += "<td style='display:none'>" + obj.birth_insurance_d + "</td>";
+
+					tr += "<td style='display:none'>" + obj.unemployment_insurance_d + "</td>";
+
+					tr += "<td style='display:none'>" + obj.injury_insurance_d + "</td>";
+
+					tr += "<td style='display:none'>" + obj.housing_fund_d + "</td>";
+
+					tr += "<td>" + obj.D_withhold + "</td>";
+
+					tr += "<td>" + obj.Bonus + "</td>";
+
+					tr += "<td>" + obj.subvention + "</td>";
+					tr += "<td>" + obj.after_tax_salary + "</td>"; //应发工资
+					tr += "<td>" + adc(obj.state) + "</td>";
+					tr += "<td><input type='checkbox' name='checkid' value='" + obj.payid + "'></td>";
+					tr += "</tr>";
+					$("#tbody").append(tr);
+				}
+			}
+		});
+	}
 </script>
 </html>

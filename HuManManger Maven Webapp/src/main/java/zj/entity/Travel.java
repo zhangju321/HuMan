@@ -44,7 +44,8 @@ public class Travel {
         this.travel_Id = travel_Id;
     }
 
-    public Integer getSta_Staff_Id() {
+
+	public Integer getSta_Staff_Id() {
 		return sta_Staff_Id;
 	}
 

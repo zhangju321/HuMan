@@ -3,9 +3,9 @@
 <mapper namespace="zj.dao.Hr_filterMapper" >
    <!-- 查询人才库 -->
    <select id="selectpool" resultType="Map" >
-     select pool.* from
+     select pool.*,plan.PLAN_NO,plan.PLAN_NAME from
        hr_recruit_pool pool LEFT JOIN hr_recruit_plan plan on pool.PLAN_NO=plan.PLAN_NO
-<!--         where pool.WHETHER_BY_SCREENING=0 -->
+        where pool.WHETHER_BY_SCREENING=0
    </select>
    <select id="selectid" resultType="Map" parameterType="int" >
      select 
@@ -36,34 +36,20 @@
    </select>
    <!-- 根据id查询 -->
    <select id="selectId" resultType="Map" parameterType="int">
-     select 
-       filter.*,plan.PLAN_NAME
-     from
-       hr_recruit_filter filter LEFT JOIN hr_recruit_plan plan on filter.PLAN_NO=plan.PLAN_NO
-     where FILTER_ID=#{filterId}
+	select filter.*,plan.PLAN_NAME,p.positionName,
+	(select uname from users where id=(select TRANSACTOR_STEP FROM hr_recruit_filter where FILTER_ID=#{filterId})) step,
+	(select uname from users where id=(select NEXT_TRANSA_STEP FROM hr_recruit_filter where FILTER_ID=#{filterId})) next_step,
+	(select uname from users where id=(select TRANSACTOR_STEP1 FROM hr_recruit_filter where FILTER_ID=#{filterId})) step1,
+	(select uname from users where id=(select NEXT_TRANSA_STEP1 FROM hr_recruit_filter where FILTER_ID=#{filterId})) next_step1,
+	(select uname from users where id=(select TRANSACTOR_STEP2 FROM hr_recruit_filter where FILTER_ID=#{filterId})) step2
+	from hr_recruit_filter filter LEFT JOIN hr_recruit_plan plan on
+	filter.PLAN_NO=plan.PLAN_NO left join position p on filter.POSITION=p.positionId
+	where FILTER_ID=#{filterId}
    </select>
    <!-- 修改 -->
    <update id="updateFilter"  parameterType="zj.entity.Hr_recruit_filter" >
       update hr_recruit_filter 
       <set>
-        <if test="planNo != null" >
-          PLAN_NO = #{planNo},
-        </if>
-        <if test="employeeName != null" >
-          EMPLOYEE_NAME = #{employeeName},
-        </if>
-        <if test="position != null" >
-          POSITION = #{position},
-        </if>
-        <if test="employeeMajor != null" >
-          EMPLOYEE_MAJOR = #{employeeMajor},
-        </if>
-        <if test="employeePhone != null" >
-          EMPLOYEE_PHONE = #{employeePhone},
-        </if>
-        <if test="transactorStep != null" >
-          TRANSACTOR_STEP = #{transactorStep},
-        </if>
         <if test="nextDateTime != null" >
           NEXT_DATE_TIME = #{nextDateTime},
         </if>
@@ -86,6 +72,9 @@
         </if>
         <if test="endFlag != null" >
           END_FLAG = #{endFlag},
+        </if>
+        <if test="filterDateTime1 != null" >
+          NEXT_DATE_TIME = #{filterDateTime1},
         </if>
         <if test="filterMethod1 != null" >
           FILTER_METHOD1 = #{filterMethod1},
@@ -125,6 +114,9 @@
         <if test="endFlag != null" >
           END_FLAG = #{endFlag},
         </if>
+        <if test="filterDateTime2 != null" >
+          NEXT_DATE_TIME1 = #{filterDateTime2},
+        </if>
         <if test="filterMethod2 != null" >
           FILTER_METHOD2 = #{filterMethod2},
         </if>
@@ -137,17 +129,11 @@
         <if test="firstView2 != null" >
           FIRST_VIEW2 = #{firstView2},
         </if>
-        <if test="transactorStep2 != null" >
+        <if test="firstView2 != null" >
           TRANSACTOR_STEP2 = #{transactorStep2},
         </if>
-        <if test="passOrNot2 != null" >
+        <if test="firstView2 != null" >
           PASS_OR_NOT2 = #{passOrNot2},
-        </if>
-        <if test="nextTransaStep2 != null" >
-          NEXT_TRANSA_STEP2 = #{nextTransaStep2},
-        </if>
-        <if test="nextDateTime2 != null" >
-          NEXT_DATE_TIME2 = #{nextDateTime2},
         </if>
         </set>
         where FILTER_ID=#{filterId}
@@ -158,6 +144,6 @@
       select filter.EMPLOYEE_NAME,plan.PLAN_NO,plan.PLAN_NAME,filter.POSITION from hr_recruit_filter filter left JOIN hr_recruit_plan plan on filter.PLAN_NO=plan.PLAN_NO
          where STEP_FLAG=1 and END_FLAG=2 and PASS_OR_NOT1=1 union ALL
       select filter.EMPLOYEE_NAME,plan.PLAN_NO,plan.PLAN_NAME,filter.POSITION from hr_recruit_filter filter left JOIN hr_recruit_plan plan on filter.PLAN_NO=plan.PLAN_NO
-         where STEP_FLAG=2 and END_FLAG=2 and PASS_OR_NOT2=1
+         where STEP_FLAG=2 and END_FLAG=2
    </select>
 </mapper>

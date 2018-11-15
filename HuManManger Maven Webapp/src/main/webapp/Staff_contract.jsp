@@ -96,7 +96,7 @@
                                 <div class="col-lg-4">
                                   <label>员工</label>
 								  <input type="hidden" id="contractId" name="contractId" class="form-control" placeholder="请输入">
-										<select class="form-control" id="staffId" name="staffId">
+										<select class="staffinfo form-control" id="staffId" name="staffId">
         	                            </select>
 								</div>							
                                 <div class="col-lg-4">
@@ -287,7 +287,7 @@
 				   };
 					var tr = "<tr>";
 					tr += "<td style='display:none'>" + obj.CONTRACT_ID + "</td>"; //合同编号
-					tr += "<td id='name'>" + obj.STAFF_NAME + "</td>"; //员工姓名
+					tr += "<td id='staffname'>" + obj.STAFF_NAME + "</td>"; //员工姓名
 					tr += "<td>" + obj.CONTRACT_ENTERPRIES + "</td>"; //合同续签公司
 					tr += "<td>" + contype + "</td>"; //合同类型
 					tr += "<td>" + ttt + "</td>"; //合同状态
@@ -404,7 +404,7 @@
        success:function(data){
          for(var i=0;i<data.length;i++){
             var obj=data[i];
-            $(".staff").append("<option value='"+obj.staffId+"'>"+obj.STAFF_NAME+"</option>");
+            $(".staff").append("<option value='"+obj.staffId+"'>"+obj.staffName+"</option>");
          } } });  }); 
 	//添加与修改
 	$(document).on("click", "#insertorupdate", function() { 
@@ -421,7 +421,7 @@
 			} }); });
 	/*修改前查询  */
 	$(document).on("click", ".selectByID", function() { 
-	 	var staffName=$(this).parent().parent().find("#name").html();
+	 	var staffName=$(this).parent().parent().find("#staffname").html();
 	    //合同到期时间
 	 	var htdq=$(this).parent().parent().find("#htdq").html();
 	 	//试用到期时间
@@ -440,7 +440,6 @@
 			data : { "contractId" : id },
 			dataType : "json",
 			success : function(data) {
-			alert(data.staffId);
 						$("#contractId").val(data.contractId);//合同编号
 		                $("#staffId").val(data.staffId);//员工外键
 		                $("#contractType").val(data.contractType);//合同类型
@@ -459,10 +458,10 @@
        success:function(data){
          for(var i=0;i<data.length;i++){
             var obj=data[i];
-            if(staffName==obj.STAFF_NAME){
-             $("#staffId").append("<option value='"+obj.staffId+"' selected='selected'>"+obj.STAFF_NAME+"</option>");
+            if(staffName==obj.staffName){
+             $(".staffinfo").append("<option value='"+obj.staffId+"' selected='selected'>"+obj.staffName+"</option>");
             }else{
-             $("#staffId").append("<option value='"+obj.staffId+"'>"+obj.STAFF_NAME+"</option>");
+             $(".staffinfo").append("<option value='"+obj.staffId+"'>"+obj.staffName+"</option>");
             } } } });
              });
 

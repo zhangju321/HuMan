@@ -6,12 +6,18 @@
     <!-- select * from vocation -->
     select v.status_Name,v.vocation_Id,s.STAFF_NAME,v.vocation_Reason,v.vocation_Qi_Time,v.vocation_Jie_Time,
        v.examine_Person,v.circulate from vocation v left join staff_Info s on
-       v.sta_Staff_Id=s.Staff_Id order by v.vocation_Id    
+       v.sta_Staff_Id=s.Staff_Id order by v.vocation_Id desc   
   </select>  
   
   <select id="findAll" resultType="java.util.Map">
     select staff_Id,STAFF_NAME from staff_Info
-  </select>    
+  </select> 
+   <select id="notApproved" resultType="Map">  
+       select v.status_Name,v.vocation_Id,s.staff_Name,v.vocation_Reason,v.vocation_Qi_Time,v.vocation_Jie_Time,
+       v.examine_Person,v.circulate from vocation v left join staff_Info s on
+       v.sta_Staff_Id=s.Staff_Id where status_Name='0' order by v.vocation_Id   
+  </select> 
+     
   <select id="queryById" resultType="Map" parameterType="int">
      select d.departmentName,s.STAFF_NAME,s.staff_Id,v.vocation_Reason,v.vocation_Qi_Time,v.vocation_Jie_Time,v.status_Name
      from vocation v left join staff_Info s on v.sta_Staff_Id=s.STAFF_ID

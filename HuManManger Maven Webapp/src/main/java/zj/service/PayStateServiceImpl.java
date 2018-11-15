@@ -9,13 +9,15 @@ import org.springframework.stereotype.Service;
 import zj.dao.PayStateDao;
 @Service
 public class PayStateServiceImpl implements PayStateService{
-@Autowired
-private PayStateDao dao;
+	@Autowired
+	private PayStateDao dao;
+	//查询全部
 	@Override
 	public List<Map<String, Object>> queryPay() {
 		// TODO Auto-generated method stub
 		return dao.queryPay();
 	}
+	//批量修改薪资状态
 	@Override
 	public int updateState(String[] check_val) {
 		int[] intArr=new int[0];//生成一个int数组
@@ -47,5 +49,11 @@ private PayStateDao dao;
 			return 1;
 		}
 		return 0;//返回正确的结果，返回1
+	}
+	//根据时间模糊查询薪资
+	@Override
+	public List<Map<String, Object>> queryTime(String tax_time) {
+		// TODO Auto-generated method stub
+		return dao.queryTime(tax_time);
 	}
 }

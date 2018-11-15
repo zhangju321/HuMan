@@ -12,7 +12,9 @@ public interface TravelMapper {
 	//出差查询
 	  public List<Map> queryAll();
 	//职工查询
-		public List<Staff_info> findAll();
+	  public List<Map> findAll();
+	//未审批查询  
+	   public List<Map> notApproved();
 	//出差登记
 	    public int save(Travel t);
 	  //修改状态

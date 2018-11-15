@@ -4,44 +4,51 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import net.sf.jsqlparser.expression.DateTimeLiteralExpression.DateTime;
+
 public class Hr_recruit_filter {
 	private int filterId;
     private int planNo;
     private int id;
     private String employeeName;
-    private String position;
+    private int position;
     private String employeeMajor;
     private String employeePhone;
-    private String transactorStep;
+    private int transactorStep;//发起人
     private int stepFlag;
     private int endFlag;
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date nextDateTime;
-    private String nextTransaStep;
+    private int nextTransaStep;//下一步审批人
     /*外键计划表*/
     private Hr_recruit_plan plan;
     /*初选*/
     private String filterMethod1;
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date filterDateTime1;
     private String firstContent1;
     private String firstView1;
-    private String transactorStep1;
+    private int transactorStep1;
     private String passOrNot1;
-    private String nextTransaStep1;
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private int nextTransaStep1;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date nextDateTime1;
 	/*复选*/
     private String filterMethod2;
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date filterDateTime2;
     private String firstContent2;
     private String firstView2;
-    private String transactorStep2;
+    private int transactorStep2;
     private String passOrNot2;
-    private String nextTransaStep2;
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    private Date nextDateTime2;
+    private Users user;
+    
+	public Users getUser() {
+		return user;
+	}
+	public void setUser(Users user) {
+		this.user = user;
+	}
 	public int getId() {
 		return id;
 	}
@@ -66,10 +73,10 @@ public class Hr_recruit_filter {
 	public void setEmployeeName(String employeeName) {
 		this.employeeName = employeeName;
 	}
-	public String getPosition() {
+	public int getPosition() {
 		return position;
 	}
-	public void setPosition(String position) {
+	public void setPosition(int position) {
 		this.position = position;
 	}
 	public String getEmployeeMajor() {
@@ -84,10 +91,10 @@ public class Hr_recruit_filter {
 	public void setEmployeePhone(String employeePhone) {
 		this.employeePhone = employeePhone;
 	}
-	public String getTransactorStep() {
+	public int getTransactorStep() {
 		return transactorStep;
 	}
-	public void setTransactorStep(String transactorStep) {
+	public void setTransactorStep(int transactorStep) {
 		this.transactorStep = transactorStep;
 	}
 	public int getStepFlag() {
@@ -108,10 +115,10 @@ public class Hr_recruit_filter {
 	public void setNextDateTime(Date nextDateTime) {
 		this.nextDateTime = nextDateTime;
 	}
-	public String getNextTransaStep() {
+	public int getNextTransaStep() {
 		return nextTransaStep;
 	}
-	public void setNextTransaStep(String nextTransaStep) {
+	public void setNextTransaStep(int nextTransaStep) {
 		this.nextTransaStep = nextTransaStep;
 	}
 	public Hr_recruit_plan getPlan() {
@@ -144,10 +151,10 @@ public class Hr_recruit_filter {
 	public void setFirstView1(String firstView1) {
 		this.firstView1 = firstView1;
 	}
-	public String getTransactorStep1() {
+	public int getTransactorStep1() {
 		return transactorStep1;
 	}
-	public void setTransactorStep1(String transactorStep1) {
+	public void setTransactorStep1(int transactorStep1) {
 		this.transactorStep1 = transactorStep1;
 	}
 	public String getPassOrNot1() {
@@ -156,10 +163,10 @@ public class Hr_recruit_filter {
 	public void setPassOrNot1(String passOrNot1) {
 		this.passOrNot1 = passOrNot1;
 	}
-	public String getNextTransaStep1() {
+	public int getNextTransaStep1() {
 		return nextTransaStep1;
 	}
-	public void setNextTransaStep1(String nextTransaStep1) {
+	public void setNextTransaStep1(int nextTransaStep1) {
 		this.nextTransaStep1 = nextTransaStep1;
 	}
 	public Date getNextDateTime1() {
@@ -192,10 +199,10 @@ public class Hr_recruit_filter {
 	public void setFirstView2(String firstView2) {
 		this.firstView2 = firstView2;
 	}
-	public String getTransactorStep2() {
+	public int getTransactorStep2() {
 		return transactorStep2;
 	}
-	public void setTransactorStep2(String transactorStep2) {
+	public void setTransactorStep2(int transactorStep2) {
 		this.transactorStep2 = transactorStep2;
 	}
 	public String getPassOrNot2() {
@@ -203,18 +210,6 @@ public class Hr_recruit_filter {
 	}
 	public void setPassOrNot2(String passOrNot2) {
 		this.passOrNot2 = passOrNot2;
-	}
-	public String getNextTransaStep2() {
-		return nextTransaStep2;
-	}
-	public void setNextTransaStep2(String nextTransaStep2) {
-		this.nextTransaStep2 = nextTransaStep2;
-	}
-	public Date getNextDateTime2() {
-		return nextDateTime2;
-	}
-	public void setNextDateTime2(Date nextDateTime2) {
-		this.nextDateTime2 = nextDateTime2;
 	}
 	
 }

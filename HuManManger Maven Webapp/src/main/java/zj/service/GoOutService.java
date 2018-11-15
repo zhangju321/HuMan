@@ -10,11 +10,11 @@ import zj.entity.Vocation;
 
 public interface GoOutService {
 	  public List<Map> queryAll();
-	  public List<Staff_info> findAll();
+	  public List<Map> findAll();
 	  public int insert(GoOut g);
 	  public void updateStatu(GoOut statu); 
-	  public void updateStatu2(GoOut statu);
-	  //public GoOut queryById(int out_Id);
+	  public void updateStatu2(GoOut statu);	
+	  public List<Map> notApproved();
 	  public List<Map<String,Object>> queryDetails(int out_Id);
 	  public List<Map> queryStaff3(int sta_Staff_Id);
 	  public GoOut queryId(int out_Id);

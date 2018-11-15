@@ -66,7 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<td nowrap class="col-md-2 control-label" style="width: 10%">调动人员:</td>
 				<td class="TableData" style="width: 20%">
 					<input type="hidden"name="sta_staff_Id" id="sta_staff_Id" class="form-control">
-				    <input type="text" id="staffName" class="form-control">
+				    <input type="text" id="staffName" name="staffName" class="form-control">
 				</td> 
 				<td nowrap class="col-md-4 control-label" style="width: 20%">调动类型:</td>
 				<td class="TableData" style="width: 20%">
@@ -104,12 +104,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<td nowrap class="col-md-4 control-label" style="width: 20%">调动手续办理:</td>
 				<td class="TableData" style="width: 20%">
 				    <input type="text"name="MATERIALS_CONDITION"  id="MATERIALS_CONDITION"  class="form-control">
-				</td>
-			</tr> 
-			<tr>
-				<td nowrap class="col-md-4 control-label" style="width: 20%">附件上传:</td>
-				<td class="TableData" style="width: 20%">
-				    <input type="text"name="ATTACHMENT_NAME"  id="ATTACHMENT_NAME"  class="form-control">
 				</td>
 			</tr> 
 			<tr>
@@ -204,16 +198,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  <script>
  $(function(){ 
 			queryAll();
-			
-			
 		})
  	/* 查询全部 */
 function queryAll(){
 		$.ajax({
         	url : "stfer/queryAll",
         	type : "post",
-        	async : true,
-        	contentType: "application/json; charset=utf-8",
        	 	dataType : 'json', 
         	success : function(data) {
         		$("#transfer_tbody").html("");
@@ -289,24 +279,18 @@ function queryAll(){
  		}); 
 	 }
 	   /*删除*/
-	 $(function(){
-				$("#transfer_tbody").on("click",".deleteTransfer",function(){
+				$(document).on("click",".deleteTransfer",function(){
 					var id=this.id;
-					alert(id);
 					$.ajax({
 						url:"stfer/delete",
+						data:{"TRANSFER_ID":id},
 						type:"post",
-						async:true,
-						contentType:"application/json;charset=utf-8",
-						data:JSON.stringify(id),
-						dataType: 'Json',
-						success:function(data){
-						queryAll();
-						}
+						dataType: 'text',
+						success : function(data) {
+        	      queryAll();
+        	}
 					});
 				})
-			})
-			
 			
 			 /* 部门查询 */
      $('#qian_modal').on('show.bs.modal', function () {
@@ -388,7 +372,6 @@ function queryAll(){
 			$(function(){
 				$("#transfer_tbody").on("click",".details",function(){
 					var id=this.id;
-					alert(1);
 					$.ajax({
 						url:"stfer/queryId",
 						type:"post",
@@ -398,8 +381,8 @@ function queryAll(){
 						dataType: 'Json',
 						success:function(data){
 						$("#from_details").html("");
-						    var tr="<tr >";
-        		            tr+="<td>姓名:</td><td>"+data[0].staffName+"</td><td>调动类型:</td><td>"+ditch(data[0].TRANSFER_TYPE)+"</td>";
+						    var tr="<tr>";
+        		            tr+="<td>姓名:</td><td>"+data[0].STAFF_NAME+"</td><td>调动类型:</td><td>"+ditch(data[0].TRANSFER_TYPE)+"</td>";
         		            tr+="</tr>";
         		            tr+="<tr>";
         		            tr+="<td>调动日期:</td><td>"+data[0].TRANSFER_DATE+"</td><td>电动生效日期:</td><td>"+data[0].TRANSFER_EFFECTIVE_DATE+"</td>";
@@ -408,7 +391,7 @@ function queryAll(){
         		            tr+="<td>调动前部门:</td><td>"+data[0].DIAOQIAN+"</td><td>调动后部门:</td><td>"+data[0].DIAOHOU+"</td>";
         		            tr+="</tr>";
         		            tr+="<tr>";
-        		            tr+="<td>调动手续办理</td><td>"+data[0].START_DATE+"</td>";		            
+        		            /* tr+="<td>调动手续办理</td><td>"+data[0].START_DATE+"</td>";	 */	            
         		            tr+="</tr>";
         		            tr+="<tr>";
         		            tr+="<td>调动原因</td><td>"+data[0].TRAN_REASON+"</td>";

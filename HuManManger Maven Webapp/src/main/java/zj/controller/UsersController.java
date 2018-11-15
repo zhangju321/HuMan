@@ -25,7 +25,7 @@ public class UsersController {
 		List<Users> list=service.findAll();
 		return list;
 	} 	
-	@ResponseBody
+	
 	@RequestMapping("/login")
 	public String login(Users users,HttpSession session){
 		Map<String, Object> map=new HashMap<String, Object>();
@@ -37,9 +37,9 @@ public class UsersController {
 		System.out.println(user);
 		if(user!=null){
 			session.setAttribute("user", user);
-			return "1";
+			return "index";
 		}else{
-			return "0";
+			return "kaoshi";
 		}
 	}
 	

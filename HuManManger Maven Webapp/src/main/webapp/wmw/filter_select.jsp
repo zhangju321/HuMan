@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%
+<%                 
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
@@ -22,10 +22,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" type="text/css"href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css">
     <script	src="${pageContext.request.contextPath}/resource/jquery-1.11.3.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+    
+    <script src="resource/js/bootstrap/js/bootstrapValidator.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="resource/js/bootstrap/css/bootstrapValidator.min.css">
+	<script src="resource/jquery.serialize.js"></script>	
+	<link type="text/css" rel="stylesheet" href="resource/jedate/test/jeDate-test.css">
+    <link type="text/css" rel="stylesheet" href="resource/jedate/skin/jedate.css">	
+	<script type="text/javascript" src="resource/jedate/src/jedate.js"></script>
   </head>
   
   <body>
-  <p>人才筛选</p>
+  <p></p>
       <ul class="nav nav-tabs">
 	  <li class="active"><a href="/HuManManger/wmw/filter_select.jsp">人才筛选管理</a></li>
 	  <li><a href="/HuManManger/wmw/filter_save.jsp">创建筛选计划</a></li>
@@ -51,59 +58,62 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"aria-hidden="true">×</button>
-						<h4 class="modal-title" id="myModalLabel">招聘计划修改</h4>
+						<h4 class="modal-title" id="myModalLabel">人才筛选信息修改</h4>
 					</div>
 		<div class="modal-body">
 		<!-- 修改 -->
 		<form method="post" id="filterUpdate_form">
-		<table class="Table" width="50%" align="center" >
+		<table class="table table-bordered" width="50%" align="center" >
 			<tr align="center" class="TableControl">
 				<td colspan=4 nowrap>
-					<p>创建招聘筛选</p>
+					<p>修改招聘筛选</p>
 				</td>
 			</tr>
 			<tr>
 			     <input type="hidden"name="filterId" id="filterId" class="form-control">
-			     <input type="hidden"name="planNo" id="planNo" class="form-control">
+			     <input type="hidden" id="planNo" class="form-control">
 			</tr>
 			<tr>
 				<td nowrap class="col-md-2 control-label" style="width: 10%">计划名称:</td>
 				<td class="TableData" style="width: 20%">
-				   <input type="text"name="planName" id="planName" class="form-control">
+				   <input type="text"id="planName" class="form-control" readonly="readonly">
 				</td> 
 				<td nowrap class="col-md-4 control-label" style="width: 20%">应聘人员:</td>
 				<td class="TableData" style="width: 20%">
-				    <input type="text"name="employeeName" id="employeeName"  class="form-control">
+				    <input type="text"id="employeeName"  class="form-control" readonly="readonly">
 				</td>
 			</tr>
 			<tr>
 				<td nowrap class="col-md-1 control-label" style="width: 10%">应聘岗位:</td>
 				<td class="TableData" style="width: 20%">
-				   <input type="text"name="position" id="position" class="form-control">
+				   <input type="text" id="position" class="form-control" readonly="readonly">
 				</td>
 				<td nowrap class="col-md-4 control-label" style="width: 20%">所学专业:</td>
 				<td class="TableData" style="width: 20%">
-				    <input type="text"name="employeeMajor" id="employeeMajor" class="form-control">
+				    <input type="text" id="employeeMajor" class="form-control" readonly="readonly">
 				</td>
 			</tr>
 			<tr>
 				<td nowrap class="col-md-1 control-label" style="width: 10%">联系电话:</td>
 				<td class="TableData" style="width: 20%">
-				   <input type="text"name="employeePhone"  id="employeePhone" class="form-control">
+				   <input type="text" id="employeePhone" class="form-control" readonly="readonly">
 				</td>
 				<td nowrap class="col-md-4 control-label" style="width: 20%">发起人:</td>
 				<td class="TableData" style="width: 20%">
-				    <input type="text"name="transactorStep"  id="transactorStep" class="form-control">
+				    <input type="text" id="upstep" class="form-control" readonly="readonly">
+				    <input type="hidden" id="transactorStep" class="form-control" >
 				</td>
 			</tr>
 			<tr>
-				<td nowrap class="col-md-4 control-label" style="width: 20%">下一次筛选人员:</td>
-				<td class="TableData" style="width: 20%">
-				    <input type="text"name="nextTransaStep"  id="nextTransaStep"  class="form-control">
-				</td>
+				<td>下一次筛选人员:</td>
+                    <td>
+                    <input type="text" id="upuname" readonly="readonly">
+                    <input type="hidden" name="nextTransaStep" id="upuid">
+                    <input type="button" href="#user_modal" value="添加" data-toggle='modal'  >
+               </td>
 				<td nowrap class="col-md-1 control-label" style="width: 10%">下一次筛选时间:</td>
 				<td class="TableData" style="width: 20%">
-				   <input type="date"name="nextDateTime" id="nextDateTime"  class="form-control">
+				   <input type="text" name="nextDateTime" id="upstart" required placeholder="请选择下一次筛选时间" class="form-control"/>
 				</td>
 			</tr> 
 		</table>
@@ -116,7 +126,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</div>
 		</div>
-		
+
 <!-- 第一次面试模态框 -->
 <div class="modal fade" id="filterOne_modal" role="dialog" style="overflow:scroll;"aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" style="width:700px"><!-- auto -->
@@ -128,7 +138,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="modal-body">
 		<!-- 面试人员信息 -->
 		<form action="" >
-		   <table>
+		   <table  class="table table-bordered">
 		    <tr align="center" class="TableControl">
 				<td colspan=4 nowrap>
 					<p>面试人员信息</p>
@@ -139,19 +149,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</form>
 		<!-- 第一次筛选信息 -->
 		<form action="" id="filterOne_InforForm" style="display:none">
-		   <table>
+		   <table  class="table table-bordered">
 		     <tbody id="filterOne_Infor"></tbody>
 		   </table>
 		</form>
 		<!-- 第二次筛选信息 -->
 		<form action="" id="filterTwo_InforForm" style="display:none">
-		   <table>
+		   <table  class="table table-bordered">
 		     <tbody id="filterTwo_Infor"></tbody>
 		   </table>
 		</form>
 		<!-- 第一次筛选form -->
 		<form method="post" id="filterOne_FilterForm" >
-		<table class="Table" width="50%" align="center" >
+		<table class="table table-bordered" width="50%" align="center" >
 		   <tr align="center" class="TableControl">
 				<td colspan=4 nowrap>
 					<p>第一次筛选</p>
@@ -175,23 +185,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                </td>
 				<td nowrap class="col-md-4 control-label" style="width: 20%">初选时间:</td>
 				<td class="TableData" style="width: 20%">
-				    <input type="date"name="filterDateTime1"  class="form-control">
+				    <input type="text" name="filterDateTime1" id="start1" required placeholder="选择筛选时间" class="form-control"/>
 				</td>
 			</tr>
 			<tr>
 				<td nowrap class="col-md-1 control-label" style="width: 10%">初选内容:</td>
-				<td class="TableData" style="width: 20%">
-				   <input type="text"name="firstContent1" class="form-control">
+				<td class="TableData" style="width: 20%" colspan=3>
+				   <textarea class="form-control" name="firstContent1" ></textarea>
 				</td>
-				<td nowrap class="col-md-4 control-label" style="width: 20%">初选意见:</td>
-				<td class="TableData" style="width: 20%">
-				    <input type="text"name="firstView1" class="form-control">
+		    </tr>
+		    <tr>
+		        <td nowrap class="col-md-1 control-label" style="width: 10%">初选意见:</td>
+				<td class="TableData" style="width: 20%" colspan=3>
+				   <textarea class="form-control" name="firstView1" ></textarea>
 				</td>
 			</tr>
 			<tr>
 				<td nowrap class="col-md-1 control-label" style="width: 10%">初选办理人:</td>
 				<td class="TableData" style="width: 20%">
-				   <input type="text"name="transactorStep1"class="form-control">
+				   <input type="text" value="${user.uname}" class="form-control" readonly="readonly">
+				   <input type="hidden" name="transactorStep1" value="${user.id}">
 				</td>
 				<td nowrap class="TableData">是否通过：</td>
                 <td class="TableData">
@@ -203,13 +216,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</tr>
 			<tr id="next1" style="display:none">
                 <td nowrap class="col-md-2 control-label">下一步骤办理人:</td>
-                <td class="TableData" style="width: 20%">
-                  <input type="text"   id="uname"  name="nextTransaStep1"  readonly="readonly">
-                  <input type="button"  href="#user_modal" value="添加" data-toggle='modal'  >
+                <td >
+                  <input type="text"   id="uname1"  readonly="readonly">
+                  <input type="hidden"  id="uid1"  name="nextTransaStep1"  >
+                  <input type="button"  href="#user1_modal" value="添加" data-toggle='modal'  >
                 </td>
                 <td nowrap class="TableData">下一次筛选时间：</td>
                 <td class="TableData">
-                 <input type="date" name="nextDateTime1" size="20" maxlength="20" class="form-control" value="" />
+                  <input type="text" name="nextDateTime1" id="start2" required placeholder="选择筛选时间" class="form-control"/>
                 </td>
              </tr>
              </table>
@@ -225,19 +239,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   </form>
 	   <!-- 第二次筛选信息模态框 -->
 	   <form method="post" id="filterTwo_FilterForm"  style="display:none">
-		<table class="Table" width="50%" align="center" >
+		<table class="table table-bordered"  width="50%" align="center" >
 		   <tr align="center" class="TableControl">
 				<td colspan=4 nowrap>
 					<p>第二次筛选</p>
-				</td>
-			</tr>
-			<tr>
-			<td>
 			     <input type="hidden"name=filterId  id="filterTwo" class="form-control">
 			     <input type="hidden"name="stepFlag"  id="stepFlag2" value="2" class="form-control">
 			     <input type="hidden"name="endFlag"  id="endFlag2" class="form-control">
-			</td>
+				</td>
 			</tr>
+
 			<tr>
 				<td nowrap class="col-md-2 control-label" style="width: 10%">复选方式:</td>
                 <td class="TableData">
@@ -249,27 +260,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                </td>
 				<td nowrap class="col-md-4 control-label" style="width: 20%">复选时间:</td>
 				<td class="TableData" style="width: 20%">
-				    <input type="date"name="filterDateTime2"  class="form-control">
+				    <input type="text" name="filterDateTime2" id="start3" required placeholder="选择筛选时间" class="form-control"/>
 				</td>
 			</tr>
 			<tr>
 				<td nowrap class="col-md-1 control-label" style="width: 10%">复选内容:</td>
-				<td class="TableData" style="width: 20%">
-				   <input type="text"name="firstContent2" class="form-control">
+				<td class="TableData" style="width: 20%" colspan=3>
+				   <textarea class="form-control" name="firstContent2" ></textarea>
 				</td>
-				<td nowrap class="col-md-4 control-label" style="width: 20%">复选意见:</td>
-				<td class="TableData" style="width: 20%">
-				    <input type="text"name="firstView2" class="form-control">
+		    </tr>
+		    <tr>
+		        <td nowrap class="col-md-1 control-label" style="width: 10%">复选意见:</td>
+				<td class="TableData" style="width: 20%" colspan=3>
+				   <textarea class="form-control" name="firstView2" ></textarea>
 				</td>
 			</tr>
 			<tr>
 				<td nowrap class="col-md-1 control-label" style="width: 10%">复选办理人:</td>
 				<td class="TableData" style="width: 20%">
-				   <input type="text"name="transactorStep2"class="form-control">
+				   <input type="text" class="form-control" readonly="readonly" value="${user.uname}">
+				   <input type="hidden" name="transactorStep2"class="form-control" value="${user.id}">
 				</td>
 				<td nowrap class="TableData">是否通过：</td>
                 <td class="TableData">
-                <select name="passOrNot2" id="passOrNot2" style="background:white" title="" onChange="next_play(2);">
+                <select name="passOrNot2" id="passOrNot2" style="background:white" title="" >
                   <option value="0" >未通过</option>
                   <option value="1" >通过</option>
                 </select>
@@ -280,7 +294,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              <table>
 		     <tr>
 		        <td>
-		        <!-- <button type="button" class="btn btn-primary" style="display:none" id="filterTwo_next" data-dismiss="modal"onclick="filterClose_One(1,2)">下一步骤</button> -->
 			    <button type="button" class="btn btn-default" data-dismiss="modal"onclick="filterClose_One(2,2)">结束筛选</button>
 		        </td>
 		     </tr>
@@ -290,7 +303,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 </div>
 </div>	
- <!-- 审批人 模态框-->
+ <!-- 修改 审批人 模态框-->
    <div class="modal fade" id="user_modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" style="width:700px">
 		<div class="modal-content">
@@ -312,6 +325,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
       </div>
    </div>
+    <!--  审批人 模态框-->
+   <div class="modal fade" id="user1_modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:700px">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"aria-hidden="true">×</button>
+					<h4 class="modal-title" >审批人</h4>
+				</div>
+				<div class="modal-body">
+				<form method="post" id="from_user">
+					<table class="table table-bordered" width="60%" align="center">
+							  <tbody id="user1Name"></tbody>
+				</table>
+               </form>
+			</div>
+		<div class="modal-footer">
+		    <button type="button" class="btn btn-default"data-dismiss="modal"  onclick="empty(1)">清空</button>
+			<button type="button" class="btn btn-default"data-dismiss="modal">关闭</button>
+		</div>
+		</div>
+      </div>
+   </div>
 </body>
 </html>
 <script>
@@ -321,7 +356,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 })
 	 /* 查询全部 */
 function filterSelect(){
-var id=1;
+var id=${user.id};
 		$.ajax({
         	url : "filter/select",
         	type : "post",
@@ -372,12 +407,14 @@ var id=1;
 						    $("#planNo").val(data[0].PLAN_NO);
 						    $("#planName").val(data[0].PLAN_NAME);
 							$("#employeeName").val(data[0].EMPLOYEE_NAME);
-							$("#position").val(data[0].POSITION);
+							$("#position").val(data[0].positionName);
 							$("#employeeMajor").val(data[0].EMPLOYEE_MAJOR);
 							$("#employeePhone").val(data[0].EMPLOYEE_PHONE);
 							$("#transactorStep").val(data[0].TRANSACTOR_STEP);
-							$("#nextDateTime").val(data[0].NEXT_DATE_TIME);
-							$("#nextTransaStep").val(data[0].NEXT_TRANSA_STEP);
+							$("#upstep").val(data[0].step);
+							$("#upuid").val(data[0].NEXT_TRANSA_STEP);
+							$("#upuname").val(data[0].next_step);
+							$("#upstart").val(data[0].NEXT_DATE_TIME);
 						}
 					});
 				})
@@ -385,6 +422,7 @@ var id=1;
 			/* 模态框修改 */
 	   function filter_update(){
 			var obj=$("#filterUpdate_form").serialize();
+			alert(obj);
 		    $.ajax({
 		       url : "filter/filterUpdate",
         	   type : "post",
@@ -427,12 +465,12 @@ var id=1;
  					 /* 根据步骤编号判断第几次筛选*/
 					if(filterStep==0){
 					/*第一次筛选   查询人员信息（0），调用第一次模态框*/
-					        $("#filterOne").val(filter_Id);
-					        filter_SelectInfor(filter_Id);
-  	                        $('#filterOne_modal').modal('show');
+					        $("#filterOne").val(filter_Id);/*添加id值*/
+					        filter_SelectInfor(filter_Id);/*根据id查询第一次筛选信息*/
   	                        document.getElementById("filterOne_FilterForm").style.display='';
   	                        document.getElementById("filterTwo_FilterForm").style.display='none';
-  	                         
+  	                        $('#filterOne_modal').modal('show');
+  	                        
   	                }else if(filterStep==1){
   	                /*第二次筛选   查询人员信息(0) ，查询第一次筛选信息，并显示(a)，调用第二次筛选模态框*/
   	                        $("#filterTwo").val(filter_Id);
@@ -461,6 +499,7 @@ var id=1;
   	                        $('#filterOne_modal').modal('show');
   	                        document.getElementById("filterOne_FilterForm").style.display='none';
   	                        document.getElementById("filterTwo_FilterForm").style.display='none';
+  	                        
   	                }else if(filterStep==1){
   	                        filter_SelectInfor(filter_Id);
   	                        filterOne_SelectInfor(filter_Id);
@@ -498,13 +537,13 @@ var id=1;
         		            tr+="<td>应聘者姓名：</td><td>"+data[0].EMPLOYEE_NAME+"</td><td>招聘计划：</td><td>"+data[0].PLAN_NAME+"</td>";
         		            tr+="</tr>";
         		            tr+="<tr>";
-        		            tr+="<td>应聘岗位：</td><td>"+data[0].POSITION+"</td><td>所学专业：</td><td>"+data[0].EMPLOYEE_MAJOR+"</td>";
+        		            tr+="<td>应聘岗位：</td><td>"+data[0].positionName+"</td><td>所学专业：</td><td>"+data[0].EMPLOYEE_MAJOR+"</td>";
         		            tr+="</tr>";
         		            tr+="<tr>";
-        		            tr+="<td>联系电话：</td><td>"+data[0].EMPLOYEE_PHONE+"</td><td>发起人：</td><td>"+data[0].TRANSACTOR_STEP+"</td>";        		            
+        		            tr+="<td>联系电话：</td><td>"+data[0].EMPLOYEE_PHONE+"</td><td>发起人：</td><td>"+data[0].step+"</td>";        		            
         		            tr+="</tr>";
         		            tr+="<tr>";
-        		            tr+="<td>下一步办理人：</td><td>"+data[0].NEXT_TRANSA_STEP+"</td><td>下一步筛选时间：</td><td>"+data[0].NEXT_DATE_TIME+"</td>";
+        		            tr+="<td>下一步办理人：</td><td>"+data[0].next_step+"</td><td>下一步筛选时间：</td><td>"+data[0].NEXT_DATE_TIME+"</td>";
         		            tr+="</tr>";
         		            $("#filter_Infor").append(tr); 
 						}
@@ -552,16 +591,16 @@ var id=1;
 						    var tr="<tr>";
 						    tr+="<td align='center' class='TableControl' colspan=4 nowrap><p>第一次筛选信息</p></td>";
         		            tr+="</tr>";
-        		            tr+="<td>初选方式：</td><td>"+data[0].FILTER_METHOD1+"</td><td>初选时间：</td><td>"+data[0].FILTER_DATE_TIME1+"</td>";
+        		            tr+="<td>初选方式：</td><td>"+method(data[0].FILTER_METHOD1)+"</td><td>初选时间：</td><td>"+data[0].FILTER_DATE_TIME1+"</td>";
         		            tr+="</tr>";
         		            tr+="<tr>";
         		            tr+="<td>初选内容：</td><td>"+data[0].FIRST_CONTENT1+"</td><td>初选意见：</td><td>"+data[0].FIRST_VIEW1+"</td>";
         		            tr+="</tr>";
         		            tr+="<tr>";
-        		            tr+="<td>初选办理人：</td><td>"+data[0].TRANSACTOR_STEP1+"</td><td>初选是否通过：</td><td>"+data[0].PASS_OR_NOT1+"</td>";        		            
+        		            tr+="<td>初选办理人：</td><td>"+data[0].step1+"</td><td>初选是否通过：</td><td>"+passornot(data[0].PASS_OR_NOT1)+"</td>";        		            
         		            tr+="</tr>";
         		            tr+="<tr>";
-        		            tr+="<td>初选下一步办理人：</td><td>"+data[0].NEXT_TRANSA_STEP1+"</td><td>初选下步筛选时间：</td><td>"+data[0].NEXT_DATE_TIME1+"</td>";
+        		            tr+="<td>初选下一步办理人：</td><td>"+data[0].next_step1+"</td><td>初选下步筛选时间：</td><td>"+data[0].NEXT_DATE_TIME1+"</td>";
         		            tr+="</tr>";
         		            $("#filterOne_Infor").append(tr); 
 						}
@@ -580,15 +619,15 @@ var id=1;
 						success:function(data){
 				           $("#filterTwo_Infor").html("");
 						    var tr="<tr>";
-						    tr+="<td align='center' class='TableControl' colspan=4 nowrap><p>第二次筛选信息</p></td>";
+						    tr+="<td><p>第二次筛选信息</p></td>";
         		            tr+="</tr>";
-        		            tr+="<td>复选方式：</td><td>"+data[0].FILTER_METHOD2+"</td><td>复选时间：</td><td>"+data[0].FILTER_DATE_TIME2+"</td>";
+        		            tr+="<td>复选方式：</td><td>"+method(data[0].FILTER_METHOD2)+"</td><td>复选时间：</td><td>"+data[0].FILTER_DATE_TIME2+"</td>";
         		            tr+="</tr>";
         		            tr+="<tr>";
         		            tr+="<td>复选内容：</td><td>"+data[0].FIRST_CONTENT2+"</td><td>复选意见：</td><td>"+data[0].FIRST_VIEW2+"</td>";
         		            tr+="</tr>";
         		            tr+="<tr>";
-        		            tr+="<td>复选办理人：</td><td>"+data[0].TRANSACTOR_STEP2+"</td><td>复选是否通过：</td><td>"+data[0].PASS_OR_NOT2+"</td>";        		            
+        		            tr+="<td>复选办理人：</td><td>"+data[0].step2+"</td><td>复选是否通过：</td><td>"+passornot(data[0].PASS_OR_NOT2)+"</td>";        		            
         		            tr+="</tr>";
         		            $("#filterTwo_Infor").append(tr); 
 						}
@@ -614,10 +653,10 @@ var id=1;
 	      }
 	   }
 	 }
-	 /* 筛选办理人 */
+	 /* 修改选办理人 */
 	 $('#user_modal').on('show.bs.modal', function () {
         $.ajax({
-        	url : "findAll",
+        	url : "users/usersname",
         	type : "post",
         	async : true,
         	contentType: "application/json; charset=utf-8",
@@ -641,10 +680,67 @@ var id=1;
         		      var uid=users[0];
         		      var uname=users[1];
 					}
-				$("#uid").val(uid);
-			    $("#uname").val(uname); 
+				$("#upuid").val(uid);
+			    $("#upuname").val(uname); 
 				})
 			})
+			/* 筛选办理人 */
+	 $('#user1_modal').on('show.bs.modal', function () {
+        $.ajax({
+        	url : "users/usersname",
+        	type : "post",
+        	async : true,
+        	contentType: "application/json; charset=utf-8",
+        	dataType : 'json', 
+        	success : function(data) {
+           		$("#user1Name").html("");
+        		 for(var i=0; i<data.length;i++){
+        		    var tr="<tr>";
+        		    var user=data[i].id+","+data[i].uname;
+        		    tr+="<td><button type='button' id='"+user+"' class='insert btn btn-default' data-dismiss='modal'>'"+data[i].uname+"'</button></td>";
+        		    tr+="</tr>";
+        		     $("#user1Name").append(tr); 
+        	}}
+ 		}); 
+     })
+	$(function(){
+				$("#user1Name").on("click",".insert",function(){
+				    var user=this.id;
+					var users= user.split(",");
+					for(var i=0; i<users.length;i++){
+        		      var uid=users[0];
+        		      var uname=users[1];
+					}
+				$("#uid1").val(uid);
+			    $("#uname1").val(uname); 
+				})
+			})
+			
+	 function empty(none){
+            if (none==0) {
+                $("#uid").val("");
+                $("#uname").val("");
+            }else if(none==1){
+                $("#uid1").val("");
+                $("#uname1").val("");
+            }
+	 }
+	 /*判断筛选方式*/
+	 function method(meth){
+            if (meth==1) {
+                return "笔试";
+            }else if(meth==2){
+                return "面试";
+            }
+	 }
+	  /*判断是否通过*/
+	function passornot(pass){
+            if (pass==1) {
+                return "通过";
+            }else if(pass==2){
+                return "未通过";
+            }
+	 }
 	 
 	                                                                    /* 按钮 */
 	 /* 结束筛选判断按钮 */
@@ -694,5 +790,60 @@ var id=1;
  				 document.getElementById("filterTwo_next").style.display='';
 	    }
 	}}
-                                                                               /* 详细信息 */
+	var upstart = {};
+    jeDate('#upstart',{
+       format: 'YYYY-MM-DD hh:mm:ss',
+            minDate: function (that) {
+                //that 指向实例对象
+                var nowMinDate = jeDate.valText('#upstart') == "" && jeDate.valText(that.valCell) == "";
+                return nowMinDate ? jeDate.nowDate({DD:0}) : end.minDate ;
+            }, //设定最大日期为当前日期
+    });
+      //蓝色主题色
+    jeDate("#upstart",{
+        theme:{ bgcolor:"#00A1CB",color:"#ffffff", pnColor:"#00CCFF"},
+        format: "YYYY-MM-DD hh:mm:ss"
+    });
+var start1 = {};
+    jeDate('#start1',{
+       format: 'YYYY-MM-DD hh:mm:ss',
+            minDate: function (that) {
+                //that 指向实例对象
+                var nowMinDate1 = jeDate.valText('#start1') == "" && jeDate.valText(that.valCell) == "";
+                return nowMinDate1 ? jeDate.nowDate({DD:0}) : end.minDate ;
+            }, //设定最大日期为当前日期
+    });
+      //蓝色主题色
+    jeDate("#start1",{
+        theme:{ bgcolor:"#00A1CB",color:"#ffffff", pnColor:"#00CCFF"},
+        format: "YYYY-MM-DD hh:mm:ss"
+    });
+    var start2 = {};
+    jeDate('#start2',{
+       format: 'YYYY-MM-DD hh:mm:ss',
+            minDate: function (that) {
+                //that 指向实例对象
+                var nowMinDate2 = jeDate.valText('#start2') == "" && jeDate.valText(that.valCell) == "";
+                return nowMinDate2 ? jeDate.nowDate({DD:0}) : end.minDate ;
+            }, //设定最大日期为当前日期
+    });
+      //蓝色主题色
+    jeDate("#start2",{
+        theme:{ bgcolor:"#00A1CB",color:"#ffffff", pnColor:"#00CCFF"},
+        format: "YYYY-MM-DD hh:mm:ss"
+    });
+    var start3 = {};
+    jeDate('#start3',{
+       format: 'YYYY-MM-DD hh:mm:ss',
+            minDate: function (that) {
+                //that 指向实例对象
+                var nowMinDate3 = jeDate.valText('#start3') == "" && jeDate.valText(that.valCell) == "";
+                return nowMinDate3 ? jeDate.nowDate({DD:0}) : end.minDate ;
+            }, //设定最大日期为当前日期
+    });
+      //蓝色主题色
+    jeDate("#start3",{
+        theme:{ bgcolor:"#00A1CB",color:"#ffffff", pnColor:"#00CCFF"},
+        format: "YYYY-MM-DD hh:mm:ss"
+    });
 </script>

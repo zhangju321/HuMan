@@ -5,15 +5,18 @@
     <!-- select * from travel -->
     select t.status_Name,t.travel_Id,s.STAFF_NAME,t.travel_Reason,t.travel_Place,t.start_Time,
        t.end_Time,t.examine_Person,t.circulate from travel t left join staff_Info s on
-       t.sta_Staff_Id=s.STAFF_ID order by t.travel_Id   
+       t.sta_Staff_Id=s.STAFF_ID order by t.travel_Id desc
   </select>
   
-  <select id="findAll" resultType="Staff_info">
+  <select id="findAll" resultType="java.util.Map">
     select staff_Id ,STAFF_NAME from staff_info
+  </select> 
+  <select id="notApproved" resultType="Map">  
+       select t.status_Name,t.travel_Id,s.staff_Name,t.travel_Reason,t.travel_Place,t.start_Time,
+       t.end_Time,t.examine_Person,t.circulate from travel t left join staff_Info s on
+       t.sta_Staff_Id=s.STAFF_ID where status_Name='0' order by t.travel_Id   
   </select>
-  <!-- <select id="queryById" resultType="Travel" parameterType="int">
-     select * from travel where travel_Id=#{travel_Id}
-  </select> -->
+  
   <select id="queryDetails" resultType="Map" parameterType="int">
      select d.departmentName,s.STAFF_NAME,s.staff_Id,t.travel_Reason,
      t.travel_Place,t.start_Time,t.end_Time,t.status_Name 
@@ -32,10 +35,10 @@
   
   <insert id="save" parameterType="Travel" >
     insert into travel (sta_Staff_Id,travel_place,start_time, end_time, travel_date,
-      travel_reason, examine_Person, circulate, status_name)
+      travel_reason, uid, circulate, status_name)
     values (#{sta_Staff_Id,jdbcType=INTEGER}, #{travel_Place,jdbcType=VARCHAR}, 
       #{start_Time,jdbcType=TIMESTAMP}, #{end_Time,jdbcType=TIMESTAMP}, #{travel_Date,jdbcType=INTEGER}, 
-      #{travel_Reason,jdbcType=VARCHAR},#{examine_Person,jdbcType=VARCHAR}, #{circulate,jdbcType=VARCHAR}, 
+      #{travel_Reason,jdbcType=VARCHAR},#{uid,jdbcType=INTEGER}, #{circulate,jdbcType=VARCHAR}, 
       #{status_Name,jdbcType=VARCHAR})
   </insert>
    <update id="updateStatu" parameterType="Travel">

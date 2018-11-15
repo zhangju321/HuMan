@@ -46,11 +46,7 @@
 				<th>实际出勤（天）</th>
 				<th>休息（次）</th>
 				<th>旷工（次）</th>
-				<th>上班未登记</th>
-				<th>下班未登记</th>
 				<th>迟到(次)</th>
-		        <th>外出次数</th>
-				<th>出差次数</th>
 				<th>操作</th>
 			</tr>
 		</thead>
@@ -64,6 +60,29 @@
 		<li><button type="button" class="btn btn-default" id="xyy">下一页</button></li>
 		<li><button type="button" class="btn btn-default" id="weiye">尾页</button></li>
 		<li style="font-weight: lighter;">当前第<input type="text" id="currPage" style="height:35px;width:50px;border-radius:10px;text-align: center;"/>页</li>
+	</ul>
+	
+	
+	<table class="table table-hover">
+		<thead>
+			<tr class="success">
+				<th>员工姓名</th>
+				<th>考勤次数</th>
+				<th>外出次数</th>
+				<th>出差次数</th>
+				<th>请假次数</th>
+			</tr>
+		</thead>
+		<tbody id="cishutbody">
+
+		</tbody>
+	</table>
+	<ul class="pager">
+		<li><button type="button" class="btn btn-default" id="shouye1">首页</button></li>
+		<li><button type="button" class="btn btn-default" id="syy1">上一页</button></li>
+		<li><button type="button" class="btn btn-default" id="xyy1">下一页</button></li>
+		<li><button type="button" class="btn btn-default" id="weiye1">尾页</button></li>
+		<li style="font-weight: lighter;">当前第<input type="text" id="currPage1" style="height:35px;width:50px;border-radius:10px;text-align: center;"/>页</li>
 	</ul>
 	
 <!-- 模态框弹出详细信息 -->
@@ -157,6 +176,7 @@
 	/* 页面加载函数 */
 	$(function() {
 		selectas();
+		selectcishu();
 	});
 	function selectas(startPage) {
 		$.ajax({
@@ -171,18 +191,15 @@
 				var list=data.list;
 				for (var i = 0; i < list.length; i++) {
 					var obj = list[i];
+					var chuqin=obj.saa/4;
 					var tr = "<tr>";
 					tr += "<td id='staid' style='display:none'>" + obj.staff_id + "</td>"; //员工id
 					tr += "<td id='sname'>" + obj.STAFF_NAME + "</td>"; //员工姓名
-					tr += "<td>" + obj.sas + "</td>"; //应出勤 
-					tr += "<td>" + obj.saa + "</td>"; //实际出勤 
+					tr += "<td>" + obj.attendance_should + "</td>"; //应出勤 
+					tr += "<td>" + chuqin + "</td>"; //实际出勤 
 					tr += "<td>" + obj.sr + "</td>"; //休息
 					tr += "<td>" + obj.sa + "</td>"; //旷工
-					tr += "<td>" + obj.su + "</td>"; //上班未登记
-					tr += "<td>" + obj.so + "</td>"; //下班未登记
 					tr += "<td>" + obj.sl + "</td>"; //迟到
-			        tr += "<td >" + obj.co + "</td>"; //外出次数 
-					tr += "<td>" + obj.ct + "</td>"; //出差次数
 					tr += "<td><input type='button'  title=" + obj.staff_id + "  data-toggle='modal' data-target='#myModal' class='Details btn btn-default' value='详细信息'></td>";
 					tr += "</tr>";
 					$("#tbody").append(tr);
@@ -235,6 +252,78 @@
 	})
 	$("#shouye").click(function() {
 		selectas(1);
+	})
+	
+		function selectcishu(startPage) {
+		$.ajax({
+			url : "as/selectcishu",
+			type : "post",
+			data : {
+				"startPage" : startPage
+			},
+			dataType : "json",
+			success : function(data) {
+				$("#cishutbody").empty();
+				var list=data.list;
+				for (var i = 0; i < list.length; i++) {
+					var obj = list[i];
+					var tr = "<tr>";
+					tr += "<td>" + obj.STAFF_NAME + "</td>"; //员工姓名
+					tr += "<td>" + obj.考勤次数 + "</td>"; //考勤次数
+					tr += "<td>" + obj.外出次数 + "</td>"; //外出次数
+					tr += "<td>" + obj.出差次数 + "</td>"; //出差次数
+					tr += "<td>" + obj.请假次数 + "</td>"; //请假次数
+					tr += "</tr>";
+					$("#cishutbody").append(tr);
+				}
+			//当前页的值
+				$("#currPage1").val(data.pageNum);
+				$("#weiye1").click(function() {
+					var last = Math.ceil(data.total / data.pageSize);
+					selectcishu(last);
+				})
+				$("#currPage1").blur(function() {
+					var last = Math.ceil(data.total / data.pageSize);
+					var curr = $("#currPage1").val();
+					if(last<curr){
+					   $("#currPage1").val(last);
+					   selectcishu(last);
+					}
+					if(curr<=0){
+					  $("#currPage1").val(1);
+					   selectcishu(1);
+					}
+					 selectcishu(curr);
+				});
+				
+				if (data.isFirstPage) {
+					$("#syy1").attr("disabled", "disabled");
+					$("#shouye1").attr("disabled", "disabled");
+				} else {
+					$("#syy1").removeAttr("disabled", "disabled");
+					$("#shouye1").removeAttr("disabled", "disabled");
+				}
+				if (data.isLastPage) {
+					$("#xyy1").attr("disabled", "disabled");
+					$("#weiye1").attr("disabled", "disabled");
+				} else {
+					$("#xyy1").removeAttr("disabled", "disabled");
+					$("#weiye1").removeAttr("disabled", "disabled");
+				}
+       }
+    });
+  }
+  /* 按钮的赋值 */
+	$("#syy1").click(function() {
+		var currPage = parseInt($("#currPage1").val());
+		selectcishu(currPage - 1);
+	})
+	$("#xyy1").click(function() {
+		var currPage = parseInt($("#currPage1").val());
+		selectcishu(currPage + 1);
+	})
+	$("#shouye1").click(function() {
+		selectcishu(1);
 	})
 	
 	

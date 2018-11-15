@@ -5,178 +5,116 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class Work_register {//上班登记
-    private int workId;
+    private Integer workId;
 
-    private int departmentid;
+    private Integer departmentid;
 
-    private int staffId;
+    private Integer staffId;
 
-    private int registerOrder;
+    private Integer registerOrder;
 
-    private String registerType;
+    private Integer attendanceShould;//应出勤
 
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private Date setTime;//规定时间
+    private Integer attendanceActual;//实际出勤
 
-    private int registerIp;
+    private Integer rest;//休息
 
-    private int attendanceShould;//应出勤
+    private Integer absenteeism;//旷工
 
-    private int attendanceActual;//实际出勤
+    private Integer late;//迟到
 
-    private int rest;//休息
 
-    private int absenteeism;//旷工
+    private Integer earlyRetreat;//早退
 
-    private int late;//迟到
 
-    private int workUnregistered;//上班未登记
+    private String workTime1;//上班时间
 
-    private int earlyRetreat;//早退
-
-    private int workOff;//下班未登记
-
-    private String workTime;//上班时间
-
-    private String workOfftime;//下班时间
-
-	public int getWorkId() {
+    private String workOfftime1;//下班时间
+    private String workTime2;
+    private String workOfftime2;
+	public Integer getWorkId() {
 		return workId;
 	}
-
-	public void setWorkId(int workId) {
+	public void setWorkId(Integer workId) {
 		this.workId = workId;
 	}
-
-	public int getDepartmentid() {
+	public Integer getDepartmentid() {
 		return departmentid;
 	}
-
-	public void setDepartmentid(int departmentid) {
+	public void setDepartmentid(Integer departmentid) {
 		this.departmentid = departmentid;
 	}
-
-	public int getStaffId() {
+	public Integer getStaffId() {
 		return staffId;
 	}
-
-	public void setStaffId(int staffId) {
+	public void setStaffId(Integer staffId) {
 		this.staffId = staffId;
 	}
-
-	public int getRegisterOrder() {
+	public Integer getRegisterOrder() {
 		return registerOrder;
 	}
-
-	public void setRegisterOrder(int registerOrder) {
+	public void setRegisterOrder(Integer registerOrder) {
 		this.registerOrder = registerOrder;
 	}
-
-	public String getRegisterType() {
-		return registerType;
-	}
-
-	public void setRegisterType(String registerType) {
-		this.registerType = registerType;
-	}
-
-	public Date getSetTime() {
-		return setTime;
-	}
-
-	public void setSetTime(Date setTime) {
-		this.setTime = setTime;
-	}
-
-	public int getRegisterIp() {
-		return registerIp;
-	}
-
-	public void setRegisterIp(int registerIp) {
-		this.registerIp = registerIp;
-	}
-
-	public int getAttendanceShould() {
+	public Integer getAttendanceShould() {
 		return attendanceShould;
 	}
-
-	public void setAttendanceShould(int attendanceShould) {
+	public void setAttendanceShould(Integer attendanceShould) {
 		this.attendanceShould = attendanceShould;
 	}
-
-	public int getAttendanceActual() {
+	public Integer getAttendanceActual() {
 		return attendanceActual;
 	}
-
-	public void setAttendanceActual(int attendanceActual) {
+	public void setAttendanceActual(Integer attendanceActual) {
 		this.attendanceActual = attendanceActual;
 	}
-
-	public int getRest() {
+	public Integer getRest() {
 		return rest;
 	}
-
-	public void setRest(int rest) {
+	public void setRest(Integer rest) {
 		this.rest = rest;
 	}
-
-	public int getAbsenteeism() {
+	public Integer getAbsenteeism() {
 		return absenteeism;
 	}
-
-	public void setAbsenteeism(int absenteeism) {
+	public void setAbsenteeism(Integer absenteeism) {
 		this.absenteeism = absenteeism;
 	}
-
-	public int getLate() {
+	public Integer getLate() {
 		return late;
 	}
-
-	public void setLate(int late) {
+	public void setLate(Integer late) {
 		this.late = late;
 	}
-
-	public int getWorkUnregistered() {
-		return workUnregistered;
-	}
-
-	public void setWorkUnregistered(int workUnregistered) {
-		this.workUnregistered = workUnregistered;
-	}
-
-	public int getEarlyRetreat() {
+	public Integer getEarlyRetreat() {
 		return earlyRetreat;
 	}
-
-	public void setEarlyRetreat(int earlyRetreat) {
+	public void setEarlyRetreat(Integer earlyRetreat) {
 		this.earlyRetreat = earlyRetreat;
 	}
-
-	public int getWorkOff() {
-		return workOff;
+	public String getWorkTime1() {
+		return workTime1;
 	}
-
-	public void setWorkOff(int workOff) {
-		this.workOff = workOff;
+	public void setWorkTime1(String workTime1) {
+		this.workTime1 = workTime1;
 	}
-
-	public String getWorkTime() {
-		return workTime;
+	public String getWorkOfftime1() {
+		return workOfftime1;
 	}
-
-	public void setWorkTime(String workTime) {
-		this.workTime = workTime;
+	public void setWorkOfftime1(String workOfftime1) {
+		this.workOfftime1 = workOfftime1;
 	}
-
-	public String getWorkOfftime() {
-		return workOfftime;
+	public String getWorkTime2() {
+		return workTime2;
 	}
-
-	public void setWorkOfftime(String workOfftime) {
-		this.workOfftime = workOfftime;
+	public void setWorkTime2(String workTime2) {
+		this.workTime2 = workTime2;
 	}
-
+	public String getWorkOfftime2() {
+		return workOfftime2;
+	}
+	public void setWorkOfftime2(String workOfftime2) {
+		this.workOfftime2 = workOfftime2;
+	}
 	
-
-
 }

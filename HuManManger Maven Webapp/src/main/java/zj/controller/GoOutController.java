@@ -28,6 +28,15 @@ import zj.service.GoOutService;
 public class GoOutController {
 	@Autowired
 	 private GoOutService gser;
+	
+	 @RequestMapping("notApproved")
+	 @ResponseBody
+	 public PageInfo<Map> notApproved(@RequestParam(required = false, defaultValue = "1") Integer startPage){
+		 PageHelper.startPage(startPage, 5);
+		 List<Map> list=gser.notApproved();
+		 PageInfo<Map> vo = new PageInfo<>(list);
+		 return vo;
+	}
 	 	
 	 @RequestMapping("/queryAll")
 	 @ResponseBody	 
@@ -39,8 +48,8 @@ public class GoOutController {
 	}
 	 @RequestMapping("/findAll")
 	 @ResponseBody
-	 public List<Staff_info> findAll(){
-		  List<Staff_info> lists=gser.findAll();
+	 public List<Map> findAll(){
+		  List<Map> lists=gser.findAll();
 		  return lists;	  
 	 }
 	@RequestMapping("/queryDetails")

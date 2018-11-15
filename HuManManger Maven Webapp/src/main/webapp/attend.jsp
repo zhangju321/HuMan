@@ -19,6 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link type="text/css" rel="stylesheet" href="resource/js/bootstrap/css/bootstrapValidator.min.css">
 	<script src="resource/js/bootstrap/js/bootstrap.min.js"></script>
 	<script src="resource/jquery.serialize.js"></script>	
+	<script src="resource/jqueryExt.js"></script>
 	<link type="text/css" rel="stylesheet" href="resource/jedate/test/jeDate-test.css">
     <link type="text/css" rel="stylesheet" href="resource/jedate/skin/jedate.css">	
 	<script type="text/javascript" src="resource/jedate/src/jedate.js"></script>
@@ -295,9 +296,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
       
       <div class="form-group">
-        <label for="s.stuName" class="col-md-4 control-label">申请状态:</label>
+        <label for="status_Name" class="col-md-4 control-label">申请状态:</label>
          <div class="col-md-8">            
-              <input type="radio" name="status_Name" value="0" checked="checked"/>未审批             
+              <input type="radio" name="status_name" value="0" checked="checked"/>未审批             
          </div>
       </div>
            <div class="form-group">
@@ -411,14 +412,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <div>
     	<table class="table table-bordered table-hover">
     		<tr>
-    		    <td>状态</td>
-    		    <!-- <td>外出编号</td> -->
+    		    
+    		    <td>外出编号</td> 
     		    <td>外出人员</td>
     			<td>外出原因</td>
     			<td>外出地点</td>
-    			<td>外出日期</td>
+    			<!-- <td>外出日期</td> -->
     			<td>开始时间</td>
-    			<td>结束时间</td>      					
+    			<td>结束时间</td> 
+    			<td>状态</td>     					
     			<td>操作</td>    			      			 		
     		</tr>
     		<tbody id="tbodyGo"></tbody>
@@ -442,7 +444,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!-- 模态框弹出录入内容 -->
 	<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="modalTitle1" aria-hidden="true">
 	<div class="modal-dialog" style="width:550px">
-		<div class="modal-content" style="height:600px">
+		<div class="modal-content" style="height:650px">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 					&times; <!-- 关闭按钮 -->
@@ -454,13 +456,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="modal-body">
    <form id="tform" method="post" class="form-horizontal">
       <div class="form-group">
-        <label for="s.tabClasses" class="col-md-4 control-label">出差人员:</label>
-         <div class="col-md-6">
-          <select name="sta_Staff_Id" id="sta3"></select><br/>
+        <label for="sta_Staff_Id" class="col-md-4 control-label">出差人员:</label>
+         <div class="col-md-6">            
+          <select name="sta_Staff_Id" id="sta3"></select><br/>       
          </div>
       </div>
       <div class="form-group">
-        <label for="s.stuCode" class="col-md-4 control-label">出差原因:</label>
+        <label for="travel_Reason" class="col-md-4 control-label">出差原因:</label>
           <div class="col-md-6">
             <textarea name="travel_Reason" class="form-control" rows="3"></textarea>
          </div>
@@ -471,24 +473,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <input type="text" name="travel_Place" class="form-control"/>
          </div>
       </div>
-      <div class="form-group">
+     <div class="form-group">
         <label for="start_Time" class="col-md-4 control-label">开始时间:</label>
          <div class="col-md-6">
-             <input type="date" name="start_Time" required placeholder="请输入开始时间" class="form-control"/>
+             <input type="date" name="start_Time" id="txt1" required placeholder="请输入开始时间" class="form-control"/>
          </div>
       </div>
       <div class="form-group">
         <label for="s.stuAge" class="col-md-4 control-label">结束时间:</label>
          <div class="col-md-6">
-                <input type="date" name="end_Time" required  placeholder="请输入结束时间" class="form-control"/>
+                <input type="date" name="end_Time" id="txt2" required  placeholder="请输入结束时间" class="form-control"/>
          </div>
       </div>
       <div class="form-group">
         <label for="s.stuSex" class="col-md-4 control-label">出差时长:</label>
          <div class="col-md-6">
-            <input type="text" name="travel_Date" class="form-control"/>                      
+            <input type="text" name="travel_Date" id="txt3" readonly class="form-control"/>
+            <span style="position:relative;left:260px;top:-30px">天</span>                     
          </div>
       </div>
+
       <div class="form-group">
         <label for="s.stuName" class="col-md-4 control-label">请假状态:</label>
          <div class="col-md-6">         
@@ -498,7 +502,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <div class="form-group">
         <label for="s.stuAddr" class="col-md-4 control-label">审批人员:</label>
          <div class="col-md-6">
-                <input type="text" name="examine_Person" class="form-control"/>
+                <input type="text" id="uname3" class="form-control"/>
+          <input type="hidden" name="uid" id="uid3"/>
+          <input type="button" id="btnt" href="#user_modal3" value="+" data-toggle='modal' style="position:relative;left:260px;top:-30px" >
          </div>
       </div>       
       <div class="form-group">      
@@ -516,7 +522,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div><!-- /.modal-content -->
    </div><!-- /.modal -->
    </div>
-   
+   <div id="showt">
+   <div class="modal fade" id="user_modal3" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"aria-hidden="true">×</button>
+					<h4 class="modal-title" >审批人</h4>
+				</div>
+				<div class="modal-body">
+				<form method="post" id="from_user">
+					<table class="table table-bordered" width="60%" align="center">
+							  <tbody id="userName3"></tbody>
+				   </table>
+               </form>
+			</div>
+		<div class="modal-footer">
+		    <button type="button" class="btn btn-default"data-dismiss="modal"  onclick="empty(0)">清空</button>
+			<button type="button" class="btn btn-default"data-dismiss="modal">关闭</button>
+		</div>
+                    </div>
+                </div>
+            </div>
+   </div>
    <div class="modal fade" id="myModalxq" tabindex="-1" role="dialog" aria-labelledby="modalTitle3" aria-hidden="true">
 	<div class="modal-dialog" style="width:550px">
 		<div class="modal-content" style="height:500px">
@@ -943,8 +971,8 @@ $(function(){
 			})
 	function empty(none){
            if(none==0){
-                $("#uid").val("");
-           		$("#uname").val("");
+                $("#uid2").val("");
+           		$("#uname2").val("");
             }
 	 }  
 	
@@ -965,7 +993,14 @@ $(function(){
           for(var i=0;i<ary.length;i++){
            var obj = ary[i];
             var tr="<tr>";
-              if(obj.status_Name==0){
+                    tr+="<td>"+obj.out_Id+"</td>";			  
+        			tr+="<td>"+obj.STAFF_NAME+"</td>";
+        			tr+="<td>"+obj.reason+"</td>";
+        			tr+="<td>"+obj.place+"</td>";
+        			/* tr+="<td>"+obj.out_Time+"</td>"; */
+        			tr+="<td>"+obj.start_Time+"</td>";
+        			tr+="<td>"+obj.end_Time+"</td>";
+        			if(obj.status_Name==0){
 		        		tr+="<td>未审批</td>";
 		        		}
 		        	if(obj.status_Name==1){
@@ -973,13 +1008,7 @@ $(function(){
 		        		}
 		        	if(obj.status_Name==2){
 		        		tr+="<td>驳回</td>";
-		        		}        			  
-        			tr+="<td>"+obj.STAFF_NAME+"</td>";
-        			tr+="<td>"+obj.reason+"</td>";
-        			tr+="<td>"+obj.place+"</td>";
-        			tr+="<td>"+obj.out_Time+"</td>";
-        			tr+="<td>"+obj.start_Time+"</td>";
-        			tr+="<td>"+obj.end_Time+"</td>";
+		        		}  
                     tr+="<td><button id='"+obj.out_Id+"'  class='queryId2 btn btn-primary' data-toggle='modal' data-target='#myModal2'>详情</button></td>";          			      			
         			if(obj.status_Name==0){                                                                          
 		        	 tr+="<td><button type='button' id='"+obj.out_Id+"' class='updateStag btn btn-danger'>通过</button><button  id='"+obj.out_Id+"' class='updateStag2 btn btn-primary' data-toggle='modal' data-target='#myModabh2'>驳回</button></td>";		        		
@@ -1151,28 +1180,21 @@ $(function(){
 				
         	}	
 		})
-	})					  
-	/* $("#tbodyGo").on("click",".queryId2",function(){
-		 var out_Id=this.id;
-		alert(out_Id); 
-		$.ajax({
-			url:"goOut/queryById",
-			type : "post",			
-        	 data:{
-        		"out_Id" : out_Id,
-        	}, 
-       	 	dataType : "json",//返回的数据类型
-        	success : function(data) {       						
-				$("#staff_Id2").val(data.sta_Staff_Id);
-				$("#reason").val(data.reason);
-				$("#start_Time").val(data.start_Time);
-				$("#end_Time").val(data.end_Time);				
-				 $("#goStatusName").val(data.status_Name); 
-				$("#place").val(data.place);				
-        	}	
-		})
-	}) */
+	})					  	
 	/* 出差 */
+	/* 计算两个日期间隔天数 */
+	window.onload=function(){
+        document.getElementById("txt2").onblur= function(){
+             var   d1 = new Date(  document.getElementById("txt1").value  ),
+                   d2 = new Date(  this.value  );
+             if(d1 >=d2){
+                  alert("开始时间必须小于结束时间！");
+                  return false; 
+                     }
+            $("#txt3").val((Math.abs(d1-d2)/(1000*60*60*24))) 
+        }
+    } 
+	
 	$(function(){
     conFind3(1);
    
@@ -1275,11 +1297,12 @@ $(function(){
 		 async:true,
 		 success:function(data){
 		 for(var i=0;i<data.length;i++){
-		  $("#sta3").append("<option value='"+data[i].staffId+"'>"+data[i].STAFF_NAME+"</option>");
+		  $("#sta3").append("<option value='"+data[i].staff_Id+"'>"+data[i].STAFF_NAME+"</option>");
 		 	}		 	
 		      }
 		  });		
 	}
+	 
 	function test3(){
 			var obj=$("#tform").serializeObject();
 			$.ajax({
@@ -1376,27 +1399,49 @@ $(function(){
         	}	
 		})
 	})				
-	/* $("#travelbody").on("click",".queryId3",function(){
-		 var travel_Id=this.id;
-		alert(travel_Id); 
-		$.ajax({
-			url:"travel/queryById",
-			type : "post",			
-        	 data:{
-        		"travel_Id" : travel_Id,
-        	}, 
-       	 	dataType : "json",//返回的数据类型
-        	success : function(data) {       						
-				$("#staff_Id3").val(data.sta_Staff_Id);
-				$("#travel_Reason").val(data.travel_Reason);
-				$("#kssc").val(data.strat_Time);
-				$("#end_Time2").val(data.end_Time);
-				$("#travel_Date").val(data.travel_Date);
-				$("#status_Name3").val(data.status_Name);
-					        	
-        	}	
-		})
-	}) */
+	/* 出差审批人 */
+	$(function(){
+                      $("#btnt").click(function(){                       
+                       $("#showt").modal("show");
+                   });                 
+             })
+ $('#user_modal3').on('show.bs.modal', function () {
+        $.ajax({
+        	url : "users/usersname",
+        	type : "post",
+        	async : true,
+        	contentType: "application/json; charset=utf-8",
+        	dataType : 'json', 
+        	success : function(data) {
+           		$("#userName3").html("");
+        		 for(var i=0; i<data.length;i++){
+        		    var tr="<tr>";
+        		    var user=data[i].id+","+data[i].uname;
+        		    tr+="<td><button type='button' id='"+user+"' class='insert btn btn-default' data-dismiss='modal'>'"+data[i].uname+"'</button></td>";
+        		    tr+="</tr>";
+        		     $("#userName3").append(tr); 
+        	}}
+ 		}); 
+     })
+	$(function(){
+				$("#userName3").on("click",".insert",function(){
+				    var user=this.id;
+					var users= user.split(",");
+					for(var i=0; i<user.length;i++){
+        		      var uid=users[0];
+        		      var uname=users[1];
+					}
+				$("#uid3").val(uid);
+			    $("#uname3").val(uname); 
+				})
+			})
+	function empty(none){
+           if(none==0){
+                $("#uid3").val("");
+           		$("#uname3").val("");
+            }
+	 }  
+	
 	
 	var start = {}, end = {};
     jeDate('#start',{

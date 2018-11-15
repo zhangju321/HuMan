@@ -88,6 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          <th>结束日期</th>
          <th>部门范围</th>
          <th></th>
+         <th></th>
        </tr>
      </thead>
      <tbody id="tbody">
@@ -123,7 +124,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<label for="roleName" class="col-sm-2 control-label">免签节假日:</label>
 								<div class="col-sm-4">
 							   <input type="hidden" id="sfId" name="sfId" class="form-control" >
-							    <input type="text" id="sfName" name="sfName" class="form-control">
+							    <input type="text" id="sfName" name="sfName" onblur="isChinese(this.value)" placeholder="请输入中文！" class="form-control">
 								</div>
 							</div>
 
@@ -170,7 +171,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<li><input type="checkbox" class="check_box" value="后勤部"/> 
     	<span>后勤部</span></li>
   	</ul>
-  		<input type="text" name="departId"  class="select_val" style="width: 100%;height:5%;"/>					
+  		<input type="text" name="departId" id="departId" class="select_val" style="width: 100%;height:5%;"/>					
              </div> 
 						</div>			
 						</div>
@@ -276,7 +277,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           $("#sfName").val("");
           $("#sfTime").val("");
           $("#sfTimeEnd").val("");
-          $(".check_box").val("");
+          $("#departId").val("");
        
   });
    $(document).on("click","#saveOrUpdate",function(){
@@ -311,7 +312,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           $("#sfName").val(data.sfName);
           $("#sfTime").val(data.sfTime);
           $("#sfTimeEnd").val(data.sfTimeEnd);
-          $(".select_val").val(data.departId);
+          $("#departId").val(data.departId);
        }
     });
       /*   $.ajax({
@@ -421,5 +422,14 @@ layui.use(['laypage', 'layer'], function(){
 		}
 	});
  </script>
- 
+ <script language="javascript">
+function isChinese(obj){
+var reg=/^[\u0391-\uFFE5]+$/;
+if(obj!=""&&!reg.test(obj)){
+alert('必须输入中文！');
+return false;
+}
+}
+
+</script>
 

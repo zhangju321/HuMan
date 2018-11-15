@@ -18,10 +18,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" type="text/css"href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css">
     <script	src="${pageContext.request.contextPath}/resource/jquery-1.11.3.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-
+     
+	<script src="resource/js/bootstrap/js/bootstrapValidator.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="resource/js/bootstrap/css/bootstrapValidator.min.css">
+	<script src="resource/jquery.serialize.js"></script>	
+	<link type="text/css" rel="stylesheet" href="resource/jedate/test/jeDate-test.css">
+    <link type="text/css" rel="stylesheet" href="resource/jedate/skin/jedate.css">	
+	<script type="text/javascript" src="resource/jedate/src/jedate.js"></script>
   </head>
   <body>
-  <p>人才筛选</p>
+  <p></p>
       <ul class="nav nav-tabs">
 	  <li><a href="/HuManManger/wmw/filter_select.jsp">人才筛选管理</a></li>
 	  <li class="active"><a href="/HuManManger/wmw/filter_save.jsp">创建筛选计划</a></li>
@@ -40,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    <td nowrap class="col-md-4 control-label" style="width: 20%">应聘人员:</td>
 				<td class="TableData" style="width: 20%">
                     <input type="text" id="employeeName" name="employeeName">
-				    <input type="hidden" id="expertId"  class="form-control"><!-- name="expertId" -->
+				    <input type="hidden"name="expertId" id="expertId"  class="form-control">
                     <input type="button"  href="#pool_modal" value="添加" data-toggle='modal' >
 				</td>
 				<td nowrap class="col-md-2 control-label" style="width: 10%">计划名称:</td>
@@ -66,7 +72,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</td>
 				<td nowrap class="col-md-4 control-label" style="width: 20%">发起人:</td>
 				<td class="TableData" style="width: 20%">
-				    <input type="text"name="transactorStep"  id="transactorStep" class="form-control">
+				    <input type="text"class="form-control" value="${user.uname}">
+				    <input type="hidden"name="transactorStep" id="transactorStep" value="${user.id}">
 				</td>
 			</tr>
 			<tr>
@@ -82,7 +89,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                </td>
 				<td nowrap class="col-md-1 control-label" style="width: 10%">下一次筛选时间:</td>
 				<td class="TableData" style="width: 20%">
-				   <input type="date"name="nextDateTime" id="nextDateTime"  class="form-control">
+				   <input type="text" name="nextDateTime" id="start" required placeholder="请选择下一次筛选时间" class="form-control"/>
 				</td>
 			</tr> 
 			<tr align="center" class="TableControl">
@@ -154,8 +161,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            		$("#poolName").html("");
         		 for(var i=0; i<data.length;i++){
         		    var tr="<tr>";
-        		    var pool=data[i].EXPERT_ID+","+data[i].EMPLOYEE_NAME+","+data[i].EMPLOYEE_NAME
-        		    +","+data[i].PLAN_NO+","+data[i].POSITION+","+data[i].EMPLOYEE_MAJOR
+        		    var pool=data[i].EXPERT_ID+","+data[i].EMPLOYEE_NAME+","+data[i].PLAN_NO
+        		    +","+data[i].PLAN_NAME+","+data[i].POSITION+","+data[i].EMPLOYEE_MAJOR
         		    +","+data[i].EMPLOYEE_PHONE;
         		    tr+="<td><button type='button' id='"+pool+"' class='insert btn btn-default' data-dismiss='modal'>'"+data[i].EMPLOYEE_NAME+"'</button></td>";
         		    tr+="</tr>";
@@ -170,8 +177,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					for(var i=0; i<pool.length;i++){
         		      var expertId=pool[0];
         		      var employeeName=pool[1];
-        		      var planName=pool[2];
-        		      var planNo=pool[3];
+        		      var planNo=pool[2];
+        		      var planName=pool[3];
         		      var position=pool[4];
         		      var employeeMajor=pool[5];
         		      var employeePhone=pool[6];
@@ -203,7 +210,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 	/*审批人查询*/
 	$('#user_modal').on('show.bs.modal', function () {
         $.ajax({
-        	url : "findAll",
+        	url : "users/usersname",
         	type : "post",
         	async : true,
         	contentType: "application/json; charset=utf-8",
@@ -231,10 +238,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    $("#uname").val(uname); 
 				})
 			})
-			
+
      function filtersave(){
              var obj=$("#filter_form").serialize();
-             alert(obj);
 		     $.ajax({
 		       url : "filter/filtersave",
         	   type : "post",
@@ -242,7 +248,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	           dataType:'text',
         	   success : function(data) {
         	      alert("创建筛选成功");
+        	      location.href="wmw/filter_select.jsp";
         	}  
  		}); 
 	 }
+	 var start = {};
+    jeDate('#start',{
+       format: 'YYYY-MM-DD hh:mm:ss',
+            minDate: function (that) {
+                //that 指向实例对象
+                var nowMinDate = jeDate.valText('#start') == "" && jeDate.valText(that.valCell) == "";
+                return nowMinDate ? jeDate.nowDate({DD:0}) : end.minDate ;
+            }, //设定最大日期为当前日期
+        donefun: function(obj){
+            end.minDate = obj.val; //开始日选好后，重置结束日的最小日期
+        }
+    });
+      //蓝色主题色
+    jeDate("#start",{
+        theme:{ bgcolor:"#00A1CB",color:"#ffffff", pnColor:"#00CCFF"},
+        format: "YYYY-MM-DD hh:mm:ss"
+    });
   </script>

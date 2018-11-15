@@ -12,7 +12,9 @@ public interface GoOutMapper {
 	//外出查询
 	  public List<Map> queryAll();
 	//职工查询
-		public List<Staff_info> findAll();
+		public List<Map> findAll();
+	//未审批查询  
+	    public List<Map> notApproved();
 	//外出登记
 	    public int insert(GoOut g);
 	  //修改状态

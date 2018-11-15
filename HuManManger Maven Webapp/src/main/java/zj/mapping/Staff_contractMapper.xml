@@ -39,7 +39,7 @@
 	<!-- 员工 -->
 	 <resultMap id="staff_info" type="zj.entity.Staff_info">
 		<id column="staff_id" property="staffId" jdbcType="INTEGER" />
-		<result column="STAFF_NAME" property="STAFF_NAME" jdbcType="VARCHAR" />
+		<result column="STAFF_NAME" property="staffName" jdbcType="VARCHAR" />
 	</resultMap> 
 
 <!-- 查询员工 -->

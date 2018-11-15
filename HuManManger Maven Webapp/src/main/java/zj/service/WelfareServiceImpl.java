@@ -57,4 +57,14 @@ public int welfSave(Welfare welf) {
 		return dao.queryWelfare2(id);
 	}
 
+
+
+	@Override
+	public List<Map<String, Object>> queryTime(String issue_date) {
+		// TODO Auto-generated method stub
+		return dao.queryTime(issue_date);
+	}
+
+
+
 }

@@ -43,7 +43,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          <th>角色名</th>
          <th>人员名</th>
          <th>排班名称</th>
-         <th>是/否</th>
+         <th>是/否排班</th>
          <th>排班开始日期</th>
          <th>排班结束日期</th>
          <th></th>
@@ -115,7 +115,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</div>
 							
 							<div class="form-group">
-								<label for="description" class="col-sm-2 control-label">是/否:</label>
+								<label for="description" class="col-sm-2 control-label">是/否排班:</label>
 								<div class="col-sm-4">
 								<!-- <input type="radio" id="status" name="status" value="1" checked="checked">是
 								<input type="radio" id="sta" name="status" value="2" >否 -->

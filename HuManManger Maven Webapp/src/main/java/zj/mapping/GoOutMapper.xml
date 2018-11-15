@@ -5,16 +5,19 @@
     <!-- select * from goout -->
     select g.status_Name,g.out_Id,s.STAFF_NAME,g.reason,g.out_Time,g.start_Time,
        g.end_Time,g.place from hr_go_out g left join staff_Info s on
-       g.sta_Staff_Id=s.STAFF_ID order by g.out_Id
+       g.sta_Staff_Id=s.STAFF_ID order by g.out_Id desc
     
   </select>
   
-  <select id="findAll" resultType="Staff_info">
+  <select id="findAll" resultType="java.util.Map">
     select staff_Id,STAFF_NAME from staff_info
   </select>
-   <!-- <select id="queryById" resultType="GoOut" parameterType="int">
-     select * from hr_go_out where out_Id=#{out_Id}
-  </select> -->
+   <select id="notApproved" resultType="Map">  
+       select g.status_Name,g.out_Id,s.staff_Name,g.reason,g.out_Time,g.start_Time,
+       g.end_Time,g.place from hr_go_out g left join staff_Info s on
+       g.sta_Staff_Id=s.STAFF_ID where status_Name='0' order by g.out_Id   
+  </select>
+
   <select id="queryDetails" resultType="Map" parameterType="int">
      select d.departmentName,s.STAFF_NAME,s.staff_Id,g.reason,g.out_Time,g.start_Time,
        g.end_Time,g.place,g.status_Name 
@@ -32,11 +35,11 @@
   </select>
   <insert id="insert" parameterType="GoOut" >
     insert into hr_go_out ( sta_Staff_Id, reason, 
-      out_time, start_time, end_time,place, uid, circulate, status_Name)
+      out_time, start_time, end_time,place, uid, circulate, status_name)
     values ( #{sta_Staff_Id,jdbcType=INTEGER}, #{reason,jdbcType=VARCHAR}, 
       #{out_Time,jdbcType=TIMESTAMP}, #{start_Time,jdbcType=TIMESTAMP}, #{end_Time,jdbcType=TIMESTAMP}, 
       #{place,jdbcType=VARCHAR}, #{uid}, #{circulate,jdbcType=VARCHAR}, 
-      #{status_Name,jdbcType=VARCHAR})
+      #{status_name,jdbcType=VARCHAR})
   </insert>
  <update id="updateStatu" parameterType="GoOut">
     update hr_go_out set status_Name='1' where out_Id=#{out_Id} 

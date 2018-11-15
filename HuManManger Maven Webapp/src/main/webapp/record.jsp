@@ -24,7 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="resource/jquery-1.11.3.min.js"></script>
 	<script src="resource/js/bootstrap/js/bootstrap.min.js"></script>
 	<script src="resource/jquery.serialize.js"></script>
-	
+	<script src="resource/js/bootstrap/js/tableExport.js"></script>
   </head>
   
   <body>
@@ -74,8 +74,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					考勤记录
 				</h4>
 			</div>
+			<div>
+			<a onclick="$('.pvtTable').tableExport({type:'excel',
+                        mso: {
+                         styles:['border-bottom', 'border-top', 'border-left', 'border-right']
+                         }});">导出为 Excel</a>
+          </div>
 	<div class="modal-body">  
-    <table class="table table-bordered table-hover">
+    <table class="pvtTable table table-bordered table-hover">
       <div style="background-color:#D2E9FF;border:1px">请假记录</div>
     		<tr>
     		    
@@ -84,7 +90,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     			<td>开始时间</td>
     			<td>结束时间</td>
     			<td>状态</td> 
-    			<td>操作</td>		
+    				
     		</tr>
     		<tbody id="tbody2">   		
     		</tbody>
@@ -92,7 +98,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     
     <div class="modal-body">  
-    <table class="table table-bordered table-hover">
+    <table class="pvtTable table table-bordered table-hover">
       <div style="background-color:#D2E9FF;border:1px">出差记录</div>
     		<tr>
     		    
@@ -102,14 +108,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     			<td>开始时间</td>
     			<td>结束时间</td>
     			<td>状态</td> 
-    			<td>操作</td>		
+    			<	
     		</tr>
     		<tbody id="tbody3">   		
     		</tbody>
     	</table>
     </div>
      <div class="modal-body">  
-    <table class="table table-bordered table-hover">
+    <table class="pvtTable table table-bordered table-hover">
       <div style="background-color:#D2E9FF;border:1px">外出记录</div>
     		<tr>
     		    
@@ -119,7 +125,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     			<td>开始时间</td>
     			<td>结束时间</td>
     			<td>状态</td> 
-    			<td>操作</td>		
+    				
     		</tr>
     		<tbody id="tbody4">   		
     		</tbody>
@@ -300,7 +306,7 @@ function godeptId(departmentId){
         		for(var i=0;i<data.length;i++){
         			var obj=data[i];
         			var tr="<tr>";        		        				
-        			tr+="<td>"+data[i].staff_Name+"</td>";
+        			tr+="<td>"+data[i].STAFF_NAME+"</td>";
         			tr+="<td>"+data[i].vocation_Reason+"</td>";
         			tr+="<td>"+data[i].vocation_Qi_Time+"</td>";
         			tr+="<td>"+data[i].vocation_Jie_Time+"</td>";        			
@@ -313,7 +319,6 @@ function godeptId(departmentId){
 		        	if(data[i].status_Name==2){
 		        		tr+="<td>驳回</td>";
 		        		}        			
-        			tr+="<td><button class='delete btn btn-primary' id='"+data[i].vocation_Id+"' data-toggle='modal'>删除</button></td>";          			      					        	  		     
         			tr+="</tr>";
         			$("#tbody2").append(tr);
         		}     
@@ -321,29 +326,7 @@ function godeptId(departmentId){
         	}	
 		})
 	})
-	$(function(){
-		$("#tbody2").on("click",".delete",function() {
-			var vocation_Id =this.id;
-			alert(vocation_Id);
-			if(confirm("确认删除？")){
-			$.ajax({
-				url : "vocation/delete",
-				type : "post",
-				async : true,
-				contentType: "application/json; charset=utf-8",
-				data : JSON.stringify(vocation_Id),
-				dataType : 'text',
-				success:function(data){
-				alert(data);
-				
- 		}
-		 	});
-     	}else{
-	 		alert("取消了删除！");
-		 	}
-					 	
-		})
-	}) 
+	
 	
 	$("#tbody").on("click",".queryId",function(){
 		 var sta_Staff_Id=this.id;
@@ -360,7 +343,7 @@ function godeptId(departmentId){
         		for(var i=0;i<data.length;i++){
         			var obj=data[i];
         			var tr="<tr>";        			
-        			tr+="<td>"+data[i].staff_Name+"</td>";
+        			tr+="<td>"+data[i].STAFF_NAME+"</td>";
         			tr+="<td>"+data[i].travel_Reason+"</td>";
         			tr+="<td>"+data[i].travel_Place+"</td>";
         			tr+="<td>"+data[i].start_Time+"</td>";
@@ -374,8 +357,7 @@ function godeptId(departmentId){
 		        	if(data[i].status_Name==2){
 		        		tr+="<td>驳回</td>";
 		        		}        			
-/*         			tr+="<td><button class='delete btn btn-primary' id='"+data[i].travel_Id+"' data-toggle='modal' data-target='#myModall'>详情</button></td>";          			      					        	  		     
- */        			tr+="</tr>";
+        			tr+="</tr>";
         			$("#tbody3").append(tr);
         		}     
 				
@@ -397,7 +379,7 @@ function godeptId(departmentId){
         		for(var i=0;i<data.length;i++){
         			var obj=data[i];
         			var tr="<tr>";        			
-        			tr+="<td>"+data[i].staff_Name+"</td>";
+        			tr+="<td>"+data[i].STAFF_NAME+"</td>";
         			tr+="<td>"+data[i].reason+"</td>";
         			tr+="<td>"+data[i].place+"</td>";
         			tr+="<td>"+data[i].start_Time+"</td>";
@@ -411,36 +393,13 @@ function godeptId(departmentId){
 		        	if(data[i].status_Name==2){
 		        		tr+="<td>驳回</td>";
 		        		}        			
-/*         			tr+="<td><button class='delete btn btn-primary' id='"+data[i].staff_Id+"' data-toggle='modal' data-target='#myModall'>详情</button></td>";          			      					        	  		     
- */        			tr+="</tr>";
+        			tr+="</tr>";
         			$("#tbody4").append(tr);
         		}     
 				
         	}	
 		})
 	})
-	
-	
-	
-/* $("#tbody").on("click",".queryId",function(){
-		 var staff_Id=this.id;
-		 
-		$.ajax({
-			url:"staffInfo/queryById",
-			type : "post",			
-        	data:{
-        		"staff_Id" : staff_Id,
-        	},
-       	 	dataType : "json",//返回的数据类型
-        	success : function(data) {       						
-				if (data.staff_Id!=null) {
-				window.location.href="record2.jsp";																		
-			} else {
-				alert("出错了！");				
-			}				
-        	}	
-		})
-	}) */
 	
 
 </script>

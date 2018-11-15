@@ -44,10 +44,8 @@ public class Staff_transferController {
 	}
 		//É¾³ý
 		@RequestMapping("/delete")
-		@ResponseBody
-		public int delete(@RequestBody Staff_transfer transfer){
-			System.out.println(transfer.getTRANSFER_ID());
-			return ser.delete(transfer);
+		public void delete(Staff_transfer transfer){ 
+			ser.delete(transfer);
 		}
 		//Ìí¼Ó
 		@RequestMapping("/savetransfer")

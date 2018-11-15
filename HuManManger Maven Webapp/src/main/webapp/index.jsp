@@ -71,7 +71,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</a>
 						<dl class="layui-nav-child">
 							<dd  style="text-align: center;">
-								<a href="denglu.jsp">退出</a>
+								<a href="ceshi3.jsp">退出</a>
 							</dd>
 						</dl></li>
 				</ul>
@@ -121,9 +121,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<a href="javascript:;">招聘计划<span class="layui-nav-more"></span></a>
 									<dl class="layui-nav-child">
 										<dd data-name="list">
-											<a lay-href="/HuManManger/wmw/plan_save.jsp">创建招聘计划</a>
-										</dd>
-										<dd data-name="list">
 											<a lay-href="/HuManManger/wmw/plan_select.jsp">招聘计划管理</a>
 										</dd>
 										<dd data-name="list">
@@ -172,6 +169,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								class="layui-icon layui-icon-template"></i> <cite>考勤审批</cite>
 						</a>
 							<dl class="layui-nav-child">
+							    <dd>
+									<a lay-href="notapproved.jsp">待审批事项</a>
+								</dd>
 								<dd>
 									<a lay-href="attend.jsp">考勤登记/审批</a>
 								</dd>

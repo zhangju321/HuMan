@@ -18,7 +18,7 @@ public class PayServiceImpl implements PayService{
 @Autowired
 private PayDao dao;
 
-	
+	//判断薪资是否重复添加
 @Transactional
 public int paySave(Pay pay) {
 	// TODO Auto-generated method stub
@@ -104,6 +104,12 @@ public int paySave(Pay pay) {
 	public List<Map<String, Object>> selectid(int id) {
 		// TODO Auto-generated method stub
 		return dao.selectid(id);
+	}
+//根据时间模糊查询薪资
+	@Override
+	public List<Map<String, Object>> queryTime(String tax_time) {
+		// TODO Auto-generated method stub
+		return dao.queryTime(tax_time);
 	}
 
 	

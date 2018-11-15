@@ -23,10 +23,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 </head>
 <body>
-	 <p>招聘录用</p>
+	 <p></p>
      <ul class="nav nav-tabs">
-	  <li class="active"><a href="/HuManManger/wmw/recruitment_select.jsp">招聘录用管理</a></li>
-	  <li><a href="/HuManManger/wmw/recruitment_save.jsp">新建招聘录用</a></li>
+	  <li><a href="/HuManManger/wmw/recruitment_select.jsp">招聘录用管理</a></li>
+	  <li class="active"><a href="/HuManManger/wmw/recruitment_save.jsp">新建招聘录用</a></li>
     </ul>
 
 <!-- 添加招聘需求-->

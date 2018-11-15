@@ -10,7 +10,7 @@ import net.sf.jsqlparser.expression.DateTimeLiteralExpression.DateTime;
 
 public class Staff_transfer {
 	private int TRANSFER_ID;//调动编号
-	private int	sta_staff_Id;//人事员工编号
+	private int sta_staff_Id;//人事员工编号
 	private int departmentId;//部门编号
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date TRANSFER_DATE;//调动日期

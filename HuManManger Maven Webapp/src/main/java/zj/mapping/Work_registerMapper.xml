@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="zj.dao.Work_registerMapper" >
+	<select id="queryAll" resultType="Map">
+		<!-- select wr.*,dt.departmentName,so.STAFF_NAME from work_register wr LEFT JOIN department dt 
+		on wr.departmentId=dt.departmentId
+        LEFT JOIN staff_info so on wr.staff_id=so.staff_id -->
+        select * from work_register
+	</select>
+	<insert id="saveWork" parameterType="Work_register">
+		insert into work_register
+		(staff_id,departmentId,register_order,register_type,
+		set_time,register_ip,attendance_should,attendance_actual,
+		rest,absenteeism,late,work_unregistered,early_retreat,
+		work_off,work_time,work_offtime)
+		values(#{staff_id},#{departmentId},#{register_order},#{register_type},
+		#{set_time},#{register_ip},#{attendance_should},#{attendance_actual},
+		#{rest},#{absenteeism},#{late},#{work_unregistered},#{early_retreat},
+		#{work_off},#{work_time},#{work_offtime})
+	</insert>
+	<select id="selectId" resultType="Map" parameterType="int">
+		select wr.*,dt.departmentName,so.STAFF_NAME from work_register wr LEFT JOIN department dt 
+		on wr.departmentId=dt.departmentId
+        LEFT JOIN staff_info so on wr.staff_id=so.staff_id
+	</select>
+	<update id="updateWork" parameterType="Work_register">
+		update work_refister
+		<set>
+			<if test="staff_id !=null">staff_id=#{staff_id},</if>
+			<if test="departmentId !=null">departmentId=#{departmentId},</if>
+			<if test="register_order !=null">register_order=#{register_order},</if>
+			<if test="register_type !=null">register_type=#{register_type},</if>
+			<if test="set_time !=null">set_time=#{set_time},</if>
+			<if test="register_ip !=null">register_ip=#{register_ip},</if>
+			<if test="attendance_should !=null">attendance_should=#{attendance_should},</if>
+			<if test="attendance_actual !=null">attendance_actual=#{attendance_actual},</if>
+			<if test="rest !=null">rest=#{rest},</if>
+			<if test="absenteeism !=null">absenteeism=#{absenteeism},</if>
+			<if test="late !=null">late=#{late},</if>
+			<if test="work_unregistered !=null">work_unregistered=#{work_unregistered},</if>
+			<if test="early_retreat !=null">early_retreat=#{early_retreat},</if>
+			<if test="work_off !=null">work_off=#{work_off},</if>
+			<if test="work_time !=null">work_time=#{work_time},</if>
+			<if test="work_offtime !=null">work_offtime=#{work_offtime},</if>
+			
+		</set>
+		where work_id=#{work_id}
+	</update>
+</mapper>

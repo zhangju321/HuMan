@@ -44,7 +44,7 @@ public class GoOutServiceImpl implements GoOutService {
 	}
 
 	@Override
-	public List<Staff_info> findAll() {
+	public List<Map> findAll() {
 		return gmapper.findAll();
 	}	
 	@Override
@@ -65,6 +65,14 @@ public class GoOutServiceImpl implements GoOutService {
 	public List<Map<String, Object>> queryDetails(int out_Id) {
 		// TODO Auto-generated method stub
 		return gmapper.queryDetails(out_Id);
+	}
+
+
+
+	@Override
+	public List<Map> notApproved() {
+		// TODO Auto-generated method stub
+		return gmapper.notApproved();
 	}
 
 

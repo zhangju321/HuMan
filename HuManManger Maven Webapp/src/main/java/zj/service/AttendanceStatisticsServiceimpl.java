@@ -44,6 +44,12 @@ public class AttendanceStatisticsServiceimpl implements AttendanceStatisticsServ
 		return as.selectreg(staffid);
 	}
 
+	@Override
+	public List<Map<String, Object>> selectcishu() {
+		// TODO Auto-generated method stub
+		return as.selectcishu();
+	}
+
 
 
 	

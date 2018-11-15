@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    <p>招聘需求</p>
+    <p></p>
      <ul class="nav nav-tabs">
 	  <li><a href="/HuManManger/wmw/requirements_select.jsp">招聘需求管理</a></li>
 	  <li class="active"><a href="/HuManManger/wmw/requirements_save.jsp">创建招聘需求</a></li>

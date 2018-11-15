@@ -29,8 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-   <th><input type="button"  data-toggle="modal" data-target="#myModal"  class="emptys btn btn-default" value="添加"></th>
-    	<body>
+    	 <a href="csj/rencaiADD.jsp">新建人才</a>
    	<div  style="width:1300px">
 	<table class="table table-condensed">
 		<tr>
@@ -71,50 +70,41 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</td>
 			</tr> 
 			<tr>
-				<td nowrap class="col-md-2 control-label" style="width: 10%">计划名称:</td>
+			<td nowrap class="col-md-2 control-label" style="width: 10%">计划名称:</td>
 				<td class="TableData" style="width: 20%">
 					<input type="hidden"name="PLAN_NO" id="PLAN_NO" class="form-control">
 				    <input type="text" id="PLAN_NAME" class="form-control">
+				    
 				</td> 
 				<td nowrap class="col-md-4 control-label" style="width: 20%">应聘者姓名:</td>
 				<td class="TableData" style="width: 20%">
-				   <input type="datetime"name="EMPLOYEE_NAME" id="EMPLOYEE_NAME" class="form-control">
+				   <input type="text"name="EMPLOYEE_NAME" id="EMPLOYEE_NAME" class="form-control">
 				   </td>
 			</tr>
 			<tr>
-				<td nowrap class="col-md-1 control-label" style="width: 10%">性别:</td>
+			<td nowrap class="col-md-2 control-label" style="width: 10%">性别:</td>
 				<td class="TableData" style="width: 20%">
-				   <input type="text"name="EMPLOYEE_SEX" id="EMPLOYEE_SEX" class="form-control">
-				</td>
+					 <select class="sele form-control" name="EMPLOYEE_SEX">
+        	                              <option value="1">男</option>
+        	                              <option value="2">女</option>
+        	                            </select>
+				    
+				</td> 
 				<td nowrap class="col-md-4 control-label" style="width: 20%">出生日期:</td>
 				<td class="TableData" style="width: 20%">
-				    <input type="datetime"name="EMPLOYEE_BIRTH" id="EMPLOYEE_BIRTH" class="form-control">
-				</td>
+				   <input type="date"name="EMPLOYEE_BIRTH" id="EMPLOYEE_BIRTH" class="form-control">
+				   </td>
 			</tr>
 			<tr>
-				<td nowrap class="col-md-1 control-label" style="width: 10%">民族:</td>
-				 <td class="TableData" style="width: 20%">
-				 <input type="text"name="EMPLOYEE_NATIONALITY" id="EMPLOYEE_NATIONALITY" class="form-control">
-				</td>
-				<td nowrap class="col-md-4 control-label" style="width: 20%">联系电话:</td>
+			 
+				<td nowrap class="col-md-4 control-label" style="width: 20%">年龄:</td>
 				<td class="TableData" style="width: 20%">
-				<input type="text"name="EMPLOYEE_PHONE" id="EMPLOYEE_PHONE" class="form-control">
-				</td>
-			</tr>
+				   <input type="text"name="EMPLOYEE_AGE" id="EMPLOYEE_AGE" class="form-control">
+				   </td></tr>
 			<tr>
-			<td nowrap class="col-md-4 control-label" style="width: 20%">年龄:</td>
+			<td nowrap class="col-md-2 control-label" style="width: 10%">籍贯:</td>
 				<td class="TableData" style="width: 20%">
-				    <input type="text"name="EMPLOYEE_AGE"  id="EMPLOYEE_AGE"  class="form-control">
-				</td>
-				<td nowrap class="col-md-4 control-label" style="width: 20%">E_mail:</td>
-				<td class="TableData" style="width: 20%">
-				    <input type="text"name="EMPLOYEE_EMAIL"  id="EMPLOYEE_EMAIL"  class="form-control">
-				</td>
-			</tr> 
-			<tr>
-				<td nowrap class="col-md-4 control-label" style="width: 20%">籍贯:</td>
-				<td class="TableData" style="width: 20%">
-				   <select class="sele form-control" name="EMPLOYEE_NATIVE_PLACE" id="EMPLOYEE_NATIVE_PLACE">
+				<select class="sele form-control" name="EMPLOYEE_NATIVE_PLACE">
         	                              <option value="1">北京</option>
         	                              <option value="2">天津</option>
         	                              <option value="3">上海</option>
@@ -149,122 +139,123 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	                              <option value="33">新疆</option>
         	                              <option value="34">香港</option>
         	                              <option value="35">澳门</option>
-        	                            </slect>
-     					</td>
-			</tr> 
-			
-			<tr>
-				<td nowrap class="col-md-4 control-label" style="width: 10%">户口所在地:</td>
+        	                            </select>
+					
+				    
+				</td> 
+				<td nowrap class="col-md-4 control-label" style="width: 20%">民族:</td>
 				<td class="TableData" style="width: 20%">
-				    <input type="text"name="EMPLOYEE_DOMICILE_PLACE"  id="EMPLOYEE_DOMICILE_PLACE"  class="form-control">
-				</td>
-				</td>
-				<td nowrap class="col-md-4 control-label" style="width: 20%">婚姻状况:</td>
-				<td class="TableData" style="width: 20%">
-				 <select class="sele form-control" name="EMPLOYEE_MARITAL_STATUS" id="EMPLOYEE_MARITAL_STATUS">
-				 							<option value="1">未婚</option>
-        	                              	<option value="2">已婚</option>
-				 </select>
-				</td>
+				   <input type="text"name="EMPLOYEE_NATIONALITY" id="EMPLOYEE_NATIONALITY" class="form-control">
+				   </td>
 			</tr>
 			<tr>
-				<td nowrap class="col-md-1 control-label" style="width: 10%">政治面貌:</td>
-				 <td class="TableData" style="width: 20%">
-				 <select class="sele form-control" name="EMPLOYEE_POLITICAL_STATUS" id="EMPLOYEE_POLITICAL_STATUS">
-				                          <option value="1">群众</option>
-        	                              <option value="2">共青团员</option>
-        	                              <option value="3">中共党员</option>
-        	                              <option value="4">中共预备党员</option>
-        	                              <option value="3">民主党派</option>
-        	                              <option value="4">无党派人士</option>
-        	                            </slect>
-
-      </td>
-				<td nowrap class="col-md-4 control-label" style="width: 20%">健康状况:</td>
+			<td nowrap class="col-md-2 control-label" style="width: 10%">政治面貌:</td>
 				<td class="TableData" style="width: 20%">
-				<input type="text"name="EMPLOYEE_HEALTH" id="EMPLOYEE_HEALTH" class="form-control">
-				</td>
+					<select name="EMPLOYEE_POLITICAL_STATUS"  class="form-control">
+                    <option value="1">群众</option>
+					<option value="2">共青团员</option>
+					<option value="3">中共党员</option>
+					</select>
+				    
+				</td> 
+			</tr>
+			<tr><td>联系信息</td></tr>
+			<tr>
+			<td nowrap class="col-md-2 control-label" style="width: 10%">联系电话:</td>
+				<td class="TableData" style="width: 20%">
+					<input type="text"name="EMPLOYEE_PHONE" id="EMPLOYEE_PHONE" class="form-control">
+				</td> 
+				<td nowrap class="col-md-4 control-label" style="width: 20%">邮箱:</td>
+				<td class="TableData" style="width: 20%">
+				   <input type="text"name="EMPLOYEE_EMAIL" id="EMPLOYEE_EMAIL" class="form-control">
+				   </td>
+			</tr>
+			<td>教育背景</td>
+			<tr>
+			<td nowrap class="col-md-2 control-label" style="width: 10%">学历:</td>
+				<td class="TableData" style="width: 20%">
+					 <select class="sele form-control" name="EMPLOYEE_HIGHEST_SCHOOL" id="EMPLOYEE_HIGHEST_SCHOOL">
+	                <option value="">请选择</option>
+	                <option value="1">小学</option>
+					<option value="2">初中</option>
+					<option value="3">高中</option>
+					<option value="4">中专</option>
+					<option value="5">大专</option>
+					<option value="6">本科</option>
+					<option value="7">研究生</option>
+					<option value="8">博士</option>
+					<option value="9">博士后</option>
+					<option value="11">技校</option>
+					            </select>
+				</td> 
+				<td nowrap class="col-md-4 control-label" style="width: 20%">学位:</td>
+				<td class="TableData" style="width: 20%">
+				    <select class="sele form-control" name="EMPLOYEE_HIGHEST_DEGREE" id="EMPLOYEE_HIGHEST_DEGREE">
+                <option value="" selected>请选择</option>
+                <option value="1">博士后</option>
+				<option value="2">博士</option>
+				<option value="3">MBA</option>
+				<option value="4">硕士</option>
+				<option value="5">双学士</option>
+				<option value="6">学士</option>
+				<option value="7">无</option>
+				            </select>
+				   </td>
 			</tr>
 			<tr>
-				<td nowrap class="col-md-1 control-label" style="width: 10%">参加工作时间:</td>
-				 <td class="TableData" style="width: 20%">
-				 <input type="datetime"name="JOB_BEGINNING" id="JOB_BEGINNING" class="form-control">
-				</td>
-				<td nowrap class="col-md-4 control-label" style="width: 20%">照片上传:</td>
+			<td nowrap class="col-md-2 control-label" style="width: 10%">毕业时间:</td>
 				<td class="TableData" style="width: 20%">
-				<input type="text"name="PHOTO_NAME" id="PHOTO_NAME" class="form-control">
-				</td>
-			</tr>
-			<tr>
-				<td nowrap class="col-md-1 control-label" style="width: 10%">毕业时间:</td>
-				 <td class="TableData" style="width: 20%">
-				 <input type="date"name="GRADUATION_DATE" id="GRADUATION_DATE" class="form-control">
-				</td>
+					<input type="date"name="GRADUATION_DATE" id="GRADUATION_DATE" class="form-control">
+				   
+				    
+				</td> 
 				<td nowrap class="col-md-4 control-label" style="width: 20%">毕业学校:</td>
 				<td class="TableData" style="width: 20%">
-				<input type="text"name="GRADUATION_SCHOOL" id="GRADUATION_SCHOOL" class="form-control">
-				</td>
+				   <input type="text"name="GRADUATION_SCHOOL" id="GRADUATION_SCHOOL" class="form-control">
+				   </td>
 			</tr>
 			<tr>
-				<td nowrap class="col-md-1 control-label" style="width: 10%">学历:</td>
-				 <td class="TableData" style="width: 20%">
-				 <select class="sele form-control" name="EMPLOYEE_HIGHEST_SCHOOL" id="EMPLOYEE_HIGHEST_SCHOOL">
-					 						 <option value="1">中专</option>
-	        	                             <option value="2">大专</option>
-	        	                             <option value="3">本科</option>
-	        	                             <option value="4">研究生</option>
-	        	                             <option value="5">博士</option>
-	        	                             <option value="6">博士后</option>
-        	                            </slect>
-				</td>
-				<td nowrap class="col-md-4 control-label" style="width: 20%">外语语种:</td>
+			<td nowrap class="col-md-2 control-label" style="width: 10%">专业:</td>
 				<td class="TableData" style="width: 20%">
-				<input type="text"name="FOREIGN_LANGUAGE1" id="FOREIGN_LANGUAGE1" class="form-control">
-				</td>
-			</tr>
-			<tr>
-				<td nowrap class="col-md-1 control-label" style="width: 10%">外语水平:</td>
-				 <td class="TableData" style="width: 20%">
-				 <input type="text"name="FOREIGN_LEVEL1" id="FOREIGN_LEVEL1" class="form-control">
-				</td>
+					<input type="hidden"name="EMPLOYEE_MAJOR" id="EMPLOYEE_MAJOR" class="form-control">
+				</td> 
 				<td nowrap class="col-md-4 control-label" style="width: 20%">计算机水平:</td>
 				<td class="TableData" style="width: 20%">
-				<input type="text"name="COMPUTER_LEVEL" id="COMPUTER_LEVEL" class="form-control">
-				</td>
+				   <input type="text"name="COMPUTER_LEVEL" id="COMPUTER_LEVEL" class="form-control">
+				   </td>
 			</tr>
 			<tr>
-				<td nowrap class="col-md-1 control-label" style="width: 10%">入库时间:</td>
-				 <td class="TableData" style="width: 20%">
-				 <input type="date"name="RUKUTIME" id="RUKUTIME" class="form-control">
-				</td>
+			<td nowrap class="col-md-2 control-label" style="width: 10%">外语语种:</td>
+				<td class="TableData" style="width: 20%">
+					<input type="hidden"name="FOREIGN_LANGUAGE1" id="FOREIGN_LANGUAGE1" class="form-control">
+				</td> 
+				<td nowrap class="col-md-4 control-label" style="width: 20%">外语水平:</td>
+				<td class="TableData" style="width: 20%">
+				   <input type="text"name="FOREIGN_LEVEL1" id="FOREIGN_LEVEL1" class="form-control">
+				   </td>
+			</tr>
+			<tr><td>其他</td></tr>
+			<tr>
+			<td nowrap class="col-md-2 control-label" style="width: 10%">入库时间:</td>
+				<td class="TableData" style="width: 20%">
+					<input type="date"name="RUKUTIME" id="RUKUTIME" class="form-control">
+				   
+				    
+				</td> 
 				<td nowrap class="col-md-4 control-label" style="width: 20%">招聘渠道:</td>
 				<td class="TableData" style="width: 20%">
-				<input type="text"name="RECRU_CHANNEL" id="RECRU_CHANNEL" class="form-control">
-				</td>
+				   <input type="text"name="RECRU_CHANNEL" id="RECRU_CHANNEL" class="form-control">
+				   </td>
 			</tr>
-			
 			<tr>
-				<td nowrap class="col-md-1 control-label" style="width: 10%">特长:</td>
-				 <td class="TableData" style="width: 20%">
-				 <input type="text"name="EMPLOYEE_SKILLS" id="EMPLOYEE_SKILLS" class="form-control">
-				</td>
-				<td nowrap class="col-md-4 control-label" style="width: 20%">工作经验:</td>
+			<td nowrap class="col-md-2 control-label" style="width: 10%">是否通过筛选:</td>
 				<td class="TableData" style="width: 20%">
-				<input type="text"name="WORK_EXPERIENCE" id="WORK_EXPERIENCE" class="form-control">
-				</td>
+					<select class="sele form-control" name="WHETHER_BY_SCREENING" id="WHETHER_BY_SCREENING">
+        	                              <option value="1">是</option>
+        	                              <option value="2">否</option>
+        	                            </select>
+				</td> 
 			</tr>
-			<tr>
-				<td nowrap class="col-md-1 control-label" style="width: 10%">项目经验:</td>
-				 <td class="TableData" style="width: 20%">
-				 <input type="text"name="PROJECT_EXPERIENCE" id="PROJECT_EXPERIENCE" class="form-control">
-				</td>
-			</tr>
-			<tr>
-				<td nowrap class="col-md-1 control-label" style="width: 10%">简历:</td>
-				 <td class="TableData" style="width: 20%">
-				 <input type="text"name="RESUME" id="RESUME" class="form-control">
-				</td>
-			</tr> 
 		</table>
 	</form>
 					</div>
@@ -344,32 +335,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						dataType: 'Json',
 						success:function(data){
 						    $("#EXPERT_ID").val(data[0].EXPERT_ID);
-						    $("#PLAN_NO").val(data[0].PLAN_NO);
 						    $("#PLAN_NAME").val(data[0].PLAN_NAME);
+						    $("#EMPLOYEE_NAME").val(data[0].EMPLOYEE_NAME);
 						    $("#EMPLOYEE_SEX").val(data[0].EMPLOYEE_SEX);
-							$("#EMPLOYEE_BIRTH").val(data[0].EMPLOYEE_BIRTH);
-							$("#EMPLOYEE_NATIONALITY").val(data[0].EMPLOYEE_NATIONALITY);
-							$("#EMPLOYEE_PHONE").val(data[0].EMPLOYEE_PHONE);
-							$("#EMPLOYEE_AGE").val(data[0].EMPLOYEE_AGE);
-							$("#EMPLOYEE_EMAIL").val(data[0].EMPLOYEE_EMAIL);
-							$("#EMPLOYEE_NATIVE_PLACE").val(data[0].EMPLOYEE_NATIVE_PLACE);
-							$("#EMPLOYEE_DOMICILE_PLACE").val(data[0].EMPLOYEE_DOMICILE_PLACE);
-							$("#EMPLOYEE_MARITAL_STATUS").val(data[0].EMPLOYEE_MARITAL_STATUS);
-							$("#EMPLOYEE_POLITICAL_STATUS").val(data[0].EMPLOYEE_POLITICAL_STATUS);
-							$("#EMPLOYEE_HEALTH").val(data[0].EMPLOYEE_HEALTH);
-							$("#JOB_BEGINNING").val(data[0].JOB_BEGINNING);
-							$("#PHOTO_NAME").val(data[0].PHOTO_NAME);
-							$("#GRADUATION_DATE").val(data[0].GRADUATION_DATE);
-							$("#GRADUATION_SCHOOL").val(data[0].GRADUATION_SCHOOL);
-							$("#EMPLOYEE_HIGHEST_SCHOOL").val(data[0].EMPLOYEE_HIGHEST_SCHOOL);
-							$("#FOREIGN_LANGUAGE1").val(data[0].FOREIGN_LANGUAGE1);
-							$("#FOREIGN_LEVEL1").val(data[0].FOREIGN_LEVEL1);
-							$("#RUKUTIME").val(data[0].RUKUTIME);
-							$("#RECRU_CHANNEL").val(data[0].RECRU_CHANNEL);
-							$("#EMPLOYEE_SKILLS").val(data[0].EMPLOYEE_SKILLS);
-							$("#WORK_EXPERIENCE").val(data[0].WORK_EXPERIENCE);
-							$("#PROJECT_EXPERIENCE").val(data[0].PROJECT_EXPERIENCE);
-							$("#RESUME").val(data[0].RESUME);
+						    $("#EMPLOYEE_BIRTH").val(data[0].EMPLOYEE_BIRTH);
+						    $("#EMPLOYEE_AGE").val(data[0].EMPLOYEE_AGE);
+						    $("#EMPLOYEE_NATIVE_PLACE").val(data[0].EMPLOYEE_NATIVE_PLACE);
+						    $("#EMPLOYEE_NATIONALITY").val(data[0].EMPLOYEE_NATIONALITY);
+						    $("#EMPLOYEE_POLITICAL_STATUS").val(data[0].EMPLOYEE_POLITICAL_STATUS);
+						    $("#EMPLOYEE_PHONE").val(data[0].EMPLOYEE_PHONE);
+						    $("#EMPLOYEE_EMAIL").val(data[0].EMPLOYEE_EMAIL);
+						    $("#EMPLOYEE_HIGHEST_SCHOOL").val(data[0].EMPLOYEE_HIGHEST_SCHOOL);
+						    $("#EMPLOYEE_HIGHEST_DEGREE").val(data[0].EMPLOYEE_HIGHEST_DEGREE);
+						    $("#GRADUATION_DATE").val(data[0].GRADUATION_DATE);
+						    $("#GRADUATION_SCHOOL").val(data[0].GRADUATION_SCHOOL);
+						    $("#EMPLOYEE_MAJOR").val(data[0].EMPLOYEE_MAJOR);
+						    $("#COMPUTER_LEVEL").val(data[0].COMPUTER_LEVEL);
+						    $("#FOREIGN_LANGUAGE1").val(data[0].FOREIGN_LANGUAGE1);
+						    $("#FOREIGN_LEVEL1").val(data[0].FOREIGN_LEVEL1);
+						    $("#RUKUTIME").val(data[0].RUKUTIME);
+						    $("#RECRU_CHANNEL").val(data[0].RECRU_CHANNEL);
+						   /*  $("#WHETHER_BY_SCREENING").val(data[0].WHETHER_BY_SCREENING); */
+						    
 						}
 					});
 				})

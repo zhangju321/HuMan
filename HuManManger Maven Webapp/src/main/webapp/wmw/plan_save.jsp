@@ -21,9 +21,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" type="text/css"href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css">
 <script	src="${pageContext.request.contextPath}/resource/jquery-1.11.3.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+
 </head>
   
 <body>
+<p></p>
+      <ul class="nav nav-tabs">
+	  <li><a href="/HuManManger/wmw/plan_select.jsp">人才筛选管理</a></li>
+	  <li class="active"><a href="/HuManManger/wmw/plan_save.jsp">创建筛选计划</a></li>
+    </ul>
 <!-- 添加招聘计划 -->
 <div style="width:70%; margin:0 auto;">
 <p></p>
@@ -202,18 +208,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </html>
 <script>
     function plan_save(){
-            var date = new Date();
-            var year = date.getFullYear();
-            var month = date.getMonth() + 1;
-            var day = date.getDate();
-            if (month < 10) {
-                month = "0" + month;
-            }
-            if (day < 10) {
-               day = "0" + day;
-            }
-            var MyDate = year + "-" + month + "-" + day;
-            $("#approveDate").val(MyDate);
+      var now = new Date();
+	  var year = now.getFullYear(); //得到年份
+	  var month = now.getMonth();//得到月份
+	  var date = now.getDate();//得到日期
+	  var hour = now.getHours();//得到小时
+	  var minu = now.getMinutes();//得到分钟
+	  var sec = now.getSeconds();//得到秒
+	  month = month + 1;
+	  if (month < 10) month = "0" + month;
+	  if (date < 10) date = "0" + date;
+	  if (hour < 10) hour = "0" + hour;
+	  if (minu < 10) minu = "0" + minu;
+	  if (sec < 10) sec = "0" + sec;
+	  var  MyDate= year +"-"+month +"-"+date +" "+hour+":"+minu+":"+sec;
+            $("#registerTime").val(MyDate);
 			var obj=$("#plansave").serialize();
 		    $.ajax({
 		       url : "plan/planSave",
@@ -222,6 +231,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	           dataType:'json',
         	   success : function(data) {
         	   alert("创建招聘计划成功");
+        	   location.href="/HuManManger/wmw/plan_select.jsp";
         	}
  		}); 
 	 }
@@ -297,7 +307,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	/*审批人查询*/
 	$('#user_modal').on('show.bs.modal', function () {
         $.ajax({
-        	url : "findAll",
+        	url : "users/usersname",
         	type : "post",
         	async : true,
         	contentType: "application/json; charset=utf-8",

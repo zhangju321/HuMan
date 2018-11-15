@@ -3,81 +3,56 @@ package zj.entity;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Staff_info {
     private Integer staffId;//员工编号
     private Integer departmentId;//部门编号
-    private Integer positionId;//职务编号
-    private Integer STAFF_NO;//员工工号
-    private String PHOTO_NAME;//照片文件名
+    private Integer rolesId;
+	private Integer STAFF_NO;//员工工号
     private String staffName;//员工姓名
     private String STAFF_CARD_NO;//身份证
     private Integer STAFF_SEX;//性别
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date STAFF_BIRTH;//出生日期
     private Integer STAFF_AGE;//年龄
     private String STAFF_NATIVE_PLACE;//籍贯
     private String STAFF_NATIONALITY;//民族
     private String STAFF_POLITICAL_STATUS;//政治面貌
     private Integer STAFF_PHONE;//联系电话
-    private String STAFF_EMAIL;//邮箱1
-    private String HOME_ADDRESS;//家庭住址2
-    private Date JOB_BEGINNING;//参加工作时间
-    private Integer WORK_AGE;//总工龄
-    private String STAFF_HEALTH;//健康状况
+    private String STAFF_EMAIL;//邮箱ATTACHMENT_NAME
+    private String HOME_ADDRESS;//家庭住址
     private String STAFF_HIGHEST_SCHOOL;//最高学历
     private String STAFF_HIGHEST_DEGREE;//最高学位
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date GRADUATION_DATE;//毕业时间
     private String GRADUATION_SCHOOL;//毕业学校
     private String STAFF_MAJOR;//专业
-    private String STAFF_SKILLS;//特长
-    private String STAFF_OCCUPATION;//员工类型
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date DATES_EMPLOYED;//入职时间
-    private Integer JOB_AGE;//本单位工龄
-    private Date BEGIN_SALSRY_TIME;//起薪时间
     private Integer workStatus;//在职状态
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date STAFF_CS;//合同签订时间1
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date STAFF_CTR;//合同到期时间2
-    private String STAFF_COMPANY;//所在单位1
-    private String RESUME;//简历
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date ADD_TIME;//建档时间2
     private String REMARK;//备注
-    private Integer ATTACHMENT_ID;//附件编号
-    private String ATTACHMENT_NAME;//附件名称
     private Roles roles;
     private Department department;
     private Position position;
     private List<Work_register> registers;
-    public List<Work_register> getRegisters() {
-		return registers;
+	public Integer getRolesId() {
+		return rolesId;
 	}
-	public void setRegisters(List<Work_register> registers) {
-		this.registers = registers;
+	public void setRolesId(Integer rolesId) {
+		this.rolesId = rolesId;
 	}
-	public Position getPosition() {
-		return position;
+	public Integer getStaffId() {
+		return staffId;
 	}
-	public void setPosition(Position position) {
-		this.position = position;
-	}
-	public Department getDepartment() {
-		return department;
-	}
-	public void setDepartment(Department department) {
-		this.department = department;
-	}
-	public List<Staff_transfer> getTransfers() {
-		return transfers;
-	}
-	public void setTransfers(List<Staff_transfer> transfers) {
-		this.transfers = transfers;
-	}
-	private List<Staff_transfer> transfers;
-
-	
-	public Roles getRoles() {
-		return roles;
-	}
-	public void setRoles(Roles roles) {
-		this.roles = roles;
+	public void setStaffId(Integer staffId) {
+		this.staffId = staffId;
 	}
 	public Integer getDepartmentId() {
 		return departmentId;
@@ -85,25 +60,18 @@ public class Staff_info {
 	public void setDepartmentId(Integer departmentId) {
 		this.departmentId = departmentId;
 	}
-	public Integer getPositionId() {
-		return positionId;
-	}
-	public void setPositionId(Integer positionId) {
-		this.positionId = positionId;
-	}
 	public Integer getSTAFF_NO() {
 		return STAFF_NO;
 	}
 	public void setSTAFF_NO(Integer sTAFF_NO) {
 		STAFF_NO = sTAFF_NO;
 	}
-	public String getPHOTO_NAME() {
-		return PHOTO_NAME;
+	public String getStaffName() {
+		return staffName;
 	}
-	public void setPHOTO_NAME(String pHOTO_NAME) {
-		PHOTO_NAME = pHOTO_NAME;
+	public void setStaffName(String staffName) {
+		this.staffName = staffName;
 	}
-	
 	public String getSTAFF_CARD_NO() {
 		return STAFF_CARD_NO;
 	}
@@ -164,24 +132,6 @@ public class Staff_info {
 	public void setHOME_ADDRESS(String hOME_ADDRESS) {
 		HOME_ADDRESS = hOME_ADDRESS;
 	}
-	public Date getJOB_BEGINNING() {
-		return JOB_BEGINNING;
-	}
-	public void setJOB_BEGINNING(Date jOB_BEGINNING) {
-		JOB_BEGINNING = jOB_BEGINNING;
-	}
-	public Integer getWORK_AGE() {
-		return WORK_AGE;
-	}
-	public void setWORK_AGE(Integer wORK_AGE) {
-		WORK_AGE = wORK_AGE;
-	}
-	public String getSTAFF_HEALTH() {
-		return STAFF_HEALTH;
-	}
-	public void setSTAFF_HEALTH(String sTAFF_HEALTH) {
-		STAFF_HEALTH = sTAFF_HEALTH;
-	}
 	public String getSTAFF_HIGHEST_SCHOOL() {
 		return STAFF_HIGHEST_SCHOOL;
 	}
@@ -212,37 +162,18 @@ public class Staff_info {
 	public void setSTAFF_MAJOR(String sTAFF_MAJOR) {
 		STAFF_MAJOR = sTAFF_MAJOR;
 	}
-	public String getSTAFF_SKILLS() {
-		return STAFF_SKILLS;
-	}
-	public void setSTAFF_SKILLS(String sTAFF_SKILLS) {
-		STAFF_SKILLS = sTAFF_SKILLS;
-	}
-	public String getSTAFF_OCCUPATION() {
-		return STAFF_OCCUPATION;
-	}
-	public void setSTAFF_OCCUPATION(String sTAFF_OCCUPATION) {
-		STAFF_OCCUPATION = sTAFF_OCCUPATION;
-	}
 	public Date getDATES_EMPLOYED() {
 		return DATES_EMPLOYED;
 	}
 	public void setDATES_EMPLOYED(Date dATES_EMPLOYED) {
 		DATES_EMPLOYED = dATES_EMPLOYED;
 	}
-	public Integer getJOB_AGE() {
-		return JOB_AGE;
+	public Integer getWorkStatus() {
+		return workStatus;
 	}
-	public void setJOB_AGE(Integer jOB_AGE) {
-		JOB_AGE = jOB_AGE;
+	public void setWorkStatus(Integer workStatus) {
+		this.workStatus = workStatus;
 	}
-	public Date getBEGIN_SALSRY_TIME() {
-		return BEGIN_SALSRY_TIME;
-	}
-	public void setBEGIN_SALSRY_TIME(Date bEGIN_SALSRY_TIME) {
-		BEGIN_SALSRY_TIME = bEGIN_SALSRY_TIME;
-	}
-	
 	public Date getSTAFF_CS() {
 		return STAFF_CS;
 	}
@@ -254,18 +185,6 @@ public class Staff_info {
 	}
 	public void setSTAFF_CTR(Date sTAFF_CTR) {
 		STAFF_CTR = sTAFF_CTR;
-	}
-	public String getSTAFF_COMPANY() {
-		return STAFF_COMPANY;
-	}
-	public void setSTAFF_COMPANY(String sTAFF_COMPANY) {
-		STAFF_COMPANY = sTAFF_COMPANY;
-	}
-	public String getRESUME() {
-		return RESUME;
-	}
-	public void setRESUME(String rESUME) {
-		RESUME = rESUME;
 	}
 	public Date getADD_TIME() {
 		return ADD_TIME;
@@ -279,35 +198,28 @@ public class Staff_info {
 	public void setREMARK(String rEMARK) {
 		REMARK = rEMARK;
 	}
-	public Integer getATTACHMENT_ID() {
-		return ATTACHMENT_ID;
+	public Roles getRoles() {
+		return roles;
 	}
-	public void setATTACHMENT_ID(Integer aTTACHMENT_ID) {
-		ATTACHMENT_ID = aTTACHMENT_ID;
+	public void setRoles(Roles roles) {
+		this.roles = roles;
 	}
-	public String getATTACHMENT_NAME() {
-		return ATTACHMENT_NAME;
+	public Department getDepartment() {
+		return department;
 	}
-	public void setATTACHMENT_NAME(String aTTACHMENT_NAME) {
-		ATTACHMENT_NAME = aTTACHMENT_NAME;
+	public void setDepartment(Department department) {
+		this.department = department;
 	}
-	
-	public Integer getStaffId() {
-		return staffId;
+	public Position getPosition() {
+		return position;
 	}
-	public void setStaffId(Integer staffId) {
-		this.staffId = staffId;
+	public void setPosition(Position position) {
+		this.position = position;
 	}
-	public String getStaffName() {
-		return staffName;
+	public List<Work_register> getRegisters() {
+		return registers;
 	}
-	public void setStaffName(String staffName) {
-		this.staffName = staffName;
-	}
-	public Integer getWorkStatus() {
-		return workStatus;
-	}
-	public void setWorkStatus(Integer workStatus) {
-		this.workStatus = workStatus;
+	public void setRegisters(List<Work_register> registers) {
+		this.registers = registers;
 	}
 }

@@ -23,7 +23,7 @@ public class GoOut {
 
     private String circulate;
 
-    private String status_Name;
+    private String status_name;
 
     private String operate;
     private Integer uid; 
@@ -116,15 +116,17 @@ public class GoOut {
         this.circulate = circulate == null ? null : circulate.trim();
     }
 
-    public String getStatus_Name() {
-        return status_Name;
-    }
+    
 
-    public void setStatus_Name(String _) {
-        this.status_Name = status_Name == null ? null : status_Name.trim();
-    }
+    public String getStatus_name() {
+		return status_name;
+	}
 
-    public String getOperate() {
+	public void setStatus_name(String status_name) {
+		this.status_name = status_name;
+	}
+
+	public String getOperate() {
         return operate;
     }
 

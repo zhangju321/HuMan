@@ -428,7 +428,7 @@
        success:function(data){
          for(var i=0;i<data.length;i++){
             var obj=data[i];
-            $(".staffinfo").append("<option value='"+obj.staffId+"'>"+obj.STAFF_NAME+"</option>");
+            $(".staffinfo").append("<option value='"+obj.staffId+"'>"+obj.staffName+"</option>");
          }
        }
      });
@@ -495,10 +495,10 @@
        //alert(staffid);
          for(var i=0;i<data.length;i++){
             var obj=data[i];
-            if(staffName==obj.STAFF_NAME){
-             $(".staffinfo").append("<option value='"+obj.staffId+"' selected='selected'>"+obj.STAFF_NAME+"</option>");
+            if(staffName==obj.staffName){
+             $(".staffinfo").append("<option value='"+obj.staffId+"' selected='selected'>"+obj.staffName+"</option>");
             }else{
-             $(".staffinfo").append("<option value='"+obj.staffId+"'>"+obj.STAFF_NAME+"</option>");
+             $(".staffinfo").append("<option value='"+obj.staffId+"'>"+obj.staffName+"</option>");
             }
            
          }

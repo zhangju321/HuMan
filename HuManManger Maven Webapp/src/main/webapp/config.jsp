@@ -122,14 +122,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="form-group">
 								<label for="description" class="col-sm-2 control-label">第一次签到延后多少分钟允许登记:</label>
 								<div class="col-sm-4">
-									<input type="text" id="duty_after1" class="form-control" name="duty_after1" />
+									<input type="text" id="duty_after1" onblur="checkNumber(this.value)" placeholder="请输入数字！" class="form-control" name="duty_after1" />
 								</div>
 							</div>
 							
 							<div class="form-group">
 								<label for="description" class="col-sm-2 control-label">第二次签到延后多少分钟允许登记:</label>
 								<div class="col-sm-4">
-									 <input type="text" id="duty_after2" class="form-control" name="duty_after2"> 
+									 <input type="text" id="duty_after2" onblur="checkNumber(this.value)" placeholder="请输入数字！" class="form-control" name="duty_after2"> 
 										
 								</div>
 							</div>
@@ -138,7 +138,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="form-group">
 								<label for="sellCount" class="col-sm-2 control-label">第三次签到延后多少分钟允许登记:</label>
 								<div class="col-sm-4">
-									 <input type="text" id="duty_after3" class="form-control" name="duty_after3"> 
+									 <input type="text" id="duty_after3" class="form-control" onblur="checkNumber(this.value)" placeholder="请输入数字！" name="duty_after3"> 
 										
 								</div>
 							</div>
@@ -146,7 +146,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="form-group">
 								<label for="goodsDate" class="col-sm-2 control-label">第四次签到延后多少分钟允许登记:</label>
 								<div class="col-sm-4">
-									 <input type="text"  class="form-control" id="duty_after4" name="duty_after4"> 
+									 <input type="text"  class="form-control" id="duty_after4" onblur="checkNumber(this.value)" placeholder="请输入数字！" name="duty_after4"> 
 										
 								</div>
 							</div>
@@ -354,3 +354,13 @@ layui.use('laydate', function(){
   });
   });
   </script>
+<script language=javascript>
+//验证只能为数字
+function checkNumber(obj){
+var reg = /^[0-9]+$/;
+if(obj!=""&&!reg.test(obj)){
+alert('只能输入数字！');
+return false;
+}
+}
+</script>

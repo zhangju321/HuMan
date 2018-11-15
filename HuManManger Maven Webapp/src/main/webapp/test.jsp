@@ -1,106 +1,91 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
-    <base href="<%=basePath%>">
-    
-    <title>My JSP 'test.jsp' starting page</title>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
+<head>
+<base href="<%=basePath%>">
+
+<title>My JSP 'test.jsp' starting page</title>
+
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="This is my page">
+<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-<link rel="stylesheet" type="text/css"
-	href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css"
 	href="css/bootstrap-theme.min.css">
-<script
-	src="resource/jquery-1.11.3.min.js"></script>
+<script src="resource/jquery-1.11.3.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<%-- <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/demo.css"> --%>
-  </head>
-  
-  <body>
-			
-				<!--查询人员考勤情况  -->
-			<table class="table table-hover">
+<link rel="stylesheet" type="text/css"
+	href="resource/bootstrapValidator.min.css">
+<script src="resource/bootstrapValidator.min.js"></script>
+</head>
 
-				<thead>
-					<tr class="warning">
-					<th>部门名称</th>	
-					<th>职务名称</th>
-					<th>人员名称</th>
-						<!-- <th>迟到扣款标准(元)</th>
-						<th>早退扣款标准(元)</th>
-						<th>旷工扣款标准(元)</th> -->
-						<th>迟到次数</th>
-						<th>早退次数</th>
-						<th>旷工次数</th>
-						<th><input type="button" value="设置薪资" onclick="showCol()"  class="xz btn btn-default" href="#modal-container-880261" data-toggle="modal">
-						全选/全不选<input type="checkbox" id="selectAll" />
-						</th>
-					</tr>
-				</thead>
-				<tbody id="tbody2">
+<body>
 
-				</tbody>
-			</table>
-<ul class="pager">
+	<!--查询人员考勤情况  -->
+	<table class="table table-hover">
+
+		<thead>
+			<tr class="warning">
+				<th>部门名称</th>
+				<th>职务名称</th>
+				<th>人员名称</th>
+
+				<th><input type="button" value="设置薪资" onclick="showCol()"
+					class="btn btn-primary" data-toggle="modal" href="#modal-container-880261"
+					> 全选/全不选<input type="checkbox"
+					id="selectAll" /></th>
+			</tr>
+		</thead>
+		<tbody id="tbody2">
+
+		</tbody>
+	</table>
+	<ul class="pager">
 		<li><button type="button" class="btn btn-default" id="shouye">首页</button></li>
 		<li><button type="button" class="btn btn-default" id="syy">上一页</button></li>
 		<li><button type="button" class="btn btn-default" id="xyy">下一页</button></li>
 		<li><button type="button" class="btn btn-default" id="weiye">尾页</button></li>
-		<li style="font-weight: lighter;">当前第<input type="text" id="currPage" style="height:35px;width:50px;border-radius:10px;text-align: center;"/>页</li>
+		<li style="font-weight: lighter;">当前第<input type="text"
+			id="currPage"
+			style="height:35px;width:50px;border-radius:10px;text-align: center;" />页
+		</li>
 	</ul>
-	
-		
 
-			
-		<table class="table table-striped">
 
-				<thead>
-					<tr class="success">
-						 <th>迟到扣款标准(元)</th>
-						<th>早退扣款标准(元)</th>
-						<th>旷工扣款标准(元)</th>
-					</tr>
-				</thead>
-				<tbody id="tbody4">
 
-				</tbody>
-			</table>	
-	
-	
-	
-			
-			<div class="container">
-	<div class="row clearfix">
-		<div class="col-md-12 column">
-			 <a id="modal-880261"  role="button" class="btn" ></a>
-			
-			<div class="modal fade" id="modal-container-880261" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content" style="width:650px;">
-						<div class="modal-header">
-							 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-							<h4 class="modal-title" id="myModalLabel">
-								添加薪资
-							</h4>
-						</div>
-						<div class="modal-body">
-			<form class="form-horizontal" role="form" id="form1">
-				
-				<!-- <div class="form-group">
+
+
+
+
+	<div class="container">
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+				<a id="modal-880261" role="button" class="btn"></a>
+
+				<div class="modal fade" id="modal-container-880261" role="dialog"
+					aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content" style="width:650px;">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-hidden="true">×</button>
+								<h4 class="modal-title" id="myModalLabel">添加薪资</h4>
+							</div>
+							<div class="modal-body">
+								<form class="form-horizontal" role="form" id="form1">
+
+									<!-- <div class="form-group">
 				<label for="firstname" class="col-sm-2 control-label">部门名称</label>
 				<div class="col-sm-3">
 						<input type="text" class="form-control" id="bname"
@@ -108,7 +93,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<input type="hidden"   name="departmentId"  id="bid">
 					</div>
 				</div> -->
-				<!-- 
+									<!-- 
 				<div class="form-group">
 					<label for="firstname" class="col-sm-2 control-label">职务名称</label>
 					<div class="col-sm-3">
@@ -117,189 +102,200 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<input type="hidden" name="positionId" id="zid">
 					</div>
 				</div> -->
-				
-				
-				
-				<div class="form-group">
-					<label for="firstname" class="col-sm-2 control-label">人员名称</label>
-					<div class="col-sm-3">
-						<input type="text" class="form-control"  id="rname"
-							placeholder="人员编号" >
-							<input type="hidden" id="rid">
-					</div>
-				</div>
-				
-				 <div class="form-group">
-					<label for="firstname" class="col-sm-2 control-label">薪资日期</label>
-					<div class="col-sm-3">
-						<input type="Date" class="form-control" id="tax_time"
-							placeholder="薪资日期" name="tax_time">
-					</div>
-				</div> 
-				
-				
-				<div class="form-group">
-					<label for="firstname" class="col-sm-2 control-label">职务薪水</label>
-					<div class="col-sm-3">
-						<input type="text" class="form-control" id="salary"
-							placeholder="职务薪水" name="tax_salary">
-					</div>
-					<input type="button" class="btn btn-default" value="计算"
-							onclick="bx()">
-				</div>
-				
-				
-				<div class="form-group">
-					<label for="lastname" class="col-sm-2 control-label">应交保险总额</label>
-					<div class="col-sm-3">
-						<input type="text" class="form-control" id="lastname"
-							placeholder="应交保险总额" name="insurance" readonly="readonly">
-						
-					</div>
-					
-					</div>
-					
-					<div class="form-group">
-					<label for="lastname" class="col-sm-2 control-label">个人养老保险</label>
-					<div class="col-sm-3">
-						<input type="text" class="form-control" id="lastname1"
-							placeholder="个人养老保险" name="endowment_insurance" readonly="readonly">
-					</div>
-					</div>
-					
-					
-					<div class="form-group">
-					<label for="lastname" class="col-sm-2 control-label">个人医疗保险</label >
-					<div class="col-sm-3">
-						<input type="text" class="form-control" id="lastname2"
-							placeholder="个人医疗保险" name="medical_insurance" readonly="readonly">
-					</div>
-					</div>
-					
-					
-					<div class="form-group">
-					<label for="lastname" class="col-sm-2 control-label">个人生育保险</label>
-					<div class="col-sm-3">
-						<input type="text" class="form-control" id="lastname3"
-							placeholder="个人生育保险" name="birth_insurance" readonly="readonly">
-					</div>
-					</div>
-					
-					<div class="form-group">
-					<label for="lastname" class="col-sm-2 control-label">个人失业保险</label>
-					<div class="col-sm-3">
-						<input type="text" class="form-control" id="lastname4"
-							placeholder="个人失业保险" name="unemployment_insurance" readonly="readonly">
-					</div>
-					</div>
-					
-					<div class="form-group">
-					<label for="lastname" class="col-sm-2 control-label">个人工伤保险</label>
-					<div class="col-sm-3">
-						<input type="text" class="form-control" id="lastname5"
-							placeholder="个人工伤保险" name="injury_insurance" readonly="readonly">
-					</div>
-					</div>
-					
-					<div class="form-group">
-					<label for="lastname" class="col-sm-2 control-label">个人住房公积金</label>
-					<div class="col-sm-3">
-						<input type="text" class="form-control" id="lastname6"
-							placeholder="个人住房公积金" name="housing_fund" readonly="readonly">
-					</div>
-					</div>
-					
-					
-					<div class="form-group">
-					<label for="lastname" class="col-sm-2 control-label">个人保险扣款总额</label>
-					<div class="col-sm-3">
-						<input type="text" class="form-control" id="lastname_one"
-							placeholder="个人保险扣款总额" name="B_withhold"  readonly="readonly">
-					</div>
-					</div>
-					
-					
-					<div class="form-group">
-					<label for="lastname" class="col-sm-2 control-label">单位保险扣款总额</label>
-					<div class="col-sm-3">
-						<input type="text" class="form-control" id="lastname_men"
-							placeholder="单位保险扣款总额" name="D_withhold" readonly="readonly">
-					</div>
-					</div>
-					
-					
-					<div class="form-group">
-					<label for="lastname" class="col-sm-2 control-label">单位养老保险</label>
-					<div class="col-sm-3">
-						<input type="text" class="form-control" id="lastname_d1"
-							placeholder="单位养老保险" name="endowment_insurance_d" readonly="readonly">
-					</div>
-					</div>
-					
-					<div class="form-group">
-					<label for="lastname" class="col-sm-2 control-label">单位医疗保险</label>
-					<div class="col-sm-3">
-						<input type="text" class="form-control" id="lastname_d2"
-							placeholder="单位医疗保险" name="medical_insurance_d" readonly="readonly">
-					</div>
-					</div>
-					
-					
-					
-					<div class="form-group">
-					<label for="lastname" class="col-sm-2 control-label">单位生育保险</label>
-					<div class="col-sm-3">
-						<input type="text" class="form-control" id="lastname_d3"
-							placeholder="单位生育保险" name="birth_insurance_d" readonly="readonly">
-					</div>
-					</div>
-					<div class="form-group">
-					<label for="lastname" class="col-sm-2 control-label">单位失业保险</label>
-					<div class="col-sm-3">
-						<input type="text" class="form-control" id="lastname_d4"
-							placeholder="单位失业保险" name="unemployment_insurance_d" readonly="readonly">
-					</div>
-					</div>
-					
-					
-					<div class="form-group">
-					<label for="lastname" class="col-sm-2 control-label">单位工伤保险</label>
-					<div class="col-sm-3">
-						<input type="text" class="form-control" id="lastname_d5"
-							placeholder="单位工伤保险" name="injury_insurance_d" readonly="readonly">
-					</div>
-					</div>
-					
-					
-					<div class="form-group">
-					<label for="lastname" class="col-sm-2 control-label">单位住房公积金</label>
-					<div class="col-sm-3">
-						<input type="text" class="form-control" id="lastname_d6"
-							placeholder="单位住房公积金" name="housing_fund_d" readonly="readonly">
-					</div>
-					</div>
-					
-					
-					
-					<div class="form-group">
-					<label for="lastname" class="col-sm-2 control-label">津贴</label>
-					<div class="col-sm-3">
-						<input type="text" class="form-control" id="sub"
-							placeholder="津贴" name="subvention">
-					</div>
-					</div>
-					
-					
-					
-					<div class="form-group">
-					<label for="lastname" class="col-sm-2 control-label">奖金</label>
-					<div class="col-sm-3">
-						<input type="text" class="form-control" id="bonus"
-							placeholder="奖金" name="Bonus" >
-					</div>
-					</div>
-					
-				    <!-- <div class="form-group">
+
+
+
+									<div class="form-group">
+										<label for="firstname" class="col-sm-2 control-label">人员名称</label>
+										<div class="col-sm-3">
+											<input type="text" class="form-control" id="rname"
+												placeholder="人员编号"> <input type="hidden" id="rid">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label for="firstname" class="col-sm-2 control-label">薪资日期</label>
+										<div class="col-sm-3">
+											<input type="Date" class="form-control" id="tax_time"
+												placeholder="薪资日期" name="tax_time">
+										</div>
+									</div>
+
+
+									<div class="form-group">
+										<label for="firstname" class="col-sm-2 control-label">职务薪水</label>
+										<div class="col-sm-3">
+											<input type="text" class="form-control" id="salary"
+												placeholder="职务薪水" name="tax_salary">
+										</div>
+										<input type="button" class="btn btn-primary" data-toggle="modal" value="计算保险总额"
+											onclick="bx()">
+									</div>
+
+
+									<div class="form-group">
+										<label for="lastname" class="col-sm-2 control-label">应交保险总额</label>
+										<div class="col-sm-3">
+											<input type="text" class="form-control" id="lastname"
+												placeholder="应交保险总额" name="insurance" readonly="readonly">
+
+										</div>
+
+									</div>
+
+									<div class="form-group">
+										<label for="lastname" class="col-sm-2 control-label">个人养老保险</label>
+										<div class="col-sm-3">
+											<input type="text" class="form-control" id="lastname1"
+												placeholder="个人养老保险" name="endowment_insurance"
+												readonly="readonly">
+										</div>
+									</div>
+
+
+									<div class="form-group">
+										<label for="lastname" class="col-sm-2 control-label">个人医疗保险</label>
+										<div class="col-sm-3">
+											<input type="text" class="form-control" id="lastname2"
+												placeholder="个人医疗保险" name="medical_insurance"
+												readonly="readonly">
+										</div>
+									</div>
+
+
+									<div class="form-group">
+										<label for="lastname" class="col-sm-2 control-label">个人生育保险</label>
+										<div class="col-sm-3">
+											<input type="text" class="form-control" id="lastname3"
+												placeholder="个人生育保险" name="birth_insurance"
+												readonly="readonly">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label for="lastname" class="col-sm-2 control-label">个人失业保险</label>
+										<div class="col-sm-3">
+											<input type="text" class="form-control" id="lastname4"
+												placeholder="个人失业保险" name="unemployment_insurance"
+												readonly="readonly">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label for="lastname" class="col-sm-2 control-label">个人工伤保险</label>
+										<div class="col-sm-3">
+											<input type="text" class="form-control" id="lastname5"
+												placeholder="个人工伤保险" name="injury_insurance"
+												readonly="readonly">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label for="lastname" class="col-sm-2 control-label">个人住房公积金</label>
+										<div class="col-sm-3">
+											<input type="text" class="form-control" id="lastname6"
+												placeholder="个人住房公积金" name="housing_fund"
+												readonly="readonly">
+										</div>
+									</div>
+
+
+									<div class="form-group">
+										<label for="lastname" class="col-sm-2 control-label">个人保险扣款总额</label>
+										<div class="col-sm-3">
+											<input type="text" class="form-control" id="lastname_one"
+												placeholder="个人保险扣款总额" name="B_withhold" readonly="readonly">
+										</div>
+									</div>
+
+
+									<div class="form-group">
+										<label for="lastname" class="col-sm-2 control-label">单位保险扣款总额</label>
+										<div class="col-sm-3">
+											<input type="text" class="form-control" id="lastname_men"
+												placeholder="单位保险扣款总额" name="D_withhold" readonly="readonly">
+										</div>
+									</div>
+
+
+									<div class="form-group">
+										<label for="lastname" class="col-sm-2 control-label">单位养老保险</label>
+										<div class="col-sm-3">
+											<input type="text" class="form-control" id="lastname_d1"
+												placeholder="单位养老保险" name="endowment_insurance_d"
+												readonly="readonly">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label for="lastname" class="col-sm-2 control-label">单位医疗保险</label>
+										<div class="col-sm-3">
+											<input type="text" class="form-control" id="lastname_d2"
+												placeholder="单位医疗保险" name="medical_insurance_d"
+												readonly="readonly">
+										</div>
+									</div>
+
+
+
+									<div class="form-group">
+										<label for="lastname" class="col-sm-2 control-label">单位生育保险</label>
+										<div class="col-sm-3">
+											<input type="text" class="form-control" id="lastname_d3"
+												placeholder="单位生育保险" name="birth_insurance_d"
+												readonly="readonly">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="lastname" class="col-sm-2 control-label">单位失业保险</label>
+										<div class="col-sm-3">
+											<input type="text" class="form-control" id="lastname_d4"
+												placeholder="单位失业保险" name="unemployment_insurance_d"
+												readonly="readonly">
+										</div>
+									</div>
+
+
+									<div class="form-group">
+										<label for="lastname" class="col-sm-2 control-label">单位工伤保险</label>
+										<div class="col-sm-3">
+											<input type="text" class="form-control" id="lastname_d5"
+												placeholder="单位工伤保险" name="injury_insurance_d"
+												readonly="readonly">
+										</div>
+									</div>
+
+
+									<div class="form-group">
+										<label for="lastname" class="col-sm-2 control-label">单位住房公积金</label>
+										<div class="col-sm-3">
+											<input type="text" class="form-control" id="lastname_d6"
+												placeholder="单位住房公积金" name="housing_fund_d"
+												readonly="readonly">
+										</div>
+									</div>
+
+
+
+									<div class="form-group">
+										<label for="lastname" class="col-sm-2 control-label">津贴</label>
+										<div class="col-sm-3">
+											<input type="text" class="form-control" id="sub"
+												placeholder="津贴" name="subvention">
+										</div>
+									</div>
+
+
+
+									<div class="form-group">
+										<label for="lastname" class="col-sm-2 control-label">奖金</label>
+										<div class="col-sm-3">
+											<input type="text" class="form-control" id="bonus"
+												placeholder="奖金" name="Bonus">
+										</div>
+									</div>
+
+									<!-- <div class="form-group">
 					<label for="lastname" class="col-sm-2 control-label">考勤扣款总额</label>
 					<div class="col-sm-3">
 						<input type="text" class="form-control" id="kkze"
@@ -307,68 +303,123 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div>
 					
 					</div> -->
-				
-					
-					<div class="form-group">
-					<label for="lastname" class="col-sm-2 control-label">应发工资</label>
-					<div class="col-sm-3">
-						<input type="text" class="form-control" id="tax"
-							placeholder="应发工资" name="after_tax_salary" readonly="readonly">
-					</div>
-						<input type="button" class="btn btn-default" value="计算应发工资"
-							onclick="bx2()"  >
-					</div> 
 
 
-				
-				
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-7">
-						<input type="button" class="btn btn-default" value="添加"
-							onclick="save()">
-							
-					</div>
-					
-				</div>
-				</form>
-				
-				
-	
+									<div class="form-group">
+										<label for="lastname" class="col-sm-2 control-label">应发工资</label>
+										<div class="col-sm-3">
+											<input type="text" class="form-control" id="tax"
+												placeholder="应发工资" name="after_tax_salary"
+												readonly="readonly">
+										</div>
+										<input type="button" class="btn btn-primary" data-toggle="modal" value="计算应发工资"
+											onclick="bx2()">
 									</div>
-								
-						<div class="modal-footer">
-							 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> 
+
+
+
+
+									<div class="form-group">
+										<div class="col-sm-offset-2 col-sm-7">
+											<input type="button" class="btn btn-primary" data-toggle="modal" value="添加"
+												onclick="save()">
+
+										</div>
+
+									</div>
+								</form>
+
+
+
+							</div>
+
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">关闭</button>
+							</div>
+
+						</div>
+
 					</div>
-					
+
 				</div>
-				
 			</div>
-			
 		</div>
 	</div>
-</div>	
-	</div>	
-		
-			
-				
-		
-    
 
-			
 
-  </body>
-  <script>
-	/* 		
-			//折叠特效
-$(function () { $('#collapseFour').collapse({
-		toggle: false
-	})});
-	$(function () { $('#collapseTwo').collapse('show')});
-	$(function () { $('#collapseThree').collapse('toggle')});
-	$(function () { $('#collapseOne').collapse('hide')});
- */
-//复选框全选全不选
 
+
+
+
+
+
+</body>
+<script>
+
+
+//表单验证
+$(document).ready(function() {
+ 
+    $('#form1').bootstrapValidator({
+        message: 'This value is not valid',        //验证错误时的信息
+        feedbackIcons: {        //验证时显示的图标
+            valid: 'glyphicon glyphicon-ok',      //正确图标
+            invalid: 'glyphicon glyphicon-remove',        //错误图标
+            validating: 'glyphicon glyphicon-refresh'        //正在更新图标
+        },
+        fields: { 
+              //要验证哪些字段
+              //职务工资
+            tax_salary: {
+                    //与表单里input的name属性对应
+                message: 'The username is not valid',       //验证错误时的信息，当然这里是可以使用中文的
+                validators: {
+                    notEmpty: {       //非空判断
+                        message: '不能为空'        //验证错误时的信息，
+                    },
+                    regexp: {          //正则表达式判断 
+                        regexp: /^[0-9]+.?[0-9]*$/,           //表达式内容
+                        message: '必须为数字'           //验证错误时的信息，
+                    }
+                }
+            },
+            //津贴
+           subvention: {
+                    //与表单里input的name属性对应
+                message: 'The username is not valid',       //验证错误时的信息，当然这里是可以使用中文的
+                validators: {
+                    notEmpty: {       //非空判断
+                        message: '不能为空'        //验证错误时的信息，
+                    },
+                    regexp: {          //正则表达式判断 
+                        regexp: /^[0-9]+.?[0-9]*$/,           //表达式内容
+                        message: '必须为数字'           //验证错误时的信息，
+                    }
+                }
+            },
+            //奖金
+              Bonus: {
+                    //与表单里input的name属性对应
+                message: 'The username is not valid',       //验证错误时的信息，当然这里是可以使用中文的
+                validators: {
+                    notEmpty: {       //非空判断
+                        message: '不能为空'        //验证错误时的信息，
+                    },
+                    regexp: {          //正则表达式判断 
+                        regexp: /^[0-9]+.?[0-9]*$/,           //表达式内容
+                        message: '必须为数字'           //验证错误时的信息，
+                    }
+                }
+            },
+            
+            
+        }
+     
+    });
+});
+
+//全选
 $(function() { $("#selectAll").click(function() { 
 $(":checkbox[name='checkid']").prop("checked", this.checked)
 });
@@ -446,25 +497,7 @@ $(":checkbox[name='checkid']").prop("checked", this.checked)
 
 
 				
-//获取人员编号
-	 			
-function showCol(){
-	var check=$("input[name='checkid']:checked");//选中的复选框
-	var ty=[];
-	var ty1=[];
-	check.each(function(){
-
-		var row=$(this).parent("td").parent("tr");
-
-		var id=row.find("[name='rsid']").html();//注意html()和val()
-
-		var name=row.find("[name='rsname']").html();
-		ty.push(name);
-		ty1.push(id);
-	});
-	$("#rname").val(ty);
-	$("#rid").val(ty1);
-}		
+				
 				
 
  
@@ -511,30 +544,7 @@ function showCol(){
 			},
 			error : function(data) {}
 		})
-		/* /* 表单序列化 
-		var str = $("#form1").serialize();
-		/* var ddd=3;
-		$("#project_id").val(ddd);
-		alert(333); 
-		$.ajax({
-			url : "pay/psave",
-			type : "post",
-			async : true,
-			data : $("#form1").serialize(), //数据类型不需要转化成json
-			dataType : 'text', //返回类型type
-			success : function(data) {
-				if(data>0){
-					alert("添加成功");
-					location.reload();
-				}else{
-					alert("人员重复");
-					location.reload();
-				}
-			}
-		}); */
-	}
-	
-	
+		}
 
 	
 
@@ -561,9 +571,7 @@ function showCol(){
 					tr += "<td id='zwname'>" + obj.positionName + "</td>";
 					tr += "<td name='rsid' style='display:none'>" + obj.staff_id + "</td>";
 					tr += "<td name='rsname'>" + obj.STAFF_NAME + "</td>";
-					tr += "<td id='early'>" + obj.late + "</td>";
-					tr += "<td id='withhold'>" + obj.early_retreat + "</td>";
-					tr += "<td id='absent'>" + obj.absenteeism + "</td>";
+			
 					
 					tr += "<td><input type='checkbox' name='checkid' value='" + obj.staff_id + "'></td>";
 					tr += "</tr>";
@@ -622,99 +630,35 @@ function showCol(){
 	$("#shouye").click(function() {
 		findAll(1);
 	})
-	
-	
-	
-	
-	
-	
-	
-	//查询考勤扣款标准
-	 function findAllcheck() {
-		
-		$.ajax({
-			url : "pay/querycheck",
-			type : "post",
-			async : true,
-			dataType : 'Json',
-			success : function(data) {
-				/* alert(data); */
-
-				$("#tbody4").html("");
-				for (var i = 0; i < data.length; i++) {
-					var obj = data[i];
-					var tr = "<tr>";
-					tr += "<td id='early_k'>" + obj.early + "</td>";
-					tr += "<td id='withhold_k'>" + obj.withhold + "</td>";
-					tr += "<td id='absent_k'>" + obj.absent + "</td>";
-					tr += "</tr>";
-					$("#tbody4").append(tr);
-					/* alert("ddd"+obj.check_id); */
-				}
-				
-			}
-		});
-	}
-
-	$(function() {
-		findAllcheck();
-	})
-  
-  
-	
-
-		
-		
-		
-		
-		
-		
-		
-		
-		 
-	/* 	$("#tbody2").on("click",".xz",function(){
-	obj = document.getElementsByName("checkid");
-	//获取部门编号姓名  并将值加到薪资技术的input内
-	   var bm=$(this).parent().parent().find("#bmname").html();
-	  $("#bname").val(bm);
-	  var bid=$(this).parent().parent().find("#bmid").html();
-	  $("#bid").val(bid);
-	  //获取职务编号姓名  并将值加到薪资技术的input内
-	  var zw=$(this).parent().parent().find("#zwname").html();
-	  $("#zname").val(zw);
-	  var zwid=$(this).parent().parent().find("#zwid").html();
-	  $("#zid").val(zwid);
 	  
-	  //获取员工编号姓名  并将值加到薪资技术的input内
-	  var ygname=$(this).parent().parent().find("#rsname").html();
-	  $("#rname").val(ygname); 
-	  
-	   var ygid=$(this).parent().parent().find("#rsid").html();
-	  $("#rid").val(ygid); 
 	
-		//查找table，tr两个父节点下的id---
- 	var early=$(this).parent().parent().find("#early").html();//迟到次数
-	var withhold=$(this).parent().parent().find("#withhold").html();//早退次数
-	var absent=$(this).parent().parent().find("#absent").html();//旷工次数
-//计算
- 	var kkze=early*10+withhold*10+absent*3;
- 	alert("计算考勤总额为:"+kkze);
- 	//将计算结果赋值到扣款总额的input框内
- 	$("#kkze").val(kkze);
+	//获取人员编号
 	 			
-	 			
-	 			if(early>3){
-	 			$("#bonus").val(0);
-	 			}else if(withhold>3){
-	 			$("#bonus").val(0);
-	 			
-	 			}else if(absent>0){
-	 			$("#bonus").val(0);
-	 			}else{
-	 			$("#bonus").val(200);
-	 			}
+function showCol(){
+	var check=$("input[name='checkid']:checked");//选中的复选框
+	var ty=[];
+	var ty1=[];
+	check.each(function(){
+
+		var row=$(this).parent("td").parent("tr");
+
+		var id=row.find("[name='rsid']").html();//注意html()和val()
+
+		var name=row.find("[name='rsname']").html();
+		ty.push(name);
+		ty1.push(id);
 	});
-	 */
+	$("#rname").val(ty);
+	$("#rid").val(ty1);
+}
+		
+		
+		
+		
+		
+		
+		
+
 
   </script>
 </html>

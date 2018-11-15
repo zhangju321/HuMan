@@ -12,7 +12,7 @@ public interface VocationService {
 	public List<Map> queryAll();
 	public List<Map> findAll();
 	public int save(Vocation v);	
-	//public Vocation queryById(int vocation_Id);
+	 public List<Map> notApproved();
 	public List<Map<String,Object>> queryById(int vocation_Id);
 	public List<Map> queryStaff(int sta_Staff_Id);
     public void updateStatu(Vocation statu); 

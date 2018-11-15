@@ -11,12 +11,12 @@ public interface TravelService {
 	
 	  public List<Map> queryAll();
 	
-	  public List<Staff_info> findAll();
+	  public List<Map> findAll();
 	
 	  public int save(zj.entity.Travel t);
 	  public void updateStatu(zj.entity.Travel statu); 
 	  public void updateStatu2(zj.entity.Travel statu); 
-	 // public Travel queryById(int travel_Id);
+	  public List<Map> notApproved();
 	  public List<Map> queryStaff2(int sta_Staff_Id);
 	  public Travel overrule (int travel_Id);
 	  public List<Map<String,Object>> queryDetails(int travel_Id);

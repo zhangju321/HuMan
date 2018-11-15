@@ -21,14 +21,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" type="text/css"href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css">
 <script	src="${pageContext.request.contextPath}/resource/jquery-1.11.3.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/demo.css">
 </head>
 <body>     
 
 <div id="none_select"  style="width:98%;margin:0 auto;">
-	<p></p>
+<p></p>
+      <ul class="nav nav-tabs">
+	  <li class="active"><a href="/HuManManger/wmw/plan_select.jsp">人才筛选管理</a></li>
+	  <li><a href="/HuManManger/wmw/plan_save.jsp">创建筛选计划</a></li>
+    </ul>
 	<!-- 招聘计划查询 -->
 	<table class="table table-bordered">
-	<caption><a href="/HuManManger/wmw/plan_select.jsp">招聘计划管理</a></caption>
 	<thead>
 	   <tr>
 	        <td style="width:2%;"></td>
@@ -162,11 +166,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<h4 class="modal-title" >详细信息</h4>
 				</div>
 				<div class="modal-body">
-				<form method="post" id="from_details">
-					<table class="table table-bordered" width="60%" align="center">
-						<tbody id="plandetails"></tbody>
-				    </table>
-               </form>
+				<form method="post"  id="plansave">
+                   <table class="table table-bordered" width="60%" align="center">
+                       <tbody id="from_details"></tbody>
+                   </table>
+                </form>
 			</div>
         <div class="modal-footer">
 			<button type="button" class="btn btn-default"data-dismiss="modal">关闭</button>
@@ -252,8 +256,8 @@ function queryAll(){
         	type : "post",
         	async : true,
         	contentType: "application/json; charset=utf-8",
-       	 	dataType : 'json', 
-        	success : function(data) {
+       	 	dataType : 'json',
+        	success : function(data){
         		$("#plan_tbody").html("");
         		 for(var i=0; i<data.length;i++){
         		    var tr="<tr>";
@@ -262,18 +266,19 @@ function queryAll(){
         		    tr+="<td>"+data[i].PLAN_RECR_NO+"</td>";
         		    tr+="<td>"+data[i].START_DATE+"</td>";
         		    tr+="<td>"+data[i].END_DATE+"</td>";
-        		    tr+="<td>"+data[i].WORK_DATE+"</td>"; 
+        		    tr+="<td>"+data[i].WORK_DATE+"</td>";
         		    tr+="<td>"+status(data[i].PLAN_STATUS)+"</td>";
+        		    var name=data[i].PLAN_NO+","+data[i].PLAN_NAME;
         		    if(data[i].PLAN_STATUS==1){
         		    tr+="<td><input type='button' id='"+data[i].PLAN_NO+"' value='详细信息' href='#details_modal'  data-toggle='modal'  class='details btn btn-primary'>"+
-        		    "<input type='button' id='"+data[i].PLAN_NO+"' value='删除'  class='delete btn btn-primary'></td>"; 
+        		    "<input type='button' id='"+name+"' value='删除'  class='delete btn btn-primary'></td>"; 
         		    }else{
         		   tr+="<td><input type='button' id='"+data[i].PLAN_NO+"' value='详细信息' href='#details_modal' data-toggle='modal'  class='details btn btn-primary'>"+
         		    "<input type='button' id='"+data[i].PLAN_NO+"' value='修改' href='#plan_modal' data-toggle='modal' class='update  btn btn-primary' >"+
-        		    "<input type='button' id='"+data[i].PLAN_NO+"' value='删除'  class='delete btn btn-primary'></td>"; 
+        		    "<input type='button' id='"+name+"' value='删除'  class='delete btn btn-primary'></td>"; 
         		    }
         		   tr+="</tr>";
-        		     $("#plan_tbody").append(tr); 
+        		    $("#plan_tbody").append(tr); 
         	}}
  		}); 
 	 }
@@ -338,18 +343,25 @@ function queryAll(){
 	 /* 根据ID删除 */
 	$(function(){
 				$("#plan_tbody").on("click",".delete",function(){
-					var id=this.id;
-					$.ajax({
-						url:"plan/planDelete",
-						type:"post",
-						async:true,
-						contentType:"application/json;charset=utf-8",
-						data:JSON.stringify(id),
-						dataType: 'Json',
-						success:function(data){
+					var name=this.id;
+					var plan= name.split(",");
+					for(var i=0; i<plan.length;i++){
+        		      var pNo=plan[0];
+        		      var pName=plan[1];
+					}
+					if(confirm("是否删除"+"'"+pName+"'"+"计划？")) {
+				$.ajax({
+					url : "plan/planDelete",
+					type : "post",
+					async : true,
+					contentType : "application/json;charset=utf-8",
+					data : JSON.stringify(pNo) ,
+					dataType : 'Json',
+					success : function(data) {
 						queryAll();
-						}
-					});
+					}
+				});
+				}
 				})
 			})
 			/*详细信息*/
@@ -381,10 +393,22 @@ function queryAll(){
         		            tr+="<td>用工日期：</td><td>"+data[0].WORK_DATE+"</td><td>工资范围：</td><td>"+data[0].SALARY_AREA+"</td>";
         		            tr+="</tr>";
         		            tr+="<tr>";
-        		            tr+="<td>岗位要求：</td><td>"+data[0].POSITION_REQUIRE+"</td><td>审批人：</td><td>"+data[0].uname+"</td>";
+        		            tr+="<td>审批人：</td><td>"+data[0].uname+"</td><td>创建时间：</td><td>"+data[0].REGISTER_TIME+"</td>";
         		            tr+="</tr>";
         		            tr+="<tr>";
-        		            tr+="<td>招聘说明：</td><td>"+data[0].RECRUIT_DIRECTION+"</td><td>招聘备注：</td><td>"+data[0].RECRUIT_REMARK+"</td>";
+        		            tr+="<td>岗位要求：</td><td>"+data[0].POSITION_REQUIRE+"</td>";
+        		            tr+="</tr>";
+        		            tr+="<tr>";
+        		            tr+="<td>招聘说明：</td><td>"+data[0].RECRUIT_DIRECTION+"</td>";
+        		            tr+="</tr>";
+        		            tr+="<tr>";
+        		            tr+="<td>招聘备注：</td><td>"+data[0].RECRUIT_REMARK+"</td>";
+        		            tr+="</tr>";
+        		            tr+="<tr>";
+        		            tr+="<td>审批时间：</td><td>"+data[0].APPROVE_DATE+"</td>";
+        		            tr+="</tr>";
+        		            tr+="<tr>";
+        		            tr+="<td>审批意见：</td><td>"+data[0].APPROVE_COMMENT+"</td>";
         		            tr+="</tr>";
         		            $("#from_details").append(tr); 
 						}
@@ -475,7 +499,7 @@ function queryAll(){
 	/*审批人查询*/
 	$('#user_modal').on('show.bs.modal', function () {
         $.ajax({
-        	url : "findAll",
+        	url : "users/usersname",
         	type : "post",
         	async : true,
         	contentType: "application/json; charset=utf-8",

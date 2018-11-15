@@ -2,22 +2,38 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="zj.dao.PayStateDao">
+	<!-- 根据时间模糊查询薪资 -->
+	<select id="queryTime" resultType="Map">
+		select
+		d.departmentName,pp.positionName,s.STAFF_NAME,p.payid,p.tax_salary,p.insurance,p.endowment_insurance,p.medical_insurance,p.birth_insurance,p.unemployment_insurance,p.injury_insurance,housing_fund,p.B_withhold,p.endowment_insurance_d,p.medical_insurance_d,p.birth_insurance_d,p.unemployment_insurance_d,p.injury_insurance_d,p.housing_fund_d,p.subvention,p.Bonus,p.K_withhold,p.after_tax_salary,p.D_withhold,p.tax_time,p.state
+		from pay p
+		left join department d on p.departmentId=d.departmentId
+		left
+		join position pp on p.positionId=pp.departmentId
+		left join staff_info s on p.staff_id=s.staff_id where
+		tax_time like concat ('%',#{tax_time},'%')
+	</select>
+	<!--查询所有薪资 -->
 	<select id="queryPay" resultType="Map">
 		select
 		d.departmentName,pp.positionName,s.STAFF_NAME,p.payid,p.tax_salary,p.insurance,p.endowment_insurance,p.medical_insurance,p.birth_insurance,p.unemployment_insurance,p.injury_insurance,housing_fund,p.B_withhold,p.endowment_insurance_d,p.medical_insurance_d,p.birth_insurance_d,p.unemployment_insurance_d,p.injury_insurance_d,p.housing_fund_d,p.subvention,p.Bonus,p.K_withhold,p.after_tax_salary,p.D_withhold,p.tax_time,p.state
 		from pay p
 		left join department d on p.departmentId=d.departmentId
-		left join position pp on p.positionId=pp.positionId
-		left join staff_info s on p.staff_id=s.staff_id
+		left
+		join position pp on p.positionId=pp.positionId
+		left join staff_info s
+		on p.staff_id=s.staff_id
 		
 	</select>
-	<!--  批量修改状态(禁用)-->
+	<!-- 批量修改状态(禁用) -->
 	<update id="updateState" parameterType="int">
-		update pay set state=2 where payid=#{id}
+		update pay set state=2
+		where payid=#{id}
 	</update>
-	
-	<!--  批量修改状态(启用)-->
+
+	<!-- 批量修改状态(启用) -->
 	<update id="updateState2" parameterType="int">
-		update pay set state=1 where payid=#{id}
+		update pay set state=1
+		where payid=#{id}
 	</update>
 </mapper>

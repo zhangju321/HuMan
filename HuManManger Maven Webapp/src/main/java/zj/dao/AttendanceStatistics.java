@@ -17,5 +17,7 @@ public interface AttendanceStatistics {
 	public List<Map<String,Object>> selectvoc(int staffid);
 	//根据id查询上班登记表
 	public List<Map<String,Object>> selectreg(int staffid);
+	//次数统计
+	public List<Map<String,Object>> selectcishu();
 
 }

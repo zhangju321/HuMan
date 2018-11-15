@@ -6,6 +6,9 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 public interface PayStateDao {
+	
+	//根据时间查询工资
+public List<Map<String,Object>> queryTime(String tax_time);
 	//查询薪资和审批人
  public List<Map<String,Object>> queryPay();
  //批量修改薪资计划状态(禁用)

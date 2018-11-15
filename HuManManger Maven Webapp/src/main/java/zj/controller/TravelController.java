@@ -27,6 +27,16 @@ import zj.service.TravelService;
 public class TravelController {
 	@Autowired
 	 private TravelService tser;
+	
+	
+	 @RequestMapping("notApproved")
+	 @ResponseBody
+	 public PageInfo<Map> notApproved(@RequestParam(required = false, defaultValue = "1") Integer startPage){
+		 PageHelper.startPage(startPage, 5);
+		 List<Map> list=tser.notApproved();
+		 PageInfo<Map> vo = new PageInfo<>(list);
+		 return vo;
+	}
 	 
 	 @RequestMapping("/queryAll")
 	 @ResponseBody
@@ -38,8 +48,8 @@ public class TravelController {
 	}	
 	 @RequestMapping("/findAll")
 	 @ResponseBody
-	 public List<Staff_info> findAll(){
-		  List<Staff_info> lists=tser.findAll();
+	 public List<Map> findAll(){
+		  List<Map> lists=tser.findAll();
 		  return lists;	  
 	 }
 	 @RequestMapping("/queryDetails")

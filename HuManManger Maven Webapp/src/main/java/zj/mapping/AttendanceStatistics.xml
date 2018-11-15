@@ -24,15 +24,22 @@
   	<!-- 考勤统计 -->
 	<select id="selectas" resultType="map">
 		 select i.staff_id,i.STAFF_NAME,
-                count(t.travel_id) ct,COUNT(o.out_id) co,
                 sum(r.late) sl,SUM(r.rest) sr,
                 SUM(r.absenteeism) sa,sum(r.work_unregistered) su,SUM(r.work_off) so,
-                SUM(r.attendance_should) sas,SUM(r.attendance_actual) saa
+                r.attendance_should,SUM(r.attendance_actual) saa
          from staff_info i 
-         left JOIN travel t on i.staff_id=t.sta_staff_id
          left join work_register r on i.staff_id=r.staff_id
-         left join hr_go_out o on i.staff_id=o.sta_staff_id
          group by i.staff_id,i.staff_name 
          order by i.staff_id asc
+	</select>
+	
+	  	<!-- 次数 -->
+	<select id="selectcishu" resultType="map">
+      select s.STAFF_NAME,(select count(*) from  travel t where t.sta_staff_id=s.staff_id) 出差次数,
+      (select count(*)， from  work_register r where r.staff_id=s.staff_id) 考勤次数,
+      (select count(*) from  vocation v where v.sta_staff_id=s.staff_id) 请假次数,
+      (select count(*) from  hr_go_out o where o.sta_staff_id=s.staff_id) 外出次数
+      from staff_info s 
+
 	</select>
 </mapper>

@@ -33,6 +33,15 @@ public class VocationController {
  @Autowired
  private VocationService vser;
  
+ @RequestMapping("notApproved")
+ @ResponseBody
+ public PageInfo<Map> notApproved(@RequestParam(required = false, defaultValue = "1") Integer startPage){
+	 PageHelper.startPage(startPage, 5);
+	 List<Map> list=vser.notApproved();
+	 PageInfo<Map> vo = new PageInfo<>(list);
+	 return vo;
+}
+ 
  @RequestMapping("/queryAll")
  @ResponseBody
  public PageInfo<Map> queryAll(@RequestParam(required = false, defaultValue = "1") Integer startPage){
@@ -48,7 +57,7 @@ public class VocationController {
 	  return lists;	  
  }
  @ResponseBody
-	@RequestMapping("/usersname")
+ @RequestMapping("/usersname")
 	public List<Map<String,Object>> position(){
 		return vser.UserName();
  }

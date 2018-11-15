@@ -47,12 +47,6 @@ public class VocationServiceImpl implements VocationService {
 
 	}
 
-	/*@Override
-	public Vocation queryById(int vocation_Id) {
-		// TODO Auto-generated method stub
-		return vdao.queryById(vocation_Id);
-	}*/
-
 	@Override
 	public List<Map> queryStaff(int sta_Staff_Id) {
 		// TODO Auto-generated method stub
@@ -81,6 +75,12 @@ public class VocationServiceImpl implements VocationService {
 	public List<Map<String, Object>> UserName() {
 		// TODO Auto-generated method stub
 		return vdao.UserName();
+	}
+
+	@Override
+	public List<Map> notApproved() {
+		// TODO Auto-generated method stub
+		return vdao.notApproved();
 	}
 
 	

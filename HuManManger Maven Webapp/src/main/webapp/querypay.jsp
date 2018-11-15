@@ -1,227 +1,291 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
-    <base href="<%=basePath%>">
-    
-    <title>My JSP 'querypay.jsp' starting page</title>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	
-	<link rel="stylesheet" type="text/css"
+<head>
+<base href="<%=basePath%>">
+
+<title>My JSP 'querypay.jsp' starting page</title>
+
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="This is my page">
+
+<link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css">
 <script
 	src="${pageContext.request.contextPath}/resource/jquery-1.11.3.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-<%-- <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/demo.css">
- --%>
-  </head>
-  
-  <body>
-    	<!--查询人员考勤情况  -->
-			<table class="table table-hover">
+<link rel="stylesheet" type="text/css"
+	href="resource/bootstrapValidator.min.css">
+<script src="resource/bootstrapValidator.min.js"></script>
+</head>
 
-				<thead>
-					<tr  class="warning">
-					
-					<th>人员名称</th>
-						<th>职务工资</th>
-						<th>应缴保险总额</th>
-						<th>津贴</th>
-						<th>奖金</th>
-						<th>应发工资</th>
-						<th>薪资计划状态</th>
-					</tr>
-				</thead>
-				<tbody id="tbody">
+<body>
+	<!--查询人员考勤情况  -->
+	<table class="table table-hover">
 
-				</tbody>
-			</table>
-			
-			 <ul class="pager">
+		<thead>
+			<tr class="warning">
+
+				<th>人员名称</th>
+				<th>职务工资</th>
+				<th>应缴保险总额</th>
+				<th>津贴</th>
+				<th>奖金</th>
+				<th>应发工资</th>
+				<th>薪资计划状态</th>
+			</tr>
+		</thead>
+		<tbody id="tbody">
+
+		</tbody>
+	</table>
+
+	<ul class="pager">
 		<li><button type="button" class="btn btn-default" id="shouye">首页</button></li>
 		<li><button type="button" class="btn btn-default" id="syy">上一页</button></li>
 		<li><button type="button" class="btn btn-default" id="xyy">下一页</button></li>
 		<li><button type="button" class="btn btn-default" id="weiye">尾页</button></li>
-		<li style="font-weight: lighter;">当前第<input type="text" id="currPage" style="height:35px;width:50px;border-radius:10px;text-align: center;"/>页</li>
+		<li style="font-weight: lighter;">当前第<input type="text"
+			id="currPage"
+			style="height:35px;width:50px;border-radius:10px;text-align: center;" />页
+		</li>
 	</ul>
-			
-			
-			<!--查看详情  -->
-					<div class="container">
-	<div class="row clearfix" >
-		<div class="col-md-12 column">
-			 <a id="modal-880261"  role="button" class="btn" ></a>
-			
-			<div class="modal fade" id="modal-xq" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
-				<div class="modal-dialog">
-					<div class="modal-content"  style="width:1000px">
-						<div class="modal-header">
-							 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-							<h4 class="modal-title" id="myModalLabel">
-								薪资详情
-							</h4>
-						</div>
-						<div class="modal-body" >
-					
-			<div id="myTabContent" class="tab-content">
-		<div class="tab-pane fade in active" id="home">
-			
-			<table class="table table-condensed table-bordered">
- 
-				<tbody id="tbody2">
 
-			</table>
-			
-			</div>
-			</div>
-			
+
+	<!--查看详情  -->
+	<div class="container">
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+				<a id="modal-880261" role="button" class="btn"></a>
+
+				<div class="modal fade" id="modal-xq" role="dialog"
+					aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content" style="width:850px">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-hidden="true">×</button>
+								<h4 class="modal-title" id="myModalLabel">薪资详情</h4>
 							</div>
-						<div class="modal-footer">
-							 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> 
-					</div>
-					
-				</div>
-				
-			</div>
-			
-		</div>
-	</div>
-</div>	
-	</div>		
-			
-			<!--  修改模态框-->		
-			<div class="container">
-	<div class="row clearfix" >
-		<div class="col-md-12 column">
-			 <a id="modal-880261"  role="button" class="btn" ></a>
-			
-			<div class="modal fade" id="modal-container-8802612" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
-				<div class="modal-dialog">
-					<div class="modal-content"  style="width:1000px">
-						<div class="modal-header">
-							 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-							<h4 class="modal-title" id="myModalLabel">
-								修改薪资
-							</h4>
+							<div class="modal-body">
+
+								<div id="myTabContent" class="tab-content">
+									<div class="tab-pane fade in active" id="home">
+
+										<table class="table table-condensed table-bordered">
+
+											<tbody id="tbody2">
+										</table>
+
+									</div>
+								</div>
+
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">关闭</button>
+							</div>
+
 						</div>
-						<div class="modal-body" >
-					
-			<div id="myTabContent" class="tab-content">
-		<div class="tab-pane fade in active" id="home">
-			<p>
-			<form class="form-horizontal" role="form" id="form">
-					<div class="form-group">
-					<label for="firstname" class="col-sm-2 control-label">薪资基数编号</label>
-					<div class="col-sm-3">
-							<input type="hidden"  name="payid"  id="pid">
+
 					</div>
+
 				</div>
-					
-				
-				
-				<div class="form-group">
-					<label for="firstname" class="col-sm-2 control-label">人员名称</label>
-					<div class="col-sm-3">
-						<input type="text" class="form-control" 
-							placeholder="请项目编号" id="staffname" readonly="readonly">
-							<input type="hidden"  name="staff_id"  id="staffid">
-					</div>
-				</div>
-				
-				
-				<div class="form-group">
-					<label for="firstname" class="col-sm-2 control-label">职务工资</label>
-					<div class="col-sm-3">
-						<input type="text" class="form-control" 
-							placeholder="请项目编号" name="tax_salary" id="tax" >
-					</div>
-				</div>
-				
-				
-				<div class="form-group">
-					<label for="firstname" class="col-sm-2 control-label">保险总额</label>
-					<div class="col-sm-3">
-						<input type="text" class="form-control" 
-							placeholder="请项目编号" name="insurance" id="insur" readonly="readonly">
-					</div>
-						<input type="button" class="btn btn-default" value="计算保险总额"
-							onclick="bx()">
-				</div>
-				
-				
-				
-				<div class="form-group">
-					<label for="firstname" class="col-sm-2 control-label">津贴</label>
-					<div class="col-sm-3">
-						<input type="text" class="form-control" 
-							placeholder="请项目编号" name="subvention" id="sub">
-					</div>
-				</div>
-				
-				
-				<div class="form-group">
-					<label for="firstname" class="col-sm-2 control-label">奖金</label>
-					<div class="col-sm-3">
-						<input type="text" class="form-control" 
-							placeholder="请项目编号" name="Bonus" id="bonus" readonly="readonly">
-					</div>
-				</div>
-				
-				
-				
-				
-				<div class="form-group">
-					<label for="firstname" class="col-sm-2 control-label">应发工资</label>
-					<div class="col-sm-3">
-						<input type="text" class="form-control" 
-							placeholder="应发工资" name="after_tax_salary" id="after_tax" readonly="readonly">
-					</div>
-					<input type="button" class="btn btn-default" value="计算应发工资"
-							onclick="bx2()">
-				</div>
-				
-				
-				
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-7">
-						<input type="button" class="btn btn-default" value="修改"
-							onclick="update1()">
-					</div>
-				</div>
-			</form>
 			</div>
-			</div>
-			
-							</div>
-						<div class="modal-footer">
-							 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> 
-					</div>
-					
-				</div>
-				
-			</div>
-			
 		</div>
 	</div>
-</div>	
-	</div>		
-  </body>
-  <script>
+
+	<!--  修改模态框-->
+	<div class="container">
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+				<a id="modal-880261" role="button" class="btn"></a>
+
+				<div class="modal fade" id="modal-container-8802612" role="dialog"
+					aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content" style="width:1000px">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-hidden="true">×</button>
+								<h4 class="modal-title" id="myModalLabel">修改薪资</h4>
+							</div>
+							<div class="modal-body">
+
+								<div id="myTabContent" class="tab-content">
+									<div class="tab-pane fade in active" id="home">
+										<p>
+										<form class="form-horizontal" role="form" id="form">
+											<div class="form-group">
+												<label for="firstname" class="col-sm-2 control-label">薪资基数编号</label>
+												<div class="col-sm-3">
+													<input type="hidden" name="payid" id="pid">
+												</div>
+											</div>
+
+
+
+											<div class="form-group">
+												<label for="firstname" class="col-sm-2 control-label">人员名称</label>
+												<div class="col-sm-3">
+													<input type="text" class="form-control" placeholder="请项目编号"
+														id="staffname" readonly="readonly"> <input
+														type="hidden" name="staff_id" id="staffid">
+												</div>
+											</div>
+
+
+											<div class="form-group">
+												<label for="firstname" class="col-sm-2 control-label">职务工资</label>
+												<div class="col-sm-3">
+													<input type="text" class="form-control" placeholder="请项目编号"
+														name="tax_salary" id="tax">
+												</div>
+											</div>
+
+
+											<div class="form-group">
+												<label for="firstname" class="col-sm-2 control-label">保险总额</label>
+												<div class="col-sm-3">
+													<input type="text" class="form-control" placeholder="请项目编号"
+														name="insurance" id="insur" readonly="readonly">
+												</div>
+												<input type="button" class="btn btn-primary" data-toggle="modal" value="计算保险总额"
+													onclick="bx()">
+											</div>
+
+
+
+											<div class="form-group">
+												<label for="firstname" class="col-sm-2 control-label">津贴</label>
+												<div class="col-sm-3">
+													<input type="text" class="form-control" placeholder="请项目编号"
+														name="subvention" id="sub">
+												</div>
+											</div>
+
+
+											<div class="form-group">
+												<label for="firstname" class="col-sm-2 control-label">奖金</label>
+												<div class="col-sm-3">
+													<input type="text" class="form-control" placeholder="请项目编号"
+														name="Bonus" id="bonus">
+												</div>
+											</div>
+
+
+
+
+											<div class="form-group">
+												<label for="firstname" class="col-sm-2 control-label">应发工资</label>
+												<div class="col-sm-3">
+													<input type="text" class="form-control" placeholder="应发工资"
+														name="after_tax_salary" id="after_tax" readonly="readonly">
+												</div>
+												<input type="button" class="btn btn-primary" data-toggle="modal" value="计算应发工资"
+													onclick="bx2()">
+											</div>
+
+
+
+											<div class="form-group">
+												<div class="col-sm-offset-2 col-sm-7">
+													<input type="button" class="btn btn-primary" data-toggle="modal" value="修改"
+														onclick="update1()">
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">关闭</button>
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
   
-  	
+  	//表单验证
+	$(document).ready(function() {
+ 
+    $('#form').bootstrapValidator({
+        message: 'This value is not valid',        //验证错误时的信息
+        feedbackIcons: {        //验证时显示的图标
+            valid: 'glyphicon glyphicon-ok',      //正确图标
+            invalid: 'glyphicon glyphicon-remove',        //错误图标
+            validating: 'glyphicon glyphicon-refresh'        //正在更新图标
+        },
+        fields: { 
+              //要验证哪些字段
+              //职务工资
+            tax_salary: {
+                    //与表单里input的name属性对应
+                message: 'The username is not valid',       //验证错误时的信息，当然这里是可以使用中文的
+                validators: {
+                    notEmpty: {       //非空判断
+                        message: '不能为空'        //验证错误时的信息，
+                    },
+                    regexp: {          //正则表达式判断 
+                        regexp: /^[0-9]+.?[0-9]*$/,           //表达式内容
+                        message: '必须为数字'           //验证错误时的信息，
+                    }
+                }
+            },
+            //津贴
+           subvention: {
+                    //与表单里input的name属性对应
+                message: 'The username is not valid',       //验证错误时的信息，当然这里是可以使用中文的
+                validators: {
+                    notEmpty: {       //非空判断
+                        message: '不能为空'        //验证错误时的信息，
+                    },
+                    regexp: {          //正则表达式判断 
+                        regexp: /^[0-9]+.?[0-9]*$/,           //表达式内容
+                        message: '必须为数字'           //验证错误时的信息，
+                    }
+                }
+            },
+            //奖金
+              Bonus: {
+                    //与表单里input的name属性对应
+                message: 'The username is not valid',       //验证错误时的信息，当然这里是可以使用中文的
+                validators: {
+                    notEmpty: {       //非空判断
+                        message: '不能为空'        //验证错误时的信息，
+                    },
+                    regexp: {          //正则表达式判断 
+                        regexp: /^[0-9]+.?[0-9]*$/,           //表达式内容
+                        message: '必须为数字'           //验证错误时的信息，
+                    }
+                }
+            },
+            
+            
+        }
+     
+    });
+});
 	
 	
 		
@@ -384,9 +448,7 @@ $(function(){
 					tr += "<tr>"
 					tr += "<td>津贴(元)</td><td>" + obj.subvention + "</td>";
 					tr += "</tr>";
-					tr += "<tr>"
-					tr += "<td>考勤扣款总额(元)</td><td>" + obj.K_withhold + "</td>";
-					tr += "</tr>";
+				
 					tr += "<tr>"
 					tr += "<td>个人养老保险(元)</td><td>" + obj.endowment_insurance + "</td>";//个人养老
 					tr += "</tr>";
@@ -476,9 +538,9 @@ $(function(){
 					tr += "<td id='bon'>" + obj.Bonus + "</td>";//奖金
 					tr += "<td id='tax_sala'>" + obj.after_tax_salary + "</td>";//应发工资
 					 tr += "<td>" + adc(obj.state) + "</td>"; 
-					tr += "<td><input type='button' id='" + obj.payid + "' value='修改' class='update  btn btn-default' href='#modal-container-8802612' data-toggle='modal'></td>";
-                    tr +="<td><input type='button' id='" + obj.payid + "' value='删除' class='delete btn btn-default'></td>";
-                    tr +="<td><input type='button' id='" + obj.payid + "' value='查看详情' class='xq btn btn-default' href='#modal-xq' data-toggle='modal'></td>";
+					tr += "<td><input type='button' id='" + obj.payid + "' value='修改'   class='update  btn btn-primary' href='#modal-container-8802612' data-toggle='modal'></td>";
+                    tr +="<td><input type='button' id='" + obj.payid + "' value='删除' class='delete btn btn-primary' data-toggle='modal'></td>";
+                    tr +="<td><input type='button' id='" + obj.payid + "' value='查看详情' class='xq btn btn-primary' href='#modal-xq' data-toggle='modal'></td>";
 					tr += "</tr>";
 					$("#tbody").append(tr);
 					
@@ -534,7 +596,6 @@ $(function(){
 	$("#shouye").click(function() {
 		findAll(1);
 	})
-	//状态
 function adc(num){
   	   if(num==1){
   	       return '批准';

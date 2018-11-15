@@ -15,4 +15,6 @@ public interface WelfareDao {
  public List<Map<String,Object>> queryWelfare2(int id);//单条修改查询
  public List<Map<String,Object>> queryLike();//模糊查询员工福利信息
  public int querystaffid(int id);//单条查询人员 判断id是否重复
+ public List<Map<String,Object>> queryTime(String issue_date);//根据时间查询工资
+
 }

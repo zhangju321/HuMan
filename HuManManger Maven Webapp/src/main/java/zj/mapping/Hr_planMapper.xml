@@ -4,7 +4,7 @@
   <!-- 查询全部 -->
   <select id="QueryAll" resultType="Map">
      select plan.*,d.departmentName,p.positionName from  hr_recruit_plan plan left join department d on plan.departmentId=d.departmentId
-     left join position p on plan.positionId=p.positionId
+     left join position p on plan.positionId=p.positionId order by PLAN_No desc
   </select>
   <!-- 添加 -->
   <insert id="Save" parameterType="Hr_recruit_plan">
@@ -27,7 +27,7 @@
       hr_recruit_plan plan left join Position p on plan.positionId=p.positionId
       left join  department d on plan.departmentId=d.departmentId
       left join users u on plan.id=u.id
-     where PLAN_No=#{planNo}
+     where PLAN_No=#{planNo} 
    </select>
    <!-- 修改 -->
    <update id="Update"  parameterType="Hr_recruit_plan" >
@@ -36,7 +36,7 @@
      PLAN_RECR_NO=#{planRecrNo},PLAN_DITCH=#{planDitch},PLAN_BCWS=#{planBcws},
      START_DATE=#{startDate},END_DATE=#{endDate},WORK_DATE=#{workDate},SALARY_AREA=#{salaryArea},
      POSITION_REQUIRE=#{positionRequire},RECRUIT_DIRECTION=#{recruitDirection},
-     RECRUIT_REMARK=#{recruitRemark},REGISTER_TIME=#{registerTime},ATTACHMENT_NAME=#{attachmentName},
+     RECRUIT_REMARK=#{recruitRemark},ATTACHMENT_NAME=#{attachmentName},
      PLAN_STATUS=#{planStatus},id=#{id}
      where PLAN_No=#{planNo}
    </update>
@@ -47,10 +47,11 @@
    <select id="Querystatus" resultType="Map" parameterType="Hr_recruit_plan">
      select plan.*,d.departmentName,p.positionName,u.uname from hr_recruit_plan plan left join department d on plan.departmentId=d.departmentId
      left join position p on plan.positionId=p.positionId left join users u on plan.id=u.id
-      where plan.PLAN_STATUS=#{planStatus} and u.id=#{id} 
+      where plan.PLAN_STATUS=#{planStatus} and u.id=#{id}
       <if test="planNo != 0" >
-         and plan.PLAN_NO = #{planNo}
+         and plan.PLAN_NO = #{planNo} 
         </if>
+       order by PLAN_No desc
    </select>
    <update id="statusUpdate"  parameterType="Hr_recruit_plan" >
       update hr_recruit_plan 

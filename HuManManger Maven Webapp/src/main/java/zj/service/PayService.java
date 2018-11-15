@@ -9,7 +9,6 @@ import zj.entity.Pay;
 
 public interface PayService {
 	public int paySave(Pay pay);//添加薪资基数设置
-	/*public int querystaffid(int id);*///单条查询人员 判断id是否重复
 	public List<Map<String,Object>> queryAll();//查询薪资
 
 	public List<Map<String,Object>> queryPeo();//查询全部部门职务人员名称
@@ -24,4 +23,5 @@ public interface PayService {
 	public void payDelete(Pay pay);//删除薪资
 	public List<Map<String,Object>> queryPayId(int id);//查询薪资表详情
 	public List<Map<String,Object>> selectid(int id);//单条查询薪资表
+	public List<Map<String,Object>> queryTime(String tax_time);//根据时间查询工资
 }

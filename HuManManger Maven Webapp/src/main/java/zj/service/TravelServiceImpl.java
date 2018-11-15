@@ -23,7 +23,7 @@ public class TravelServiceImpl implements TravelService {
 	}
 
 	@Override
-	public List<Staff_info> findAll() {
+	public List<Map> findAll() {
 		// TODO Auto-generated method stub
 		return tdao.findAll();
 	}
@@ -71,6 +71,12 @@ public class TravelServiceImpl implements TravelService {
 	public List<Map<String, Object>> queryDetails(int travel_Id) {
 		// TODO Auto-generated method stub
 		return tdao.queryDetails(travel_Id);
+	}
+
+	@Override
+	public List<Map> notApproved() {
+		// TODO Auto-generated method stub
+		return tdao .notApproved();
 	}
 
 }

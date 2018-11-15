@@ -24,6 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 </head>
 <body>
+<p></p>
    <ul class="nav nav-tabs">
      <li ><a href="/HuManManger/wmw/plan_zero.jsp">待审批招聘计划</a></li>
      <li class="active"><a href="/HuManManger/wmw/plan_one.jsp">已批准招聘计划</a></li>
@@ -105,7 +106,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    queryone();
 	 })
    function queryone(){
-        var uid=1;
+        var uid=${user.id};
         var status=1;
 		$.ajax({
         	url : "plan/querystatus",
@@ -245,6 +246,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         		            tr+="<tr>";
         		            tr+="<td>招聘备注：</td><td>"+data[0].RECRUIT_REMARK+"</td>";
         		            tr+="</tr>";
+        		            $("#approveComment").val(data[0].APPROVE_COMMENT);
         		            $("#zero_approval").append(tr); 
 						}
 					});
@@ -252,19 +254,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			})
   	  /*修改状态*/
 			function statusUpdate(status){
-			        var date = new Date();
-                    var year = date.getFullYear();
-                    var month = date.getMonth() + 1;
-                    var day = date.getDate();
-                      if (month < 10) {
-                         month = "0" + month;
-                      }
-                     if (day < 10) {
-                        day = "0" + day;
-                     }
-                    var MyDate = year + "-" + month + "-" + day;
-			        $("#planStatus").val(status);
+			        var now = new Date();
+	             var year = now.getFullYear(); //得到年份
+	             var month = now.getMonth();//得到月份
+            	 var date = now.getDate();//得到日期
+	             var hour = now.getHours();//得到小时
+	             var minu = now.getMinutes();//得到分钟
+	             var sec = now.getSeconds();//得到秒
+	             month = month + 1;
+	             if (month < 10) month = "0" + month;
+	             if (date < 10) date = "0" + date;
+	             if (hour < 10) hour = "0" + hour;
+	             if (minu < 10) minu = "0" + minu;
+	             if (sec < 10) sec = "0" + sec;
+	             var  MyDate= year +"-"+month +"-"+date +" "+hour+":"+minu+":"+sec;
 			        $("#approveDate").val(MyDate);
+			        $("#planStatus").val(status);
 					var obj=$("#from_approval").serialize();
 					$.ajax({
 						url:"plan/statusUpdate",

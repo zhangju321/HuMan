@@ -54,7 +54,14 @@ public class Hr_recruit_pool {
     private String RECRU_CHANNEL;//ÕÐÆ¸ÇþµÀ
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date RUKUTIME;
-    public Date getRUKUTIME() {
+    private Hr_recruit_plan plan;
+    public Hr_recruit_plan getPlan() {
+		return plan;
+	}
+	public void setPlan(Hr_recruit_plan plan) {
+		this.plan = plan;
+	}
+	public Date getRUKUTIME() {
 		return RUKUTIME;
 	}
 	public void setRUKUTIME(Date rUKUTIME) {

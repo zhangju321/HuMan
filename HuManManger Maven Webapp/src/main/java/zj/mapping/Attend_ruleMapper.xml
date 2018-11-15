@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="zj.dao.Attend_ruleMapper" >
  <select id="ruleFind" resultType="map">
- select * from attend_rule
+ select * from attend_rule order by kid desc
  </select>
  <insert id="ruleSave" parameterType="Attend_rule">
  insert into attend_rule(overtime_hour,overtime_bonus,late_hour,late_bonus,eraly_hour,early_bonus,one_late_hour,one_eraly_hour)

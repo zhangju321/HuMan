@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import net.sf.jsqlparser.expression.DateTimeLiteralExpression.DateTime;
+
 public class Hr_recruit_plan {
     private int planNo;
     private int departmentId;
@@ -25,12 +27,12 @@ public class Hr_recruit_plan {
     private String positionRequire;
     private String recruitDirection;
     private String recruitRemark;
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date registerTime;
     private int planStatus;
     private String attachmentName;
     private int id;
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date approveDate;
     private String approveComment;
     private List<Hr_recruit_filter> filter;

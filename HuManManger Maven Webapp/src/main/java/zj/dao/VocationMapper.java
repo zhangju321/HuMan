@@ -11,6 +11,9 @@ public interface VocationMapper {
 	  public List<Map> queryAll();
 	//职工查询
 		public List<Map> findAll();
+	//未审批查询  
+	    public List<Map> notApproved();
+
 	//请假登记
 	    public int save(Vocation v);
 	//根据请假id查询	    
